@@ -1,0 +1,327 @@
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Two Column Curriculum Vitae XeLaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Alessandro (The CV Inn)
+%
+% IMPORTANT: THIS TEMPLATE NEEDS TO BE COMPILED WITH XeLaTeX
+%
+% This template uses several fonts not included with Windows/Linux by
+% default. If you get compilation errors saying a font is missing, find the line
+% on which the font is used and either change it to a font included with your
+% operating system or comment the line out to use the default font.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%   PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt,a4paper]{article} % Font size (10pt, 11pt or 12pt)
+
+\usepackage[hmargin=1.25cm, vmargin=1cm]{geometry} % Document margins
+
+\usepackage{marvosym} % Required for symbols in the colored box
+%\usepackage{ifsym} % Required for symbols in the colored box
+\usepackage{fontawesome}
+
+\usepackage[usenames,dvipsnames]{xcolor} % Allows the definition of hex colors
+
+% Fonts and tweaks for XeLaTeX
+\usepackage{fontspec,xltxtra,xunicode}
+%\defaultfontfeatures{Mapping=tex-text}
+%\setromanfont[Mapping=tex-text]{Hoefler Text} % Main document font
+%\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Gill Sans} % Font for your name at the top
+%\setmonofont[Scale=MatchLowercase]{Andale Mono}
+
+% Colors for links, text and headings
+\usepackage{hyperref}
+%\definecolor{linkcolor}{HTML}{506266} % Blue-gray color for links
+\definecolor{linkcolor}{HTML}{000000}
+%\definecolor{shade}{HTML}{F5DD9D} % Peach color for the contact information box
+\definecolor{shade}{HTML}{DDDDDD}
+%\definecolor{text1}{HTML}{2b2b2b} % Main document font color, off-black
+\definecolor{text1}{HTML}{000000}
+%\definecolor{headings}{HTML}{701112} % Dark red color for headings
+\definecolor{headings}{HTML}{2B2B2B}
+% Other color palettes: shade=B9D7D9 and linkcolor=A40000; shade=D4D7FE and linkcolor=FF0080
+
+\hypersetup{colorlinks,breaklinks, urlcolor=linkcolor, linkcolor=linkcolor} % Set up links and colors
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+% Headers and footers can be added with the \lhead{} \rhead{} \lfoot{} \rfoot{} commands
+% Example footer:
+%\rfoot{\color{headings} {\sffamily Last update: \today}. Typeset with Xe\LaTeX}
+
+\renewcommand{\headrulewidth}{0pt} % Get rid of the default rule in the header
+
+\usepackage{titlesec} % Allows creating custom \section's
+
+% Format of the section titles
+\titleformat{\section}{\color{headings}
+\scshape\Large\raggedright}{}{0em}{}[\color{black}\titlerule]
+
+\titlespacing{\section}{0pt}{0pt}{5pt} % Spacing around titles
+
+\begin{document}
+
+\color{text1} % Sets the default text color for the whole document
+
+%----------------------------------------------------------------------------------------
+%   TITLE
+%----------------------------------------------------------------------------------------
+
+\par{\centering{\sffamily\LARGE\textsc{Wan Hu}}\\ % Your name
+{\Large Curriculum Vit\ae\\[2pt]\par}}
+
+%----------------------------------------------------------------------------------------
+
+% Start the left-hand side of the page
+\begin{minipage}[t]{0.5\textwidth}
+\vspace{0pt} % Trick for alignment
+
+%----------------------------------------------------------------------------------------
+%   COLORED BOX
+%----------------------------------------------------------------------------------------
+
+\colorbox{shade}{\textcolor{text1}{
+\begin{tabular}{c|p{7cm}}
+%\raisebox{-4pt}{\faBuilding} & Institute of Computing Technology,\newline{}
+%    Haidian district, Beijing 100095 \\ % Address
+\raisebox{-4pt}{\faBuilding} & Capital Normal University,\newline{}
+    Haidian district, Beijing 100048 \\ % Address
+\raisebox{-3pt}{\small\faPhone} & (010)6260~0369 \\ % Phone number
+\raisebox{-3pt}{\Large\faMobilePhone} & (+86)~152~10594789 \\ % Phone number
+\raisebox{-1pt}{\small\faEnvelope} & \href{mailto:wanhu@cnu.edu.cn}{wanhu@cnu.edu.cn} \\ % Email address
+\faLink & \href{http://www.wanhu.me}{http://www.wanhu.me} \\ % Website
+\end{tabular}
+}
+}\\[5pt]
+
+%----------------------------------------------------------------------------------------
+%   RESEARCH EXPERIENCE
+%----------------------------------------------------------------------------------------
+
+\section{Research Experience}
+
+%----------------------------------------------------------------------------------------
+% RESEARCH EXPERIENCE -1-
+{\raggedleft\textsc{April 2013 -- April 2012}\par}
+
+{\raggedright Project supported by the \textsc{College Students Research and Career-creation Program of Capital Normal University}\\
+ • Project Principal\\
+ • \textit{Design of FIR Digital Filter based on Nios II}\\}
+
+\normalsize{
+-  Solved the FIR IP core design, programmed in hardware description language to filter audio
+}\\
+
+%----------------------------------------------------------------------------------------
+% RESEARCH EXPERIENCE -2-
+{\raggedleft\textsc{June 2011 -- June 2012}\par}
+
+{\raggedright Project supported by the \textsc{Laboratory Program Foundation of Capital Normal University}\\
+ • Project Principal\\
+ • \textit{Study on Mass Data Processing Based on Hadoop}\\}
+
+\normalsize{
+-  Analyzed Hadoop's mass data sorting algorithm \textit{TeraSort}, applied to real project as a benchmark\\
+-  Won the \textsc{Excellence Award}}\\
+
+%----------------------------------------------------------------------------------------
+% RESEARCH EXPERIENCE -3-
+
+{\raggedleft\textsc{April 2011 -- April 2012}\par}
+
+{\raggedright Project supported by the \textsc{Beijing College Students Research and Career-creation Program} \\
+ • Project Member\\
+ • \textit{Research on Power Consumption and Cache-aware Scheduling Algorithm for Multiprocessor Systems}\\}
+
+\normalsize{
+-  Participated in developed  a Cache-aware scheduling algorithm for multiprocessor systems\\
+-  Administered the algorithm testing and simulation on Linux system, handled,analyzed experiment data\\
+-  Won the second prize of \textsc{Beijing College Students Research and Career-creation Program}
+}\\
+
+%----------------------------------------------------------------------------------------
+% RESEARCH EXPERIENCE -4-
+{\raggedleft\textsc{April 2010 -- April 2011}\par}
+
+{\raggedright Project supported by the \textsc{National Undergraduate Innovation Program } \\
+ • Project Principal\\
+ • \textit{Routing Management Conversion Interface’s Design and
+Implementation under Unix/Linux Systems}\\}
+
+\normalsize{
+-  Studied the routing management function on the Unix/Linux systems(based on GNU routing software \textit{Zebra})\\
+-  Designed and implemented routing management conversion interface\\
+%-  Accepted after school reception process, and reduced surplus spending by applying the system in networking laboratory
+}\\
+
+
+%----------------------------------------------------------------------------------------
+
+\end{minipage} % End left-hand side of the page
+\hfill
+% Start the right-hand side of the page
+\begin{minipage}[t]{0.44\textwidth}
+\vspace{0pt} %trick for alignment
+
+%----------------------------------------------------------------------------------------
+%   EDUCATION
+%----------------------------------------------------------------------------------------
+
+\section{Education}
+
+\begin{tabular}{rl} % Start a table with two columns, one for dates and one for qualifications
+
+%----------------------------------------------------------------------------------------
+% EDUCATION -1-
+
+2009 -- 2013 & \textbf{Undergraduate} \\
+& \textsc{Computer Science \& Technology} \\
+& \textit{Capital Normal University}\\
+& GPA 3.93/5 \\
+
+%----------------------------------------------------------------------------------------
+
+\end{tabular}\\[0pt]
+
+%----------------------------------------------------------------------------------------
+%   HONORS AND AWARDS
+%----------------------------------------------------------------------------------------
+
+\section{Honors and Awards}
+
+\begin{tabular}{rl}
+
+%----------------------------------------------------------------------------------------
+2014.01     &\small\textbf{Excellent Student of}\\
+& \small\textbf{ State Key Laboratory of}\\
+& \small\textbf{ \quad Computer Architecture}\\
+%& \small\textbf{ Institute of Computing Technology,}\\
+%& \small\textbf{ Chinese Academy of Sciences(CAS)}\\
+& \small\textit{Institute of Computing Technology,}\\
+& \small\textit{ Chinese Academy of Sciences}\\\\
+%----------------------------------------------------------------------------------------
+2013.12     &\small\textbf{Scholarship for Students of}\\
+& \small\textbf{ Chinese Academy of Sciences}\\
+& \small\textit{Chinese Academy of Sciences}\\ \\
+
+%----------------------------------------------------------------------------------------
+2013.06     &\small\textbf{Excellent graduates of}\\
+& \small\textbf{ Capital Normal University}\\
+& \small\textit{Capital Normal University}\\ \\
+%----------------------------------------------------------------------------------------
+2012.04     & \small\textbf{The \textsc{Excellence Award}  of   }\\
+& \small\textbf{ Beijing College Students Research  }\\
+& \small\textbf{ and Career-creation Program}\\
+& \small\textit{Beijing Municipal Education Commission}\\ \\
+
+%----------------------------------------------------------------------------------------
+2012.04     & \small\textbf{The \textsc{Excellence Award} of Laboratory }\\
+& \small\textbf{ Program Foundation of  }\\
+& \small\textbf{ Capital Normal University}\\
+& \small\textit{Capital Normal University}\\ \\
+
+%----------------------------------------------------------------------------------------
+2011.12     & \small\textbf{The 3rd prize of the 6th National} \\
+& \small\textbf{ Information Technology Application }\\
+& \small\textbf{ Level Competition}\\
+& \small\textit{The Education Management Information}\\
+& \small\textit{ Center of Ministry of Education,China}\\ \\
+
+%----------------------------------------------------------------------------------------
+2011.10     & \small\textbf{The 2nd prize of the 2nd Beijing}\\
+& \small\textbf{ College Students Computer Appli-}\\
+& \small\textbf{ cation Contest}\\
+& \small\textit{Beijing Municipal Education Commission}\\ \\
+
+%----------------------------------------------------------------------------------------
+2010,2011,2012    & \small\textbf{National Scholarship for }\\
+& \small\textbf{ Encouragement}\\
+& \small\textit{Ministry of Education of China}
+
+\end{tabular}\\[0pt]
+
+%----------------------------------------------------------------------------------------
+%   WORK EXPERIENCE
+%----------------------------------------------------------------------------------------
+
+\section{Work Experience}
+{\raggedleft\textsc{Sept. 2013 -- Sept. 2014}\par}
+
+{\raggedright \small\textsc{Video processing research and development }\\
+
+\textit{ Institute of Computing Technology,Chinese Academy of Sciences,Intern}\\}
+
+\normalsize{\begin{itemize}
+              \item Integrating Intel Quick Sync Video Hardware Acceleration to Enhance Performance of video processing platform on both Windows and Linux
+              \item Developing the real-time streaming media encoding/transcoding system based on FFmpeg
+            \end{itemize}
+}
+%%----------------------------------------------------------------------------------------
+%% WORK EXPERIENCE -1-
+%
+%
+%{\raggedleft\textsc{Sept 2012 -- Jan 2013}\par}
+%
+%{\raggedright \small\textsc{Computer Architecture and CPU Design Practice} Tutor\\
+%\textit{College of Information Engineering, CNU}\\}
+%
+%\normalsize{Guided students with severe challenges through courses and designed simple tactile learning experiences.
+%}\\
+%
+%%----------------------------------------------------------------------------------------
+%% WORK EXPERIENCE -2-
+%{\raggedleft\textsc{Summer 2012}\par}
+%
+%{\raggedright \small Summer Intern at EDA Laboratory\\
+%\textit{College of Information Engineering, CNU}\\}
+%
+%\normalsize{
+%Worked on design of digital signal processor based on DSP Builder.
+%}\\
+
+%----------------------------------------------------------------------------------------
+% RESEARCH EXPERIENCE -5-
+%{\raggedleft\textsc{2013}\par}
+%
+%{\raggedright \small \LaTeX Thesis Template for Capital Normal University } \\
+% • Project Principal\\
+%\normalsize{
+%-  Designed and implemented LaTeX Thesis Template for Capital Normal University\\
+%-  Promoting digital typography \& reading in Capital Normal University
+%}
+
+
+
+%----------------------------------------------------------------------------------------
+%   COMPUTER SKILLS
+%----------------------------------------------------------------------------------------
+
+%\section{Computer Skills}
+
+%\begin{tabular}{rl}
+%Basic Knowledge
+%& \textsc{java}, Adobe Illustrator\\
+%& \\
+%Intermediate Knowledge
+%& \textsc{python}, \textsc{html}, \LaTeX,\\
+%& OpenOffice, Linux,\\
+%& Microsoft Windows \\
+%& Computer Hardware \& \\
+%& Support\\ \\
+%\end{tabular}
+
+%----------------------------------------------------------------------------------------
+
+\end{minipage} % End right-hand side of the page
+
+\end{document}
+% Last Update:2014.03.26
