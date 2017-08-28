@@ -1,8 +1,8 @@
 #!/bin/bash
 cwd=`pwd`
 SCRIPTDIR=`cd $(dirname $0);pwd`
-ofile=$cwd"/"`echo $cwd |awk -F '/' '{print $NF}'`
-DEBUG=false
+ofile=`echo $cwd |awk -F '/' '{print $NF}'`
+DEBUG="false"
 BUILD="$cwd/build"
 WORKDIR="$cwd/src"
 IMGDIR="$WORKDIR/images"
@@ -24,52 +24,53 @@ function pdf()
 	do
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
-		pandoc $chapters -o $BUILD/$ofile.$theme.tex $PDF_OPTIONS
+		TEX_OUTPUT="$BUILD/$ofile.$theme.tex"
+		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS
 		
-		sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $ofile.$theme.tex
-		sed -i -E "/begin\{lstlisting.*label.*\]/ s/label=(.*)]/label=\1, caption=\1, float=htbp\]/" $ofile.$theme.tex
-		sed -i "s/\.jpg/\.eps/g" $ofile.$theme.tex
+		sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
+		sed -i -E "/begin\{lstlisting.*label.*\]/ s/label=(.*)]/label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
+		sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
 		
-		xelatex $BUILD/$ofile.$theme.tex #1&>/dev/null
-		xelatex $BUILD/$ofile.$theme.tex #1&>/dev/null
+		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
+		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	done
 }
 
 function html()
-{
-	for id in ${pdf[*]}
-	do
-		filename=`echo $id |sed 's/\.pdf//g'`
-		sed -i "s/$id/$filename.jpg/g" *.md
+{	
+	for id in $chapters;do
+		cp $id $id.tmp
+		sed -i -r 's/(!\[.*?\]\(.*?)(\.pdf\))/\1.jpg)/g' $id.tmp
 	done
 	
+	tmp_chapters=`ls *.md.tmp`
 	for theme in ${highlightStyle[@]}
 	do
-		pandoc --self-contained $chapters -o $BUILD/$ofile.$theme.html $HTML_OPTIONS
+		source $SCRIPTDIR/config.default
+		[ -f $cwd/config ] && source $cwd/config
+	
+		HTML_OUTPUT="$BUILD/$ofile.$theme.html"
+		pandoc --self-contained --verbose $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS
+		sed -i "s/pdf/jpg/g" $HTML_OUTPUT
 	done
 	
-	for id in ${pdf[*]}
-	do
-		filename=`echo $id |sed 's/\.pdf//g'`
-		sed -i "s/$filename.jpg/$id/g" *.md
+	for id in $tmp_chapters;do
+		rm -f $id;
 	done
 }
 
 function clean()
 {
-	cd ../
-	for type in html pdf tex aux gz log out toc
+	cd $BUILD
+	for type in tex aux gz log out toc
 	do
 		rm -f *.$type
 	done
 }
 
-# 初始化
-init
-
 case $# in
-	0) html;pdf;;
-	1) eval $1;;
-	2) [ "$2"x = "d" ] && DEBUG=true;eval $1;;
-	*) html;pdf;;
+	0) init;html;pdf;;
+	1) init;eval `echo $1`;;
+	2) [ "$2"x = "d"x ] && DEBUG="true";init;eval `echo $1`;;
+	*) init;html;pdf;;
 esac
