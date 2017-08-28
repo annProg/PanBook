@@ -1,0 +1,2 @@
+PDF_OPTIONS="--toc --chapters --smart -V links-as-notes --listings --highlight-style=$theme --template=$SCRIPTDIR/zh-ctex/tpl_ctex.latex --latex-engine=xelatex"
+HTML_OPTIONS="--toc --smart --highlight-style=$theme --template=$SCRIPTDIR/html5/tpl_htmldoc.html5"
