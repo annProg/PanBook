@@ -50,7 +50,7 @@ function html()
 		[ -f $cwd/config ] && source $cwd/config
 	
 		HTML_OUTPUT="$BUILD/$ofile.$theme.html"
-		pandoc --self-contained --verbose $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS
+		pandoc --self-contained $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS
 		sed -i "s/pdf/jpg/g" $HTML_OUTPUT
 	done
 	
