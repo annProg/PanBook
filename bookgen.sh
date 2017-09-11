@@ -14,7 +14,7 @@ function init()
 	[ ! -d $WORKDIR ] && mkdir $WORKDIR
 	[ ! -d $IMGDIR ] && mkdir $IMGDIR
 	cd $WORKDIR
-	chapters=`ls *.md`
+	chapters=`ls *.md 2>/dev/null`
 	[ "$DEBUG"x = "true"x ] && highlightStyle=(pygments)
 }
 
