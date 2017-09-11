@@ -15,6 +15,10 @@ bookgen.sh init
 
 之后在`src`目录进行写作, `src/images`目录存放图片
 
+### 注意以下几点
+- 在Windows上使用pandoc需要将markdown文件保存为UTF-8格式
+- 按章节拆分的多个markdown文件，开头需要空一行，否则pandoc可能不能正确识别标题
+
 ## html5模板
 
 ## slides模板
