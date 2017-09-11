@@ -76,6 +76,7 @@
 \title{用Markdown+Pandoc+XeLaTeX写作}
 \author{me@annhe.net}
 \date{\today}
+\usepackage{cleveref}
 
 \usepackage{fancyhdr}
 %\usepackage{lastpage}
@@ -87,6 +88,8 @@
 \maketitle
 
     
+
+\begin{frontmatter}<br>这里是前言<br>\end{frontmatter}
 
 
 {
@@ -100,14 +103,20 @@
 \mainmatter
     % 在此命令之后的页码为阿拉伯数字
     % 以下为正文
-\chapter{代码}\label{ux4ee3ux7801}
+\chapter{代码块}\label{ux4ee3ux7801ux5757}
 
-使用\{\#identifier\}可以为代码块加上ID属性，可以使用\ref{code:code}引用
+pandoc扩展的Markdown语法可以为代码块添加ID属性及语言类型属性，形如\lstinline!{#id .language}!，其中ID属性可以用来做交叉引用，使用\lstinline!\ref{id}!在正文中引用代码块。例如代码块\ref{code:demo}。
 
-\begin{lstlisting}[language=bash, label=code, caption=code, float=htbp]
+\begin{lstlisting}[language=bash, label=code:demo, caption=code:demo, float=htbp]
+~~~{#code:demo .bash}
 #!/bin/bash
 echo "Hello LaTeX"
+echo "Hello Pandoc"
+echo "Hello Markdown"
+~~~~
 \end{lstlisting}
+
+\chapter{图片}\label{ux56feux7247}
 
 \backmatter
 
