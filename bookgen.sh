@@ -22,8 +22,11 @@ function pdf()
 {
 	for theme in ${highlightStyle[@]}
 	do
-		source $SCRIPTDIR/config.default
+		source $SCRIPTDIR/config.default		
 		[ -f $cwd/config ] && source $cwd/config
+		# 复制模板目录的资源文件到build目录
+		TPLDIR=`echo $PDF_OPTIONS |tr ' ' '\n'|grep "template"|cut -f2 -d'=' |awk -F'/' '{$NF="";print}'|tr ' ' '/'`
+		cp -rf $TPLDIR/* $BUILD
 		TEX_OUTPUT="$BUILD/$ofile.$theme.tex"
 		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS
 		
@@ -31,6 +34,7 @@ function pdf()
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/label=(.*)]/label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
 		sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
 		
+		cd $BUILD
 		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	done

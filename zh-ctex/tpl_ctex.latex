@@ -4,6 +4,9 @@
 \setromanfont{Georgia} 	% 字型
 \setmonofont{Latin Modern Mono}
 
+\usepackage{tikz} % Required for drawing custom shapes
+\usepackage[yyyymmdd,hhmmss]{datetime}
+\ctexset{today=small}
 \usepackage{geometry} 		% 設定邊界
 \geometry{
   top=1in,
@@ -17,6 +20,8 @@
 
 $if(listings)$
 \usepackage{xcolor}
+\definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
+
 %\usepackage[x11names,svgnames,dvipsnames]{xcolor}
 \usepackage{listings}
 \lstset{
@@ -120,16 +125,63 @@ $endfor$
 
 
 \begin{document}
+\frontmatter
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
 
+\begingroup
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{Pictures/background}};
 $if(title)$
+\draw (current page.center) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]
+{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}
+{\centering $title$\\[13pt] % Book title
+$endif$
+$if(subtitle)$
+{\Large $subtitle$}\\[15pt] % Subtitle
+$endif$
+$if(author)$
+{\huge $for(author)$$author$$sep$ \and $endfor$} % Author name
+$endif$
+}};
+\end{tikzpicture}
+\vfill
+\endgroup
+\newpage
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+$if(copyright)$
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+\noindent Copyright \copyright\ \the\year\  $if(author)$$for(author)$$author$$sep$ \and $endfor$$endif$\\ % Copyright notice
+
+\noindent \textsc{Published by \LaTeX}\\ % Publisher
+$if(homepage)$
+\noindent \textsc{$homepage$}\\ % URL
+$endif$
+
+\noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\ % License information
+
+\noindent \textit{最后编译日期, \today\ \currenttime } % Printing/edition date
+$endif$
+
+$if(showtitle)$
 \maketitle
 $endif$
 
     
-$if(abstract)$
-\begin{abstract}
-$abstract$
-\end{abstract}
+$if(preface)$
+\chapter*{序言}
+\addcontentsline{toc}{chapter}{序言}
+$preface$
 $endif$
 
 $for(include-before)$
