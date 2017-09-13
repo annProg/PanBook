@@ -32,6 +32,7 @@ function pdf()
 		
 		#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/label=(.*)]/label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
+		#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
 		sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
 		
 		cd $BUILD

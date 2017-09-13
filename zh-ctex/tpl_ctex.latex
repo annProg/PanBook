@@ -149,9 +149,7 @@ $endif$
 \end{tikzpicture}
 \vfill
 \endgroup
-\newpage
-\newpage
-
+\addcontentsline{toc}{chapter}{封面}
 
 %----------------------------------------------------------------------------------------
 %	COPYRIGHT PAGE
@@ -179,8 +177,8 @@ $endif$
 
     
 $if(preface)$
-\chapter*{序言}
-\addcontentsline{toc}{chapter}{序言}
+\chapter*{前言}
+\addcontentsline{toc}{chapter}{前言}
 $preface$
 $endif$
 
@@ -194,13 +192,16 @@ $if(toc)$
 \hypersetup{linkcolor=black}
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
+\addcontentsline{toc}{chapter}{目录}
 }
 $endif$
 $if(lot)$
 \listoftables
+\addcontentsline{toc}{chapter}{表格列表}
 $endif$
 $if(lof)$
 \listoffigures
+\addcontentsline{toc}{chapter}{插图列表}
 $endif$
 
 
