@@ -4,6 +4,10 @@
 \setromanfont{Georgia} 	% 字型
 \setmonofont{Latin Modern Mono}
 
+% pandoc版本大于1.15时需要\tightlist
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+  
 \usepackage{tikz} % Required for drawing custom shapes
 \usepackage[yyyymmdd,hhmmss]{datetime}
 \ctexset{today=small}

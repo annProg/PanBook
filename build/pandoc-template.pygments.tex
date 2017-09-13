@@ -4,6 +4,10 @@
 \setromanfont{Georgia} 	% 字型
 \setmonofont{Latin Modern Mono}
 
+% pandoc版本大于1.15时需要\tightlist
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+  
 \usepackage{tikz} % Required for drawing custom shapes
 \usepackage[yyyymmdd,hhmmss]{datetime}
 \ctexset{today=small}
@@ -299,7 +303,7 @@ Markdown语法介绍可以在\href{http://www.pandoc.org/MANUAL.html\#pandocs-ma
 白字元即可。
 
 \subsubsection{Extension:
-escaped\_line\_breaks}\label{extension-escapedux5flineux5fbreaks}
+escaped\_line\_breaks}\label{extension-escaped_line_breaks}
 
 一个反斜线后跟着一个换行字元，同样也有强制换行的效果。这也是在表格单元格中添加换
 行的唯一形式。
@@ -312,7 +316,7 @@ escaped\_line\_breaks}\label{extension-escapedux5flineux5fbreaks}
 号以及一行文字所组成，你可以在文字后面加上任意数量的\#符号。由行首起算的\#符号数量决
 定了标题的阶层，如代码\ref{code:markdownTitle}所示。
 
-\begin{lstlisting}[label=code:markdownTitle, caption=code:markdownTitle, float=htbp]
+\begin{lstlisting}[caption=测试, label=code:markdownTitle, float=htbp]
 Setext A level-one header
 ==================
 
@@ -327,7 +331,7 @@ Setext A level-two header
 \end{lstlisting}
 
 \subsubsection{Extension:
-blank\_before\_header}\label{extension-blankux5fbeforeux5fheader}
+blank\_before\_header}\label{extension-blank_before_header}
 
 原始markdown语法在标题之前并不需要预留空白行。Pandoc则需要（除非标题位于文件最开始的
 地方）。这是因为以\#符号开头的情况在一般文字段落中相当常见，这会导致非预期的标题。例如：
@@ -342,7 +346,7 @@ I like several of their flavors of ice cream:
 \section{HTML与LaTeX的标题标识符}\label{htmlux4e0elatexux7684ux6807ux9898ux6807ux8bc6ux7b26}
 
 \subsubsection{Extension:
-header\_attributes}\label{extension-headerux5fattributes}
+header\_attributes}\label{extension-header_attributes}
 
 在标题文字所在行的行尾，可以使用以下语法为标题加上属性：
 
@@ -400,7 +404,7 @@ This is a block quote. This paragraph has two lines.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\itemsep1pt\parskip0pt\parsep0pt
+\tightlist
 \item
   This is a list inside a block quote.
 \item
@@ -429,7 +433,7 @@ paragraph has two lines.
 \end{lstlisting}
 
 \subsubsection{Extension:
-blank\_before\_blockquote}\label{extension-blankux5fbeforeux5fblockquote}
+blank\_before\_blockquote}\label{extension-blank_before_blockquote}
 
 原始markdown语法在区块引用之前并不需要预留空白行。Pandoc则需要（除非区
 块引用位于文件最开始的地方）。这是因为以\textgreater{}符号开头的情况在一般文字段落中
@@ -443,7 +447,7 @@ markdown\_strict格式，不然以下的语法在pandoc中将不会产生出嵌�
 
 \section{代码}\label{ux4ee3ux7801}
 
-\subsubsection{缩进式代码块}\label{ux7f29ux8fdbux5f0fux4ee3ux7801ux5757}
+\subsection{缩进式代码块}\label{ux7f29ux8fdbux5f0fux4ee3ux7801ux5757}
 
 由四个空格或一个tab缩进的文本取做代码块，区块中的特殊字符、空格和换行都会
 被保留，而缩进的空格和tab会在输出中移除，但在代码块中的空行不必缩进。
@@ -455,9 +459,10 @@ echo "Hello Markdown"
 echo "Hello LaTeX"
 \end{lstlisting}
 
-\subsubsection{围栏式代码块}\label{ux56f4ux680fux5f0fux4ee3ux7801ux5757}
+\subsection{围栏式代码块}\label{ux56f4ux680fux5f0fux4ee3ux7801ux5757}
 
-\textbf{Extension: fenced\_code\_blocks}
+\subsubsection{Extension:
+fenced\_code\_blocks}\label{extension-fenced_code_blocks}
 
 除了标准的缩进式代码块之外，Pandoc还支持围栏式代码块，
 代码块以三个或三个以
@@ -473,15 +478,17 @@ code here
 ~~~~~~
 \end{lstlisting}
 
-\textbf{Extension: backtick\_code\_blocks}
+\subsubsection{Extension:
+backtick\_code\_blocks}\label{extension-backtick_code_blocks}
 
 与\lstinline!fenced_code_blocks!相同，只不过使用反引号 ` 替换波浪线
 \textasciitilde{} 而已
 
-\textbf{Extension: fenced\_code\_attributes}
+\subsubsection{Extension:
+fenced\_code\_attributes}\label{extension-fenced_code_attributes}
 
-\begin{lstlisting}[numbers=left, firstnumber=100, label=code:fencedcode, caption=code:fencedcode, float=htbp]
-~~~~ {#code:mycode .haskell .numberLines startFrom="100"}
+\begin{lstlisting}[numbers=left, firstnumber=100, caption=围栏式代码块, label=code:fencedcode, float=htbp]
+~~~~ {#code:mycode .haskell .numberLines startFrom="100" caption="围栏式代码块"}
 qsort []     = []
 qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
                qsort (filter (>= x) xs)
@@ -490,7 +497,8 @@ qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
 
 这里的mycode为ID，haskell与numberLines是类别，而startsFrom则是值为
 100的属性。numberLines和startFrom配合使用可以显示代码行号，如果没有
-指定startFrom，则默认从1开始。有些输出格式可以利用这些信息来作语法
+指定startFrom，则默认从1开始。caption指定代码块标题，如果没有设置
+caption，则默认使用ID作为caption。有些输出格式可以利用这些信息来作语法
 高亮。目前使用到这些信息的输出格式仅有HTML与LaTeX。如果指定的输出格
 式及语言类别有语法高亮支持，那么上面那段代码区块将会以高亮并带有行号
 的方式呈现。
@@ -505,7 +513,7 @@ qsort [] = []
 
 \section{行区块}\label{ux884cux533aux5757}
 
-\subsubsection{Extension: line\_blocks}\label{extension-lineux5fblocks}
+\subsubsection{Extension: line\_blocks}\label{extension-line_blocks}
 
 行区块是一连串以竖线(
 \textbar{})加上一个空格所构成的连续行。行与行间的区隔在
@@ -535,13 +543,15 @@ qsort [] = []
 
 效果：
 
-The limerick packs laughs anatomical\\In space that is quite
-economical.\\\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}But the
-good ones I've
-seen\\\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}So seldom are
-clean\\And the clean ones so seldom are comical
+The limerick packs laughs anatomical\\
+In space that is quite economical.\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}But the good ones
+I've seen\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}So seldom are clean\\
+And the clean ones so seldom are comical
 
-200 Main St.\\Berkeley, CA 94718
+200 Main St.\\
+Berkeley, CA 94718
 
 这是从reStructuredText借来的语法。
 
@@ -557,6 +567,18 @@ clean\\And the clean ones so seldom are comical
 * two
 * three
 \end{lstlisting}
+
+显示如下
+
+\begin{itemize}
+\tightlist
+\item
+  one
+\item
+  two
+\item
+  three
+\end{itemize}
 
 这会产生一个「紧凑」列表。如果你想要一个「宽松」列表，也就是说以段落格式处
 理每个项目内的文字内容，那么只要在每个项目间加上空白行即可：
@@ -669,7 +691,7 @@ guide中并未明确表示「四个空白规则」是否一体适用于所有位
 1.  three
 \end{lstlisting}
 
-\subsubsection{Extension: fancy\_lists}\label{extension-fancyux5flists}
+\subsubsection{Extension: fancy\_lists}\label{extension-fancy_lists}
 
 与原始markdown不同的是，Pandoc除了使用阿拉伯数字作为有序列表的编号外，也可以使用大写或
 小写的英文字母，以及罗马数字。列表标记可以用括号包住，也可以单独一个右括号，抑或是句号。
@@ -712,7 +734,7 @@ guide中并未明确表示「四个空白规则」是否一体适用于所有位
 \subsection{定义列表}\label{ux5b9aux4e49ux5217ux8868}
 
 \subsubsection{Extension:
-definition\_lists}\label{extension-definitionux5flists}
+definition\_lists}\label{extension-definition_lists}
 
 Pandoc支援定义列表，其语法的灵感来自于PHP Markdown
 Extra以及reStructuredText：
@@ -752,8 +774,7 @@ Term 2
 
 \subsection{编号范例列表}\label{ux7f16ux53f7ux8303ux4f8bux5217ux8868}
 
-\subsubsection{Extension:
-example\_lists}\label{extension-exampleux5flists}
+\subsubsection{Extension: example\_lists}\label{extension-example_lists}
 
 这个特别的列表标记@可以用来产生连续编号的范例列表。列表中第一个以@标记的项目
 会被编号为'1'，接着编号为'2'，依此类推，直到文件结束。范例项目的编号不会局限
@@ -867,21 +888,11 @@ two之后「切断」列表，你可以插入一些没有缩排、输出时也�
 \subsection{简单表格}\label{ux7b80ux5355ux8868ux683c}
 
 \subsubsection{Extension:
-simple\_tables,table\_captions}\label{extension-simpleux5ftablestableux5fcaptions}
+simple\_tables,table\_captions}\label{extension-simple_tablestable_captions}
 
 简单表格看起来像这样子：
 
-\begin{lstlisting}
-  Right     Left     Center     Default
--------     ------ ----------   -------
-     12     12        12            12
-    123     123       123          123
-      1     1          1             1
-
-Table:  Demonstration of simple table syntax.
-\end{lstlisting}
-
-\begin{longtable}[c]{@{}rlcl@{}}
+\begin{longtable}[]{@{}rlcl@{}}
 \caption{Demonstration of simple table syntax.}\tabularnewline
 \toprule
 Right & Left & Center & Default\tabularnewline
@@ -897,10 +908,22 @@ Right & Left & Center & Default\tabularnewline
 \bottomrule
 \end{longtable}
 
+代码为：
+
+\begin{lstlisting}
+  Right     Left     Center     Default
+-------     ------ ----------   -------
+     12     12        12            12
+    123     123       123          123
+      1     1          1             1
+
+Table:  Demonstration of simple table syntax.
+\end{lstlisting}
+
 表头与资料列分别以一行为单位。直行的对齐则依照表头的文字和其底下虚线的相对位置来决定：
 
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
+\tightlist
 \item
   如果虚线与表头文字的右侧有切齐，而左侧比表头文字还长，则该直行为靠右对齐。
 \item
@@ -915,6 +938,16 @@ Right & Left & Center & Default\tabularnewline
 
 表头也可以省略，在省略表头的情况下，表格下方必须加上一行虚线以清楚标明表格的范围。例如：
 
+\begin{longtable}[]{@{}rlcr@{}}
+\toprule
+12 & 12 & 12 & 12\tabularnewline
+123 & 123 & 123 & 123\tabularnewline
+1 & 1 & 1 & 1\tabularnewline
+\bottomrule
+\end{longtable}
+
+代码：
+
 \begin{lstlisting}
 -------     ------ ----------   -------
      12     12        12             12
@@ -923,138 +956,230 @@ Right & Left & Center & Default\tabularnewline
 -------     ------ ----------   -------
 \end{lstlisting}
 
-当省略表头时，直行的对齐会以表格内容的第一行资料列决定。所以，以上面的表格为例，各直行的对齐依序会是靠右、靠左、置中以及靠右对齐。
+当省略表头时，直行的对齐会以表格内容的第一行资料列决定。所以，以上面的表格为例，
+各直行的对齐依序会是靠右、靠左、置中以及靠右对齐。
 
-多行表格 Extension: multiline\_tables,table\_captions
+\subsection{多行表格}\label{ux591aux884cux8868ux683c}
 
-多行表格允许表头与表格资料格的文字能以复数行呈现（但不支援横跨多栏或纵跨多列的资料格）。以下为范例：
+\subsubsection{Extension:
+multiline\_tables,table\_captions}\label{extension-multiline_tablestable_captions}
 
-\begin{longtable}[c]{@{}clrl@{}}
-\caption{Here's the caption. It, too, may span multiple lines.
-看起来很像简单表格，但两者间有以下差别：}\tabularnewline
+多行表格允许表头与表格资料格的文字能以多行呈现（但不支援横跨多栏或纵跨多列的
+资料格）。以下为范例：
+
+\begin{longtable}[]{@{}clrl@{}}
+\caption{Here's the caption. It, too, may span multiple
+lines.}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.15\columnwidth}\centering\strut
-Centered Header
-\strut\end{minipage} &
-\begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
-Default Aligned
-\strut\end{minipage} &
-\begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
-Right Aligned
-\strut\end{minipage} &
-\begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
-Left Aligned
-\strut\end{minipage}\tabularnewline
+Centered Header\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+Default Aligned\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
+Right Aligned\strut
+\end{minipage} & \begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
+Left Aligned\strut
+\end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
 \begin{minipage}[b]{0.15\columnwidth}\centering\strut
-Centered Header
-\strut\end{minipage} &
-\begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
-Default Aligned
-\strut\end{minipage} &
-\begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
-Right Aligned
-\strut\end{minipage} &
-\begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
-Left Aligned
-\strut\end{minipage}\tabularnewline
+Centered Header\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+Default Aligned\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
+Right Aligned\strut
+\end{minipage} & \begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
+Left Aligned\strut
+\end{minipage}\tabularnewline
 \midrule
 \endhead
 \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-First
-\strut\end{minipage} &
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-row
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
-12.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
-Example of a row that spans multiple lines.
-\strut\end{minipage}\tabularnewline
+First\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+12.0\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+Example of a row that spans multiple lines.\strut
+\end{minipage}\tabularnewline
 \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-Second
-\strut\end{minipage} &
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-row
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
-5.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
-Here's another one. Note the blank line between rows.
-\strut\end{minipage}\tabularnewline
+Second\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+5.0\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+Here's another one. Note the blank line between rows.\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
-在表头文字之前，必须以一列虚线作为开头（除非有省略表头）。
-必须以一列虚线作为表格结尾，之后接一个空白行。
-资料列与资料列之间以空白行隔开。
-在多行表格中，表格分析器会计算各直行的栏宽，并在输出时尽可能维持各直行在原始文件中的相对比例。因此，要是你觉得某些栏位在输出时不够宽，你可以在markdown
-的原始档中加宽一点。
+代码：
+
+\begin{lstlisting}
+-------------------------------------------------------------
+ Centered   Default           Right Left
+  Header    Aligned         Aligned Aligned
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+-------------------------------------------------------------
+
+Table: Here's the caption. It, too, may span
+multiple lines.
+\end{lstlisting}
+
+看起来很像简单表格，但两者间有以下差别：
+
+\begin{itemize}
+\tightlist
+\item
+  在表头文字之前，必须以一列虚线作为开头（除非有省略表头）。
+\item
+  必须以一列虚线作为表格结尾，之后接一个空白行。
+\item
+  资料列与资料列之间以空白行隔开。
+\item
+  在多行表格中，表格分析器会计算各直行的栏宽，并在输出时尽可能维持各直行在原始文件中的相对比例。因此，要是你觉得某些栏位在输出时不够宽，你可以在markdown
+  的原始档中加宽一点。
+\end{itemize}
 
 和简单表格一样，表头在多行表格中也是可以省略的：
 
-\begin{longtable}[c]{@{}clrl@{}}
-\caption{Here's a multiline table without headers.
-多行表格中可以单只包含一个资料列，但该资料列之后必须接着一个空白行（然后才是标示表格结尾的一行虚线）。如果没有此空白行，此表格将会被解读成简单表格。}\tabularnewline
-\toprule
-\endfirsthead
+\begin{longtable}[]{@{}clrl@{}}
+\caption{Here's a multiline table without headers.}\tabularnewline
 \toprule
 \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-First
-\strut\end{minipage} &
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-row
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
-12.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
-Example of a row that spans multiple lines.
-\strut\end{minipage}\tabularnewline
+First\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+12.0\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+Example of a row that spans multiple lines.\strut
+\end{minipage}\tabularnewline
 \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-Second
-\strut\end{minipage} &
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-row
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
-5.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
-Here's another one. Note the blank line between rows.
-\strut\end{minipage}\tabularnewline
+Second\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+5.0\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+Here's another one. Note the blank line between rows.\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
-格框表格 Extension: grid\_tables,table\_captions
+代码：
+
+\begin{lstlisting}
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+----------- ------- --------------- -------------------------
+
+: Here's a multiline table without headers.
+\end{lstlisting}
+
+多行表格中可以单只包含一个资料列，但该资料列之后必须接着一个空白行（然后才是标
+示表格结尾的一行虚线）。如果没有此空白行，此表格将会被解读成简单表格。
+
+\subsection{格框表格}\label{ux683cux6846ux8868ux683c}
+
+\subsubsection{Extension:
+grid\_tables,table\_captions}\label{extension-grid_tablestable_captions}
 
 格框表格看起来像这样：
 
+\begin{longtable}[]{@{}lll@{}}
+\caption{Sample grid table.}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Fruit\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Price\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+Advantages\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Fruit\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Price\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+Advantages\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+Bananas\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\$1.34\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  built-in wrapper
+\item
+  bright color
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+Oranges\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\$2.10\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  cures scurvy
+\item
+  tasty
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+代码：
+
+\begin{lstlisting}
 : Sample grid table.
 
-+---------------+---------------+--------------------+ \textbar{} Fruit
-\textbar{} Price \textbar{} Advantages \textbar{}
-+===============+===============+====================+ \textbar{}
-Bananas \textbar{} \$1.34 \textbar{} - built-in wrapper \textbar{}
-\textbar{} \textbar{} \textbar{} - bright color \textbar{}
-+---------------+---------------+--------------------+ \textbar{}
-Oranges \textbar{} \$2.10 \textbar{} - cures scurvy \textbar{}
-\textbar{} \textbar{} \textbar{} - tasty \textbar{}
 +---------------+---------------+--------------------+
-以=串成的一行区分了表头与表格本体，这在没有表头的表格中也是可以省略的。在格框表格中的资料格可以包含任意的区块元素（复数段落、代码区块、清单等等）。不支援对齐，也不支援横跨多栏或纵跨多列的资料格。格框表格可以在Emacs
-table mode下轻松建立。
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+
+\end{lstlisting}
 
-管线表格 Extension: pipe\_tables,table\_captions
+以=串成的一行区分了表头与表格本体，这在没有表头的表格中也是可以省略的。在格框表格中
+的资料格可以包含任意的区块元素（复数段落、代码区块、清单等等）。不支援对齐，也不支
+援横跨多栏或纵跨多列的资料格。格框表格可以在Emacs table mode下轻松建立。
+
+\subsection{管线表格}\label{ux7ba1ux7ebfux8868ux683c}
+
+\subsubsection{Extension:
+pipe\_tables,table\_captions}\label{extension-pipe_tablestable_captions}
 
 管线表格看起来像这样：
 
-\begin{longtable}[c]{@{}rllc@{}}
-\caption{Demonstration of simple table syntax. 这个语法与PHP markdown
-extra中的表格语法相同。开始与结尾的管线字元是可选的，但各直行间则必须以管线区隔。上面范例中的冒号表明了对齐方式。表头可以省略，但表头下的水平虚线必须保留，因为虚线上定义了资料栏的对齐方式。}\tabularnewline
+\begin{longtable}[]{@{}rllc@{}}
+\caption{Demonstration of simple table syntax.}\tabularnewline
 \toprule
 Right & Left & Default & Center\tabularnewline
 \midrule
@@ -1069,30 +1194,64 @@ Right & Left & Default & Center\tabularnewline
 \bottomrule
 \end{longtable}
 
-因为管线界定了各栏之间的边界，表格的原始码并不需要像上面例子中各栏之间保持直行对齐。所以，底下一样是个完全合法（虽然丑陋）的管线表格：
+代码：
 
-fruit\textbar{} price -----\textbar{}-----: apple\textbar{}2.05
-pear\textbar{}1.37 orange\textbar{}3.09
-管线表格的资料格不能包含如段落、清单之类的区块元素，也不能包含复数行文字。
+\begin{lstlisting}
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+
+  : Demonstration of simple table syntax.
+\end{lstlisting}
+
+这个语法与PHP markdown
+extra中的表格语法相同。开始与结尾的管线字元是可选的，但各直行间
+则必须以管线区隔。上面范例中的冒号表明了对齐方式。表头可以省略，但表头下的水平虚线必须
+保留，因为虚线上定义了资料栏的对齐方式。
+
+因为管线界定了各栏之间的边界，表格的原始码并不需要像上面例子中各栏之间保持直行对齐。所
+以，底下一样是个完全合法（虽然丑陋）的管线表格：
+
+\begin{lstlisting}
+fruit| price
+-----|-----:
+apple|2.05
+pear|1.37
+orange|3.09
+\end{lstlisting}
+
+管线表格的资料格不能包含如段落、清单之类的区块元素，也不能包含多行文字。
 
 注意：Pandoc 也可以看得懂以下形式的管线表格，这是由Emacs 的orgtbl-mod
 所绘制：
 
-\begin{longtable}[c]{@{}ll@{}}
+\begin{lstlisting}
+| One | Two   |
+|-----+-------|
+| my  | table |
+| is  | nice  |
+\end{lstlisting}
+
+效果：
+
+\begin{longtable}[]{@{}ll@{}}
 \toprule
 One & Two\tabularnewline
 \midrule
 \endhead
 my & table\tabularnewline
 is & nice\tabularnewline
-主要的差别在于以+取代了部分的 &
-。其他的orgtbl功能并未支援。如果要指定非预设的直行对齐形式，你仍然需要在上面的表格中自行加入冒号。\tabularnewline
 \bottomrule
 \end{longtable}
 
+主要的差别在于以+取代了部分的\textbar{}。其他的orgtbl功能并未支援。如果要指定非预设的直
+行对齐形式，你仍然需要在上面的表格中自行加入冒号。
+
 \section{插图}\label{ux63d2ux56fe}
 
-\section{表格}\label{ux8868ux683c-1}
+\section{交叉引用}\label{ux4ea4ux53c9ux5f15ux7528}
 
 Pandoc扩展的Markdown语法可以为代码块添加ID属性及语言类型属性，形如\lstinline!{#id .language}!，其中ID属性可以用来做交叉引用，使用\lstinline!\ref{id}!在正文中引用代码块。例如代码块\ref{code:demo}。
 
