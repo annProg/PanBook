@@ -48,7 +48,7 @@ I like several of their flavors of ice cream:
 
 这也是前一章所述注意事项\ref{title:note}的原因。
 
-## HTML与LaTeX的标题标识符
+### 标题标识符
 #### Extension: header_attributes
 在标题文字所在行的行尾，可以使用以下语法为标题加上属性：
 ```
