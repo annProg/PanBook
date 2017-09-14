@@ -71,6 +71,7 @@ date: \today     # 日期
 copyright: true  # 是否生成版权页
 lof: true        # 是否生成插图列表页
 lot: true        # 是否生成表格列表页
+graphics: true   # 是否使用graphicx
 homepage: https://github.com/annProg/pandoc-template
 header-includes:
   - \usepackage{cleveref}

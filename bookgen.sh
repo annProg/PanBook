@@ -27,6 +27,9 @@ function pdf()
 		# 复制模板目录的资源文件到build目录
 		TPLDIR=`echo $PDF_OPTIONS |tr ' ' '\n'|grep "template"|cut -f2 -d'=' |awk -F'/' '{$NF="";print}'|tr ' ' '/'`
 		cp -rf $TPLDIR/* $BUILD
+		# 复制src目录下资源文件到build目录
+		cp -rf $WORKDIR/* $BUILD
+		
 		TEX_OUTPUT="$BUILD/$ofile.$theme.tex"
 		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS
 		
@@ -34,7 +37,7 @@ function pdf()
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
 		#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
-		sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
+		#sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
 		
 		cd $BUILD
 		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
@@ -68,10 +71,7 @@ function html()
 function clean()
 {
 	cd $BUILD
-	for type in tex aux gz log out toc
-	do
-		rm -f *.$type
-	done
+	rm -fr *
 }
 
 case $# in

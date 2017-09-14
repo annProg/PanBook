@@ -226,8 +226,210 @@ orange|3.09
 主要的差别在于以+取代了部分的|。其他的orgtbl功能并未支援。如果要指定非预设的直
 行对齐形式，你仍然需要在上面的表格中自行加入冒号。
 
-## 插图
+## 文件标题区块
 
-## 交叉引用
-Pandoc扩展的Markdown语法可以为代码块添加ID属性及语言类型属性，形如`{#id .language}`，其中ID属性可以用来做交叉引用，使用`\ref{id}`在正文中引用代码块。例如代码块\ref{code:demo}。
+（译注：本节中提到的「标题」均指Title，而非Headers）
 
+#### Extension: pandoc_title_block
+
+如果档案以文件标题（Title）区块开头
+```
+% title
+% author(s) (separated by semicolons)
+% date
+```
+这部份将不会作为一般文字处理，而会以书目资讯的方式解析。（这可用在像是单
+一LaTeX 或是HTML 输出文件的书名上。）这个区块仅能包含标题，或是标题与作
+者，或是标题、作者与日期。如果你只想包含作者却不想包含标题，或是只有标题
+与日期而没有作者，你得利用空白行：
+```
+%
+% Author
+
+% My title
+%
+% June 15, 2006
+```
+标题可以包含多行文字，但接续行必须以空白字元开头，像是：
+
+```
+% My title
+  on multiple lines
+```
+
+如果文件有多个作者，作者也可以分列在不同行并以空白字元作开头，或是以分号间隔，或
+是两者并行。所以，下列各种写法得到的结果都是相同的：
+
+```
+% Author One
+  Author Two
+
+% Author One; Author Two
+
+% Author One;
+  Author Two
+```
+
+日期就只能写在一行之内。
+
+所有这三个metadata 栏位都可以包含标准的行内格式（斜体、连结、脚注等等）。
+
+文件标题区块一定会被分析处理，但只有在`--standaline( -s)`选项被设定时才会影响输出内
+容。在输出HTML时，文件标题会出现的地方有两个：一个是在文件的`<head>`区块里---这会
+显示在浏览器的视窗标题上---另外一个是文件的`<body>`区块最前面。位于`<head>`里的文件
+标题可以选择性地加上前缀文字（透过`--title-prefix`或`-T`选项）。而在`<body>`里的文件标
+题会以H1元素呈现，并附带“title”类别(class)，这样就能藉由CSS来隐藏显示或重新定义格
+式。如果以-T选项指定了标题前缀文字，却没有设定文件标题区块里的标题，那么前缀文字本
+身就会被当作是HTML的文件标题。
+
+而man page的输出器会分析文件标题区块的标题行，以解出标题、man page section number，
+以及其他页眉(header)页脚(footer)所需要的资讯。一般会假设标题行的第一个单字为标题，
+标题后也许会紧接着一个以括号包住的单一数字，代表section number（标题与括号之间没
+有空白）。在此之后的其他文字则为页脚与页眉文字。页脚与页眉文字之间是以单独的一个
+管线符号( |)作为区隔。所以，
+
+```
+% PANDOC(1)
+```
+将会产生一份标题为PANDOC且section为1的man page。
+
+```
+% PANDOC(1) Pandoc User Manuals
+```
+产生的man page 会再加上“Pandoc User Manuals” 在页脚处。
+
+```
+% PANDOC(1) Pandoc User Manuals | Version 4.0
+```
+产生的man page 会再加上“Version 4.0” 在页眉处。
+
+
+## 字符转义
+
+#### Extension: all_symbols_escapable
+
+除了在代码区块或行内代码之外，任何标点符号或空白字元前面只要加上一个
+反斜线，都能使其保留字面原义，而不会进行格式的转义解读。因此，举例来
+说，下面的写法
+
+```
+*\*hello\**
+```
+输出后会得到
+
+```
+<em>*hello*</em>
+```
+而不是
+
+```
+<strong>hello</strong>
+```
+这条规则比原始的markdown 规则来得好记许多，原始规则中，只有以下字元才支持
+反斜线跳脱，不作进一步转义：
+```
+\`*_{}[]()>#+-.!
+```
+（然而，如果使用了markdown_strict格式，那么就会采用原始的markdown规则）
+
+一个反斜线之后的空白字元会被解释为不断行的空白(nonbreaking space)。这在TeX的
+输出中会显示为`~`，而在HTML与XML则是显示为`\&#160;`或`\&nbsp;`。
+
+一个反斜线之后的换行字元（例如反斜线符号出现在一行的最尾端）则会被解释为强制
+换行。这在TeX的输出中会显示为`\\`，而在HTML里则是`<br />`。相对于原始markdown是以
+在行尾加上两个空白字元这种「看不见」的方式进行强制换行，反斜线接换行字元会是比较好
+的替代方案。
+
+转义字符在代码上下文中不起任何作用。
+
+## 智能标点
+
+如果指定了`--smart`选项，pandoc将会输出正式印刷用的标点符号，像是将`straight quotes`转
+换为`curly quotes` [^4]、`---`转为破折号(em-dashes)，`--`转为连接号(en-dashes)，以及将
+`...`转为省略号。不断行空格(Nonbreaking spaces)将会插入某些缩写词之后，例如“Mr.”。
+
+注意：如果你的LaTeX template使用了csquotes套件，pandoc会自动侦测并且使用`\enquote{...}`
+在引言文字上。
+
+[^4]: 译注：straight quotes指的是左右两侧都长得一样的引号，例如我们直接在键盘上打出来的
+单引号或双引号；curly quotes则是左右两侧不同，有从两侧向内包夹视觉效果的引号。
+
+
+## 行内格式
+
+###强调
+要强调某些文字，只要以`*`或`_`符号前后包住即可，像这样：
+```
+This text is _emphasized with underscores_, and this
+is *emphasized with asterisks*.
+```
+重复两个`*`或`_`符号以产生更强烈的强调：
+```
+This is **strong emphasis** and __with underscores__.
+```
+This is **strong emphasis** and __with underscores__.
+
+一个前后以空白字元包住，或是前面加上反斜线的`*`或`_`符号，都不会转换为强调格式：
+```
+This is * not emphasized *, and \*neither is this\*.
+```
+
+#### Extension: intraword_underscores
+
+因为_字元有时会使用在单字或是ID之中，所以pandoc不会把被字母包住的_解读为强调标记。
+如果有需要特别强调单字中的一部分，就用*：
+
+```
+feas*ible*, not feas*able*.
+```
+
+### 删除线
+#### Extension: strikeout
+
+要将一段文字加上水平线作为删除效果，将该段文字前后以`~~`包住即可。例如，
+```
+This ~~is deleted text.~~
+```
+
+### 上标与下标
+#### Extension: superscript,subscript
+
+要输入上标可以用`^`字元将要上标的文字包起来；要输入下标可以用`~`字元将要下标的
+文字包起来。直接看范例，
+```
+H~2~O is a liquid.  2^10^ is 1024.
+```
+H~2~O is a liquid.  2^10^ is 1024.
+
+如果要上标或下标的文字中包含了空白，那么这个空白字元之前必须加上反斜线。（这是为
+了避免一般使用下的`~`和`^`在非预期的情况下产生出意外的上标或下标。）所以，如果你想要
+让字母P后面跟着下标文字'a cat'，那么就要输入`P~a\ cat~`，而不是`P~a cat~`。
+
+### 字面文字
+要让一小段文字直接以其字面形式呈现，可以用反引号将其包住：
+
+```
+What is the difference between `>>=` and `>>`?
+```
+如果字面文字中也包含了反引号，那就使用双重反引号包住：
+
+```
+Here is a literal backtick `` ` ``.
+````
+
+（在起始反引号后的空白以及结束反引号前的空白都会被忽略。）
+
+一般性的规则如下，字面文字区段是以连续的反引号字元作为开始（反引号后的空白字元为可选），
+一直到同样数目的反引号字元出现才结束（反引号前的空白字元也为可选）。
+
+要注意的是，转义字符（以及其他markdown 结构）在字面文字的上下文中是没有效果的：
+```
+This is a backslash followed by an asterisk: `\*`.
+```
+
+#### Extension: inline_code_attributes
+
+与围栏代码区块一样，字面文字也可以附加属性：
+```
+`<$>`{.haskell}
+```
