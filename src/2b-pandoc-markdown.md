@@ -259,6 +259,13 @@ See the [Introduction].
 
 [movie reel]: movie.gif
 ```
+
+也可以使用LaTeX的`\label`为图片添加label，这样就可以在其他地方引用了，例如：
+```
+效果如图\ref{fig:markdown}。
+
+![Markdown\label{fig:markdown}](images/markdown.jpg "Markdown")
+```
 效果如图\ref{fig:markdown}。
 
 ![Markdown\label{fig:markdown}](images/markdown.jpg "Markdown")
@@ -279,6 +286,134 @@ See the [Introduction].
 ![This image won't be a figure](/url/of/image.png)\
 ```
 
-## 交叉引用
-Pandoc扩展的Markdown语法可以为代码块添加ID属性及语言类型属性，形如`{#id .language}`，其中ID属性可以用来做交叉引用，使用`\ref{id}`在正文中引用代码块。例如代码块\ref{code:demo}。
+
+## 脚注
+
+#### Extension: footnotes
+
+Pandoc's markdown 支援脚注功能，使用如代码\ref{code:footnote}所示的语法：
+```{#code:footnote caption="脚注语法"}
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they
+belong to the previous footnote.
+
+        { some.code }
+
+    The whole paragraph can be indented, or just the first
+    line.  In this way, multi-paragraph footnotes work like
+    multi-paragraph list items.
+
+This paragraph won't be part of the note, because it
+isn't indented.
+```
+
+
+Here is a footnote reference,[^1] and another.[^longnote]
+
+[^1]: Here is the footnote.
+
+[^longnote]: Here's one with multiple blocks.
+
+    Subsequent paragraphs are indented to show that they
+belong to the previous footnote.
+
+      { some.code }
+
+    The whole paragraph can be indented, or just the first
+    line.  In this way, multi-paragraph footnotes work like
+    multi-paragraph list items.
+
+This paragraph won't be part of the note, because it
+isn't indented.
+
+
+脚注参考用的ID 不得包含空白、tabs 或换行字元。这些ID 只会用来建立脚注位置与脚注文字的
+对应关连；在输出时，脚注将会依序递增编号。
+
+脚注本身不需要放在文件的最后面。它们可以放在文件里的任何地方，但不能被放入区块元素（清
+单、区块引言、表格等）之中。
+
+#### Extension: inline_notes
+
+Pandoc 也支援了行内脚注（尽管，与一般脚注不同，行内脚注不能包含多个段落）。其语法如下：
+
+```
+Here is an inline note.^[Inlines notes are easier to write, since
+you don't have to pick an identifier and move down to type the
+note.]
+```
+
+Here is an inline note.^[Inlines notes are easier to write, since
+you don't have to pick an identifier and move down to type the
+note.]
+
+行内与一般脚注可以自由交错使用。
+
+## 引用
+
+#### Extension: citations
+
+Pandoc能够以数种形式自动产生引用与参考书目（使用Andrea Rossato的hs-citeproc）。为了使用这
+项功能，你需要一个下列其中一种格式的参考书目资料库，如表\ref{table:citations}所示：
+
+| Format | File extension |
+| -----:|------:|
+|MODS	|.mods|
+|BibLaTeX|	.bib|
+|BibTeX	|.bibtex|
+|RIS	|.ris|
+|EndNote|	.enl|
+|EndNote XML|	.xml|
+|ISI	|.wos|
+|MEDLINE|	.medline|
+|Copac	|.copac|
+|JSON citeproc	|.json|
+Table: \label{table:citations}Pandoc支持的引用形式
+
+需注意的是副档名.bib一般而言同时适用于BibTeX与BibLaTeX的档案，不过你可以使用.bibtex来强制
+指定BibTeX。
+
+你需要使用命令列选项`--bibliography`来指定参考书目档案（如果有多个书目档就得反覆指定）。
+
+预设情况下，pandoc会在引用文献与参考书目中使用芝加哥「作者－日期」格式。要使用其他的格式，
+你需要用`--csl`选项来指定一个CSL 1.0格式的档案。关于建立与修改CSL格式的入门可以
+在http://citationstyles.org/downloads/primer.html这边找到。
+https://github.com/citation-style-language/styles是CSL格式的档案库。
+也可以在http://zotero.org/styles以简单的方式浏览。
+
+引用资讯放在方括号中，以分号区隔。每一条引用都会有个key，由@加上资料库中的引用ID组成，并
+且可以选择性地包含前缀、定位以及后缀。以下是一些范例：
+
+```
+Blah blah [see @doe99, pp. 33-35; also @smith04, ch. 1].
+
+Blah blah [@doe99, pp. 33-35, 38-39 and *passim*].
+
+Blah blah [@smith04; @doe99].
+```
+
+在@前面的减号( -)将会避免作者名字在引用中出现。这可以用在已经提及作者的文章场合中：
+```
+Smith says blah [-@smith04].
+```
+你也可以在文字中直接插入引用资讯，方式如下：
+```
+@smith04 says blah.
+
+@smith04 [p. 33] says blah.
+```
+如果引用格式档需要产生一份引用作品的清单，这份清单会被放在文件的最后面。一般而言，
+你需要以一个适当的标题结束你的文件：
+```
+last paragraph...
+
+# References
+```
+如此一来参考书目就会被放在这个标题后面了。
+
 

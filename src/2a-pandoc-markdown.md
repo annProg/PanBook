@@ -6,7 +6,7 @@
 ### 简单表格
 #### Extension: simple_tables,table_captions
 
-简单表格看起来像这样子：
+简单表格看起来如表\ref{table:simpletable}所示：
 
   Right     Left     Center     Default
 -------     ------ ----------   -------
@@ -14,18 +14,22 @@
     123     123       123          123
       1     1          1             1
 
-Table:  Demonstration of simple table syntax.
+Table:  Demonstration of simple table syntax.\label{table:simpletable}
 
 代码为：
 ```
+简单表格看起来如表\ref{table:simpletable}所示：
+
   Right     Left     Center     Default
 -------     ------ ----------   -------
      12     12        12            12
     123     123       123          123
       1     1          1             1
 
-Table:  Demonstration of simple table syntax.
+Table:  Demonstration of simple table syntax.\label{table:simpletable}
 ```
+
+可以用`\label`为表格添加label，然后在其他地方用`\ref`引用。
 
 表头与资料列分别以一行为单位。直行的对齐则依照表头的文字和其底下虚线的相对位置来决定：
 
