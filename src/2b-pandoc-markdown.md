@@ -373,6 +373,7 @@ Pandoc能够以数种形式自动产生引用与参考书目（使用Andrea Ross
 |MEDLINE|	.medline|
 |Copac	|.copac|
 |JSON citeproc	|.json|
+
 Table: \label{table:citations}Pandoc支持的引用形式
 
 需注意的是副档名.bib一般而言同时适用于BibTeX与BibLaTeX的档案，不过你可以使用.bibtex来强制

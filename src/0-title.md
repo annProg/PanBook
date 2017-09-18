@@ -7,8 +7,14 @@ copyright: true  # 是否生成版权页
 lof: true        # 是否生成插图列表页
 lot: true        # 是否生成表格列表页
 homepage: https://github.com/annProg/pandoc-template
+identifier:                      # epub用
+  - scheme: DOI
+    text: doi:10.234234.234/33
+publisher: pandoc-template       # epub用
+rights: © 2017 An He, CC BY-NC   # epub用
 header-includes:
   - \usepackage{cleveref}
+  - \usepackage{float}
 # preface用于生成前言
 preface: '\LaTeX\ 可以排版格式精美的书籍，但是学习成本较高，使用不便；
  Markdown是一种简单易学的标记语言。如果能结合两者的优点，使用Markdown

@@ -45,13 +45,17 @@ function pdf()
 	done
 }
 
-function html()
-{	
+function pdf2jpg()
+{
 	for id in $chapters;do
 		cp $id $id.tmp
 		sed -i -r 's/(!\[.*?\]\(.*?)(\.pdf\))/\1.jpg)/g' $id.tmp
 	done
-	
+}
+
+function html()
+{	
+	pdf2jpg # html中使用jpg图片，因此需要为pdf格式的插图准备同名jpg
 	tmp_chapters=`ls *.md.tmp`
 	for theme in ${highlightStyle[@]}
 	do
@@ -60,7 +64,7 @@ function html()
 	
 		HTML_OUTPUT="$BUILD/$ofile.$theme.html"
 		pandoc --self-contained $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS
-		sed -i "s/pdf/jpg/g" $HTML_OUTPUT
+		#sed -i "s/pdf/jpg/g" $HTML_OUTPUT
 	done
 	
 	for id in $tmp_chapters;do
@@ -68,6 +72,21 @@ function html()
 	done
 }
 
+function epub()
+{
+	pdf2jpg
+	tmp_chapters=`ls *.md.tmp`
+	
+	source $SCRIPTDIR/config.default
+	[ -f $cwd/config ] && source $cwd/config
+
+	EPUB_OUTPUT="$BUILD/$ofile.epub"
+	pandoc $EPUB_OPTIONS $tmp_chapters  -o $EPUB_OUTPUT
+	
+	for id in $tmp_chapters;do
+		rm -f $id;
+	done	
+}
 function clean()
 {
 	cd $BUILD
