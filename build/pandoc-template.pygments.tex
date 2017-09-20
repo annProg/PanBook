@@ -314,7 +314,7 @@ Markdown语法介绍可以在\href{http://www.pandoc.org/MANUAL.html\#pandocs-ma
 白字元即可。
 
 \subsubsection{Extension:
-escaped\_line\_breaks}\label{extension-escapedux5flineux5fbreaks}
+escaped\_line\_breaks}\label{extension-escaped_line_breaks}
 
 一个反斜线后跟着一个换行字元，同样也有强制换行的效果。这也是在表格单元格中添加换
 行的唯一形式。
@@ -342,7 +342,7 @@ Setext A level-two header
 \end{lstlisting}
 
 \subsubsection{Extension:
-blank\_before\_header}\label{extension-blankux5fbeforeux5fheader}
+blank\_before\_header}\label{extension-blank_before_header}
 
 原始markdown语法在标题之前并不需要预留空白行。Pandoc则需要（除非标题位于文件最开始的
 地方）。这是因为以\#符号开头的情况在一般文字段落中相当常见，这会导致非预期的标题。例如：
@@ -357,7 +357,7 @@ I like several of their flavors of ice cream:
 \subsection{标题标识符}\label{ux6807ux9898ux6807ux8bc6ux7b26}
 
 \subsubsection{Extension:
-header\_attributes}\label{extension-headerux5fattributes}
+header\_attributes}\label{extension-header_attributes}
 
 在标题文字所在行的行尾，可以使用以下语法为标题加上属性：
 
@@ -415,7 +415,7 @@ This is a block quote. This paragraph has two lines.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\itemsep1pt\parskip0pt\parsep0pt
+\tightlist
 \item
   This is a list inside a block quote.
 \item
@@ -444,7 +444,7 @@ paragraph has two lines.
 \end{lstlisting}
 
 \subsubsection{Extension:
-blank\_before\_blockquote}\label{extension-blankux5fbeforeux5fblockquote}
+blank\_before\_blockquote}\label{extension-blank_before_blockquote}
 
 原始markdown语法在区块引用之前并不需要预留空白行。Pandoc则需要（除非区
 块引用位于文件最开始的地方）。这是因为以\textgreater{}符号开头的情况在一般文字段落中
@@ -473,7 +473,7 @@ echo "Hello LaTeX"
 \subsection{围栏式代码块}\label{ux56f4ux680fux5f0fux4ee3ux7801ux5757}
 
 \subsubsection{Extension:
-fenced\_code\_blocks}\label{extension-fencedux5fcodeux5fblocks}
+fenced\_code\_blocks}\label{extension-fenced_code_blocks}
 
 除了标准的缩进式代码块之外，Pandoc还支持围栏式代码块，
 代码块以三个或三个以
@@ -490,13 +490,13 @@ code here
 \end{lstlisting}
 
 \subsubsection{Extension:
-backtick\_code\_blocks}\label{extension-backtickux5fcodeux5fblocks}
+backtick\_code\_blocks}\label{extension-backtick_code_blocks}
 
 与\lstinline!fenced_code_blocks!相同，只不过使用反引号 ` 替换波浪线
 \textasciitilde{} 而已
 
 \subsubsection{Extension:
-fenced\_code\_attributes}\label{extension-fencedux5fcodeux5fattributes}
+fenced\_code\_attributes}\label{extension-fenced_code_attributes}
 
 \begin{lstlisting}[numbers=left, firstnumber=100, caption=围栏式代码块, label=code:fencedcode, float=htbp]
 ~~~~ {#code:mycode .haskell .numberLines startFrom="100" caption="围栏式代码块"}
@@ -524,7 +524,7 @@ qsort [] = []
 
 \section{行区块}\label{ux884cux533aux5757}
 
-\subsubsection{Extension: line\_blocks}\label{extension-lineux5fblocks}
+\subsubsection{Extension: line\_blocks}\label{extension-line_blocks}
 
 行区块是一连串以竖线(
 \textbar{})加上一个空格所构成的连续行。行与行间的区隔在
@@ -554,13 +554,15 @@ qsort [] = []
 
 效果：
 
-The limerick packs laughs anatomical\\In space that is quite
-economical.\\\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}But the
-good ones I've
-seen\\\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}So seldom are
-clean\\And the clean ones so seldom are comical
+The limerick packs laughs anatomical\\
+In space that is quite economical.\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}But the good ones
+I've seen\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}So seldom are clean\\
+And the clean ones so seldom are comical
 
-200 Main St.\\Berkeley, CA 94718
+200 Main St.\\
+Berkeley, CA 94718
 
 这是从reStructuredText借来的语法。
 
@@ -580,7 +582,7 @@ clean\\And the clean ones so seldom are comical
 显示如下
 
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
+\tightlist
 \item
   one
 \item
@@ -700,7 +702,7 @@ guide中并未明确表示「四个空白规则」是否一体适用于所有位
 1.  three
 \end{lstlisting}
 
-\subsubsection{Extension: fancy\_lists}\label{extension-fancyux5flists}
+\subsubsection{Extension: fancy\_lists}\label{extension-fancy_lists}
 
 与原始markdown不同的是，Pandoc除了使用阿拉伯数字作为有序列表的编号外，也可以使用大写或
 小写的英文字母，以及罗马数字。列表标记可以用括号包住，也可以单独一个右括号，抑或是句号。
@@ -743,7 +745,7 @@ guide中并未明确表示「四个空白规则」是否一体适用于所有位
 \subsection{定义列表}\label{ux5b9aux4e49ux5217ux8868}
 
 \subsubsection{Extension:
-definition\_lists}\label{extension-definitionux5flists}
+definition\_lists}\label{extension-definition_lists}
 
 Pandoc支援定义列表，其语法的灵感来自于PHP Markdown
 Extra以及reStructuredText：
@@ -783,8 +785,7 @@ Term 2
 
 \subsection{编号范例列表}\label{ux7f16ux53f7ux8303ux4f8bux5217ux8868}
 
-\subsubsection{Extension:
-example\_lists}\label{extension-exampleux5flists}
+\subsubsection{Extension: example\_lists}\label{extension-example_lists}
 
 这个特别的列表标记@可以用来产生连续编号的范例列表。列表中第一个以@标记的项目
 会被编号为'1'，接着编号为'2'，依此类推，直到文件结束。范例项目的编号不会局限
@@ -898,11 +899,11 @@ two之后「切断」列表，你可以插入一些没有缩排、输出时也�
 \subsection{简单表格}\label{ux7b80ux5355ux8868ux683c}
 
 \subsubsection{Extension:
-simple\_tables,table\_captions}\label{extension-simpleux5ftablestableux5fcaptions}
+simple\_tables,table\_captions}\label{extension-simple_tablestable_captions}
 
 简单表格看起来如表\ref{table:simpletable}所示：
 
-\begin{longtable}[c]{@{}rlcl@{}}
+\begin{longtable}[]{@{}rlcl@{}}
 \caption{Demonstration of simple table
 syntax.\label{table:simpletable}}\tabularnewline
 \toprule
@@ -938,7 +939,7 @@ Table:  Demonstration of simple table syntax.\label{table:simpletable}
 表头与资料列分别以一行为单位。直行的对齐则依照表头的文字和其底下虚线的相对位置来决定：
 
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
+\tightlist
 \item
   如果虚线与表头文字的右侧有切齐，而左侧比表头文字还长，则该直行为靠右对齐。
 \item
@@ -953,7 +954,7 @@ Table:  Demonstration of simple table syntax.\label{table:simpletable}
 
 表头也可以省略，在省略表头的情况下，表格下方必须加上一行虚线以清楚标明表格的范围。例如：
 
-\begin{longtable}[c]{@{}rlcr@{}}
+\begin{longtable}[]{@{}rlcr@{}}
 \toprule
 12 & 12 & 12 & 12\tabularnewline
 123 & 123 & 123 & 123\tabularnewline
@@ -977,68 +978,56 @@ Table:  Demonstration of simple table syntax.\label{table:simpletable}
 \subsection{多行表格}\label{ux591aux884cux8868ux683c}
 
 \subsubsection{Extension:
-multiline\_tables,table\_captions}\label{extension-multilineux5ftablestableux5fcaptions}
+multiline\_tables,table\_captions}\label{extension-multiline_tablestable_captions}
 
 多行表格允许表头与表格资料格的文字能以多行呈现（但不支援横跨多栏或纵跨多列的
 资料格）。以下为范例：
 
-\begin{longtable}[c]{@{}clrl@{}}
+\begin{longtable}[]{@{}clrl@{}}
 \caption{Here's the caption. It, too, may span multiple
 lines.}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.15\columnwidth}\centering\strut
-Centered Header
-\strut\end{minipage} &
-\begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
-Default Aligned
-\strut\end{minipage} &
-\begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
-Right Aligned
-\strut\end{minipage} &
-\begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
-Left Aligned
-\strut\end{minipage}\tabularnewline
+Centered Header\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+Default Aligned\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
+Right Aligned\strut
+\end{minipage} & \begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
+Left Aligned\strut
+\end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
 \begin{minipage}[b]{0.15\columnwidth}\centering\strut
-Centered Header
-\strut\end{minipage} &
-\begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
-Default Aligned
-\strut\end{minipage} &
-\begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
-Right Aligned
-\strut\end{minipage} &
-\begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
-Left Aligned
-\strut\end{minipage}\tabularnewline
+Centered Header\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+Default Aligned\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
+Right Aligned\strut
+\end{minipage} & \begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
+Left Aligned\strut
+\end{minipage}\tabularnewline
 \midrule
 \endhead
 \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-First
-\strut\end{minipage} &
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-row
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
-12.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
-Example of a row that spans multiple lines.
-\strut\end{minipage}\tabularnewline
+First\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+12.0\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+Example of a row that spans multiple lines.\strut
+\end{minipage}\tabularnewline
 \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-Second
-\strut\end{minipage} &
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-row
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
-5.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
-Here's another one. Note the blank line between rows.
-\strut\end{minipage}\tabularnewline
+Second\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+5.0\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+Here's another one. Note the blank line between rows.\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -1064,7 +1053,7 @@ multiple lines.
 看起来很像简单表格，但两者间有以下差别：
 
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
+\tightlist
 \item
   在表头文字之前，必须以一列虚线作为开头（除非有省略表头）。
 \item
@@ -1078,35 +1067,27 @@ multiple lines.
 
 和简单表格一样，表头在多行表格中也是可以省略的：
 
-\begin{longtable}[c]{@{}clrl@{}}
+\begin{longtable}[]{@{}clrl@{}}
 \caption{Here's a multiline table without headers.}\tabularnewline
 \toprule
-\endfirsthead
-\toprule
 \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-First
-\strut\end{minipage} &
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-row
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
-12.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
-Example of a row that spans multiple lines.
-\strut\end{minipage}\tabularnewline
+First\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+12.0\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+Example of a row that spans multiple lines.\strut
+\end{minipage}\tabularnewline
 \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-Second
-\strut\end{minipage} &
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
-row
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
-5.0
-\strut\end{minipage} &
-\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
-Here's another one. Note the blank line between rows.
-\strut\end{minipage}\tabularnewline
+Second\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+5.0\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+Here's another one. Note the blank line between rows.\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -1131,66 +1112,58 @@ Here's another one. Note the blank line between rows.
 \subsection{格框表格}\label{ux683cux6846ux8868ux683c}
 
 \subsubsection{Extension:
-grid\_tables,table\_captions}\label{extension-gridux5ftablestableux5fcaptions}
+grid\_tables,table\_captions}\label{extension-grid_tablestable_captions}
 
 格框表格看起来像这样：
 
-\begin{longtable}[c]{@{}lll@{}}
+\begin{longtable}[]{@{}lll@{}}
 \caption{Sample grid table.}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
-Fruit
-\strut\end{minipage} &
-\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
-Price
-\strut\end{minipage} &
-\begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
-Advantages
-\strut\end{minipage}\tabularnewline
+Fruit\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Price\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+Advantages\strut
+\end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
 \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
-Fruit
-\strut\end{minipage} &
-\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
-Price
-\strut\end{minipage} &
-\begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
-Advantages
-\strut\end{minipage}\tabularnewline
+Fruit\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+Price\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+Advantages\strut
+\end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
-Bananas
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
-\$1.34
-\strut\end{minipage} &
-\begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+Bananas\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\$1.34\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
+\tightlist
 \item
   built-in wrapper
 \item
   bright color
-\end{itemize}
-\strut\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
-Oranges
-\strut\end{minipage} &
-\begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
-\$2.10
-\strut\end{minipage} &
-\begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+Oranges\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\$2.10\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
 \begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
+\tightlist
 \item
   cures scurvy
 \item
   tasty
-\end{itemize}
-\strut\end{minipage}\tabularnewline
+\end{itemize}\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -1217,11 +1190,11 @@ Oranges
 \subsection{管线表格}\label{ux7ba1ux7ebfux8868ux683c}
 
 \subsubsection{Extension:
-pipe\_tables,table\_captions}\label{extension-pipeux5ftablestableux5fcaptions}
+pipe\_tables,table\_captions}\label{extension-pipe_tablestable_captions}
 
 管线表格看起来像这样：
 
-\begin{longtable}[c]{@{}rllc@{}}
+\begin{longtable}[]{@{}rllc@{}}
 \caption{Demonstration of simple table syntax.}\tabularnewline
 \toprule
 Right & Left & Default & Center\tabularnewline
@@ -1279,7 +1252,7 @@ orange|3.09
 
 效果：
 
-\begin{longtable}[c]{@{}ll@{}}
+\begin{longtable}[]{@{}ll@{}}
 \toprule
 One & Two\tabularnewline
 \midrule
@@ -1297,7 +1270,7 @@ is & nice\tabularnewline
 （译注：本节中提到的「标题」均指Title，而非Headers）
 
 \subsubsection{Extension:
-pandoc\_title\_block}\label{extension-pandocux5ftitleux5fblock}
+pandoc\_title\_block}\label{extension-pandoc_title_block}
 
 如果档案以文件标题（Title）区块开头
 
@@ -1383,7 +1356,7 @@ number（标题与括号之间没
 \section{字符转义}\label{ux5b57ux7b26ux8f6cux4e49}
 
 \subsubsection{Extension:
-all\_symbols\_escapable}\label{extension-allux5fsymbolsux5fescapable}
+all\_symbols\_escapable}\label{extension-all_symbols_escapable}
 
 除了在代码区块或行内代码之外，任何标点符号或空白字元前面只要加上一个
 反斜线，都能使其保留字面原义，而不会进行格式的转义解读。因此，举例来
@@ -1466,7 +1439,7 @@ This is * not emphasized *, and \*neither is this\*.
 \end{lstlisting}
 
 \subsubsection{Extension:
-intraword\_underscores}\label{extension-intrawordux5funderscores}
+intraword\_underscores}\label{extension-intraword_underscores}
 
 因为\_字元有时会使用在单字或是ID之中，所以pandoc不会把被字母包住的\_解读为强调标记。
 如果有需要特别强调单字中的一部分，就用*：
@@ -1531,7 +1504,7 @@ This is a backslash followed by an asterisk: `\*`.
 \end{lstlisting}
 
 \subsubsection{Extension:
-inline\_code\_attributes}\label{extension-inlineux5fcodeux5fattributes}
+inline\_code\_attributes}\label{extension-inline_code_attributes}
 
 与围栏代码区块一样，字面文字也可以附加属性：
 
@@ -1542,7 +1515,7 @@ inline\_code\_attributes}\label{extension-inlineux5fcodeux5fattributes}
 \section{数学}\label{ux6570ux5b66}
 
 \subsubsection{Extension:
-tex\_math\_dollars}\label{extension-texux5fmathux5fdollars}
+tex\_math\_dollars}\label{extension-tex_math_dollars}
 
 所有介于两个\lstinline!$!字元之间的内容将会被视为TeX数学公式处理。开头的\lstinline!$!右侧必须立刻接上任意文
 字，而结尾\lstinline!$!的左侧同样也必须紧挨着文字。这样一来，\lstinline!$20,000  and  $30,000!就不会被当作数学公
@@ -1646,7 +1619,7 @@ script 演算编排为页面上的数学公式。
 
 \section{Raw HTML}\label{raw-html}
 
-\subsubsection{Extension: raw\_html}\label{extension-rawux5fhtml}
+\subsubsection{Extension: raw\_html}\label{extension-raw_html}
 
 Markdown允许你在文件中的任何地方插入原始HTML（或DocBook）指令（除了在字面文字上下文处，
 此时的\lstinline!<!,
@@ -1659,7 +1632,7 @@ Markdown允许你在文件中的任何地方插入原始HTML（或DocBook）指�
 代码去除掉。
 
 \subsubsection{Extension:
-markdown\_in\_html\_blocks}\label{extension-markdownux5finux5fhtmlux5fblocks}
+markdown\_in\_html\_blocks}\label{extension-markdown_in_html_blocks}
 
 原始markdown允许你插入HTML「区块」：所谓的HTML区块是指，上下各由一个空白行所隔开，开始与结尾
 均由所在行最左侧开始的一连串对称均衡的HTML标签。在这个区块中，任何内容都会当作是HTML来分析，
@@ -1698,7 +1671,7 @@ markdown文字可以用\lstinline!<div>!标签将其前后包住来进行样式�
 
 \section{Raw TeX}\label{raw-tex}
 
-\subsubsection{Extension: raw\_tex}\label{extension-rawux5ftex}
+\subsubsection{Extension: raw\_tex}\label{extension-raw_tex}
 
 除了HTML 之外，pandoc 也接受文件中嵌入原始LaTeX, TeX 以及ConTeXt
 代码。行内TeX 指令会被保留 并不作修改地输出至LaTeX 与ConTeXt
@@ -1725,8 +1698,7 @@ Age & Frequency \\ \hline
 
 \section{LaTeX 巨集}\label{latex-ux5de8ux96c6}
 
-\subsubsection{Extension:
-latex\_macros}\label{extension-latexux5fmacros}
+\subsubsection{Extension: latex\_macros}\label{extension-latex_macros}
 
 当输出格式不是LaTeX时，pandoc会分析LaTeX的\lstinline!\newcommand!和\lstinline!\renewcommand!定义，并套用
 其产生的巨集到所有LaTeX数学公式中。所以，举例来说，下列指令对于所有的输出格式均有作
@@ -1868,7 +1840,7 @@ text）：
 
 效果如图\ref{fig:markdown}。
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
 \includegraphics{images/markdown.jpg}
 \caption{Markdown\label{fig:markdown}}
@@ -1877,7 +1849,7 @@ text）：
 \subsection{附上说明的图片}\label{ux9644ux4e0aux8bf4ux660eux7684ux56feux7247}
 
 \subsubsection{Extension:
-implicit\_figures}\label{extension-implicitux5ffigures}
+implicit\_figures}\label{extension-implicit_figures}
 
 一个图片若自身单独存在一个段落中，那么将会以附上图片说明(caption)的图表(figure)形式呈
 现。（在LaTeX中，会使用图表环境；在HTML中，图片会被放在具有figure类别的div元素中，并会附
@@ -1941,8 +1913,7 @@ This paragraph won't be part of the note, because it isn't indented.
 脚注本身不需要放在文件的最后面。它们可以放在文件里的任何地方，但不能被放入区块元素（清
 单、区块引言、表格等）之中。
 
-\subsubsection{Extension:
-inline\_notes}\label{extension-inlineux5fnotes}
+\subsubsection{Extension: inline\_notes}\label{extension-inline_notes}
 
 Pandoc
 也支援了行内脚注（尽管，与一般脚注不同，行内脚注不能包含多个段落）。其语法如下：
@@ -1967,7 +1938,7 @@ Pandoc能够以数种形式自动产生引用与参考书目（使用Andrea
 Rossato的hs-citeproc）。为了使用这
 项功能，你需要一个下列其中一种格式的参考书目资料库，如表\ref{table:citations}所示：
 
-\begin{longtable}[c]{@{}rr@{}}
+\begin{longtable}[]{@{}rr@{}}
 \caption{\label{table:citations}Pandoc支持的引用形式}\tabularnewline
 \toprule
 Format & File extension\tabularnewline

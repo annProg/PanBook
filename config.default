@@ -1,3 +1,3 @@
 PDF_OPTIONS="--toc --chapters --smart -V links-as-notes --listings --highlight-style=$theme --template=$SCRIPTDIR/zh-ctex/tpl_ctex.latex --latex-engine=xelatex"
 HTML_OPTIONS="--template=$SCRIPTDIR/html5/tpl_htmldoc.html5 --toc --smart --highlight-style=$theme"
-EPUB_OPTIONS="--toc --smart --epub-cover-image=$IMGDIR/cover.jpg"
+EPUB_OPTIONS="--template=$SCRIPTDIR/book/book-template.epub --toc --smart --epub-cover-image=$IMGDIR/cover.jpg -V --date=$DATE -V --datetime=$DATETIME"

@@ -75,13 +75,15 @@ function html()
 function epub()
 {
 	pdf2jpg
+	DATE=`date +%Y年%m月%d日`
+	DATETIME=`date +%Y年%m月%d日%H:%M:%S`		
+	
 	tmp_chapters=`ls *.md.tmp`
 	
 	source $SCRIPTDIR/config.default
 	[ -f $cwd/config ] && source $cwd/config
-
 	EPUB_OUTPUT="$BUILD/$ofile.epub"
-	pandoc $EPUB_OPTIONS $tmp_chapters  -o $EPUB_OUTPUT
+	pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS
 	
 	for id in $tmp_chapters;do
 		rm -f $id;
