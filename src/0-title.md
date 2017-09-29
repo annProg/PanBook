@@ -16,7 +16,7 @@ header-includes:
   - \usepackage{cleveref}
   - \usepackage{float}
 # preface用于生成前言
-preface: '\LaTeX\ 可以排版格式精美的书籍，但是学习成本较高，使用不便；
+preface: 'LaTeX可以排版格式精美的书籍，但是学习成本较高，使用不便；
  Markdown是一种简单易学的标记语言。如果能结合两者的优点，使用Markdown
  来写作，然后通过程序转换为latex源码，再编译为PDF，那将是一件美妙的事情。
  幸运的是，已经有工具很好的实现了支持这一功能，那就是Pandoc。

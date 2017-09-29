@@ -31,6 +31,7 @@ function pdf()
 		cp -rf $WORKDIR/* $BUILD
 		
 		TEX_OUTPUT="$BUILD/$ofile.$theme.tex"
+		echo "pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS"
 		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS
 		
 		#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT

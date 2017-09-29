@@ -52,8 +52,11 @@ $if(rights)$
 $endif$
 
 </section>
+<span epub:type="pagebreak" title="ix" id="pageix"/>
+
 $if(preface)$
 <section epub:type="preface">
+<h1>前言</h1>
 <p class="preface">$preface$</p>
 </section>
 $endif$
