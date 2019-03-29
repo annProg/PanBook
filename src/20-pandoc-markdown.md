@@ -428,7 +428,7 @@ As (@good) illustrates, ...
 
 +   Third
 ```
-Pandoc会将以上列表转换为「紧凑列表」（在“First”, “Second”或“Third”之中没有<p>标签），
+Pandoc会将以上列表转换为「紧凑列表」（在“First”, “Second”或“Third”之中没有\<p\>标签），
 而markdown则会在“Second”与“Third” （但不包含“First”）里面置入\<p\>标签，这是因为“Third”
 之前的空白行而造成的结果。Pandoc依循着一个简单规则：如果文字后面跟着空白行，那么就会被
 视为段落。既然“Second”后面是跟着一个列表，而非空白行，那么就不会被视为段落了。至于子列
