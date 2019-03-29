@@ -28,6 +28,7 @@ $if(listings)$
 
 %\usepackage[x11names,svgnames,dvipsnames]{xcolor}
 \usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
 \lstset{
 	%numbers=left,
 	%numberstyle=\tiny,
