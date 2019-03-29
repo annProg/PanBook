@@ -27,6 +27,7 @@
 
 %\usepackage[x11names,svgnames,dvipsnames]{xcolor}
 \usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
 \lstset{
 	%numbers=left,
 	%numberstyle=\tiny,
@@ -151,7 +152,7 @@ Markdown是一种简单易学的标记语言。如果能结合两者的优点，
 Pandoc是由 John MacFarlane 教授开发的标记语言转换工具，实现了数十种标
 记语言之间的转换。Pandoc还扩展了Markdown语法，比如标题表格等的ID属性，
 脚注等，并且可以直接嵌入LaTeX代码，这样在Markdown中就可以实现输入数学
-公式，交叉引用等功能。Pandoc还支持自定义转换模板，通过命令\lstinline!pandoc -D latex!可以输出默认的LaTeX模板，以此模板为基础，可以定制自己的模板。
+公式，交叉引用等功能。Pandoc还支持自定义转换模板，通过命令\passthrough{\lstinline!pandoc -D latex!}可以输出默认的LaTeX模板，以此模板为基础，可以定制自己的模板。
 
 本工具定义了一种Markdown源码组织规范，提供了一个转换脚本，用来更方便的
 使用Pandoc将Markdown转换为PDF。另外还定义了一套LaTeX书籍模板，用来生成
@@ -175,9 +176,11 @@ Pandoc是由 John MacFarlane 教授开发的标记语言转换工具，实现了
 \mainmatter
     % 在此命令之后的页码为阿拉伯数字
     % 以下为正文
-\chapter{使用说明}\label{ux4f7fux7528ux8bf4ux660e}
+\hypertarget{ux4f7fux7528ux8bf4ux660e}{%
+\chapter{使用说明}\label{ux4f7fux7528ux8bf4ux660e}}
 
-\section{安装步骤}\label{ux5b89ux88c5ux6b65ux9aa4}
+\hypertarget{ux5b89ux88c5ux6b65ux9aa4}{%
+\section{安装步骤}\label{ux5b89ux88c5ux6b65ux9aa4}}
 
 首先克隆代码库
 
@@ -214,13 +217,15 @@ bookgen.sh init # 初始化工作环境
     ├── Pictures                            # 模板引用的图片资源
 \end{lstlisting}
 
-\section{使用规范}\label{ux4f7fux7528ux89c4ux8303}
+\hypertarget{ux4f7fux7528ux89c4ux8303}{%
+\section{使用规范}\label{ux4f7fux7528ux89c4ux8303}}
 
-\subsection{源码命名规范}\label{ux6e90ux7801ux547dux540dux89c4ux8303}
+\hypertarget{ux6e90ux7801ux547dux540dux89c4ux8303}{%
+\subsection{源码命名规范}\label{ux6e90ux7801ux547dux540dux89c4ux8303}}
 
-脚本中使用\lstinline!ls src/*.md!列出所有的Markdown源码，要保证顺序正确，才能生成正确的LaTeX源码。
+脚本中使用\passthrough{\lstinline!ls src/*.md!}列出所有的Markdown源码，要保证顺序正确，才能生成正确的LaTeX源码。
 因此，要求Markdown源码文件命名能够被ls以正确的顺序列出。例如，有少于十个的Markdown文件，
-可以使用0\textasciitilde{}9为前缀：
+可以使用0\textasciitilde9为前缀：
 
 \begin{lstlisting}
 $ tree src/
@@ -233,20 +238,23 @@ src/
 \end{lstlisting}
 
 如果Markdown文件数多于10个，则需要在前缀为个位数的前面补0，与最大前缀数字位数保持一致，例如
-最后一个Markdown文件为\lstinline!99-markdown.md!，那么个位数应形如
-\lstinline!01-first.md!。
+最后一个Markdown文件为\passthrough{\lstinline!99-markdown.md!}，那么个位数应形如
+\passthrough{\lstinline!01-first.md!}。
 
-\subsection{编码规范}\label{ux7f16ux7801ux89c4ux8303}
+\hypertarget{ux7f16ux7801ux89c4ux8303}{%
+\subsection{编码规范}\label{ux7f16ux7801ux89c4ux8303}}
 
 Markdown源码文件需要使用UTF-8编码。以Notepad++为例，依次选择\textbf{格式，以UTF-8无BOM格式编码}
 即可正确设置编码。
 
-\subsection{注意事项}\label{title:note}
+\hypertarget{title:note}{%
+\subsection{注意事项}\label{title:note}}
 
 Pandoc扩展的Markdown语法要求在标题前留出一个空行，因此按章节拆分的多个Markdown文件，开头需要
 空一行，否则pandoc不能正确识别标题。
 
-\section{模板变量说明}\label{ux6a21ux677fux53d8ux91cfux8bf4ux660e}
+\hypertarget{ux6a21ux677fux53d8ux91cfux8bf4ux660e}{%
+\section{模板变量说明}\label{ux6a21ux677fux53d8ux91cfux8bf4ux660e}}
 
 可以使用\href{http://www.ruanyifeng.com/blog/2016/07/yaml.html}{Yaml语言}
 定义模板中的变量，建议第一个
@@ -279,11 +287,12 @@ preface: '\LaTeX\ 可以排版格式精美的书籍，但是学习成本较高�
 % date
 \end{lstlisting}
 
-查看模板文件，可以获取所有变量（形如\lstinline!$var$!)。也可以通过修改模板来添加自定义的变量。
+查看模板文件，可以获取所有变量（形如\passthrough{\lstinline!$var$!})。也可以通过修改模板来添加自定义的变量。
 
-\section{转换命令}\label{ux8f6cux6362ux547dux4ee4}
+\hypertarget{ux8f6cux6362ux547dux4ee4}{%
+\section{转换命令}\label{ux8f6cux6362ux547dux4ee4}}
 
-pandoc-template目录加入环境变量后可以直接调用\lstinline!bookgen.sh!：
+pandoc-template目录加入环境变量后可以直接调用\passthrough{\lstinline!bookgen.sh!}：
 
 \begin{lstlisting}
 bookgen.sh init  # 初始化工作环境
@@ -292,8 +301,9 @@ bookgen.sh html  # 生成html电子书
 bookgen.sh pdf d # 调试模式，只使用一个代码高亮风格， html电子书也支持调试模式
 \end{lstlisting}
 
+\hypertarget{pandoc-markdownux8bedux6cd5ux7b80ux4ecb}{%
 \chapter{Pandoc
-Markdown语法简介}\label{pandoc-markdownux8bedux6cd5ux7b80ux4ecb}
+Markdown语法简介}\label{pandoc-markdownux8bedux6cd5ux7b80ux4ecb}}
 
 Pandoc 的目标与原始Markdown 的最初目标有着方向性的不同。在Markdown
 原本的设计中， HTML 是其主要输出对象；然而Pandoc
@@ -307,19 +317,22 @@ Markdown语法介绍可以在\href{http://www.pandoc.org/MANUAL.html\#pandocs-ma
 找到。以下翻译大部分部分摘自\href{http://pages.tzengyuxio.me/pandoc/}{tzengyuxiao的翻译}，
 在此向译者表示感谢。
 
-\section{段落}\label{ux6bb5ux843d}
+\hypertarget{ux6bb5ux843d}{%
+\section{段落}\label{ux6bb5ux843d}}
 
 一个段落指的是一行以上的文字，跟在一行以上的空白行之后。换行字元会被当作是空白处
 理，因此你可以依自己喜好排列段落文字。如果你需要强制换行，在行尾放上两个以上的空
 白字元即可。
 
+\hypertarget{extension-escaped_line_breaks}{%
 \subsubsection{Extension:
-escaped\_line\_breaks}\label{extension-escaped_line_breaks}
+escaped\_line\_breaks}\label{extension-escaped_line_breaks}}
 
 一个反斜线后跟着一个换行字元，同样也有强制换行的效果。这也是在表格单元格中添加换
 行的唯一形式。
 
-\section{标题}\label{ux6807ux9898}
+\hypertarget{ux6807ux9898}{%
+\section{标题}\label{ux6807ux9898}}
 
 有两种不同形式的标题语法，Setext
 以及Atx。Setext风格的标题是由一行文字底下接着一
@@ -341,8 +354,9 @@ Setext A level-two header
 ### Atx  level-three
 \end{lstlisting}
 
+\hypertarget{extension-blank_before_header}{%
 \subsubsection{Extension:
-blank\_before\_header}\label{extension-blank_before_header}
+blank\_before\_header}\label{extension-blank_before_header}}
 
 原始markdown语法在标题之前并不需要预留空白行。Pandoc则需要（除非标题位于文件最开始的
 地方）。这是因为以\#符号开头的情况在一般文字段落中相当常见，这会导致非预期的标题。例如：
@@ -354,10 +368,12 @@ I like several of their flavors of ice cream:
 
 这也是前一章所述注意事项\ref{title:note}的原因。
 
-\subsection{标题标识符}\label{ux6807ux9898ux6807ux8bc6ux7b26}
+\hypertarget{ux6807ux9898ux6807ux8bc6ux7b26}{%
+\subsection{标题标识符}\label{ux6807ux9898ux6807ux8bc6ux7b26}}
 
+\hypertarget{extension-header_attributes}{%
 \subsubsection{Extension:
-header\_attributes}\label{extension-header_attributes}
+header\_attributes}\label{extension-header_attributes}}
 
 在标题文字所在行的行尾，可以使用以下语法为标题加上属性：
 
@@ -394,11 +410,12 @@ My other header   {#foo}
 # My header {.unnumbered}
 \end{lstlisting}
 
-\section{引用}\label{ux5f15ux7528}
+\hypertarget{ux5f15ux7528}{%
+\section{引用}\label{ux5f15ux7528}}
 
 Markdown使用email的习惯来建立引用区块。一个引用区块可以由一或多个段落
-或其他的区块元素（如列表或标题）组成，并且其行首均是由一个\textgreater{}符号加上一
-个空白作为开头。（\textgreater{}符号不一定要位在该行最左边，但也不能缩进超过三个空白）。
+或其他的区块元素（如列表或标题）组成，并且其行首均是由一个\textgreater 符号加上一
+个空白作为开头。（\textgreater 符号不一定要位在该行最左边，但也不能缩进超过三个空白）。
 
 \begin{lstlisting}
 > This is a block quote. This
@@ -423,7 +440,7 @@ This is a block quote. This paragraph has two lines.
 \end{enumerate}
 \end{quote}
 
-有一个「偷懒」的形式：你只需要在引用区块的第一行行首输入\textgreater{}即可，后面的
+有一个「偷懒」的形式：你只需要在引用区块的第一行行首输入\textgreater 即可，后面的
 行首可以省略符号：
 
 \begin{lstlisting}
@@ -443,11 +460,12 @@ paragraph has two lines.
 >> A block quote within a block quote.
 \end{lstlisting}
 
+\hypertarget{extension-blank_before_blockquote}{%
 \subsubsection{Extension:
-blank\_before\_blockquote}\label{extension-blank_before_blockquote}
+blank\_before\_blockquote}\label{extension-blank_before_blockquote}}
 
 原始markdown语法在区块引用之前并不需要预留空白行。Pandoc则需要（除非区
-块引用位于文件最开始的地方）。这是因为以\textgreater{}符号开头的情况在一般文字段落中
+块引用位于文件最开始的地方）。这是因为以\textgreater 符号开头的情况在一般文字段落中
 相当常见（也许由于断行所致），这会导致非预期的格式。因此，除非是指定为
 markdown\_strict格式，不然以下的语法在pandoc中将不会产生出嵌套区块引用：
 
@@ -456,9 +474,11 @@ markdown\_strict格式，不然以下的语法在pandoc中将不会产生出嵌�
 >> Nested.
 \end{lstlisting}
 
-\section{代码}\label{ux4ee3ux7801}
+\hypertarget{ux4ee3ux7801}{%
+\section{代码}\label{ux4ee3ux7801}}
 
-\subsection{缩进式代码块}\label{ux7f29ux8fdbux5f0fux4ee3ux7801ux5757}
+\hypertarget{ux7f29ux8fdbux5f0fux4ee3ux7801ux5757}{%
+\subsection{缩进式代码块}\label{ux7f29ux8fdbux5f0fux4ee3ux7801ux5757}}
 
 由四个空格或一个tab缩进的文本取做代码块，区块中的特殊字符、空格和换行都会
 被保留，而缩进的空格和tab会在输出中移除，但在代码块中的空行不必缩进。
@@ -470,16 +490,18 @@ echo "Hello Markdown"
 echo "Hello LaTeX"
 \end{lstlisting}
 
-\subsection{围栏式代码块}\label{ux56f4ux680fux5f0fux4ee3ux7801ux5757}
+\hypertarget{ux56f4ux680fux5f0fux4ee3ux7801ux5757}{%
+\subsection{围栏式代码块}\label{ux56f4ux680fux5f0fux4ee3ux7801ux5757}}
 
+\hypertarget{extension-fenced_code_blocks}{%
 \subsubsection{Extension:
-fenced\_code\_blocks}\label{extension-fenced_code_blocks}
+fenced\_code\_blocks}\label{extension-fenced_code_blocks}}
 
 除了标准的缩进式代码块之外，Pandoc还支持围栏式代码块，
 代码块以三个或三个以
-上的\textasciitilde{}符号行开始，以等于或多于开始行\textasciitilde{}个数符号行结束，
-若是代码块中含有\textasciitilde{}，只需
-使开始行和结束行中的\textasciitilde{}符号个数多于代码块中的即可
+上的\textasciitilde 符号行开始，以等于或多于开始行\textasciitilde 个数符号行结束，
+若是代码块中含有\textasciitilde，只需
+使开始行和结束行中的\textasciitilde 符号个数多于代码块中的即可
 
 \begin{lstlisting}
 ~~~~~
@@ -489,14 +511,16 @@ code here
 ~~~~~~
 \end{lstlisting}
 
+\hypertarget{extension-backtick_code_blocks}{%
 \subsubsection{Extension:
-backtick\_code\_blocks}\label{extension-backtick_code_blocks}
+backtick\_code\_blocks}\label{extension-backtick_code_blocks}}
 
-与\lstinline!fenced_code_blocks!相同，只不过使用反引号 ` 替换波浪线
-\textasciitilde{} 而已
+与\passthrough{\lstinline!fenced\_code\_blocks!}相同，只不过使用反引号 `
+替换波浪线 \textasciitilde{} 而已
 
+\hypertarget{extension-fenced_code_attributes}{%
 \subsubsection{Extension:
-fenced\_code\_attributes}\label{extension-fenced_code_attributes}
+fenced\_code\_attributes}\label{extension-fenced_code_attributes}}
 
 \begin{lstlisting}[numbers=left, firstnumber=100, caption=围栏式代码块, label=code:fencedcode, float=htbp]
 ~~~~ {#code:mycode .haskell .numberLines startFrom="100" caption="围栏式代码块"}
@@ -522,12 +546,14 @@ qsort [] = []
 ~~~
 \end{lstlisting}
 
-\section{行区块}\label{ux884cux533aux5757}
+\hypertarget{ux884cux533aux5757}{%
+\section{行区块}\label{ux884cux533aux5757}}
 
-\subsubsection{Extension: line\_blocks}\label{extension-line_blocks}
+\hypertarget{extension-line_blocks}{%
+\subsubsection{Extension: line\_blocks}\label{extension-line_blocks}}
 
 行区块是一连串以竖线(
-\textbar{})加上一个空格所构成的连续行。行与行间的区隔在
+\textbar)加上一个空格所构成的连续行。行与行间的区隔在
 输出时将会以原样保留，行首的空白字元数目也一样会被保留；反之，这些行
 将会以markdown的格式处理。这个语法在输入诗句或地址时很有帮助。
 
@@ -566,9 +592,11 @@ Berkeley, CA 94718
 
 这是从reStructuredText借来的语法。
 
-\section{列表}\label{ux5217ux8868}
+\hypertarget{ux5217ux8868}{%
+\section{列表}\label{ux5217ux8868}}
 
-\subsection{无序列表}\label{ux65e0ux5e8fux5217ux8868}
+\hypertarget{ux65e0ux5e8fux5217ux8868}{%
+\subsection{无序列表}\label{ux65e0ux5e8fux5217ux8868}}
 
 无序列表是以项目符号作列举的列表。每条项目都以项目符号( *, +或-)作开头。
 下面是个简单的例子：
@@ -622,7 +650,8 @@ list item.
 * and my second.
 \end{lstlisting}
 
-\subsubsection{四个空白规则}\label{ux56dbux4e2aux7a7aux767dux89c4ux5219}
+\hypertarget{ux56dbux4e2aux7a7aux767dux89c4ux5219}{%
+\subsubsection{四个空白规则}\label{ux56dbux4e2aux7a7aux767dux89c4ux5219}}
 
 一个列表项目可以包含多个段落以及其他区块等级的内容。然而，后续的段落必须接在空
 白行之后，并且以四个空白或一个tab
@@ -680,7 +709,8 @@ guide中并未明确表示「四个空白规则」是否一体适用于所有位
 区块元素上；规范文件中只提及了段落与代码区块。但文件暗示了此规则适用于所有区块等级的内容
 （包含嵌套列表），并且pandoc以此方向进行解读与实作。
 
-\subsection{有序列表}\label{ux6709ux5e8fux5217ux8868}
+\hypertarget{ux6709ux5e8fux5217ux8868}{%
+\subsection{有序列表}\label{ux6709ux5e8fux5217ux8868}}
 
 有序列表与无序列表相类似，唯一的差别在于列表项目是以列举编号作开头，而不是项目符号。
 
@@ -702,13 +732,15 @@ guide中并未明确表示「四个空白规则」是否一体适用于所有位
 1.  three
 \end{lstlisting}
 
-\subsubsection{Extension: fancy\_lists}\label{extension-fancy_lists}
+\hypertarget{extension-fancy_lists}{%
+\subsubsection{Extension: fancy\_lists}\label{extension-fancy_lists}}
 
 与原始markdown不同的是，Pandoc除了使用阿拉伯数字作为有序列表的编号外，也可以使用大写或
 小写的英文字母，以及罗马数字。列表标记可以用括号包住，也可以单独一个右括号，抑或是句号。
 如果列表标记是大写字母接着一个句号，句号后请使用至少两个空白字元。
 
-\subsubsection{Extension: startnum}\label{extension-startnum}
+\hypertarget{extension-startnum}{%
+\subsubsection{Extension: startnum}\label{extension-startnum}}
 
 除了列表标记外，Pandoc
 也能判读列表的起始编号，这两项资讯都会保留于输出格式中。举例来说，
@@ -742,10 +774,12 @@ guide中并未明确表示「四个空白规则」是否一体适用于所有位
 #.  three
 \end{lstlisting}
 
-\subsection{定义列表}\label{ux5b9aux4e49ux5217ux8868}
+\hypertarget{ux5b9aux4e49ux5217ux8868}{%
+\subsection{定义列表}\label{ux5b9aux4e49ux5217ux8868}}
 
+\hypertarget{extension-definition_lists}{%
 \subsubsection{Extension:
-definition\_lists}\label{extension-definition_lists}
+definition\_lists}\label{extension-definition_lists}}
 
 Pandoc支援定义列表，其语法的灵感来自于PHP Markdown
 Extra以及reStructuredText：
@@ -783,9 +817,12 @@ Term 2
   ~ Definition 2b
 \end{lstlisting}
 
-\subsection{编号范例列表}\label{ux7f16ux53f7ux8303ux4f8bux5217ux8868}
+\hypertarget{ux7f16ux53f7ux8303ux4f8bux5217ux8868}{%
+\subsection{编号范例列表}\label{ux7f16ux53f7ux8303ux4f8bux5217ux8868}}
 
-\subsubsection{Extension: example\_lists}\label{extension-example_lists}
+\hypertarget{extension-example_lists}{%
+\subsubsection{Extension:
+example\_lists}\label{extension-example_lists}}
 
 这个特别的列表标记@可以用来产生连续编号的范例列表。列表中第一个以@标记的项目
 会被编号为'1'，接着编号为'2'，依此类推，直到文件结束。范例项目的编号不会局限
@@ -811,7 +848,8 @@ As (@good) illustrates, ...
 
 标签可以是由任何英文字母、底线或是连字符号所组成的字串。
 
-\subsection{紧凑与宽松列表}\label{ux7d27ux51d1ux4e0eux5bbdux677eux5217ux8868}
+\hypertarget{ux7d27ux51d1ux4e0eux5bbdux677eux5217ux8868}{%
+\subsection{紧凑与宽松列表}\label{ux7d27ux51d1ux4e0eux5bbdux677eux5217ux8868}}
 
 在与列表相关的「边界处理」上，Pandoc与Markdown.pl有着不同的处理结果。考虑如下代码：
 
@@ -826,17 +864,17 @@ As (@good) illustrates, ...
 \end{lstlisting}
 
 Pandoc会将以上列表转换为「紧凑列表」（在``First'',
-``Second''或``Third''之中没有
-
-标签）， 而markdown则会在``Second''与``Third''
-（但不包含``First''）里面置入\textless{}p\textgreater{}标签，这是因为``Third''
+``Second''或``Third''之中没有\textless p\textgreater 标签），
+而markdown则会在``Second''与``Third''
+（但不包含``First''）里面置入\textless p\textgreater 标签，这是因为``Third''
 之前的空白行而造成的结果。Pandoc依循着一个简单规则：如果文字后面跟着空白行，那么就会被
 视为段落。既然``Second''后面是跟着一个列表，而非空白行，那么就不会被视为段落了。至于子列
 表的后面是不是跟着空白行，那就无关紧要了。（注意：即使是设定为markdown\_strict格式，
 Pandoc仍是依以上方式处理列表项目是否为段落的判定。这个处理方式与markdown官方语法规范里
 的描述一致，然而却与Markdown.pl的处理不同。）
 
-\subsection{结束一个列表}\label{ux7ed3ux675fux4e00ux4e2aux5217ux8868}
+\hypertarget{ux7ed3ux675fux4e00ux4e2aux5217ux8868}{%
+\subsection{结束一个列表}\label{ux7ed3ux675fux4e00ux4e2aux5217ux8868}}
 
 如果你在列表之后放入一个缩排的代码区块，会有什么结果？
 
@@ -878,7 +916,8 @@ two之后「切断」列表，你可以插入一些没有缩排、输出时也�
 3.  tres
 \end{lstlisting}
 
-\section{分隔线}\label{ux5206ux9694ux7ebf}
+\hypertarget{ux5206ux9694ux7ebf}{%
+\section{分隔线}\label{ux5206ux9694ux7ebf}}
 
 一行中若包含三个以上的*,
 -或\_符号（中间可以以空白字元分隔），则会产生一条分隔线：
@@ -891,15 +930,18 @@ two之后「切断」列表，你可以插入一些没有缩排、输出时也�
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
-\section{表格}\label{ux8868ux683c}
+\hypertarget{ux8868ux683c}{%
+\section{表格}\label{ux8868ux683c}}
 
 有四种表格的形式可以使用。前三种适用于等宽字型的编辑环境，例如Courier。第四种则
 不需要直行的对齐，因此可以在比例字型的环境下使用。
 
-\subsection{简单表格}\label{ux7b80ux5355ux8868ux683c}
+\hypertarget{ux7b80ux5355ux8868ux683c}{%
+\subsection{简单表格}\label{ux7b80ux5355ux8868ux683c}}
 
+\hypertarget{extension-simple_tablestable_captions}{%
 \subsubsection{Extension:
-simple\_tables,table\_captions}\label{extension-simple_tablestable_captions}
+simple\_tables,table\_captions}\label{extension-simple_tablestable_captions}}
 
 简单表格看起来如表\ref{table:simpletable}所示：
 
@@ -934,7 +976,7 @@ Right & Left & Center & Default\tabularnewline
 Table:  Demonstration of simple table syntax.\label{table:simpletable}
 \end{lstlisting}
 
-可以用\lstinline!\label!为表格添加label，然后在其他地方用\lstinline!\ref!引用。
+可以用\passthrough{\lstinline!\\label!}为表格添加label，然后在其他地方用\passthrough{\lstinline!\\ref!}引用。
 
 表头与资料列分别以一行为单位。直行的对齐则依照表头的文字和其底下虚线的相对位置来决定：
 
@@ -956,6 +998,7 @@ Table:  Demonstration of simple table syntax.\label{table:simpletable}
 
 \begin{longtable}[]{@{}rlcr@{}}
 \toprule
+\endhead
 12 & 12 & 12 & 12\tabularnewline
 123 & 123 & 123 & 123\tabularnewline
 1 & 1 & 1 & 1\tabularnewline
@@ -975,10 +1018,12 @@ Table:  Demonstration of simple table syntax.\label{table:simpletable}
 当省略表头时，直行的对齐会以表格内容的第一行资料列决定。所以，以上面的表格为例，
 各直行的对齐依序会是靠右、靠左、置中以及靠右对齐。
 
-\subsection{多行表格}\label{ux591aux884cux8868ux683c}
+\hypertarget{ux591aux884cux8868ux683c}{%
+\subsection{多行表格}\label{ux591aux884cux8868ux683c}}
 
+\hypertarget{extension-multiline_tablestable_captions}{%
 \subsubsection{Extension:
-multiline\_tables,table\_captions}\label{extension-multiline_tablestable_captions}
+multiline\_tables,table\_captions}\label{extension-multiline_tablestable_captions}}
 
 多行表格允许表头与表格资料格的文字能以多行呈现（但不支援横跨多栏或纵跨多列的
 资料格）。以下为范例：
@@ -987,45 +1032,45 @@ multiline\_tables,table\_captions}\label{extension-multiline_tablestable_caption
 \caption{Here's the caption. It, too, may span multiple
 lines.}\tabularnewline
 \toprule
-\begin{minipage}[b]{0.15\columnwidth}\centering\strut
+\begin{minipage}[b]{0.15\columnwidth}\centering
 Centered Header\strut
-\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright
 Default Aligned\strut
-\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedleft
 Right Aligned\strut
-\end{minipage} & \begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.32\columnwidth}\raggedright
 Left Aligned\strut
 \end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{0.15\columnwidth}\centering\strut
+\begin{minipage}[b]{0.15\columnwidth}\centering
 Centered Header\strut
-\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright
 Default Aligned\strut
-\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedleft\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedleft
 Right Aligned\strut
-\end{minipage} & \begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.32\columnwidth}\raggedright
 Left Aligned\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+\begin{minipage}[t]{0.15\columnwidth}\centering
 First\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 row\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
 12.0\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
 Example of a row that spans multiple lines.\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+\begin{minipage}[t]{0.15\columnwidth}\centering
 Second\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 row\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
 5.0\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
 Here's another one. Note the blank line between rows.\strut
 \end{minipage}\tabularnewline
 \bottomrule
@@ -1070,22 +1115,23 @@ multiple lines.
 \begin{longtable}[]{@{}clrl@{}}
 \caption{Here's a multiline table without headers.}\tabularnewline
 \toprule
-\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+\endhead
+\begin{minipage}[t]{0.15\columnwidth}\centering
 First\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 row\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
 12.0\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
 Example of a row that spans multiple lines.\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.15\columnwidth}\centering\strut
+\begin{minipage}[t]{0.15\columnwidth}\centering
 Second\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 row\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedleft
 5.0\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
 Here's another one. Note the blank line between rows.\strut
 \end{minipage}\tabularnewline
 \bottomrule
@@ -1109,40 +1155,42 @@ Here's another one. Note the blank line between rows.\strut
 多行表格中可以单只包含一个资料列，但该资料列之后必须接着一个空白行（然后才是标
 示表格结尾的一行虚线）。如果没有此空白行，此表格将会被解读成简单表格。
 
-\subsection{格框表格}\label{ux683cux6846ux8868ux683c}
+\hypertarget{ux683cux6846ux8868ux683c}{%
+\subsection{格框表格}\label{ux683cux6846ux8868ux683c}}
 
+\hypertarget{extension-grid_tablestable_captions}{%
 \subsubsection{Extension:
-grid\_tables,table\_captions}\label{extension-grid_tablestable_captions}
+grid\_tables,table\_captions}\label{extension-grid_tablestable_captions}}
 
 格框表格看起来像这样：
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{Sample grid table.}\tabularnewline
 \toprule
-\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.20\columnwidth}\raggedright
 Fruit\strut
-\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
 Price\strut
-\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright
 Advantages\strut
 \end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.20\columnwidth}\raggedright
 Fruit\strut
-\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
 Price\strut
-\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright
 Advantages\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Bananas\strut
-\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
 \$1.34\strut
-\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -1151,11 +1199,11 @@ Bananas\strut
   bright color
 \end{itemize}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
 Oranges\strut
-\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
 \$2.10\strut
-\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -1187,10 +1235,12 @@ Oranges\strut
 的资料格可以包含任意的区块元素（复数段落、代码区块、清单等等）。不支援对齐，也不支
 援横跨多栏或纵跨多列的资料格。格框表格可以在Emacs table mode下轻松建立。
 
-\subsection{管线表格}\label{ux7ba1ux7ebfux8868ux683c}
+\hypertarget{ux7ba1ux7ebfux8868ux683c}{%
+\subsection{管线表格}\label{ux7ba1ux7ebfux8868ux683c}}
 
+\hypertarget{extension-pipe_tablestable_captions}{%
 \subsubsection{Extension:
-pipe\_tables,table\_captions}\label{extension-pipe_tablestable_captions}
+pipe\_tables,table\_captions}\label{extension-pipe_tablestable_captions}}
 
 管线表格看起来像这样：
 
@@ -1262,15 +1312,17 @@ is & nice\tabularnewline
 \bottomrule
 \end{longtable}
 
-主要的差别在于以+取代了部分的\textbar{}。其他的orgtbl功能并未支援。如果要指定非预设的直
+主要的差别在于以+取代了部分的\textbar。其他的orgtbl功能并未支援。如果要指定非预设的直
 行对齐形式，你仍然需要在上面的表格中自行加入冒号。
 
-\section{文件标题区块}\label{ux6587ux4ef6ux6807ux9898ux533aux5757}
+\hypertarget{ux6587ux4ef6ux6807ux9898ux533aux5757}{%
+\section{文件标题区块}\label{ux6587ux4ef6ux6807ux9898ux533aux5757}}
 
 （译注：本节中提到的「标题」均指Title，而非Headers）
 
+\hypertarget{extension-pandoc_title_block}{%
 \subsubsection{Extension:
-pandoc\_title\_block}\label{extension-pandoc_title_block}
+pandoc\_title\_block}\label{extension-pandoc_title_block}}
 
 如果档案以文件标题（Title）区块开头
 
@@ -1319,10 +1371,10 @@ pandoc\_title\_block}\label{extension-pandoc_title_block}
 所有这三个metadata
 栏位都可以包含标准的行内格式（斜体、连结、脚注等等）。
 
-文件标题区块一定会被分析处理，但只有在\lstinline!--standaline( -s)!选项被设定时才会影响输出内
-容。在输出HTML时，文件标题会出现的地方有两个：一个是在文件的\lstinline!<head>!区块里---这会
-显示在浏览器的视窗标题上---另外一个是文件的\lstinline!<body>!区块最前面。位于\lstinline!<head>!里的文件
-标题可以选择性地加上前缀文字（透过\lstinline!--title-prefix!或\lstinline!-T!选项）。而在\lstinline!<body>!里的文件标
+文件标题区块一定会被分析处理，但只有在\passthrough{\lstinline!--standaline( -s)!}选项被设定时才会影响输出内
+容。在输出HTML时，文件标题会出现的地方有两个：一个是在文件的\passthrough{\lstinline!<head>!}区块里---这会
+显示在浏览器的视窗标题上---另外一个是文件的\passthrough{\lstinline!<body>!}区块最前面。位于\passthrough{\lstinline!<head>!}里的文件
+标题可以选择性地加上前缀文字（透过\passthrough{\lstinline!--title-prefix!}或\passthrough{\lstinline!-T!}选项）。而在\passthrough{\lstinline!<body>!}里的文件标
 题会以H1元素呈现，并附带``title''类别(class)，这样就能藉由CSS来隐藏显示或重新定义格
 式。如果以-T选项指定了标题前缀文字，却没有设定文件标题区块里的标题，那么前缀文字本
 身就会被当作是HTML的文件标题。
@@ -1333,7 +1385,7 @@ section number，
 标题后也许会紧接着一个以括号包住的单一数字，代表section
 number（标题与括号之间没
 有空白）。在此之后的其他文字则为页脚与页眉文字。页脚与页眉文字之间是以单独的一个
-管线符号( \textbar{})作为区隔。所以，
+管线符号( \textbar)作为区隔。所以，
 
 \begin{lstlisting}
 % PANDOC(1)
@@ -1353,10 +1405,12 @@ number（标题与括号之间没
 
 产生的man page 会再加上``Version 4.0'' 在页眉处。
 
-\section{字符转义}\label{ux5b57ux7b26ux8f6cux4e49}
+\hypertarget{ux5b57ux7b26ux8f6cux4e49}{%
+\section{字符转义}\label{ux5b57ux7b26ux8f6cux4e49}}
 
+\hypertarget{extension-all_symbols_escapable}{%
 \subsubsection{Extension:
-all\_symbols\_escapable}\label{extension-all_symbols_escapable}
+all\_symbols\_escapable}\label{extension-all_symbols_escapable}}
 
 除了在代码区块或行内代码之外，任何标点符号或空白字元前面只要加上一个
 反斜线，都能使其保留字面原义，而不会进行格式的转义解读。因此，举例来
@@ -1390,41 +1444,42 @@ all\_symbols\_escapable}\label{extension-all_symbols_escapable}
 
 一个反斜线之后的空白字元会被解释为不断行的空白(nonbreaking
 space)。这在TeX的
-输出中会显示为\lstinline!~!，而在HTML与XML则是显示为\lstinline!\&#160;!或\lstinline!\&nbsp;!。
+输出中会显示为\passthrough{\lstinline!\~!}，而在HTML与XML则是显示为\passthrough{\lstinline!\\\&\#160;!}或\passthrough{\lstinline!\\\&nbsp;!}。
 
 一个反斜线之后的换行字元（例如反斜线符号出现在一行的最尾端）则会被解释为强制
-换行。这在TeX的输出中会显示为\lstinline!\\!，而在HTML里则是\lstinline!<br />!。相对于原始markdown是以
+换行。这在TeX的输出中会显示为\passthrough{\lstinline!\\\\!}，而在HTML里则是\passthrough{\lstinline!<br />!}。相对于原始markdown是以
 在行尾加上两个空白字元这种「看不见」的方式进行强制换行，反斜线接换行字元会是比较好
 的替代方案。
 
 转义字符在代码上下文中不起任何作用。
 
-\section{智能标点}\label{ux667aux80fdux6807ux70b9}
+\hypertarget{ux667aux80fdux6807ux70b9}{%
+\section{智能标点}\label{ux667aux80fdux6807ux70b9}}
 
-如果指定了\lstinline!--smart!选项，pandoc将会输出正式印刷用的标点符号，像是将\lstinline!straight quotes!转
-换为\lstinline!curly quotes! \footnote{译注：straight
+如果指定了\passthrough{\lstinline!--smart!}选项，pandoc将会输出正式印刷用的标点符号，像是将\passthrough{\lstinline!straight quotes!}转
+换为\passthrough{\lstinline!curly quotes!} \footnote{译注：straight
   quotes指的是左右两侧都长得一样的引号，例如我们直接在键盘上打出来的
   单引号或双引号；curly
-  quotes则是左右两侧不同，有从两侧向内包夹视觉效果的引号。}、\lstinline!---!转为破折号(em-dashes)，\lstinline!--!转为连接号(en-dashes)，以及将
-\lstinline!...!转为省略号。不断行空格(Nonbreaking
+  quotes则是左右两侧不同，有从两侧向内包夹视觉效果的引号。}、\passthrough{\lstinline!---!}转为破折号(em-dashes)，\passthrough{\lstinline!--!}转为连接号(en-dashes)，以及将
+\passthrough{\lstinline!...!}转为省略号。不断行空格(Nonbreaking
 spaces)将会插入某些缩写词之后，例如``Mr.''。
 
 注意：如果你的LaTeX
-template使用了csquotes套件，pandoc会自动侦测并且使用\lstinline!\enquote{...}!
+template使用了csquotes套件，pandoc会自动侦测并且使用\passthrough{\lstinline!\\enquote\{...\}!}
 在引言文字上。
 
-\section{行内格式}\label{ux884cux5185ux683cux5f0f}
+\hypertarget{ux884cux5185ux683cux5f0f}{%
+\section{行内格式}\label{ux884cux5185ux683cux5f0f}}
 
-\subsection{强调}\label{ux5f3aux8c03}
-
-要强调某些文字，只要以\lstinline!*!或\lstinline!_!符号前后包住即可，像这样：
+\#\#\#强调
+要强调某些文字，只要以\passthrough{\lstinline!*!}或\passthrough{\lstinline!\_!}符号前后包住即可，像这样：
 
 \begin{lstlisting}
 This text is _emphasized with underscores_, and this
 is *emphasized with asterisks*.
 \end{lstlisting}
 
-重复两个\lstinline!*!或\lstinline!_!符号以产生更强烈的强调：
+重复两个\passthrough{\lstinline!*!}或\passthrough{\lstinline!\_!}符号以产生更强烈的强调：
 
 \begin{lstlisting}
 This is **strong emphasis** and __with underscores__.
@@ -1432,14 +1487,15 @@ This is **strong emphasis** and __with underscores__.
 
 This is \textbf{strong emphasis} and \textbf{with underscores}.
 
-一个前后以空白字元包住，或是前面加上反斜线的\lstinline!*!或\lstinline!_!符号，都不会转换为强调格式：
+一个前后以空白字元包住，或是前面加上反斜线的\passthrough{\lstinline!*!}或\passthrough{\lstinline!\_!}符号，都不会转换为强调格式：
 
 \begin{lstlisting}
 This is * not emphasized *, and \*neither is this\*.
 \end{lstlisting}
 
+\hypertarget{extension-intraword_underscores}{%
 \subsubsection{Extension:
-intraword\_underscores}\label{extension-intraword_underscores}
+intraword\_underscores}\label{extension-intraword_underscores}}
 
 因为\_字元有时会使用在单字或是ID之中，所以pandoc不会把被字母包住的\_解读为强调标记。
 如果有需要特别强调单字中的一部分，就用*：
@@ -1448,22 +1504,26 @@ intraword\_underscores}\label{extension-intraword_underscores}
 feas*ible*, not feas*able*.
 \end{lstlisting}
 
-\subsection{删除线}\label{ux5220ux9664ux7ebf}
+\hypertarget{ux5220ux9664ux7ebf}{%
+\subsection{删除线}\label{ux5220ux9664ux7ebf}}
 
-\subsubsection{Extension: strikeout}\label{extension-strikeout}
+\hypertarget{extension-strikeout}{%
+\subsubsection{Extension: strikeout}\label{extension-strikeout}}
 
-要将一段文字加上水平线作为删除效果，将该段文字前后以\lstinline!~~!包住即可。例如，
+要将一段文字加上水平线作为删除效果，将该段文字前后以\passthrough{\lstinline!\~\~!}包住即可。例如，
 
 \begin{lstlisting}
 This ~~is deleted text.~~
 \end{lstlisting}
 
-\subsection{上标与下标}\label{ux4e0aux6807ux4e0eux4e0bux6807}
+\hypertarget{ux4e0aux6807ux4e0eux4e0bux6807}{%
+\subsection{上标与下标}\label{ux4e0aux6807ux4e0eux4e0bux6807}}
 
+\hypertarget{extension-superscriptsubscript}{%
 \subsubsection{Extension:
-superscript,subscript}\label{extension-superscriptsubscript}
+superscript,subscript}\label{extension-superscriptsubscript}}
 
-要输入上标可以用\lstinline!^!字元将要上标的文字包起来；要输入下标可以用\lstinline!~!字元将要下标的
+要输入上标可以用\passthrough{\lstinline!^!}字元将要上标的文字包起来；要输入下标可以用\passthrough{\lstinline!\~!}字元将要下标的
 文字包起来。直接看范例，
 
 \begin{lstlisting}
@@ -1473,11 +1533,12 @@ H~2~O is a liquid.  2^10^ is 1024.
 H\textsubscript{2}O is a liquid. 2\textsuperscript{10} is 1024.
 
 如果要上标或下标的文字中包含了空白，那么这个空白字元之前必须加上反斜线。（这是为
-了避免一般使用下的\lstinline!~!和\lstinline!^!在非预期的情况下产生出意外的上标或下标。）所以，如果你想要
+了避免一般使用下的\passthrough{\lstinline!\~!}和\passthrough{\lstinline!^!}在非预期的情况下产生出意外的上标或下标。）所以，如果你想要
 让字母P后面跟着下标文字'a
-cat'，那么就要输入\lstinline!P~a\ cat~!，而不是\lstinline!P~a cat~!。
+cat'，那么就要输入\passthrough{\lstinline!P\~a\\ cat\~!}，而不是\passthrough{\lstinline!P\~a cat\~!}。
 
-\subsection{字面文字}\label{ux5b57ux9762ux6587ux5b57}
+\hypertarget{ux5b57ux9762ux6587ux5b57}{%
+\subsection{字面文字}\label{ux5b57ux9762ux6587ux5b57}}
 
 要让一小段文字直接以其字面形式呈现，可以用反引号将其包住：
 
@@ -1503,8 +1564,9 @@ Here is a literal backtick `` ` ``.
 This is a backslash followed by an asterisk: `\*`.
 \end{lstlisting}
 
+\hypertarget{extension-inline_code_attributes}{%
 \subsubsection{Extension:
-inline\_code\_attributes}\label{extension-inline_code_attributes}
+inline\_code\_attributes}\label{extension-inline_code_attributes}}
 
 与围栏代码区块一样，字面文字也可以附加属性：
 
@@ -1512,93 +1574,107 @@ inline\_code\_attributes}\label{extension-inline_code_attributes}
 `<$>`{.haskell}
 \end{lstlisting}
 
-\section{数学}\label{ux6570ux5b66}
+\hypertarget{ux6570ux5b66}{%
+\section{数学}\label{ux6570ux5b66}}
 
+\hypertarget{extension-tex_math_dollars}{%
 \subsubsection{Extension:
-tex\_math\_dollars}\label{extension-tex_math_dollars}
+tex\_math\_dollars}\label{extension-tex_math_dollars}}
 
-所有介于两个\lstinline!$!字元之间的内容将会被视为TeX数学公式处理。开头的\lstinline!$!右侧必须立刻接上任意文
-字，而结尾\lstinline!$!的左侧同样也必须紧挨着文字。这样一来，\lstinline!$20,000  and  $30,000!就不会被当作数学公
-式处理了。如果基于某些原因，有必须使用\lstinline!$!符号将其他文字括住的需求时，那么可以在\lstinline!$!前使用反
-斜线跳脱字元，这样\lstinline!$!就不会被当作数学公式的分隔符。
+所有介于两个\passthrough{\lstinline!$!}字元之间的内容将会被视为TeX数学公式处理。开头的\passthrough{\lstinline!$!}右侧必须立刻接上任意文
+字，而结尾\passthrough{\lstinline!$!}的左侧同样也必须紧挨着文字。这样一来，\passthrough{\lstinline!$20,000  and  $30,000!}就不会被当作数学公
+式处理了。如果基于某些原因，有必须使用\passthrough{\lstinline!$!}符号将其他文字括住的需求时，那么可以在\passthrough{\lstinline!$!}前使用反
+斜线跳脱字元，这样\passthrough{\lstinline!$!}就不会被当作数学公式的分隔符。
 
 TeX 数学公式会在所有输出格式中印出。至于会以什么方式演算编排(render)
 则取决于输出的格式：
 
+\hypertarget{markdown-latex-org-mode-context}{%
 \subsubsection{Markdown, LaTeX, Org-Mode,
-ConTeXt}\label{markdown-latex-org-mode-context}
+ConTeXt}\label{markdown-latex-org-mode-context}}
 
 公式会以字面文字呈现在两个\$符号之间。
 
-\subsubsection{reStructuredText}\label{restructuredtext}
+\hypertarget{restructuredtext}{%
+\subsubsection{reStructuredText}\label{restructuredtext}}
 
 公式会使用此处所描述的:math:这个``interpreted text
 role''来进行演算编排。
 
-\subsubsection{AsciiDoc}\label{asciidoc}
+\hypertarget{asciidoc}{%
+\subsubsection{AsciiDoc}\label{asciidoc}}
 
-公式会以latexmath:{[}\ldots{}{]}演算编排。
+公式会以latexmath:{[}\ldots{]}演算编排。
 
-\subsubsection{Texinfo}\label{texinfo}
+\hypertarget{texinfo}{%
+\subsubsection{Texinfo}\label{texinfo}}
 
 公式会在@math指令中演算编排。
 
-\subsubsection{groff man}\label{groff-man}
+\hypertarget{groff-man}{%
+\subsubsection{groff man}\label{groff-man}}
 
-公式会以去掉\lstinline!$!后的字面文字演算编排。
+公式会以去掉\passthrough{\lstinline!$!}后的字面文字演算编排。
 
-\subsubsection{MediaWiki}\label{mediawiki}
+\hypertarget{mediawiki}{%
+\subsubsection{MediaWiki}\label{mediawiki}}
 
-公式会在标签中演算编排。
+公式会在\textless math\textgreater 标签中演算编排。
 
-\subsubsection{Textile}\label{textile}
+\hypertarget{textile}{%
+\subsubsection{Textile}\label{textile}}
 
-公式会在\lstinline!<span class="math">!标签中演算编排。
+公式会在\passthrough{\lstinline!<span class="math">!}标签中演算编排。
 
-\subsubsection{RTF, OpenDocument, ODT}\label{rtf-opendocument-odt}
+\hypertarget{rtf-opendocument-odt}{%
+\subsubsection{RTF, OpenDocument, ODT}\label{rtf-opendocument-odt}}
 
 如果可以的话，公式会以unicode 字元演算编排，不然就直接使用字面字元。
 
-\subsubsection{Docbook}\label{docbook}
+\hypertarget{docbook}{%
+\subsubsection{Docbook}\label{docbook}}
 
-如果使用了\lstinline!--mathml!旗标，公式就会在inlineequation或informalequation标签中
+如果使用了\passthrough{\lstinline!--mathml!}旗标，公式就会在inlineequation或informalequation标签中
 使用mathml演算编排。否则就会尽可能使用unicode字元演算编排。
 
-\subsubsection{Docx}\label{docx}
+\hypertarget{docx}{%
+\subsubsection{Docx}\label{docx}}
 
 公式会以OMML 数学标记的方式演算编排。
 
-\subsubsection{FictionBook2}\label{fictionbook2}
+\hypertarget{fictionbook2}{%
+\subsubsection{FictionBook2}\label{fictionbook2}}
 
-如果有使用\lstinline!--webtex!选项，公式会以Google
+如果有使用\passthrough{\lstinline!--webtex!}选项，公式会以Google
 Charts或其他相容的网路服务演算编排为
 图片，并下载嵌入于电子书中。否则就会以字面文字显示。
 
+\hypertarget{html-slidy-dzslides-s5-epub}{%
 \subsubsection{HTML, Slidy, DZSlides, S5,
-EPUB}\label{html-slidy-dzslides-s5-epub}
+EPUB}\label{html-slidy-dzslides-s5-epub}}
 
 公式会依照以下命令列选项的设置，以不同的方法演算编排为HTML 代码。
 
 预设方式是将TeX数学公式尽可能地以unicode字元演算编排，如同RTF、DocBook以及OpenDocument的
-输出。公式会被放在附有属性\lstinline!class="math"!的span标签内，所以可以在需要时给予不同的样式，使其
+输出。公式会被放在附有属性\passthrough{\lstinline!class="math"!}的span标签内，所以可以在需要时给予不同的样式，使其
 突出于周遭的文字内容。
 
-如果使用了\lstinline!--latexmathml!选项，TeX数学公式会被显示于\lstinline!$!或\lstinline!$$!字元中，并放在附带LaTeX类别
-的\lstinline!<span>!标签里。这段内容会用LaTeXMathML
+如果使用了\passthrough{\lstinline!--latexmathml!}选项，TeX数学公式会被显示于\passthrough{\lstinline!$!}或\passthrough{\lstinline!$$!}字元中，并放在附带LaTeX类别
+的\passthrough{\lstinline!<span>!}标签里。这段内容会用LaTeXMathML
 script演算编排为数学公式。（这个方法无法适用于
 所有浏览器，但在Firefox中是有效的。在不支援LaTeXMathML的浏览器中，TeX数学公式会单纯的以
 两个\$字元间的字面文字呈现。）
 
-如果使用了\lstinline!--jsmath!选项，TeX数学公式会放在\lstinline!<span>!标签（用于行内数学公式）或\lstinline!<div>!标签
+如果使用了\passthrough{\lstinline!--jsmath!}选项，TeX数学公式会放在\passthrough{\lstinline!<span>!}标签（用于行内数学公式）或\passthrough{\lstinline!<div>!}标签
 （用于区块数学公式）中，并附带类别属性math。这段内容会使用jsMath
 script来演算编排。
 
-如果使用了\lstinline!--mimetex!选项，mimeTeX CGI
+如果使用了\passthrough{\lstinline!--mimetex!}选项，mimeTeX CGI
 script会被呼叫来产生每个TeX数学公式的图片。这适用
-于所有浏览器。\lstinline!--mimetex!选项有一个可选的URL参数。如果没有指定URL，它会假设mimeTeX
-CGI script的位置在\lstinline!/cgi-bin/mimetex.cig!。
+于所有浏览器。\passthrough{\lstinline!--mimetex!}选项有一个可选的URL参数。如果没有指定URL，它会假设mimeTeX
+CGI script的位置在\passthrough{\lstinline!/cgi-bin/mimetex.cig!}。
 
-如果使用了\lstinline!--gladtex!选项，TeX数学公式在HTML的输出中会被\lstinline!<eq>!标签包住。产生的htex档案之
+如果使用了\passthrough{\lstinline!--gladtex!}选项，TeX数学公式在HTML的输出中会被\passthrough{\lstinline!<eq>!}标签包住。产生的htex档案之
 后可以透过gladTeX处理，这会针对每个数学公式生成图片，并于最后生成一个包含这些图片连结的html
 档案。所以，整个处理流程如下：
 
@@ -1608,22 +1684,24 @@ gladtex -d myfile-images myfile.htex
 # produces myfile.html and images in myfile-images
 \end{lstlisting}
 
-如果使用了\lstinline!--webtex!选项，TeX数学公式会被转换为\lstinline!<img>!标签并连结到一个用以转换公式为图片的
+如果使用了\passthrough{\lstinline!--webtex!}选项，TeX数学公式会被转换为\passthrough{\lstinline!<img>!}标签并连结到一个用以转换公式为图片的
 外部script。公式将会编码为URL可接受格式并且与指定的URL参数串接。如果没有指定URL，那么将会
 使用Google Chart API (
 http://chart.apis.google.com/chart?cht=tx\&chl=)。
 
-如果使用了\lstinline!--mathjax!选项，TeX数学公式将会被包在\lstinline!\(...\)!（用于行内数学公式）或\lstinline!\[...\]!（用
-于区块数学公式）之间显示，并且放在附带类别math的\lstinline!<span>!标签之中。这段内容会使用MathJax
+如果使用了\passthrough{\lstinline!--mathjax!}选项，TeX数学公式将会被包在\passthrough{\lstinline!\\(...\\)!}（用于行内数学公式）或\passthrough{\lstinline!\\[...\\]!}（用
+于区块数学公式）之间显示，并且放在附带类别math的\passthrough{\lstinline!<span>!}标签之中。这段内容会使用MathJax
 script 演算编排为页面上的数学公式。
 
-\section{Raw HTML}\label{raw-html}
+\hypertarget{raw-html}{%
+\section{Raw HTML}\label{raw-html}}
 
-\subsubsection{Extension: raw\_html}\label{extension-raw_html}
+\hypertarget{extension-raw_html}{%
+\subsubsection{Extension: raw\_html}\label{extension-raw_html}}
 
 Markdown允许你在文件中的任何地方插入原始HTML（或DocBook）指令（除了在字面文字上下文处，
-此时的\lstinline!<!,
-\lstinline!>!和\&都会按其字面意义显示）。（技术上而言这不算扩充功能，因为原始markdown本身就
+此时的\passthrough{\lstinline!<!},
+\passthrough{\lstinline!>!}和\&都会按其字面意义显示）。（技术上而言这不算扩充功能，因为原始markdown本身就
 有提供此功能，但做成扩充形式便可以在有特殊需要的时候关闭此功能。）
 
 输出HTML, S5, Slidy, Slideous, DZSlides, EPUB, Markdown 以及Textile
@@ -1631,8 +1709,9 @@ Markdown允许你在文件中的任何地方插入原始HTML（或DocBook）指�
 码会不作修改地保留至输出档案中；而其他格式的输出内容则会将原始HTML
 代码去除掉。
 
+\hypertarget{extension-markdown_in_html_blocks}{%
 \subsubsection{Extension:
-markdown\_in\_html\_blocks}\label{extension-markdown_in_html_blocks}
+markdown\_in\_html\_blocks}\label{extension-markdown_in_html_blocks}}
 
 原始markdown允许你插入HTML「区块」：所谓的HTML区块是指，上下各由一个空白行所隔开，开始与结尾
 均由所在行最左侧开始的一连串对称均衡的HTML标签。在这个区块中，任何内容都会当作是HTML来分析，
@@ -1663,15 +1742,17 @@ markdown\_in\_html\_blocks}\label{extension-markdown_in_html_blocks}
 
 而Markdown.pl则是保留该段原样。
 
-这个规则只有一个例外：那就是介于\lstinline!<script>!与\lstinline!<style>!之间的文字都不会被拿来当作markdown解读。
+这个规则只有一个例外：那就是介于\passthrough{\lstinline!<script>!}与\passthrough{\lstinline!<style>!}之间的文字都不会被拿来当作markdown解读。
 
 这边与原始markdown的分歧，主要是为了让markdown能够更便利地混入HTML区块元素。比方说，一段
-markdown文字可以用\lstinline!<div>!标签将其前后包住来进行样式指定，而不用担心里面的markdown不会被解
+markdown文字可以用\passthrough{\lstinline!<div>!}标签将其前后包住来进行样式指定，而不用担心里面的markdown不会被解
 译到。
 
-\section{Raw TeX}\label{raw-tex}
+\hypertarget{raw-tex}{%
+\section{Raw TeX}\label{raw-tex}}
 
-\subsubsection{Extension: raw\_tex}\label{extension-raw_tex}
+\hypertarget{extension-raw_tex}{%
+\subsubsection{Extension: raw\_tex}\label{extension-raw_tex}}
 
 除了HTML 之外，pandoc 也接受文件中嵌入原始LaTeX, TeX 以及ConTeXt
 代码。行内TeX 指令会被保留 并不作修改地输出至LaTeX 与ConTeXt
@@ -1696,11 +1777,13 @@ Age & Frequency \\ \hline
 
 行内LaTeX 在输出至Markdown, LaTeX 及ConTeXt 之外的格式时会被忽略掉。
 
-\section{LaTeX 巨集}\label{latex-ux5de8ux96c6}
+\hypertarget{latex-ux5de8ux96c6}{%
+\section{LaTeX 巨集}\label{latex-ux5de8ux96c6}}
 
-\subsubsection{Extension: latex\_macros}\label{extension-latex_macros}
+\hypertarget{extension-latex_macros}{%
+\subsubsection{Extension: latex\_macros}\label{extension-latex_macros}}
 
-当输出格式不是LaTeX时，pandoc会分析LaTeX的\lstinline!\newcommand!和\lstinline!\renewcommand!定义，并套用
+当输出格式不是LaTeX时，pandoc会分析LaTeX的\passthrough{\lstinline!\\newcommand!}和\passthrough{\lstinline!\\renewcommand!}定义，并套用
 其产生的巨集到所有LaTeX数学公式中。所以，举例来说，下列指令对于所有的输出格式均有作
 用，而非仅仅作用于LaTeX格式：
 
@@ -1710,13 +1793,15 @@ Age & Frequency \\ \hline
 $\tuple{a, b, c}$
 \end{lstlisting}
 
-在LaTeX的输出中，\lstinline!\newcommand!定义会单纯不作修改地保留至输出结果。
+在LaTeX的输出中，\passthrough{\lstinline!\\newcommand!}定义会单纯不作修改地保留至输出结果。
 
-\section{连结}\label{ux8fdeux7ed3}
+\hypertarget{ux8fdeux7ed3}{%
+\section{连结}\label{ux8fdeux7ed3}}
 
 Markdown 接受以下数种指定连结的方式。
 
-\subsection{自动连结}\label{ux81eaux52a8ux8fdeux7ed3}
+\hypertarget{ux81eaux52a8ux8fdeux7ed3}{%
+\subsection{自动连结}\label{ux81eaux52a8ux8fdeux7ed3}}
 
 如果你用角括号将一段URL 或是email 位址包起来，它会自动转换成连结：
 
@@ -1724,7 +1809,8 @@ Markdown 接受以下数种指定连结的方式。
 
 \href{mailto:sam@green.eggs.ham}{\nolinkurl{sam@green.eggs.ham}}
 
-\subsection{行内连结}\label{ux884cux5185ux8fdeux7ed3}
+\hypertarget{ux884cux5185ux8fdeux7ed3}{%
+\subsection{行内连结}\label{ux884cux5185ux8fdeux7ed3}}
 
 一个行内连结包含了位在方括号中的连结文字，以及方括号后以圆括号包起来的URL。（你可以选
 择性地在URL 后面加入连结标题，标题文字要放在引号之中。）
@@ -1739,7 +1825,8 @@ This is an \href{/url}{inline link}, and here's
 
 方括号与圆括号之间不能有空白。连结文字可以包含格式（例如强调），但连结标题则否。
 
-\subsection{参考连结}\label{ux53c2ux8003ux8fdeux7ed3}
+\hypertarget{ux53c2ux8003ux8fdeux7ed3}{%
+\subsection{参考连结}\label{ux53c2ux8003ux8fdeux7ed3}}
 
 一个明确的参考连结包含两个部分，连结本身以及连结定义，其中连结定义可以放在文件的任何地
 方（不论是放在连结所在处之前或之后）。
@@ -1797,7 +1884,8 @@ restriction。所以虽然下面的
 > [quote]: /foo
 \end{lstlisting}
 
-\subsection{内部连结}\label{ux5185ux90e8ux8fdeux7ed3}
+\hypertarget{ux5185ux90e8ux8fdeux7ed3}{%
+\subsection{内部连结}\label{ux5185ux90e8ux8fdeux7ed3}}
 
 要连结到同一份文件的其他章节，可使用自动产生的ID（参见HTML,
 LaTeX与ConTeXt的标题识别符一 节后半）。
@@ -1817,7 +1905,8 @@ See the [Introduction].
 内部连结目前支援的格式有HTML（包括HTML slide shows 与EPUB）、LaTeX
 以及ConTeXt。
 
-\section{图片}\label{ux56feux7247}
+\hypertarget{ux56feux7247}{%
+\section{图片}\label{ux56feux7247}}
 
 在连结语法的前面加上一个!就是图片的语法了。连结文字将会作为图片的替代文字（alt
 text）：
@@ -1830,7 +1919,7 @@ text）：
 [movie reel]: movie.gif
 \end{lstlisting}
 
-也可以使用LaTeX的\lstinline!\label!为图片添加label，这样就可以在其他地方引用了，例如：
+也可以使用LaTeX的\passthrough{\lstinline!\\label!}为图片添加label，这样就可以在其他地方引用了，例如：
 
 \begin{lstlisting}
 效果如图\ref{fig:markdown}。
@@ -1846,10 +1935,12 @@ text）：
 \caption{Markdown\label{fig:markdown}}
 \end{figure}
 
-\subsection{附上说明的图片}\label{ux9644ux4e0aux8bf4ux660eux7684ux56feux7247}
+\hypertarget{ux9644ux4e0aux8bf4ux660eux7684ux56feux7247}{%
+\subsection{附上说明的图片}\label{ux9644ux4e0aux8bf4ux660eux7684ux56feux7247}}
 
+\hypertarget{extension-implicit_figures}{%
 \subsubsection{Extension:
-implicit\_figures}\label{extension-implicit_figures}
+implicit\_figures}\label{extension-implicit_figures}}
 
 一个图片若自身单独存在一个段落中，那么将会以附上图片说明(caption)的图表(figure)形式呈
 现。（在LaTeX中，会使用图表环境；在HTML中，图片会被放在具有figure类别的div元素中，并会附
@@ -1866,9 +1957,11 @@ implicit\_figures}\label{extension-implicit_figures}
 ![This image won't be a figure](/url/of/image.png)\
 \end{lstlisting}
 
-\section{脚注}\label{ux811aux6ce8}
+\hypertarget{ux811aux6ce8}{%
+\section{脚注}\label{ux811aux6ce8}}
 
-\subsubsection{Extension: footnotes}\label{extension-footnotes}
+\hypertarget{extension-footnotes}{%
+\subsubsection{Extension: footnotes}\label{extension-footnotes}}
 
 Pandoc's markdown
 支援脚注功能，使用如代码\ref{code:footnote}所示的语法：
@@ -1913,7 +2006,8 @@ This paragraph won't be part of the note, because it isn't indented.
 脚注本身不需要放在文件的最后面。它们可以放在文件里的任何地方，但不能被放入区块元素（清
 单、区块引言、表格等）之中。
 
-\subsubsection{Extension: inline\_notes}\label{extension-inline_notes}
+\hypertarget{extension-inline_notes}{%
+\subsubsection{Extension: inline\_notes}\label{extension-inline_notes}}
 
 Pandoc
 也支援了行内脚注（尽管，与一般脚注不同，行内脚注不能包含多个段落）。其语法如下：
@@ -1930,9 +2024,11 @@ Here is an inline note.\footnote{Inlines notes are easier to write,
 
 行内与一般脚注可以自由交错使用。
 
-\section{引用}\label{ux5f15ux7528-1}
+\hypertarget{ux5f15ux7528-1}{%
+\section{引用}\label{ux5f15ux7528-1}}
 
-\subsubsection{Extension: citations}\label{extension-citations}
+\hypertarget{extension-citations}{%
+\subsubsection{Extension: citations}\label{extension-citations}}
 
 Pandoc能够以数种形式自动产生引用与参考书目（使用Andrea
 Rossato的hs-citeproc）。为了使用这
@@ -1964,10 +2060,10 @@ JSON citeproc & .json\tabularnewline
 需注意的是副档名.bib一般而言同时适用于BibTeX与BibLaTeX的档案，不过你可以使用.bibtex来强制
 指定BibTeX。
 
-你需要使用命令列选项\lstinline!--bibliography!来指定参考书目档案（如果有多个书目档就得反覆指定）。
+你需要使用命令列选项\passthrough{\lstinline!--bibliography!}来指定参考书目档案（如果有多个书目档就得反覆指定）。
 
 预设情况下，pandoc会在引用文献与参考书目中使用芝加哥「作者－日期」格式。要使用其他的格式，
-你需要用\lstinline!--csl!选项来指定一个CSL
+你需要用\passthrough{\lstinline!--csl!}选项来指定一个CSL
 1.0格式的档案。关于建立与修改CSL格式的入门可以
 在http://citationstyles.org/downloads/primer.html这边找到。
 https://github.com/citation-style-language/styles是CSL格式的档案库。
