@@ -1,5 +1,7 @@
 # pandoc模板
 
+默认参数基于`pandoc 2.7.1`版本
+
 ## ctex书籍模板
 ```
 git clone https://github.com/annProg/pandoc-template
@@ -11,6 +13,10 @@ git clone https://github.com/annProg/pandoc-template
 mkdir workdir
 cd workdir
 bookgen.sh init
+bookgen.sh epub # 生成epub电子书
+bookgen.sh pdf # 生成pdf电子书
+bookgen.sh html # 生成html电子书
+bookgen.sh pdf d # 生成pdf电子书(debug模式，仅生成一种样式)
 ```
 
 之后在`src`目录进行写作, `src/images`目录存放图片
@@ -22,3 +28,8 @@ bookgen.sh init
 ## html5模板
 
 ## slides模板
+
+## 默认选项说明
+
+### --number-sections   
+Number section headings in LaTeX, ConTeXt, HTML, or EPUB output. By default, sections are not numbered. Sections with class unnumbered will never be numbered, even if --number-sections is specified.
