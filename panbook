@@ -5,8 +5,13 @@ ofile=`echo $cwd |awk -F '/' '{print $NF}'`
 DEBUG="false"
 BUILD="$cwd/build"
 WORKDIR="$cwd/src"
+METADATA="$WORKDIR/metadata.yaml"
 IMGDIR="$WORKDIR/images"
 highlightStyle=(pygments kate monochrome espresso haddock tango zenburn)
+
+function meta() {
+	cat $SCRIPTDIR/src/metadata.yaml
+}
 
 function init()
 {
@@ -14,12 +19,18 @@ function init()
 	[ ! -d $WORKDIR ] && mkdir $WORKDIR
 	[ ! -d $IMGDIR ] && mkdir $IMGDIR
 	cd $WORKDIR
-	chapters=`ls *.md 2>/dev/null`
+	
+	# 前言和后记部分
+	[ ! -f frontmatter.md ] && touch frontmatter.md
+	[ ! -f backmatter.md ] && touch backmatter.md
+	[ ! -f metadata.yaml ] && meta > metadata.yaml
+	chapters=`ls *.md |grep -vE "frontmatter|backmatter" 2>/dev/null`
 	[ "$DEBUG"x = "true"x ] && highlightStyle=(pygments)
 }
 
 function pdf()
 {
+	init  # 首先初始化
 	for theme in ${highlightStyle[@]}
 	do
 		source $SCRIPTDIR/config.default		
@@ -30,9 +41,13 @@ function pdf()
 		# 复制src目录下资源文件到build目录
 		cp -rf $WORKDIR/* $BUILD
 		
-		TEX_OUTPUT="$BUILD/$ofile.$theme.tex"
-		echo "pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS"
-		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS
+		cd $BUILD
+		# 生成前言和后记
+		pandoc -t latex frontmatter.md --top-level-division=chapter -o frontmatter.tex
+		pandoc -t latex backmatter.md --top-level-division=chapter -o backmatter.tex
+		
+		TEX_OUTPUT="$ofile.$theme.tex"
+		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA
 		
 		#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
@@ -40,31 +55,33 @@ function pdf()
 		#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
 		#sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
 		
-		cd $BUILD
 		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	done
+	clean
 }
 
 function pdf2jpg()
 {
-	for id in $chapters;do
+	for id in $chapters frontmatter.md backmatter.md;do
 		cp $id $id.tmp
 		sed -i -r 's/(!\[.*?\]\(.*?)(\.pdf\))/\1.jpg)/g' $id.tmp
 	done
+	
+	tmp_chapters="frontmatter.md.tmp "`ls *.md.tmp |grep -vE "frontmatter.md.tmp|backmatter.md.tmp"`" backmatter.md.tmp"
 }
 
 function html()
 {	
+	init
 	pdf2jpg # html中使用jpg图片，因此需要为pdf格式的插图准备同名jpg
-	tmp_chapters=`ls *.md.tmp`
 	for theme in ${highlightStyle[@]}
 	do
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
 	
 		HTML_OUTPUT="$BUILD/$ofile.$theme.html"
-		pandoc --self-contained $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS
+		pandoc --self-contained $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA
 		#sed -i "s/pdf/jpg/g" $HTML_OUTPUT
 	done
 	
@@ -75,30 +92,50 @@ function html()
 
 function epub()
 {
+	init
 	pdf2jpg
 	DATE=`date +%Y年%m月%d日`
 	DATETIME=`date +%Y年%m月%d日%H:%M:%S`		
-	
-	tmp_chapters=`ls *.md.tmp`
-	
+		
 	source $SCRIPTDIR/config.default
 	[ -f $cwd/config ] && source $cwd/config
 	EPUB_OUTPUT="$BUILD/$ofile.epub"
-	pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS
+	pandoc $tmp_chapters -o $EPUB_OUTPUT --metadata-file=$METADATA $EPUB_OPTIONS
 	
 	for id in $tmp_chapters;do
 		rm -f $id;
 	done	
 }
-function clean()
+
+function clean() {
+	cd $BUILD
+	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
+	release="/tmp/release-$rand"
+	mkdir $release
+	mv *.pdf *.tex *.epub *.html $release 2>/dev/null
+	rm -fr *
+	mv $release/* .
+	rm -fr $release
+}
+
+function cleanall()
 {
 	cd $BUILD
 	rm -fr *
 }
 
+function printhelp() {
+	echo -e "  eBook maker base pandoc\n"
+	echo -e "\tpanbook init        initialize work environment"
+	echo -e "\tpanbook pdf         make pdf ebook"
+	echo -e "\tpanbook html        make html ebook"
+	echo -e "\tpanbook epub        make epub ebook"
+	echo -e "\tpanbook help        print help info"
+}
+
 case $# in
-	0) init;html;pdf;;
-	1) init;eval `echo $1`;;
-	2) [ "$2"x = "d"x ] && DEBUG="true";init;eval `echo $1`;;
-	*) init;html;pdf;;
+	0) printhelp;;
+	1) [ $1 == "help" ] && printhelp  || eval `echo $1`;;
+	2) [ "$2"x = "d"x ] && DEBUG="true";eval `echo $1`;;
+	*) printhelp;;
 esac

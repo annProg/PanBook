@@ -12,11 +12,11 @@ git clone https://github.com/annProg/pandoc-template
 ```
 mkdir workdir
 cd workdir
-bookgen.sh init
-bookgen.sh epub # 生成epub电子书
-bookgen.sh pdf # 生成pdf电子书
-bookgen.sh html # 生成html电子书
-bookgen.sh pdf d # 生成pdf电子书(debug模式，仅生成一种样式)
+panbook init
+panbook epub # 生成epub电子书
+panbook pdf # 生成pdf电子书
+panbook html # 生成html电子书
+panbook pdf d # 生成pdf电子书(debug模式，仅生成一种样式)
 ```
 
 之后在`src`目录进行写作, `src/images`目录存放图片

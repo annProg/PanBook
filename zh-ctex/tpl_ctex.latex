@@ -180,13 +180,6 @@ $if(showtitle)$
 \maketitle
 $endif$
 
-    
-$if(preface)$
-\chapter*{前言}
-\addcontentsline{toc}{chapter}{前言}
-$preface$
-$endif$
-
 $for(include-before)$
 $include-before$
 
