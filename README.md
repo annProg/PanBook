@@ -17,6 +17,7 @@ panbook epub # 生成epub电子书
 panbook pdf # 生成pdf电子书
 panbook html # 生成html电子书
 panbook pdf d # 生成pdf电子书(debug模式，仅生成一种样式)
+TPL=elegantbook panbook pdf #指定模板
 ```
 
 之后在`src`目录进行写作, `src/images`目录存放图片

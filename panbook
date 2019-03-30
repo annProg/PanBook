@@ -9,6 +9,10 @@ METADATA="$WORKDIR/metadata.yaml"
 IMGDIR="$WORKDIR/images"
 highlightStyle=(pygments kate monochrome espresso haddock tango zenburn)
 
+function getEnv() {
+	env |grep -w $1 || eval $1=$2
+}
+
 function meta() {
 	cat $SCRIPTDIR/src/metadata.yaml
 }
@@ -19,6 +23,9 @@ function init()
 	[ ! -d $WORKDIR ] && mkdir $WORKDIR
 	[ ! -d $IMGDIR ] && mkdir $IMGDIR
 	cd $WORKDIR
+	
+	# 模板
+	cp -rfu $SCRIPTDIR/templates/$TPL/* $BUILD
 	
 	# 字体
 	cp -rfu $SCRIPTDIR/fonts $BUILD
@@ -34,14 +41,13 @@ function init()
 
 function pdf()
 {
+	getEnv TPL "ctex"
+	echo $TPL
 	init  # 首先初始化
 	for theme in ${highlightStyle[@]}
 	do
 		source $SCRIPTDIR/config.default		
 		[ -f $cwd/config ] && source $cwd/config
-		# 复制模板目录的资源文件到build目录
-		TPLDIR=`echo $PDF_OPTIONS |tr ' ' '\n'|grep "template"|cut -f2 -d'=' |awk -F'/' '{$NF="";print}'|tr ' ' '/'`
-		cp -rf $TPLDIR/* $BUILD
 		# 复制src目录下资源文件到build目录
 		cp -rf $WORKDIR/* $BUILD
 		
@@ -51,7 +57,7 @@ function pdf()
 		pandoc -t latex backmatter.md --top-level-division=chapter -o backmatter.tex
 		
 		TEX_OUTPUT="$ofile.$theme.tex"
-		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA
+		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
 		
 		#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
@@ -77,6 +83,7 @@ function pdf2jpg()
 
 function html()
 {	
+	getEnv TPL "html5"
 	init
 	pdf2jpg # html中使用jpg图片，因此需要为pdf格式的插图准备同名jpg
 	for theme in ${highlightStyle[@]}
@@ -85,7 +92,7 @@ function html()
 		[ -f $cwd/config ] && source $cwd/config
 	
 		HTML_OUTPUT="$BUILD/$ofile.$theme.html"
-		pandoc --self-contained $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA
+		pandoc --self-contained $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
 		#sed -i "s/pdf/jpg/g" $HTML_OUTPUT
 	done
 	
@@ -96,6 +103,7 @@ function html()
 
 function epub()
 {
+	getEnv TPL "epub"
 	init
 	pdf2jpg
 	DATE=`date +%Y年%m月%d日`
@@ -111,7 +119,7 @@ function epub()
 	cat $cwd/src/frontmatter.md.tmp >> $merge
 	mv $merge $cwd/src/frontmatter.md.tmp
 
-	pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS
+	pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl
 	
 	for id in $tmp_chapters;do
 		rm -f $id;

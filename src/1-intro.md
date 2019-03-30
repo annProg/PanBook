@@ -15,19 +15,14 @@
 
 ```{#code:structure caption="目录规范"}
 .
-├── book                                    # 书籍模板
-│   └── book-template.epub
+├── templates                                    # 模板
 ├── panbook                                 # 转换脚本
 ├── build                                   # 电子书构建目录
 ├── config.default                          # pandoc默认转换配置
-├── html5                                   # html5电子书模板
 ├── README.md
-├── resume                                  # 简历模板
 ├── src                                     # Markdown源码目录
 │   └── images                              # 源码涉及插图目录
 │   └── metadata.yaml                       # 书籍元数据文件
-└── zh-ctex                                 # ctexbook模板目录
-    ├── Pictures                            # 模板引用的图片资源
 ```
 
 ## 使用规范
@@ -120,5 +115,6 @@ panbook init  # 初始化工作环境
 panbook pdf   # 生成pdf电子书
 panbook html  # 生成html电子书
 panbook pdf d # 调试模式，只使用一个代码高亮风格， html电子书也支持调试模式
+TPL=elegantbook panbook pdf d # 指定模板
 ```
 
