@@ -7,7 +7,6 @@
 \usepackage[yyyymmdd,hhmmss]{datetime}
 
 $if(listings)$
-\usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
 \lstset{
 	frame=shadowbox,

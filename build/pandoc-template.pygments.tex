@@ -1,43 +1,15 @@
-\documentclass[fancyhdr,bookmark]{ctexbook}
-\setCJKmainfont{SimSun}
-\setmainfont{Georgia} 	% 設定英文字型
-\setromanfont{Georgia} 	% 字型
-\setmonofont{Latin Modern Mono}
+\documentclass[cn]{elegantbook}
 
 % pandoc版本大于1.15时需要\tightlist
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-\usepackage{tikz} % Required for drawing custom shapes
 \usepackage[yyyymmdd,hhmmss]{datetime}
-\ctexset{today=small}
-\usepackage{geometry} 		% 設定邊界
-\geometry{
-  top=1in,
-  inner=1in,
-  outer=1in,
-  bottom=1in,
-  headheight=3ex,
-  headsep=2ex
-}
 
-
-\usepackage{xcolor}
-\definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
-
-%\usepackage[x11names,svgnames,dvipsnames]{xcolor}
-\usepackage{listings}
+%\usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
 \lstset{
-	%numbers=left,
-	%numberstyle=\tiny,
-	basicstyle=\small\ttfamily,
-	keywordstyle=\color[rgb]{0.13,0.29,0.53}\textbf,
-	commentstyle=\color[rgb]{0.56,0.35,0.01}\textit,
-	identifierstyle=\color[rgb]{0.00,0.00,0.00},
-	stringstyle=\color[rgb]{0.31,0.60,0.02},
 	frame=shadowbox,
-	rulesepcolor=\color{red!20!green!20!blue!20},
 	backgroundcolor=\color[rgb]{0.97,0.97,0.97},
 	tabsize=4,
 	breaklines=tr,
@@ -45,90 +17,31 @@
 }
 \renewcommand{\lstlistingname}{代码}
 
-%\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
-%\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
-%\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-%\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-%\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-%\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
-%\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
-%\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
-%\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
-%\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
-%\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
-%\newcommand{\RegionMarkerTok}[1]{{#1}}
-%\newcommand{\ErrorTok}[1]{\textbf{{#1}}}
-%\newcommand{\NormalTok}[1]{{#1}}
 
-
-
-\ifxetex
-  \usepackage[setpagesize=false, % page size defined by xetex
-              unicode=false, % unicode breaks when used with xetex
-              xetex]{hyperref}
-\else
-  \usepackage[unicode=true]{hyperref}
-\fi
-\hypersetup{breaklinks=true,
-            bookmarks=true,
-            pdfauthor={An He},
-            pdftitle={用Markdown+Pandoc+XeLaTeX写作},
-            colorlinks=true,
-            urlcolor=blue,
-            linkcolor=magenta,
-            pdfborder={0 0 0}}
-\urlstyle{same}  % don't use monospace font for urls
-% Make links footnotes instead of hotlinks:
-\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
 
 \usepackage{longtable,booktabs}
-\usepackage{graphicx}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 
-
-\title{用Markdown+Pandoc+XeLaTeX写作}
+\title{用Markdown+Pandoc写作}
 \author{An He}
 \date{\today}
+
 \usepackage{cleveref}
 \usepackage{float}
 
-\usepackage{fancyhdr}
-%\usepackage{lastpage}
-\pagestyle{fancy}
+
+
+\logo{logo.png}
+
+\cover{cover.jpg}
 
 
 \begin{document}
 \frontmatter
-%----------------------------------------------------------------------------------------
-%	TITLE PAGE
-%----------------------------------------------------------------------------------------
 
-\begingroup
-\thispagestyle{empty}
-\begin{tikzpicture}[remember picture,overlay]
-\node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{Pictures/background}};
-\draw (current page.center) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]
-{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}
-{\centering 用Markdown+Pandoc+XeLaTeX写作\\[13pt] % Book title
-{\huge An He} % Author name
-}};
-\end{tikzpicture}
-\vfill
-\endgroup
-\addcontentsline{toc}{chapter}{封面}
+\maketitle
 
-%----------------------------------------------------------------------------------------
-%	COPYRIGHT PAGE
-%----------------------------------------------------------------------------------------
 \newpage
-~\vfill
+%~\vfill
 \thispagestyle{empty}
 
 \noindent Copyright \copyright\ \the\year\  An He\\ % Copyright notice
@@ -140,6 +53,15 @@
 
 \noindent \textit{最后编译日期, \today\ \currenttime } % Printing/edition date
 
+\tableofcontents
+
+\listoftables
+\addcontentsline{toc}{chapter}{表格列表}
+\listoffigures
+\addcontentsline{toc}{chapter}{插图列表}
+
+\clearpage
+\thispagestyle{empty}
 
 \hypertarget{ux524dux8a00}{%
 \chapter{前言}\label{ux524dux8a00}}
@@ -159,23 +81,9 @@ Pandoc是由 John MacFarlane 教授开发的标记语言转换工具，实现了
 中文书籍。用户也可以在自己的工作目录修改此模板，并通过修改配置来引用自己
 的模板。
 
-
-{
-\hypersetup{linkcolor=black}
-\setcounter{tocdepth}{2}
-\tableofcontents
-\addcontentsline{toc}{chapter}{目录}
-}
-\listoftables
-\addcontentsline{toc}{chapter}{表格列表}
-\listoffigures
-\addcontentsline{toc}{chapter}{插图列表}
-
-
-
 \mainmatter
-    % 在此命令之后的页码为阿拉伯数字
-    % 以下为正文
+\hypersetup{pageanchor=true}
+
 \hypertarget{ux4f7fux7528ux8bf4ux660e}{%
 \chapter{使用说明}\label{ux4f7fux7528ux8bf4ux660e}}
 
@@ -195,19 +103,14 @@ Pandoc是由 John MacFarlane 教授开发的标记语言转换工具，实现了
 
 \begin{lstlisting}[caption=目录规范, label=code:structure, float=htbp]
 .
-├── book                                    # 书籍模板
-│   └── book-template.epub
+├── templates                                    # 模板
 ├── panbook                                 # 转换脚本
 ├── build                                   # 电子书构建目录
 ├── config.default                          # pandoc默认转换配置
-├── html5                                   # html5电子书模板
 ├── README.md
-├── resume                                  # 简历模板
 ├── src                                     # Markdown源码目录
 │   └── images                              # 源码涉及插图目录
 │   └── metadata.yaml                       # 书籍元数据文件
-└── zh-ctex                                 # ctexbook模板目录
-    ├── Pictures                            # 模板引用的图片资源
 \end{lstlisting}
 
 \hypertarget{ux4f7fux7528ux89c4ux8303}{%
@@ -325,6 +228,7 @@ panbook init  # 初始化工作环境
 panbook pdf   # 生成pdf电子书
 panbook html  # 生成html电子书
 panbook pdf d # 调试模式，只使用一个代码高亮风格， html电子书也支持调试模式
+TPL=elegantbook panbook pdf d # 指定模板
 \end{lstlisting}
 
 \hypertarget{pandoc-markdownux8bedux6cd5ux7b80ux4ecb}{%
@@ -2133,6 +2037,7 @@ last paragraph...
 如此一来参考书目就会被放在这个标题后面了。
 
 \backmatter
+
 
 \hypertarget{ux540eux8bb0}{%
 \chapter{后记}\label{ux540eux8bb0}}
