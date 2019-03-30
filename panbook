@@ -20,6 +20,10 @@ function init()
 	[ ! -d $IMGDIR ] && mkdir $IMGDIR
 	cd $WORKDIR
 	
+	# 字体
+	cp -r $SCRIPTDIR/fonts $BUILD
+	[ -d $cwd/fonts ] && cp -r $cwd/fonts/* $BUILD/fonts/
+	
 	# 前言和后记部分
 	[ ! -f frontmatter.md ] && touch frontmatter.md
 	[ ! -f backmatter.md ] && touch backmatter.md
