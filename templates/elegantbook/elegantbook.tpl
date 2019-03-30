@@ -4,6 +4,7 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+\usepackage{ulem}
 \usepackage[yyyymmdd,hhmmss]{datetime}
 
 $if(listings)$
