@@ -51,6 +51,8 @@ $endfor$
 
 $if(equote)$
 \equote{$equote$}
+$else$
+\equote{使用pandoc-template编译}
 $endif$
 
 $if(logo)$

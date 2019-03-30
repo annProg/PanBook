@@ -6,7 +6,6 @@
 
 \usepackage[yyyymmdd,hhmmss]{datetime}
 
-%\usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
 \lstset{
 	frame=shadowbox,
@@ -29,6 +28,7 @@
 \usepackage{float}
 
 
+\equote{使用pandoc-template编译}
 
 \logo{logo.png}
 
@@ -192,29 +192,32 @@ header-includes:
 \caption{epub:type of first section epub:type of
 body\label{table:epub-type-attr}}\tabularnewline
 \toprule
-Attr & Type\tabularnewline
+\begin{minipage}[b]{0.51\columnwidth}\raggedright
+Attr\strut
+\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\centering
+Type\strut
+\end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-Attr & Type\tabularnewline
+\begin{minipage}[b]{0.51\columnwidth}\raggedright
+Attr\strut
+\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\centering
+Type\strut
+\end{minipage}\tabularnewline
 \midrule
 \endhead
-prologue & frontmatter\tabularnewline
-abstract & frontmatter\tabularnewline
-acknowledgments & frontmatter\tabularnewline
-copyright-page & frontmatter\tabularnewline
-dedication & frontmatter\tabularnewline
-foreword & frontmatter\tabularnewline
-halftitle & frontmatter\tabularnewline
-introduction & frontmatter\tabularnewline
-preface & frontmatter\tabularnewline
-seriespage & frontmatter\tabularnewline
-titlepage & frontmatter\tabularnewline
-afterword & backmatter\tabularnewline
-appendix & backmatter\tabularnewline
-colophon & backmatter\tabularnewline
-conclusion & backmatter\tabularnewline
-epigraph & backmatter\tabularnewline
+\begin{minipage}[t]{0.51\columnwidth}\raggedright
+prologue,abstract,acknowledgments copyright-page,dedication,foreword
+halftitle,introduction preface,seriespage,titlepage\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering
+frontmatter\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.51\columnwidth}\raggedright
+afterword,appendix,colophon conclusion,epigraph\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering
+backmatter\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 

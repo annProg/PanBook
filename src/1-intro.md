@@ -84,25 +84,18 @@ header-includes:
 
 支持如下属性如表\ref{table:epub-type-attr}：
 
-Attr                 Type
----------------     ---------
-prologue	         frontmatter
-abstract	         frontmatter
-acknowledgments	     frontmatter
-copyright-page	     frontmatter
-dedication	         frontmatter
-foreword	         frontmatter
-halftitle	         frontmatter
-introduction	     frontmatter
-preface	             frontmatter
-seriespage	         frontmatter
-titlepage	         frontmatter
-afterword	         backmatter
-appendix	         backmatter
-colophon	         backmatter
-conclusion	         backmatter
-epigraph	         backmatter
-------------------------
+--------------------------------------------------
+Attr                                    Type
+----------------------------------     -----------
+prologue,abstract,acknowledgments      frontmatter	         
+copyright-page,dedication,foreword
+halftitle,introduction	     
+preface,seriespage,titlepage	         
+
+
+afterword,appendix,colophon	           backmatter
+conclusion,epigraph
+----------------------------------------------------
 : epub:type of first section	epub:type of body\label{table:epub-type-attr}
 
 
