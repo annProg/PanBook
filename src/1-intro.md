@@ -63,9 +63,8 @@ Markdown源码文件需要使用UTF-8编码。以Notepad++为例，依次选择*
 Pandoc扩展的Markdown语法要求在标题前留出一个空行，因此按章节拆分的多个Markdown文件，开头需要
 空一行，否则pandoc不能正确识别标题。
 
-## 模板变量说明
-可以使用[Yaml语言](http://www.ruanyifeng.com/blog/2016/07/yaml.html) 定义模板中的变量，建议第一个
-Markdown文件专门用来定义变量，如代码\ref{code:template-var}所示。
+## 书籍元数据
+在`src/metadata.yaml`中使用[Yaml语言](http://www.ruanyifeng.com/blog/2016/07/yaml.html) 定义书籍的数据及可用的模板变量，如代码\ref{code:template-var}所示。
 ```{#code:template-var}
 ---
 title: 用Markdown+Pandoc+XeLaTeX写作
@@ -80,13 +79,6 @@ homepage: https://github.com/annProg/pandoc-template
 header-includes:
   - \usepackage{cleveref}
 ...
-```
-
-其中title，author，date 变量也可以通过以下形式来定义：
-```
-% title
-% author(s) (separated by semicolons)
-% date
 ```
 
 查看模板文件，可以获取所有变量（形如`$var$`)。也可以通过修改模板来添加自定义的变量。
@@ -121,7 +113,6 @@ epigraph	backmatter
 
 Table: epub:type of first section	epub:type of body \label{table:epub-type-attr}
 
-# 
 ## 转换命令
 pandoc-template目录加入环境变量后可以直接调用`panbook`：
 ```

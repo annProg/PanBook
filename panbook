@@ -100,7 +100,14 @@ function epub()
 	source $SCRIPTDIR/config.default
 	[ -f $cwd/config ] && source $cwd/config
 	EPUB_OUTPUT="$BUILD/$ofile.epub"
-	pandoc $tmp_chapters -o $EPUB_OUTPUT --metadata-file=$METADATA $EPUB_OPTIONS
+
+	merge="/tmp/epub-meta-"`echo $RANDOM$RANDOM$RANDOM$RANDOM`
+	cat $METADATA > $merge
+	echo -e "\n\n\n" >> $merge
+	cat $cwd/src/frontmatter.md.tmp >> $merge
+	mv $merge $cwd/src/frontmatter.md.tmp
+
+	pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS
 	
 	for id in $tmp_chapters;do
 		rm -f $id;

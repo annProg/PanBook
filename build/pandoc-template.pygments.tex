@@ -258,12 +258,11 @@ Markdown源码文件需要使用UTF-8编码。以Notepad++为例，依次选择\
 Pandoc扩展的Markdown语法要求在标题前留出一个空行，因此按章节拆分的多个Markdown文件，开头需要
 空一行，否则pandoc不能正确识别标题。
 
-\hypertarget{ux6a21ux677fux53d8ux91cfux8bf4ux660e}{%
-\section{模板变量说明}\label{ux6a21ux677fux53d8ux91cfux8bf4ux660e}}
+\hypertarget{ux4e66ux7c4dux5143ux6570ux636e}{%
+\section{书籍元数据}\label{ux4e66ux7c4dux5143ux6570ux636e}}
 
-可以使用\href{http://www.ruanyifeng.com/blog/2016/07/yaml.html}{Yaml语言}
-定义模板中的变量，建议第一个
-Markdown文件专门用来定义变量，如代码\ref{code:template-var}所示。
+在\passthrough{\lstinline!src/metadata.yaml!}中使用\href{http://www.ruanyifeng.com/blog/2016/07/yaml.html}{Yaml语言}
+定义书籍的数据及可用的模板变量，如代码\ref{code:template-var}所示。
 
 \begin{lstlisting}[label=code:template-var, caption=code:template-var, float=htbp]
 ---
@@ -279,14 +278,6 @@ homepage: https://github.com/annProg/pandoc-template
 header-includes:
   - \usepackage{cleveref}
 ...
-\end{lstlisting}
-
-其中title，author，date 变量也可以通过以下形式来定义：
-
-\begin{lstlisting}
-% title
-% author(s) (separated by semicolons)
-% date
 \end{lstlisting}
 
 查看模板文件，可以获取所有变量（形如\passthrough{\lstinline!$var$!})。也可以通过修改模板来添加自定义的变量。
@@ -331,9 +322,6 @@ conclusion & backmatter\tabularnewline
 epigraph & backmatter\tabularnewline
 \bottomrule
 \end{longtable}
-
-\hypertarget{section}{%
-\chapter{}\label{section}}
 
 \hypertarget{ux8f6cux6362ux547dux4ee4}{%
 \section{转换命令}\label{ux8f6cux6362ux547dux4ee4}}
