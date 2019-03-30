@@ -182,29 +182,21 @@ Pandoc是由 John MacFarlane 教授开发的标记语言转换工具，实现了
 \hypertarget{ux5b89ux88c5ux6b65ux9aa4}{%
 \section{安装步骤}\label{ux5b89ux88c5ux6b65ux9aa4}}
 
-首先克隆代码库
+首先克隆代码库，将pandoc-template目录加入环境变量，并建立工作目录。见\ref{code:init}。
 
-\begin{lstlisting}
-git clone https://github.com/annProg/pandoc-template
+\begin{lstlisting}[caption=初始化工作环境, label=code:init, float=htbp]
+# git clone https://github.com/annProg/pandoc-template
+# mkdir workdir
+# cd workdir
+# panbook init # 初始化工作环境
 \end{lstlisting}
 
-然后将pandoc-template目录加入环境变量
+目录结构如代码\ref{code:structure}所示。
 
-建立工作目录
-
-\begin{lstlisting}
-mkdir workdir
-cd workdir
-panbook init # 初始化工作环境
-\end{lstlisting}
-
-目录结构说明
-
-\begin{lstlisting}
+\begin{lstlisting}[caption=目录规范, label=code:structure, float=htbp]
 .
-├── book                                    # 书籍模板，暂未用到
-│   ├── book-template.latex
-│   └── pm-template.latex
+├── book                                    # 书籍模板
+│   └── book-template.epub
 ├── panbook                                 # 转换脚本
 ├── build                                   # 电子书构建目录
 ├── config.default                          # pandoc默认转换配置
@@ -227,9 +219,9 @@ panbook init # 初始化工作环境
 脚本中使用\passthrough{\lstinline!ls src/*.md!}列出所有的Markdown源码，要保证顺序正确，才能生成正确的LaTeX源码。
 因此，要求Markdown源码文件命名能够被ls以正确的顺序列出。其中,
 \passthrough{\lstinline!frontmatter.md!}和\passthrough{\lstinline!backmatter.md!}用于
-前言和后记，文件名固定不可更改。例如，有少于十个的Markdown文件，可以像下面这样组织源码：
+前言和后记，文件名固定不可更改。例如，有少于十个的Markdown文件，可以像代码\ref{code:rule}这样组织源码：
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=源码命名规范, label=code:rule, float=htbp]
 $ tree src/
 src/
 ├── 0-title.md
@@ -293,9 +285,9 @@ header-includes:
 
 支持如下属性如表\ref{table:epub-type-attr}：
 
-\begin{longtable}[]{@{}ll@{}}
-\caption{epub:type of first section epub:type of body
-\label{table:epub-type-attr}}\tabularnewline
+\begin{longtable}[]{@{}lc@{}}
+\caption{epub:type of first section epub:type of
+body\label{table:epub-type-attr}}\tabularnewline
 \toprule
 Attr & Type\tabularnewline
 \midrule
@@ -306,13 +298,13 @@ Attr & Type\tabularnewline
 \endhead
 prologue & frontmatter\tabularnewline
 abstract & frontmatter\tabularnewline
-acknowledgme & nts frontmatter\tabularnewline
-copyright-pa & ge frontmatter\tabularnewline
+acknowledgments & frontmatter\tabularnewline
+copyright-page & frontmatter\tabularnewline
 dedication & frontmatter\tabularnewline
 foreword & frontmatter\tabularnewline
-halftitle, & frontmatter\tabularnewline
+halftitle & frontmatter\tabularnewline
 introduction & frontmatter\tabularnewline
-preface fron & tmatter\tabularnewline
+preface & frontmatter\tabularnewline
 seriespage & frontmatter\tabularnewline
 titlepage & frontmatter\tabularnewline
 afterword & backmatter\tabularnewline
@@ -326,9 +318,9 @@ epigraph & backmatter\tabularnewline
 \hypertarget{ux8f6cux6362ux547dux4ee4}{%
 \section{转换命令}\label{ux8f6cux6362ux547dux4ee4}}
 
-pandoc-template目录加入环境变量后可以直接调用\passthrough{\lstinline!panbook!}：
+pandoc-template目录加入环境变量后可以直接调用\passthrough{\lstinline!panbook!}，如代码\ref{code:panbook-cmd}：
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=转换命令, label=code:panbook-cmd, float=htbp]
 panbook init  # 初始化工作环境
 panbook pdf   # 生成pdf电子书
 panbook html  # 生成html电子书

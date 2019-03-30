@@ -2,25 +2,21 @@
 # 使用说明
 
 ## 安装步骤
-首先克隆代码库
-```
-git clone https://github.com/annProg/pandoc-template
-```
-然后将pandoc-template目录加入环境变量
+首先克隆代码库，将pandoc-template目录加入环境变量，并建立工作目录。见\ref{code:init}。
 
-建立工作目录
-```
-mkdir workdir
-cd workdir
-panbook init # 初始化工作环境
+```{#code:init caption="初始化工作环境"}
+# git clone https://github.com/annProg/pandoc-template
+# mkdir workdir
+# cd workdir
+# panbook init # 初始化工作环境
 ```
 
-目录结构说明
-```
+目录结构如代码\ref{code:structure}所示。
+
+```{#code:structure caption="目录规范"}
 .
-├── book                                    # 书籍模板，暂未用到
-│   ├── book-template.latex
-│   └── pm-template.latex
+├── book                                    # 书籍模板
+│   └── book-template.epub
 ├── panbook                                 # 转换脚本
 ├── build                                   # 电子书构建目录
 ├── config.default                          # pandoc默认转换配置
@@ -38,8 +34,9 @@ panbook init # 初始化工作环境
 ### 源码命名规范
 脚本中使用`ls src/*.md`列出所有的Markdown源码，要保证顺序正确，才能生成正确的LaTeX源码。
 因此，要求Markdown源码文件命名能够被ls以正确的顺序列出。其中, `frontmatter.md`和`backmatter.md`用于
-前言和后记，文件名固定不可更改。例如，有少于十个的Markdown文件，可以像下面这样组织源码：
-```
+前言和后记，文件名固定不可更改。例如，有少于十个的Markdown文件，可以像代码\ref{code:rule}这样组织源码：
+
+```{#code:rule caption="源码命名规范"}
 $ tree src/
 src/
 ├── 0-title.md
@@ -92,30 +89,33 @@ header-includes:
 
 支持如下属性如表\ref{table:epub-type-attr}：
 
-Attr        Type
------       ---------
-prologue	frontmatter
-abstract	frontmatter
-acknowledgments	frontmatter
-copyright-page	frontmatter
-dedication	frontmatter
-foreword	frontmatter
-halftitle,	frontmatter
-introduction	frontmatter
-preface	frontmatter
-seriespage	frontmatter
-titlepage	frontmatter
-afterword	backmatter
-appendix	backmatter
-colophon	backmatter
-conclusion	backmatter
-epigraph	backmatter
+Attr                 Type
+---------------     ---------
+prologue	         frontmatter
+abstract	         frontmatter
+acknowledgments	     frontmatter
+copyright-page	     frontmatter
+dedication	         frontmatter
+foreword	         frontmatter
+halftitle	         frontmatter
+introduction	     frontmatter
+preface	             frontmatter
+seriespage	         frontmatter
+titlepage	         frontmatter
+afterword	         backmatter
+appendix	         backmatter
+colophon	         backmatter
+conclusion	         backmatter
+epigraph	         backmatter
+------------------------
+: epub:type of first section	epub:type of body\label{table:epub-type-attr}
 
-Table: epub:type of first section	epub:type of body \label{table:epub-type-attr}
 
 ## 转换命令
-pandoc-template目录加入环境变量后可以直接调用`panbook`：
-```
+
+pandoc-template目录加入环境变量后可以直接调用`panbook`，如代码\ref{code:panbook-cmd}：
+
+```{#code:panbook-cmd caption="转换命令"}
 panbook init  # 初始化工作环境
 panbook pdf   # 生成pdf电子书
 panbook html  # 生成html电子书
