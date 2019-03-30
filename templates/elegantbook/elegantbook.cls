@@ -467,9 +467,9 @@
 		{\renewcommand{\arraystretch}{0.618}
 		\begin{tabular}{l} 
 			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Author: }}{\textbf{作者：}}\@author \\
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Institute: }}{\textbf{组织：}}\the\institute\\
+			%\ifdefstring{\ELEGANT@lang}{en}{\textbf{Institute: }}{\textbf{组织：}}\the\institute\\
 			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Update: }}{\textbf{更新：}}\@date\\
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Version: }}{\textbf{版本：}}\the\version \\ 
+			%\ifdefstring{\ELEGANT@lang}{en}{\textbf{Version: }}{\textbf{版本：}}\the\version \\ 
 		\end{tabular}}
 	\end{minipage}
 	\begin{minipage}[c]{0.27\linewidth}
