@@ -9,6 +9,7 @@
 $if(listings)$
 \newcommand{\passthrough}[1]{#1}
 \lstset{
+	basicstyle=\small\linespread{0.8}\ttfamily,
 	frame=shadowbox,
 	backgroundcolor=\color[rgb]{0.97,0.97,0.97},
 	tabsize=4,

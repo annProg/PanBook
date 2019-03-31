@@ -30,9 +30,9 @@ $if(listings)$
 \lstset{
 	%numbers=left,
 	%numberstyle=\tiny,
-	basicstyle=\small\code,
+	basicstyle=\small\linespread{1}\code,
 	keywordstyle=\color[rgb]{0.13,0.29,0.53}\textbf,
-	commentstyle=\color[rgb]{0.56,0.35,0.01}\textit,
+	commentstyle=\color{gray},
 	identifierstyle=\color[rgb]{0.00,0.00,0.00},
 	stringstyle=\color[rgb]{0.31,0.60,0.02},
 	frame=shadowbox,
