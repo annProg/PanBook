@@ -28,18 +28,18 @@ function init()
 	
 	# 模板, 支持用户自定义模板
 	[ -d $SCRIPTDIR/templates/$TPL ] && cp -rfu $SCRIPTDIR/templates/$TPL/* $BUILD
-	[ -d $cwd/templates/$TPL ] && cp -rfu $cwd/templates/$TPL/* $BUILD
+	[ -d $cwd/templates/$TPL ] && cp -rfu $cwd/templates/$TPL/* $BUILD 2>/dev/null
 	
 	# 字体
 	cp -rfu $SCRIPTDIR/fonts $BUILD
-	[ -d $cwd/fonts ] && cp -rfu $cwd/fonts/* $BUILD/fonts/
+	[ -d $cwd/fonts ] && cp -rfu $cwd/fonts/* $BUILD/fonts/ 2>/dev/null
 	
 	# 前言和后记部分
 	[ ! -f frontmatter.md ] && touch frontmatter.md
 	[ ! -f backmatter.md ] && touch backmatter.md
 	[ ! -f metadata.yaml ] && meta > metadata.yaml
 	chapters=`ls *.md |grep -vE "frontmatter|backmatter" 2>/dev/null`
-	[ "$DEBUG"x = "true"x ] && highlightStyle=(pygments)
+	[ "$DEBUG"x = "true"x ] && highlightStyle=(espresso)
 }
 
 function pdf()
@@ -47,19 +47,20 @@ function pdf()
 	getEnv TPL "ctex"
 	echo $TPL
 	init  # 首先初始化
+	
+	# 复制src目录下资源文件到build目录
+	cp -rf $WORKDIR/* $BUILD
+	cd $BUILD
+	# 生成前言和后记
+	pandoc -t latex frontmatter.md --top-level-division=chapter -o frontmatter.tex
+	pandoc -t latex backmatter.md --top-level-division=chapter -o backmatter.tex
+	
 	for theme in ${highlightStyle[@]}
 	do
 		source $SCRIPTDIR/config.default		
 		[ -f $cwd/config ] && source $cwd/config
-		# 复制src目录下资源文件到build目录
-		cp -rf $WORKDIR/* $BUILD
 		
-		cd $BUILD
-		# 生成前言和后记
-		pandoc -t latex frontmatter.md --top-level-division=chapter -o frontmatter.tex
-		pandoc -t latex backmatter.md --top-level-division=chapter -o backmatter.tex
-		
-		TEX_OUTPUT="$ofile.$theme.tex"
+		TEX_OUTPUT="$ofile-$TPL-$theme.tex"
 		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
 		
 		#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
@@ -94,7 +95,7 @@ function html()
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
 	
-		HTML_OUTPUT="$BUILD/$ofile.$theme.html"
+		HTML_OUTPUT="$BUILD/$ofile-$TPL-$theme.html"
 		pandoc --self-contained $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
 		#sed -i "s/pdf/jpg/g" $HTML_OUTPUT
 	done
@@ -112,9 +113,6 @@ function epub()
 	DATE=`date +%Y年%m月%d日`
 	DATETIME=`date +%Y年%m月%d日%H:%M:%S`		
 		
-	source $SCRIPTDIR/config.default
-	[ -f $cwd/config ] && source $cwd/config
-	EPUB_OUTPUT="$BUILD/$ofile.epub"
 
 	merge="/tmp/epub-meta-"`echo $RANDOM$RANDOM$RANDOM$RANDOM`
 	cat $METADATA > $merge
@@ -122,7 +120,13 @@ function epub()
 	cat $cwd/src/frontmatter.md.tmp >> $merge
 	mv $merge $cwd/src/frontmatter.md.tmp
 
-	pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl
+	for theme in ${highlightStyle[@]}
+	do
+		source $SCRIPTDIR/config.default
+		[ -f $cwd/config ] && source $cwd/config
+		EPUB_OUTPUT="$BUILD/$ofile-$TPL-$theme.epub"
+		pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl
+	done
 	
 	for id in $tmp_chapters;do
 		rm -f $id;
