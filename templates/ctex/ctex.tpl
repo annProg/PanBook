@@ -1,8 +1,8 @@
 \documentclass[fancyhdr,bookmark]{ctexbook}
 \setCJKmainfont{SimSun}
-\setmainfont{Georgia} 	% 設定英文字型
-\setromanfont{Georgia} 	% 字型
-\setmonofont{Latin Modern Mono}
+\setmainfont{DejaVu Sans} 	% 設定英文字型
+\setromanfont{DejaVu Sans} 	% 字型
+\setmonofont{DejaVu Sans Mono}
 
 % pandoc版本大于1.15时需要\tightlist
 \providecommand{\tightlist}{%
@@ -21,18 +21,16 @@
   headsep=2ex
 }
 
+\newfontfamily\code{Courier New}
 
 $if(listings)$
-\usepackage{xcolor}
-\definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
-
-%\usepackage[x11names,svgnames,dvipsnames]{xcolor}
 \usepackage{listings}
+\definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
 \newcommand{\passthrough}[1]{#1}
 \lstset{
 	%numbers=left,
 	%numberstyle=\tiny,
-	basicstyle=\small\ttfamily,
+	basicstyle=\small\code,
 	keywordstyle=\color[rgb]{0.13,0.29,0.53}\textbf,
 	commentstyle=\color[rgb]{0.56,0.35,0.01}\textit,
 	identifierstyle=\color[rgb]{0.00,0.00,0.00},
@@ -47,23 +45,8 @@ $if(listings)$
 \renewcommand{\lstlistingname}{代码}
 $endif$
 
-%\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
-%\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
-%\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-%\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-%\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-%\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
-%\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
-%\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
-%\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
-%\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
-%\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
-%\newcommand{\RegionMarkerTok}[1]{{#1}}
-%\newcommand{\ErrorTok}[1]{\textbf{{#1}}}
-%\newcommand{\NormalTok}[1]{{#1}}
-
 $if(lhs)$
-\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\code}}{}
 $endif$
 
 $if(highlighting-macros)$
