@@ -55,3 +55,6 @@ $ TPL=elegantbook panbook pdf   #指定模板
 使用本项目编译的书籍
 
 - [人人都能用英语 李笑来](https://github.com/annProg/everyone-can-use-english)
+- [把时间当作朋友 李笑来](https://github.com/annProg/time-as-a-friend/releases)
+- [TOEFL iBT高分作文 李笑来](https://github.com/annProg/twe185/releases)
+- [翻译漫谈 余晟](https://github.com/annProg/chitchat-on-translation/releases)
