@@ -48,6 +48,10 @@ function pdf()
 	echo $TPL
 	init  # 首先初始化
 	
+	# 判断设备类型
+	device=`grep -E "^device" $METADATA | awk '{print $2}' |cut -f1 -d'#'`
+	[ "$device"x != ""x ] && device="-$device"
+	
 	# 复制src目录下资源文件到build目录
 	cp -rf $WORKDIR/* $BUILD
 	cd $BUILD
@@ -60,7 +64,7 @@ function pdf()
 		source $SCRIPTDIR/config.default		
 		[ -f $cwd/config ] && source $cwd/config
 		
-		TEX_OUTPUT="$ofile-$TPL-$theme.tex"
+		TEX_OUTPUT="$ofile-$TPL-$theme$device.tex"
 		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
 		
 		#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
