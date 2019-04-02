@@ -5,26 +5,30 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <title>$pagetitle$</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
 $if(quotes)$
-  <style type="text/css">
-    q { quotes: "“" "”" "‘" "’"; }
-  </style>
+      q { quotes: "“" "”" "‘" "’"; }
 $endif$
+  </style>
 $if(highlighting-css)$
-  <style type="text/css">
+  <style>
 $highlighting-css$
   </style>
 $endif$
 $for(css)$
-  <link rel="stylesheet" type="text/css" href="$css$" />
+  <link rel="stylesheet" href="$css$" />
 $endfor$
 $for(header-includes)$
   $header-includes$
 $endfor$
 </head>
-<body$if(coverpage)$ id="cover"$endif$>
+<body$if(coverpage)$ id="cover"$endif$$if(body-type)$ epub:type="$body-type$"$endif$>
 $if(titlepage)$
-<section epub:type="titlepage">
+<section epub:type="titlepage" class="titlepage">
 $for(title)$
 $if(title.type)$
   <h1 class="$title.type$">$title.text$</h1>
@@ -50,15 +54,11 @@ $endif$
 $if(rights)$
   <div class="rights">$rights$</div>
 $endif$
-
 </section>
-<span epub:type="pagebreak" title="ix" id="pageix"/>
-
 $else$
 $for(include-before)$
 $include-before$
 $endfor$
-
 $body$
 $for(include-after)$
 $include-after$
@@ -66,3 +66,4 @@ $endfor$
 $endif$
 </body>
 </html>
+
