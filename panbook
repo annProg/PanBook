@@ -55,8 +55,8 @@ function pdf()
 	cp -rf $WORKDIR/* $BUILD
 	cd $BUILD
 	# 生成前言和后记
-	pandoc -t latex frontmatter.md --top-level-division=chapter -o frontmatter.tex
-	pandoc -t latex backmatter.md --top-level-division=chapter -o backmatter.tex
+	pandoc -t latex frontmatter.md --top-level-division=chapter --listings -o frontmatter.tex
+	pandoc -t latex backmatter.md --top-level-division=chapter --listings -o backmatter.tex
 	
 	for theme in ${highlightStyle[@]}
 	do
