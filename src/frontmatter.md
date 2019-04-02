@@ -1,4 +1,4 @@
-# 前言 {epub:type=preface}
+# 前言 {epub:type=preface .unnumbered}
 
 LaTeX可以排版格式精美的书籍，但是学习成本较高，使用不便；
 Markdown是一种简单易学的标记语言。如果能结合两者的优点，使用Markdown
