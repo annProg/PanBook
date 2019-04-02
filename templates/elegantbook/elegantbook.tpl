@@ -121,7 +121,7 @@ $if(copyright)$
 %~\vfill
 \thispagestyle{empty}
 
-\noindent Copyright \copyright\ \the\year\  $if(author)$$for(author)$$author$$sep$ \and $endfor$$endif$\\ % Copyright notice
+\noindent Copyright \copyright\ \the\year\  $if(author)$$for(author)$$author$$sep$, $endfor$$endif$\\ % Copyright notice
 
 \noindent \textsc{Published by \LaTeX}\\ % Publisher
 $if(homepage)$
