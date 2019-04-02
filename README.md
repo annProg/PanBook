@@ -43,6 +43,14 @@ $ DEVICE=mobile panbook pdf     # 指定设备类型，可选mobile, kindle, pc�
 
 之后在`src`目录进行写作, `src/images`目录存放图片
 
+### 可用环境变量
+
+```
+TPL         指定模板           elegantbook|ctex|epub|html5
+DEVICE      指定设备类型       mobile|kindle|pc  需要模板支持
+ELEGANT     elegantbook专用设置elegantbook选项，可设置语言模板(cn|en)，颜色主题(green|blue|cyan|plain)，章标题显示风格(hang|display)，比如  ELEGANT=cn,blue  即使用中文，蓝色主题编译
+```
+
 ## 注意事项
 - 在Windows上使用pandoc需要将markdown文件保存为UTF-8格式
 - 按章节拆分的多个markdown文件，开头需要空一行，否则pandoc可能不能正确识别标题

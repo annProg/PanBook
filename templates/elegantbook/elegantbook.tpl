@@ -1,4 +1,4 @@
-\documentclass[cn]{elegantbook}
+\documentclass[$if(elegantoption)$$elegantoption$$else$cn$endif$]{elegantbook}
 
 % pandoc版本大于1.15时需要\tightlist
 \providecommand{\tightlist}{%
