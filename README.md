@@ -35,8 +35,9 @@ $ panbook init                  # 初始化工作环境
 $ panbook epub                  # 生成epub电子书
 $ panbook pdf                   # 生成pdf电子书
 $ panbook html                  # 生成html电子书
-$ panbook pdf d                 # 生成pdf电子书(d选项意为debug模式，仅生成一种样式)
-$ TPL=elegantbook panbook pdf   #指定模板
+$ panbook pdf d                 # 生成pdf电子书(debug模式，仅生成一种代码高亮样式)
+$ TPL=elegantbook panbook pdf   # 指定模板
+$ DEVICE=mobile panbook pdf     # 指定设备类型，可选mobile, kindle, pc，需要模板支持
 ```
 
 之后在`src`目录进行写作, `src/images`目录存放图片
