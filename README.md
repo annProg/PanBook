@@ -33,6 +33,7 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/pandoc-template:/c/Users/myna
 $ cd /d/dev/mybook
 $ panbook init                  # 初始化工作环境
 $ panbook epub                  # 生成epub电子书
+$ CSS=epub panbook epub         # 指定epub自定义样式文件名，css应放置在对应模板目录下的css文件夹下
 $ panbook pdf                   # 生成pdf电子书
 $ panbook html                  # 生成html电子书
 $ panbook pdf d                 # 生成pdf电子书(debug模式，仅生成一种代码高亮样式)
