@@ -60,7 +60,9 @@ $endif$
 $if(listings)$
 \usepackage{listings}
 \definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
-\newcommand{\passthrough}[1]{#1}
+\definecolor{lightgray}{rgb}{0.97,0.97,1}
+\newcommand{\passthrough}[1]{\colorbox{lightgray}{#1}}
+
 \lstset{
 	%numbers=left,
 	%numberstyle=\tiny,

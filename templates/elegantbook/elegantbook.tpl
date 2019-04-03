@@ -49,7 +49,8 @@ $else$
 $endif$
 
 $if(listings)$
-\newcommand{\passthrough}[1]{#1}
+\definecolor{lightgray}{rgb}{0.97,0.97,1}
+\newcommand{\passthrough}[1]{\colorbox{lightgray}{#1}}
 \lstset{
 	basicstyle=\small\linespread{0.8}\ttfamily,
 	frame=shadowbox,
