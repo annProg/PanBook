@@ -6,7 +6,7 @@
 - [ElegantBook模板-pc](https://api.annhe.net/pandoc-template/pandoc-template-elegantbook-pc.pdf)
 - [Ctex模板-pc](https://api.annhe.net/pandoc-template/pandoc-template-ctex-pc.pdf)
 - [Ctex模板-mobile](https://api.annhe.net/pandoc-template/pandoc-template-ctex-mobile.pdf)
-- [Epub模板](https://api.annhe.net/pandoc-template/pandoc-template-epub.pdf)
+- [Epub模板](https://api.annhe.net/pandoc-template/pandoc-template-epub.epub)
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。
