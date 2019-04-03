@@ -1,4 +1,12 @@
 # pandoc模板
+此项目定义了一种`Markdown`源码组织规范，提供一个脚本`panbook`及数个`LaTeX`及`epub`模板，用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`及`epub`格式电子书。
+
+查看电子书效果：
+
+- [pandoc-template-ctex-pc.pdf](https://api.annhe.net/pandoc-template/pandoc-template-ctex-pc.pdf)
+- [pandoc-template-ctex-mobile.pdf](https://api.annhe.net/pandoc-template/pandoc-template-ctex-mobile.pdf)
+- [pandoc-template-elegantbook-pc.pdf](https://api.annhe.net/pandoc-template/pandoc-template-elegantbook-pc.pdf)
+- [pandoc-template-epub.pdf](https://api.annhe.net/pandoc-template/pandoc-template-epub.pdf)
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。
@@ -66,3 +74,8 @@ CSS          指定epub自定义样式文件名，css应放置在对应模板目
 - [把时间当作朋友 李笑来](https://github.com/annProg/time-as-a-friend/releases)
 - [TOEFL iBT高分作文 李笑来](https://github.com/annProg/twe185/releases)
 - [翻译漫谈 余晟](https://github.com/annProg/chitchat-on-translation/releases)
+
+## QQ群
+欢迎加入QQ群交流
+
+![](medias/qq.png)
