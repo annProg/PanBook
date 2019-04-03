@@ -7,7 +7,7 @@ BUILD="$cwd/build"
 WORKDIR="$cwd/src"
 METADATA="$WORKDIR/metadata.yaml"
 IMGDIR="$WORKDIR/images"
-highlightStyle=(pygments kate monochrome espresso haddock tango zenburn)
+highlightStyle=(pygments kate monochrome espresso haddock tango zenburn breezedark)
 
 function getEnv() {
 	env |grep -w $1 || eval $1=$2
@@ -39,7 +39,7 @@ function init()
 	[ ! -f backmatter.md ] && touch backmatter.md
 	[ ! -f metadata.yaml ] && meta > metadata.yaml
 	chapters=`ls *.md |grep -vE "frontmatter|backmatter" 2>/dev/null`
-	[ "$DEBUG"x = "true"x ] && highlightStyle=(espresso)
+	[ "$DEBUG"x = "true"x ] && highlightStyle=(tango)
 }
 
 function pdf()
