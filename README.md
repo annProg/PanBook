@@ -3,10 +3,10 @@
 
 查看电子书效果：
 
-- [pandoc-template-ctex-pc.pdf](https://api.annhe.net/pandoc-template/pandoc-template-ctex-pc.pdf)
-- [pandoc-template-ctex-mobile.pdf](https://api.annhe.net/pandoc-template/pandoc-template-ctex-mobile.pdf)
-- [pandoc-template-elegantbook-pc.pdf](https://api.annhe.net/pandoc-template/pandoc-template-elegantbook-pc.pdf)
-- [pandoc-template-epub.pdf](https://api.annhe.net/pandoc-template/pandoc-template-epub.pdf)
+- [ElegantBook模板-pc](https://api.annhe.net/pandoc-template/pandoc-template-elegantbook-pc.pdf)
+- [Ctex模板-pc](https://api.annhe.net/pandoc-template/pandoc-template-ctex-pc.pdf)
+- [Ctex模板-mobile](https://api.annhe.net/pandoc-template/pandoc-template-ctex-mobile.pdf)
+- [Epub模板](https://api.annhe.net/pandoc-template/pandoc-template-epub.pdf)
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。
