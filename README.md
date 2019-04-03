@@ -1,4 +1,4 @@
-# pandoc模板
+# Pandoc模板
 此项目定义了一种`Markdown`源码组织规范，提供一个脚本`panbook`及数个`LaTeX`及`epub`模板，用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`及`epub`格式电子书。
 
 查看电子书效果：
@@ -15,7 +15,7 @@
 
 - 下载[msys2](https://www.msys2.org/) 并安装
 - 下载[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本并安装
-- 下载[pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本并安装
+- 下载[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本并安装
 
 ### 下载本项目
 
@@ -27,7 +27,7 @@ $ git clone https://github.com/annProg/pandoc-template
 ```
 
 ### 设置环境变量
-需要将本项目，`texlive`及`pandoc`加入环境变量，编辑`~/.bashrc`，加入以下内容
+需要将本项目，`texlive`及`Pandoc`加入环境变量，编辑`~/.bashrc`，加入以下内容
 
 ```
 $ tail -n 1 ~/.bashrc
@@ -58,8 +58,8 @@ CSS          指定epub自定义样式文件名，css应放置在对应模板目
 ```
 
 ## 注意事项
-- 在Windows上使用pandoc需要将markdown文件保存为UTF-8格式
-- 按章节拆分的多个markdown文件，开头需要空一行，否则pandoc可能不能正确识别标题
+- 在Windows上使用`Pandoc`需要`Markdown`文件保存为`UTF-8`格式
+- 按章节拆分的多个`Markdown`文件，开头需要空一行，否则`Pandoc`可能不能正确识别标题
 
 ## 模板说明
 本项目使用了一些开源模板，列表如下
