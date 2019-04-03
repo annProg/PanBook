@@ -113,6 +113,9 @@ function epub()
 {
 	getEnv TPL "epub"
 	getEnv CSS "epub"
+	addCss=""
+	[ "$CSS"x != ""x ] && addCss="--css=$BUILD/css/$CSS.css"
+	
 	init
 	pdf2jpg
 	DATE=`date +%Y年%m月%d日`
@@ -130,7 +133,7 @@ function epub()
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
 		EPUB_OUTPUT="$BUILD/$ofile-$TPL-$theme.epub"
-		pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl --css=$BUILD/css/$CSS.css
+		pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl $addCss
 	done
 	
 	for id in $tmp_chapters;do
