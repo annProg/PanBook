@@ -61,23 +61,21 @@ function pdf()
 	pandoc -t latex frontmatter.md --top-level-division=chapter --listings -o frontmatter.tex
 	pandoc -t latex backmatter.md --top-level-division=chapter --listings -o backmatter.tex
 	
-	for theme in ${highlightStyle[@]}
-	do
-		source $SCRIPTDIR/config.default		
-		[ -f $cwd/config ] && source $cwd/config
-		
-		TEX_OUTPUT="$ofile-$TPL-$theme-$DEVICE.tex"
-		pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl -V device=$DEVICE -V elegantoption=$ELEGANT
-		
-		#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
-		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
-		sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
-		#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
-		#sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
-		
-		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
-		xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
-	done
+	source $SCRIPTDIR/config.default		
+	[ -f $cwd/config ] && source $cwd/config
+	
+	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
+	pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl -V device=$DEVICE -V elegantoption=$ELEGANT
+	
+	#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
+	sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
+	sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
+	#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
+	#sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
+	
+	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
+	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
+	
 	clean
 }
 
