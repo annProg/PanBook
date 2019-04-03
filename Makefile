@@ -11,7 +11,8 @@ ctex6in:
 	DEVICE=mobile panbook pdf
 elegantbook: 
 	TPL=elegantbook panbook pdf
-epub: 
+epub:
+	rm -f build/*.epub
 	panbook epub d
 	mv build/pandoc-template-epub-*.epub build/pandoc-template-epub.epub
 
