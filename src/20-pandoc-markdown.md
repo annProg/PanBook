@@ -24,7 +24,7 @@ Pandoc Markdown语法介绍可以在[Pandoc主页](http://www.pandoc.org/MANUAL.
 行=符号（用于一阶标题）或-符号（用于二阶标题）所构成；Atx风格的标题是由一到六个#符
 号以及一行文字所组成，你可以在文字后面加上任意数量的#符号。由行首起算的#符号数量决
 定了标题的阶层，如代码\ref{code:markdownTitle}所示。
-```{#code:markdownTitle caption="测试"}
+```{#code:markdownTitle .markdown caption="markdown标题"}
 Setext A level-one header
 ==================
 
@@ -58,7 +58,7 @@ I like several of their flavors of ice cream:
 但目前只有标识符(identifier/ID)在输出时有实际作用（且只在部分格式
 的输出，包括：HTML, LaTeX, ConTeXt, Textile, AsciiDoc）。举例来说，
 下面是将标题加上foo标识符的几种方法：
-```
+```markdown
 # My header {#foo}
 
 ## My header ##    {#foo}
@@ -70,11 +70,11 @@ My other header   {#foo}
 
 具有unnumbered类别的标题将不会被编号，即使--number-sections的选项是开启
 的。单一连字符号( -)等同于.unnumbered，且更适用于非英文文件中。因此，
-```
+```markdown
 # My header {-}
 ```
 与下面这行是等价的
-```
+```markdown
 # My header {.unnumbered}
 ```
 
@@ -83,7 +83,7 @@ Markdown使用email的习惯来建立引用区块。一个引用区块可以由�
 或其他的区块元素（如列表或标题）组成，并且其行首均是由一个>符号加上一
 个空白作为开头。（>符号不一定要位在该行最左边，但也不能缩进超过三个空白）。
 
-```
+```markdown
 > This is a block quote. This
 > paragraph has two lines.
 >
@@ -100,7 +100,7 @@ Markdown使用email的习惯来建立引用区块。一个引用区块可以由�
 
 有一个「偷懒」的形式：你只需要在引用区块的第一行行首输入>即可，后面的
 行首可以省略符号：
-```
+```markdown
 > This is a block quote. This
 paragraph has two lines.
 
@@ -110,7 +110,7 @@ paragraph has two lines.
 由于区块引用可包含其他区块元素，而区块引用本身也是区块元素，所以，引用
 是可以嵌套入其他引用的。
 
-```
+```markdown
 > This is a block quote.
 >
 >> A block quote within a block quote.
@@ -121,7 +121,7 @@ paragraph has two lines.
 块引用位于文件最开始的地方）。这是因为以>符号开头的情况在一般文字段落中
 相当常见（也许由于断行所致），这会导致非预期的格式。因此，除非是指定为
 markdown_strict格式，不然以下的语法在pandoc中将不会产生出嵌套区块引用：
-```
+```markdown
 > This is a block quote.
 >> Nested.
 ```
@@ -174,7 +174,7 @@ caption，则默认使用ID作为caption。有些输出格式可以利用这些�
 
 仅指定高亮语言时，可以简写为以下形式：
 
-```
+```markdown
 ~~~haskell
 qsort [] = []
 ~~~
@@ -187,7 +187,7 @@ qsort [] = []
 行区块是一连串以竖线( |)加上一个空格所构成的连续行。行与行间的区隔在
 输出时将会以原样保留，行首的空白字元数目也一样会被保留；反之，这些行
 将会以markdown的格式处理。这个语法在输入诗句或地址时很有帮助。
-```
+```markdown
 | The limerick packs laughs anatomical
 | In space that is quite economical.
 |    But the good ones I've seen
@@ -200,7 +200,7 @@ qsort [] = []
 
 如果有需要的话，书写时也可以将完整一行拆成多行，但后续行必须以空白作为开始。
 下面范例的前两行在输出时会被视为一整行：
-```
+```markdown
 | The Right Honorable Most Venerable and Righteous Samuel L.
   Constable, Jr.
 | 200 Main St.
@@ -225,7 +225,7 @@ qsort [] = []
 ### 无序列表
 无序列表是以项目符号作列举的列表。每条项目都以项目符号( *, +或-)作开头。
 下面是个简单的例子：
-```
+```markdown
 * one
 * two
 * three
@@ -238,7 +238,7 @@ qsort [] = []
 
 这会产生一个「紧凑」列表。如果你想要一个「宽松」列表，也就是说以段落格式处
 理每个项目内的文字内容，那么只要在每个项目间加上空白行即可：
-```
+```markdown
 * one
 
 * two
@@ -250,13 +250,13 @@ qsort [] = []
 
 列表项目中的接续行，若与该项目的第一行文字对齐（在项目符号之后），看上去会较
 为美观：
-```
+```markdown
 * here is my first
   list item.
 * and my second.
 ```
 但markdown 也允许以下「偷懒」的格式：
-```
+```markdown
 * here is my first
 list item.
 * and my second.
@@ -265,7 +265,7 @@ list item.
 一个列表项目可以包含多个段落以及其他区块等级的内容。然而，后续的段落必须接在空
 白行之后，并且以四个空白或一个tab 作缩进。因此，如果项目里第一个段落与后面段落
 对齐的话（也就是项目符号前置入两个空白），看上去会比较整齐美观：
-```
+```markdown
   * First paragraph.
 
     Continued.
@@ -277,7 +277,7 @@ list item.
 ```
 列表项目也可以包含其他列表。在这情况下前置的空白行是可有可无的。嵌套列表必须以四
 个空白或一个tab 作缩进：
-```
+```markdown
 * fruits
     + apples
         - macintosh
@@ -290,7 +290,7 @@ list item.
 ```	
 上一节提到，markdown 允许你以「偷懒」的方式书写，项目的接续行可以不和第一行对齐。不过，
 如果一个列表项目中包含了多个段落或是其他区块元素，那么每个元素的第一行都必须缩进对齐。
-```
+```markdown
 + A lazy, lazy, list
 item.
 
@@ -314,13 +314,13 @@ list item.
 在原始markdown 中，列举编号是阿拉伯数字后面接着一个句点与空白。数字本身代表的数值会被忽
 略，因此下面两个列表并无差别：
 
-```
+```markdown
 1.  one
 2.  two
 3.  three
 ```
 上下两个列表的输出是相同的。
-```
+```markdown
 5.  one
 7.  two
 1.  three
@@ -337,7 +337,7 @@ list item.
 除了列表标记外，Pandoc 也能判读列表的起始编号，这两项资讯都会保留于输出格式中。举例来说，
 下面的输入可以产生一个从编号9 开始，以单括号为编号标记的列表，底下还跟着一个小写罗马数字
 的子列表：
-```
+```markdown
  9)  Ninth
 10)  Tenth
 11)  Eleventh
@@ -346,14 +346,14 @@ list item.
      iii. subthree
 ```
 当遇到不同形式的列表标记时，Pandoc 会重新开始一个新的列表。所以，以下的输入会产生三份列表：
-```
+```markdown
 (2) Two
 (5) Three
 1.  Four
 *   Five
 ```
 如果需要预设的有序列表标记符号，可以使用#.：
-```
+```markdown
 #.  one
 #.  two
 #.  three
@@ -363,7 +363,7 @@ list item.
 #### Extension: definition_lists
 
 Pandoc支援定义列表，其语法的灵感来自于PHP Markdown Extra以及reStructuredText：
-```
+```markdown
 Term 1
 
 :   Definition 1
@@ -385,7 +385,7 @@ Term 2 with *inline markup*
 如果你在定义内容后面留下空白行（如同上面的范例），那么该段定义会被当作段落处理。在某
 些输出格式中，这意谓著成对的专有名词与定义内容间会有较大的空白间距。在定义与定义之间，
 以及定义与下个专有名词间不要留空白行，即可产生一个比较紧凑的定义列表：
-```
+```markdown
 Term 1
   ~ Definition 1
 Term 2
@@ -400,7 +400,7 @@ Term 2
 会被编号为'1'，接着编号为'2'，依此类推，直到文件结束。范例项目的编号不会局限
 于单一列表中，而是文件中所有以@为标记的项目均会次序递增其编号，直到最后一个。
 举例如下：
-```
+```markdown
 (@)  My first example will be numbered (1).
 (@)  My second example will be numbered (2).
 
@@ -410,7 +410,7 @@ Explanation of examples.
 ```
 
 编号范例可以加上标签，并且在文件的其他地方作参照：
-```
+```markdown
 (@good)  This is a good example.
 
 As (@good) illustrates, ...
@@ -419,7 +419,7 @@ As (@good) illustrates, ...
 
 ### 紧凑与宽松列表
 在与列表相关的「边界处理」上，Pandoc与Markdown.pl有着不同的处理结果。考虑如下代码：
-```
+```markdown
 +   First
 +   Second:
     -   Fee
@@ -438,7 +438,7 @@ Pandoc仍是依以上方式处理列表项目是否为段落的判定。这个�
 
 ### 结束一个列表
 如果你在列表之后放入一个缩排的代码区块，会有什么结果？
-```
+```markdown
 -   item one
 -   item two
 
@@ -449,7 +449,7 @@ Pandoc仍是依以上方式处理列表项目是否为段落的判定。这个�
 
 要在item two之后「切断」列表，你可以插入一些没有缩排、输出时也不可见的内容，例如HTML的
 注解：
-```
+```markdown
 -   item one
 -   item two
 
@@ -458,7 +458,7 @@ Pandoc仍是依以上方式处理列表项目是否为段落的判定。这个�
     { my code block }
 ```	
 当你想要两个各自独立的列表，而非一个大且连续的列表时，也可以运用同样的技巧：
-```
+```markdown
 1.  one
 2.  two
 3.  three
@@ -472,7 +472,7 @@ Pandoc仍是依以上方式处理列表项目是否为段落的判定。这个�
 
 ## 分隔线
 一行中若包含三个以上的*, -或_符号（中间可以以空白字元分隔），则会产生一条分隔线：
-```
+```markdown
 *  *  *  *
 
 ---------------

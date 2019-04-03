@@ -108,6 +108,17 @@ blockquote p {
 code, pre {
   font-family: monospace;
 }
+
+pre {
+	font-size: 70%;
+	padding: 5px;
+}
+
+p code {
+	 background-color: #fee9cc;
+}
+
+/* use highlight style
 code {
   background-color: #fee9cc;
   color: rgba(0, 0, 0, 0.75);
@@ -176,6 +187,8 @@ code.sourceCode span.er {
   color: red;
   font-weight: bold;
 }
+*/
+
 body {
   font-family: serif;
 }

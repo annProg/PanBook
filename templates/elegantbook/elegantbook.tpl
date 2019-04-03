@@ -52,7 +52,7 @@ $if(listings)$
 \definecolor{lightgray}{rgb}{0.97,0.97,1}
 \newcommand{\passthrough}[1]{\colorbox{lightgray}{#1}}
 \lstset{
-	basicstyle=\small\linespread{0.8}\ttfamily,
+	basicstyle=\small\linespread{0.9}\ttfamily,
 	frame=shadowbox,
 	backgroundcolor=\color[rgb]{0.97,0.97,0.97},
 	tabsize=4,

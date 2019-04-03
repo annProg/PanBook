@@ -4,7 +4,7 @@
 ## 安装步骤
 首先克隆代码库，将pandoc-template目录加入环境变量，并建立工作目录。见\ref{code:init}。
 
-```{#code:init caption="初始化工作环境"}
+```{#code:init .bash caption="初始化工作环境"}
 # git clone https://github.com/annProg/pandoc-template
 # mkdir workdir
 # cd workdir
@@ -13,7 +13,7 @@
 
 目录结构如代码\ref{code:structure}所示。
 
-```{#code:structure caption="目录规范"}
+```{#code:structure .bash caption="目录规范"}
 .
 ├── templates                                    # 模板
 ├── panbook                                 # 转换脚本
@@ -31,7 +31,7 @@
 因此，要求Markdown源码文件命名能够被ls以正确的顺序列出。其中, `frontmatter.md`和`backmatter.md`用于
 前言和后记，文件名固定不可更改。例如，有少于十个的Markdown文件，可以像代码\ref{code:rule}这样组织源码：
 
-```{#code:rule caption="源码命名规范"}
+```{#code:rule .bash caption="源码命名规范"}
 $ tree src/
 src/
 ├── 0-title.md
@@ -57,7 +57,7 @@ Pandoc扩展的Markdown语法要求在标题前留出一个空行，因此按章
 
 ## 书籍元数据
 在`src/metadata.yaml`中使用[Yaml语言](http://www.ruanyifeng.com/blog/2016/07/yaml.html) 定义书籍的数据及可用的模板变量，如代码\ref{code:template-var}所示。
-```{#code:template-var}
+```{#code:template-var .yaml caption="书籍元数据"}
 ---
 title: 用Markdown+Pandoc+XeLaTeX写作
 author:          # 作者（数组）
@@ -78,7 +78,7 @@ header-includes:
 ## 前言后记
 在`frontmatter.md`中添加前言，`backmatter.md`中添加后记。对于`epub`电子书，可以给标题添加`epub type`属性，见代码\ref{code:epub-type-attr}。
 
-```{#code:epub-type-attr}
+```{#code:epub-type-attr .markdown caption="epub标题属性"}
 # My chapter {epub:type=prologue}
 ```
 
@@ -103,11 +103,20 @@ conclusion,epigraph
 
 pandoc-template目录加入环境变量后可以直接调用`panbook`，如代码\ref{code:panbook-cmd}：
 
-```{#code:panbook-cmd caption="转换命令"}
-panbook init  # 初始化工作环境
-panbook pdf   # 生成pdf电子书
-panbook html  # 生成html电子书
-panbook pdf d # 调试模式，只使用一个代码高亮风格， html电子书也支持调试模式
-TPL=elegantbook panbook pdf d # 指定模板
+```{#code:panbook-cmd .bash caption="转换命令"}
+$ panbook init   # 初始化工作环境
+$ panbook pdf    # 生成pdf电子书
+$ panbook epub   # 生成html电子书
+$ panbook epub d # 调试模式，只使用一个代码高亮风格，epub,html格式支持
+$ TPL=elegantbook panbook pdf d # 通过环境变量指定模板
+```
+
+### 可用环境变量
+
+```{#code:env .bash caption="panbook支持的环境变量"}
+TPL         指定模板           elegantbook|ctex|epub|html5
+DEVICE      指定设备类型       mobile|kindle|pc  需要模板支持
+ELEGANT     elegantbook专用设置elegantbook选项，可设置语言模板(cn|en)，颜色主题(green|blue|cyan|plain)，章标题显示风格(hang|display)，比如  ELEGANT=cn,blue  即使用中文，蓝色主题编译
+CSS          指定epub自定义样式文件名，css应放置在对应模板目录下的css文件夹下
 ```
 

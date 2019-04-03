@@ -66,7 +66,7 @@ script的位置在`/cgi-bin/mimetex.cig`。
 如果使用了`--gladtex`选项，TeX数学公式在HTML的输出中会被`<eq>`标签包住。产生的htex档案之
 后可以透过gladTeX处理，这会针对每个数学公式生成图片，并于最后生成一个包含这些图片连结的html
 档案。所以，整个处理流程如下：
-```
+```bash
 pandoc -s --gladtex myfile.txt -o myfile.htex
 gladtex -d myfile-images myfile.htex
 # produces myfile.html and images in myfile-images
@@ -99,7 +99,7 @@ Markdown允许你在文件中的任何地方插入原始HTML（或DocBook）指�
 
 当指定格式为markdown_strict时，Pandoc会以上述方式处理；但预设情况下，Pandoc能够以markdown语法
 解读HTML区块标签中的内容。举例说明，Pandoc能够将底下这段
-```
+```html
 <table>
     <tr>
         <td>*one*</td>
@@ -108,7 +108,7 @@ Markdown允许你在文件中的任何地方插入原始HTML（或DocBook）指�
 </table>
 ```
 转换为
-```
+```html
 <table>
     <tr>
         <td><em>one</em></td>
@@ -135,7 +135,7 @@ markdown文字可以用`<div>`标签将其前后包住来进行样式指定，�
 This result was proved in \cite{jones.1967}.
 ```
 请注意在LaTeX 环境下时，像是底下
-```
+```tex
 \begin{tabular}{|l|l|}\hline
 Age & Frequency \\ \hline
 18--25  & 15 \\
@@ -154,7 +154,7 @@ Age & Frequency \\ \hline
 当输出格式不是LaTeX时，pandoc会分析LaTeX的`\newcommand`和`\renewcommand`定义，并套用
 其产生的巨集到所有LaTeX数学公式中。所以，举例来说，下列指令对于所有的输出格式均有作
 用，而非仅仅作用于LaTeX格式：
-```
+```tex
 \newcommand{\tuple}[1]{\langle #1 \rangle}
 
 $\tuple{a, b, c}$
@@ -175,7 +175,7 @@ Markdown 接受以下数种指定连结的方式。
 ### 行内连结
 一个行内连结包含了位在方括号中的连结文字，以及方括号后以圆括号包起来的URL。（你可以选
 择性地在URL 后面加入连结标题，标题文字要放在引号之中。）
-```
+```markdown
 This is an [inline link](/url), and here's [one with
 a title](http://fsf.org "click here for a good time!").
 ```
@@ -194,18 +194,18 @@ a title](http://fsf.org "click here for a good time!").
 着一个URL，最后可以选择性地（在一个空白之后）加入由引号或是圆括号包住的连结标题。
 
 以下是一些范例：
-```
+```markdown
 [my label 1]: /foo/bar.html  "My title, optional"
 [my label 2]: /foo
 [my label 3]: http://fsf.org (The free software foundation)
 [my label 4]: /bar#special  'A title in single quotes'
 ```
 连结的URL 也可以选择性地以角括号包住：
-```
+```markdown
 [my label 5]: <http://foo.bar.baz>
 ```
 连结标题可以放在第二行，效果见[my label 3]：
-```
+```markdown
 [my label 3]: http://fsf.org
   "The free software foundation"
 ```
@@ -214,13 +214,13 @@ a title](http://fsf.org "click here for a good time!").
   "The free software foundation"
 
 需注意连结标签并不区分大小写。所以下面的例子会建立合法的连结：
-```
+```markdown
 Here is [my link][FOO]
 
 [Foo]: /bar/baz
 ```
 在一个隐性参考连结中，第二组方括号的内容是空的，甚至可以完全地略去：
-```
+```markdown
 See [my website][], or [my website].
 
 [my website]: http://foo.bar.baz
@@ -229,7 +229,7 @@ See [my website][], or [my website].
 如清单项目或是区块引言。Pandoc lifts this arbitrary seeming restriction。所以虽然下面的
 语法在几乎所有其他实作中都是错误的，但在pandoc中可以正确处理：
 
-```
+```markdown
 > My block [quote].
 >
 > [quote]: /foo
@@ -238,11 +238,11 @@ See [my website][], or [my website].
 ### 内部连结
 要连结到同一份文件的其他章节，可使用自动产生的ID（参见HTML, LaTeX与ConTeXt的标题识别符一
 节后半）。
-```
+```markdown
 See the [Introduction](#introduction).
 ```
 或是
-```
+```markdown
 See the [Introduction].
 
 [Introduction]: #introduction
@@ -252,7 +252,7 @@ See the [Introduction].
 ## 图片
 
 在连结语法的前面加上一个!就是图片的语法了。连结文字将会作为图片的替代文字（alt text）：
-```
+```markdown
 ![la lune](Pictures/background.pdf "Voyage to the moon")
 
 ![movie reel]
@@ -261,7 +261,7 @@ See the [Introduction].
 ```
 
 也可以使用LaTeX的`\label`为图片添加label，这样就可以在其他地方引用了，例如：
-```
+```markdown
 效果如图\ref{fig:markdown}。
 
 ![Markdown\label{fig:markdown}](images/markdown.jpg "Markdown")
@@ -277,12 +277,12 @@ See the [Introduction].
 现。（在LaTeX中，会使用图表环境；在HTML中，图片会被放在具有figure类别的div元素中，并会附
 上一个具有caption类别的p元素。）图片的替代文字同时也会用来作为图片说明。
 
-```
+```markdown
 ![This is the caption](/url/of/image.png)
 ```
 如果你只是想要个一般的行内图片，那么只要让图片不是段落里唯一的元素即可。一个简单的方法
 是在图片后面插入一个不断行空格：
-```
+```markdown
 ![This image won't be a figure](/url/of/image.png)\
 ```
 
@@ -292,7 +292,7 @@ See the [Introduction].
 #### Extension: footnotes
 
 Pandoc's markdown 支援脚注功能，使用如代码\ref{code:footnote}所示的语法：
-```{#code:footnote caption="脚注语法"}
+```{#code:footnote .markdown caption="脚注语法"}
 Here is a footnote reference,[^1] and another.[^longnote]
 
 [^1]: Here is the footnote.
@@ -342,7 +342,7 @@ isn't indented.
 
 Pandoc 也支援了行内脚注（尽管，与一般脚注不同，行内脚注不能包含多个段落）。其语法如下：
 
-```
+```markdown
 Here is an inline note.^[Inlines notes are easier to write, since
 you don't have to pick an identifier and move down to type the
 note.]
@@ -390,7 +390,7 @@ https://github.com/citation-style-language/styles是CSL格式的档案库。
 引用资讯放在方括号中，以分号区隔。每一条引用都会有个key，由@加上资料库中的引用ID组成，并
 且可以选择性地包含前缀、定位以及后缀。以下是一些范例：
 
-```
+```markdown
 Blah blah [see @doe99, pp. 33-35; also @smith04, ch. 1].
 
 Blah blah [@doe99, pp. 33-35, 38-39 and *passim*].
@@ -399,18 +399,18 @@ Blah blah [@smith04; @doe99].
 ```
 
 在@前面的减号( -)将会避免作者名字在引用中出现。这可以用在已经提及作者的文章场合中：
-```
+```markdown
 Smith says blah [-@smith04].
 ```
 你也可以在文字中直接插入引用资讯，方式如下：
-```
+```markdown
 @smith04 says blah.
 
 @smith04 [p. 33] says blah.
 ```
 如果引用格式档需要产生一份引用作品的清单，这份清单会被放在文件的最后面。一般而言，
 你需要以一个适当的标题结束你的文件：
-```
+```markdown
 last paragraph...
 
 # References

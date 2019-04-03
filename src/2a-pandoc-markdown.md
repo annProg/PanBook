@@ -17,7 +17,7 @@
 Table:  Demonstration of simple table syntax.\label{table:simpletable}
 
 代码为：
-```
+```markdown
 简单表格看起来如表\ref{table:simpletable}所示：
 
   Right     Left     Center     Default
@@ -48,7 +48,7 @@ Table:  Demonstration of simple table syntax.\label{table:simpletable}
 -------     ------ ----------   -------
 
 代码：
-```
+```markdown
 -------     ------ ----------   -------
      12     12        12             12
     123     123       123           123
@@ -81,7 +81,7 @@ Table: Here's the caption. It, too, may span
 multiple lines.
 
 代码：
-```
+```markdown
 -------------------------------------------------------------
  Centered   Default           Right Left
   Header    Aligned         Aligned Aligned
@@ -120,7 +120,7 @@ multiple lines.
 : Here's a multiline table without headers.
 
 代码：
-```
+```markdown
 ----------- ------- --------------- -------------------------
    First    row                12.0 Example of a row that
                                     spans multiple lines.
@@ -154,7 +154,7 @@ multiple lines.
 +---------------+---------------+--------------------+
 
 代码：
-```
+```markdown
 : Sample grid table.
 
 +---------------+---------------+--------------------+
@@ -186,7 +186,7 @@ multiple lines.
   : Demonstration of simple table syntax.
   
 代码：
-```
+```markdown
 | Right | Left | Default | Center |
 |------:|:-----|---------|:------:|
 |   12  |  12  |    12   |    12  |
@@ -203,7 +203,7 @@ multiple lines.
 因为管线界定了各栏之间的边界，表格的原始码并不需要像上面例子中各栏之间保持直行对齐。所
 以，底下一样是个完全合法（虽然丑陋）的管线表格：
 
-```
+```markdown
 fruit| price
 -----|-----:
 apple|2.05
@@ -213,7 +213,7 @@ orange|3.09
 管线表格的资料格不能包含如段落、清单之类的区块元素，也不能包含多行文字。
 
 注意：Pandoc 也可以看得懂以下形式的管线表格，这是由Emacs 的orgtbl-mod 所绘制：
-```
+```markdown
 | One | Two   |
 |-----+-------|
 | my  | table |
@@ -363,18 +363,18 @@ orange|3.09
 
 ###强调
 要强调某些文字，只要以`*`或`_`符号前后包住即可，像这样：
-```
+```markdown
 This text is _emphasized with underscores_, and this
 is *emphasized with asterisks*.
 ```
 重复两个`*`或`_`符号以产生更强烈的强调：
-```
+```markdown
 This is **strong emphasis** and __with underscores__.
 ```
 This is **strong emphasis** and __with underscores__.
 
 一个前后以空白字元包住，或是前面加上反斜线的`*`或`_`符号，都不会转换为强调格式：
-```
+```markdown
 This is * not emphasized *, and \*neither is this\*.
 ```
 
@@ -383,7 +383,7 @@ This is * not emphasized *, and \*neither is this\*.
 因为_字元有时会使用在单字或是ID之中，所以pandoc不会把被字母包住的_解读为强调标记。
 如果有需要特别强调单字中的一部分，就用*：
 
-```
+```markdown
 feas*ible*, not feas*able*.
 ```
 
@@ -391,7 +391,7 @@ feas*ible*, not feas*able*.
 #### Extension: strikeout
 
 要将一段文字加上水平线作为删除效果，将该段文字前后以`~~`包住即可。例如，
-```
+```markdown
 This ~~is deleted text.~~
 ```
 
@@ -400,7 +400,7 @@ This ~~is deleted text.~~
 
 要输入上标可以用`^`字元将要上标的文字包起来；要输入下标可以用`~`字元将要下标的
 文字包起来。直接看范例，
-```
+```markdown
 H~2~O is a liquid.  2^10^ is 1024.
 ```
 H~2~O is a liquid.  2^10^ is 1024.
@@ -412,12 +412,12 @@ H~2~O is a liquid.  2^10^ is 1024.
 ### 字面文字
 要让一小段文字直接以其字面形式呈现，可以用反引号将其包住：
 
-```
+```markdown
 What is the difference between `>>=` and `>>`?
 ```
 如果字面文字中也包含了反引号，那就使用双重反引号包住：
 
-```
+```markdown
 Here is a literal backtick `` ` ``.
 ````
 
@@ -427,13 +427,13 @@ Here is a literal backtick `` ` ``.
 一直到同样数目的反引号字元出现才结束（反引号前的空白字元也为可选）。
 
 要注意的是，转义字符（以及其他markdown 结构）在字面文字的上下文中是没有效果的：
-```
+```markdown
 This is a backslash followed by an asterisk: `\*`.
 ```
 
 #### Extension: inline_code_attributes
 
 与围栏代码区块一样，字面文字也可以附加属性：
-```
+```markdown
 `<$>`{.haskell}
 ```
