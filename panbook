@@ -76,7 +76,10 @@ function pdf()
 	sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
 	#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
 	#sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
-		
+	
+	# gif格式图片编译报错，需要引用png格式，需转换后使用
+	sed -i -r "s#(\includegraphics\{.*?).(gif)(\})#\1.png\3#g" $TEX_OUTPUT
+	
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	
