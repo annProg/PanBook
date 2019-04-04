@@ -1,4 +1,9 @@
 #!/bin/bash
+
+function getEnv() {
+	env |grep -w $1 || eval $1=$2
+}
+
 cwd=`pwd`
 SCRIPTDIR=`cd $(dirname $0);pwd`
 ofile=`echo $cwd |awk -F '/' '{print $NF}'`
@@ -10,12 +15,7 @@ METADATA="$WORKDIR/metadata.yaml"
 IMGDIR="$WORKDIR/images"
 highlightStyle=(pygments kate monochrome espresso haddock tango zenburn breezedark)
 DATE=`date +%Y/%m/%d`
-DATETIME=`date +%Y/%m/%d\ %H:%M:%S`		
-
-
-function getEnv() {
-	env |grep -w $1 || eval $1=$2
-}
+DATETIME=`date +%Y/%m/%d\ %H:%M:%S`
 
 function meta() {
 	cat $SCRIPTDIR/src/metadata.yaml
