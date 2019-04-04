@@ -4,6 +4,7 @@ PORT ?= 22
 DIR ?= /pandoc-template
 
 all: ctex ctex6in elegantbook epub release
+pdf: ctex ctex6in elegantbook
 
 ctex: 
 	panbook pdf
