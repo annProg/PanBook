@@ -44,6 +44,7 @@ $ panbook epub                  # 生成epub电子书
 $ panbook pdf                   # 生成pdf电子书
 $ panbook html                  # 生成html电子书
 $ panbook epub d                # 加d选项意为debug模式，仅生成一种代码高亮样式(epub和html格式有效)
+$ SRC=markdown panbook epub     # 使用环境变量
 ```
 
 之后在`src`目录进行写作, `src/images`目录存放图片
@@ -55,6 +56,7 @@ TPL         指定模板           elegantbook|ctex|epub|html5
 DEVICE      指定设备类型       mobile|kindle|pc  需要模板支持
 ELEGANT     elegantbook专用设置elegantbook选项，可设置语言模板(cn|en)，颜色主题(green|blue|cyan|plain)，章标题显示风格(hang|display)，比如  ELEGANT=cn,blue  即使用中文，蓝色主题编译
 CSS          指定epub自定义样式文件名，css应放置在对应模板目录下的css文件夹下
+SRC         默认SRC目录名为 src ，可以通过此环境变量更改
 ```
 
 ## 注意事项
