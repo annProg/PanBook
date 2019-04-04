@@ -93,6 +93,7 @@ function toeps()
 		new=`echo $item |sed -r "s/.$1$/.eps/g"`
 		bmeps $item $new
 	done
+	cd $cwd
 }
 
 function eps()
