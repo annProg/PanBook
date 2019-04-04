@@ -44,7 +44,7 @@ $ panbook epub                  # 生成epub电子书
 $ panbook pdf                   # 生成pdf电子书
 $ panbook html                  # 生成html电子书
 $ panbook epub d                # 加d选项意为debug模式，仅生成一种代码高亮样式(epub和html格式有效)
-$ panbook png2eps               # 将IMGDIR中的png图片转为eps供latex使用
+$ panbook eps                   # 将IMGDIR中的png或gif图片转为eps供latex使用
 $ SRC=markdown panbook epub     # 使用环境变量
 ```
 
