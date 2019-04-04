@@ -15,6 +15,9 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, strong, b, u, i, pre, c
 table
 {
   border-collapse:collapse;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 100%;
 }
 table, td, th
 {
@@ -46,23 +49,23 @@ h1, h2, h3, h4, h5, h6 {
   adobe-hyphenate: none;
 }
 h1 {
-  font-size: 220%;
-  margin-bottom: 1.5em;
+  font-size: 180%;
+  margin-bottom: 1.1em;
 }
 h2 {
-  font-size: 190%;
+  font-size: 150%;
 }
 h3 {
-  font-size: 160%;
+  font-size: 135%;
 }
 h4 {
-  font-size: 140%;
+  font-size: 120%;
 }
 h5 {
-  font-size: 130%;
+  font-size: 115%;
 }
 h6 {
-  font-size: 120%;
+  font-size: 110%;
 }
 hr {
   margin: 0 0 19px;
@@ -76,7 +79,7 @@ blockquote {
   border-left:10px solid #ccc;
   margin:1.5em 10px;
   padding:.5em 10px;
-  quotes:"\201C""\201D""\2018""\2019";
+  /*quotes:"\201C""\201D""\2018""\2019";*/
 }
 blockquote:before {
   color:#ccc;
@@ -88,6 +91,14 @@ blockquote:before {
 }
 blockquote p {
  display:inline;
+}
+
+blockquote ul {
+	padding-left: 50px;
+}
+
+blockquote ol {
+	padding-left: 50px;
 }
 /* End 引用样式 */
 
