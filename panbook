@@ -4,7 +4,8 @@ SCRIPTDIR=`cd $(dirname $0);pwd`
 ofile=`echo $cwd |awk -F '/' '{print $NF}'`
 DEBUG="false"
 BUILD="$cwd/build"
-WORKDIR="$cwd/src"
+SRC=`getEnv SRC "src"`
+WORKDIR="$cwd/$SRC"
 METADATA="$WORKDIR/metadata.yaml"
 IMGDIR="$WORKDIR/images"
 highlightStyle=(pygments kate monochrome espresso haddock tango zenburn breezedark)
@@ -57,7 +58,7 @@ function pdf()
 	# elegantbook 模板选项
 	getEnv ELEGANT "cn"
 	
-	# 复制src目录下资源文件到build目录
+	# 复制$SRC目录下资源文件到build目录
 	cp -rf $WORKDIR/* $BUILD
 	cd $BUILD
 	# 生成前言和后记
@@ -125,8 +126,8 @@ function epub()
 	merge="/tmp/epub-meta-"`echo $RANDOM$RANDOM$RANDOM$RANDOM`
 	cat $METADATA > $merge
 	echo -e "\n\n\n" >> $merge
-	cat $cwd/src/frontmatter.md.tmp >> $merge
-	mv $merge $cwd/src/frontmatter.md.tmp
+	cat $WORKDIR/frontmatter.md.tmp >> $merge
+	mv $merge $WORKDIR/frontmatter.md.tmp
 
 	for theme in ${highlightStyle[@]}
 	do
