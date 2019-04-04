@@ -91,7 +91,7 @@ function toeps()
 	cd $IMGDIR
 	for item in `ls *.$1`;do
 		new=`echo $item |sed -r "s/.$1$//g"`
-		convert $item $new.eps
+		/mingw64/bin/convert $item $new.eps
 		mv $new-0.eps $new.eps
 		rm -f $new-*.eps
 	done
