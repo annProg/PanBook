@@ -9,7 +9,7 @@ SCRIPTDIR=`cd $(dirname $0);pwd`
 ofile=`echo $cwd |awk -F '/' '{print $NF}'`
 DEBUG="false"
 BUILD="$cwd/build"
-SRC=`getEnv SRC "src"`
+getEnv SRC "src"
 WORKDIR="$cwd/$SRC"
 METADATA="$WORKDIR/metadata.yaml"
 IMGDIR="$WORKDIR/images"
