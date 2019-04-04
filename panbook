@@ -12,7 +12,7 @@ BUILD="$cwd/build"
 getEnv SRC "src"
 WORKDIR="$cwd/$SRC"
 METADATA="$WORKDIR/metadata.yaml"
-IMGDIR="$WORKDIR/images"
+getEnv IMGDIR "$WORKDIR/images"
 highlightStyle=(pygments kate monochrome espresso haddock tango zenburn breezedark)
 DATE=`date +%Y/%m/%d`
 DATETIME=`date +%Y/%m/%d\ %H:%M:%S`
@@ -77,10 +77,22 @@ function pdf()
 	#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
 	#sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
 	
+	# png格式图片编译报错，需要引用eps格式，使用bmeps转换
+	sed -i -r "s#(\includegraphics\{.*)?.png(\})#\1.eps\2#g" $TEX_OUTPUT
+	
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	
 	clean
+}
+
+function png2eps()
+{
+	cd $IMGDIR
+	for item in `ls *.png`;do
+		new=`echo $item |sed -r 's/.png$/.eps/g'`
+		bmeps $item $new
+	done
 }
 
 function pdf2jpg()

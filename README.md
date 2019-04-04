@@ -51,13 +51,14 @@ $ SRC=markdown panbook epub     # 使用环境变量
 
 ### 可用环境变量
 
-```
-TPL         指定模板           elegantbook|ctex|epub|html5
-DEVICE      指定设备类型       mobile|kindle|pc  需要模板支持
-ELEGANT     elegantbook专用设置elegantbook选项，可设置语言模板(cn|en)，颜色主题(green|blue|cyan|plain)，章标题显示风格(hang|display)，比如  ELEGANT=cn,blue  即使用中文，蓝色主题编译
-CSS          指定epub自定义样式文件名，css应放置在对应模板目录下的css文件夹下
-SRC         默认SRC目录名为 src ，可以通过此环境变量更改
-```
+| 环境变量 | 用途 |
+| ------ | ---- |
+|TPL     |    指定模板           elegantbook\|ctex\|epub\|html5 |
+DEVICE   |   指定设备类型       mobile\|kindle\|pc  需要模板支持|
+ELEGANT  |   elegantbook专用设置elegantbook选项，可设置语言模板(cn\|en)，颜色主题(green\|blue\|cyan\|plain)，章标题显示风格(hang\|display)，比如  ELEGANT=cn,blue  即使用中文，蓝色主题编译|
+CSS      |    指定epub自定义样式文件名，css应放置在对应模板目录下的css文件夹下|
+SRC      |   默认SRC目录名为 src ，可以通过此环境变量更改|
+IMGDIR   |   指定图片文件夹路径|
 
 ## 注意事项
 - 在Windows上使用`Pandoc`需要`Markdown`文件保存为`UTF-8`格式
