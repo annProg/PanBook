@@ -80,10 +80,33 @@ function pdf()
 	# gif格式图片编译报错，需要引用eps格式，需转换后使用
 	sed -i -r "s#(\includegraphics\{.*?).(gif)(\})#\1.eps\3#g" $TEX_OUTPUT
 	
+	# 网络图片需要替换为本地文件
+	sed -i -r "s#(\includegraphics\{)http(s)?://(.*)#\1$IMGDIR/\3#g" $TEX_OUTPUT
+	
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	
 	clean
+}
+
+# 保存网络图片至本地
+function saveimg() 
+{
+	cd $IMGDIR
+	for item in `ls $WORKDIR/*.md`;do
+		for url in `grep -E "^\!\[.*?\]\(http(s)?://.*\)" $item |awk -F"(" '{print $2}' |tr -d ')'`;do
+			wget -m -np $url
+			localpath=`echo $url |sed -r 's#http(s)?://##g'`
+			echo $localpath |grep -E "\.gif$" && r=0 || r=1
+			if [ $r -eq 0 ];then
+				new=`echo $localpath |sed -r "s/\.gif$//g"`
+				/mingw64/bin/convert $localpath $new.eps
+				mv $new-0.eps $new.eps 2>/dev/null
+				rm -f $new-*.eps
+			fi
+		done
+	done
+	cd $cwd
 }
 
 function toeps()
@@ -92,12 +115,13 @@ function toeps()
 	for item in `ls *.$1`;do
 		new=`echo $item |sed -r "s/.$1$//g"`
 		/mingw64/bin/convert $item $new.eps
-		mv $new-0.eps $new.eps
+		mv $new-0.eps $new.eps 2>/dev/null
 		rm -f $new-*.eps
 	done
 	cd $cwd
 }
 
+# 转换为eps格式
 function eps()
 {
 	toeps gif
@@ -186,6 +210,8 @@ function printhelp() {
 	echo -e "\tpanbook html        make html ebook"
 	echo -e "\tpanbook epub        make epub ebook"
 	echo -e "\tpanbook help        print help info"
+	echo -e "\tpanbook saveimg     save image url to local"
+	echo -e "\tpanbook eps         convert gif to eps"
 }
 
 case $# in
