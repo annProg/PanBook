@@ -77,8 +77,8 @@ function pdf()
 	#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
 	#sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
 	
-	# gif格式图片编译报错，需要引用png格式，需转换后使用
-	sed -i -r "s#(\includegraphics\{.*?).(gif)(\})#\1.png\3#g" $TEX_OUTPUT
+	# gif格式图片编译报错，需要引用eps格式，需转换后使用
+	sed -i -r "s#(\includegraphics\{.*?).(gif)(\})#\1.eps\3#g" $TEX_OUTPUT
 	
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
@@ -90,15 +90,16 @@ function toeps()
 {
 	cd $IMGDIR
 	for item in `ls *.$1`;do
-		new=`echo $item |sed -r "s/.$1$/.eps/g"`
-		bmeps $item $new
+		new=`echo $item |sed -r "s/.$1$//g"`
+		convert $item $new.eps
+		mv $new-0.eps $new.eps
+		rm -f $new-*.eps
 	done
 	cd $cwd
 }
 
 function eps()
 {
-	toeps png
 	toeps gif
 }
 
