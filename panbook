@@ -28,8 +28,14 @@ function init()
 	[ ! -d $IMGDIR ] && mkdir $IMGDIR
 	[ ! -d $cwd/templates ] && mkdir $cwd/templates
 	[ ! -d $cwd/fonts ] && mkdir $cwd/fonts
-	# IMGDIR 绝对路径
-	IMGDIR=`cd $IMGDIR && pwd`
+	# IMGDIR 相对路径
+	IMGDIRFULL=`cd $IMGDIR && pwd`
+	echo $IMGDIRFULL |grep -w $WORKDIR && r=0 || r=1
+	if [ $r -eq 0 ];then
+		IMGDIRRELATIVE=`echo $IMGDIRFULL|sed "s#$WORKDIR#.#g"`
+	else
+		IMGDIRRELATIVE=`echo $IMGDIRFULL|sed "s#$cwd#..#g"`
+	fi
 
 	cd $WORKDIR
 
@@ -84,7 +90,7 @@ function pdf()
 	sed -i -r "s#(\includegraphics\{.*?).(gif)(\})#\1.eps\3#g" $TEX_OUTPUT
 	
 	# 网络图片需要替换为本地文件
-	sed -i -r "s#(\includegraphics\{)http(s)?://(.*)#\1$IMGDIR/\3#g" $TEX_OUTPUT
+	sed -i -r "s#(\includegraphics\{)http(s)?://(.*)#\1$IMGDIRRELATIVE/\3#g" $TEX_OUTPUT
 	
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
