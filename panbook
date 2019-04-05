@@ -28,8 +28,11 @@ function init()
 	[ ! -d $IMGDIR ] && mkdir $IMGDIR
 	[ ! -d $cwd/templates ] && mkdir $cwd/templates
 	[ ! -d $cwd/fonts ] && mkdir $cwd/fonts
+	# IMGDIR 绝对路径
+	IMGDIR=`cd $IMGDIR && pwd`
+
 	cd $WORKDIR
-	
+
 	# 模板, 支持用户自定义模板
 	[ -d $SCRIPTDIR/templates/$TPL ] && cp -rfu $SCRIPTDIR/templates/$TPL/* $BUILD
 	[ -d $cwd/templates/$TPL ] && cp -rfu $cwd/templates/$TPL/* $BUILD 2>/dev/null
