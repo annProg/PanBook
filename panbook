@@ -17,6 +17,9 @@ highlightStyle=(pygments kate monochrome espresso haddock tango zenburn breezeda
 DATE=`date +%Y/%m/%d`
 DATETIME=`date +%Y/%m/%d\ %H:%M:%S`
 
+CMD_CONVERT="convert"
+[ "`uname -o`"x == "Msys"x ] && CMD_CONVERT="/mingw64/bin/convert"
+
 function meta() {
 	cat $SCRIPTDIR/src/metadata.yaml
 }
@@ -109,7 +112,7 @@ function saveimg()
 			echo $localpath |grep -E "\.gif$" && r=0 || r=1
 			if [ $r -eq 0 ];then
 				new=`echo $localpath |sed -r "s/\.gif$//g"`
-				/mingw64/bin/convert $localpath $new.eps
+				$CMD_CONVERT $localpath $new.eps
 				mv $new-0.eps $new.eps 2>/dev/null
 				rm -f $new-*.eps
 			fi
@@ -123,7 +126,7 @@ function toeps()
 	cd $IMGDIR
 	for item in `ls *.$1`;do
 		new=`echo $item |sed -r "s/.$1$//g"`
-		/mingw64/bin/convert $item $new.eps
+		$CMD_CONVERT $item $new.eps
 		mv $new-0.eps $new.eps 2>/dev/null
 		rm -f $new-*.eps
 	done
