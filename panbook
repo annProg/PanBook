@@ -81,13 +81,16 @@ function compatible()
 				if [ "$stype" == "exclude" ];then
 					rm -f $item
 				else
-					cat $item >> $stype.md
+					cat $item >> $newName
 					echo -e "\n\n" >> $newName
 				fi
+				
+				# 被删除及写入frontmatter和backmatter的源码，需要从BODY中排除
+				BODY=`echo $BODY |sed -r "s/($item | $item)//g"`
+				[ $stype == "frontmatter" ] && FRONTMATTER=$newName
+				[ $stype == "backmatter" ] && BACKMATTER=$newName
+				[ $stype == "body" ] && BODY=$newName				
 			done
-			[ $stype == "frontmatter" ] && FRONTMATTER=$newName
-			[ $stype == "backmatter" ] && BACKMATTER=$newName
-			[ $stype == "body" ] && BODY=$newName
 		done
 	fi
 }
@@ -199,6 +202,8 @@ function html()
 		HTML_OUTPUT="$BUILD/$ofile-$TPL-$theme.html"
 		pandoc --self-contained $FRONTMATTER $BODY $BACKMATTER -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
 	done	
+	
+	clean
 }
 
 function epub()
@@ -227,6 +232,8 @@ function epub()
 		EPUB_OUTPUT="$BUILD/$ofile-$TPL-$theme.epub"
 		pandoc $FRONTMATTER $BODY $BACKMATTER -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl $addCss --metadata date="$DATETIME"
 	done
+	
+	clean
 }
 
 function clean() {
