@@ -50,12 +50,46 @@ function init()
 	cp -rfu $SCRIPTDIR/fonts $BUILD
 	[ -d $cwd/fonts ] && cp -rfu $cwd/fonts/* $BUILD/fonts/ 2>/dev/null
 	
+	# 文件名规范
+	FRONTMATTER="frontmatter.md"
+	BACKMATTER="backmatter.md"
+	chapters=`ls *.md |grep -vE "$FRONTMATTER|$BACKMATTER" 2>/dev/null`
+	BODY="$chapters"
+	
 	# 前言和后记部分
-	[ ! -f frontmatter.md ] && touch frontmatter.md
-	[ ! -f backmatter.md ] && touch backmatter.md
+	[ ! -f $FRONTMATTER ] && touch $FRONTMATTER
+	[ ! -f $BACKMATTER ] && touch $BACKMATTER
 	[ ! -f metadata.yaml ] && meta > metadata.yaml
-	chapters=`ls *.md |grep -vE "frontmatter|backmatter" 2>/dev/null`
 	[ "$DEBUG"x = "true"x ] && highlightStyle=(tango)
+	
+	# 复制$SRC目录下资源文件到build目录
+	cp -rf $WORKDIR/* $BUILD
+	cd $BUILD	
+}
+
+# 兼容不规范源码
+function compatible()
+{	
+	cd $BUILD
+	COMPATIBLE="compatible.conf"
+	PREFIX="pandoc-template-compatible-"
+	if [ -f $COMPATIBLE ];then
+		for stype in frontmatter backmatter body exclude;do
+			newName=$PREFIX$stype.md
+			echo > $newName
+			for item in `grep -E "$stype$" $COMPATIBLE |awk '{print $1}'`;do
+				if [ "$stype" == "exclude" ];then
+					rm -f $item
+				else
+					cat $item >> $stype.md
+					echo -e "\n\n" >> $newName
+				fi
+			done
+			[ $stype == "frontmatter" ] && FRONTMATTER=$newName
+			[ $stype == "backmatter" ] && BACKMATTER=$newName
+			[ $stype == "body" ] && BODY=$newName
+		done
+	fi
 }
 
 function pdf()
@@ -70,18 +104,19 @@ function pdf()
 	# elegantbook 模板选项
 	getEnv ELEGANT "cn"
 	
-	# 复制$SRC目录下资源文件到build目录
-	cp -rf $WORKDIR/* $BUILD
+	# 兼容性处理
+	compatible
+	
 	cd $BUILD
 	# 生成前言和后记
-	pandoc -t latex frontmatter.md --top-level-division=chapter --listings -o frontmatter.tex
-	pandoc -t latex backmatter.md --top-level-division=chapter --listings -o backmatter.tex
+	pandoc -t latex $FRONTMATTER --top-level-division=chapter --listings -o frontmatter.tex
+	pandoc -t latex $BACKMATTER --top-level-division=chapter --listings -o backmatter.tex
 	
 	source $SCRIPTDIR/config.default		
 	[ -f $cwd/config ] && source $cwd/config
 	
 	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
-	pandoc $chapters -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today"
+	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today"
 	
 	#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
 	sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
@@ -141,32 +176,29 @@ function eps()
 
 function pdf2jpg()
 {
-	for id in $chapters frontmatter.md backmatter.md;do
-		cp $id $id.tmp
-		sed -i -r 's/(!\[.*?\]\(.*?)(\.pdf\))/\1.jpg)/g' $id.tmp
+	cd $BUILD
+	for id in $BODY $FRONTMATTER $BACKMATTER;do
+		sed -i -r 's/(!\[.*?\]\(.*?)(\.pdf\))/\1.jpg)/g' $id
 	done
-	
-	tmp_chapters="frontmatter.md.tmp "`ls *.md.tmp |grep -vE "frontmatter.md.tmp|backmatter.md.tmp"`" backmatter.md.tmp"
 }
 
 function html()
 {	
 	getEnv TPL "html5"
 	init
+	# 兼容性处理
+	compatible
 	pdf2jpg # html中使用jpg图片，因此需要为pdf格式的插图准备同名jpg
+	
+	cd $BUILD
 	for theme in ${highlightStyle[@]}
 	do
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
 	
 		HTML_OUTPUT="$BUILD/$ofile-$TPL-$theme.html"
-		pandoc --self-contained $tmp_chapters -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
-		#sed -i "s/pdf/jpg/g" $HTML_OUTPUT
-	done
-	
-	for id in $tmp_chapters;do
-		rm -f $id;
-	done
+		pandoc --self-contained $FRONTMATTER $BODY $BACKMATTER -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
+	done	
 }
 
 function epub()
@@ -177,25 +209,24 @@ function epub()
 	[ "$CSS"x != ""x ] && addCss="--css=$BUILD/css/$CSS.css"
 	
 	init
+	# 兼容性处理
+	compatible
 	pdf2jpg		
 
+	cd $BUILD
 	merge="/tmp/epub-meta-"`echo $RANDOM$RANDOM$RANDOM$RANDOM`
 	cat $METADATA > $merge
 	echo -e "\n\n\n" >> $merge
-	cat $WORKDIR/frontmatter.md.tmp >> $merge
-	mv $merge $WORKDIR/frontmatter.md.tmp
+	cat $FRONTMATTER >> $merge
+	mv $merge $FRONTMATTER
 
 	for theme in ${highlightStyle[@]}
 	do
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
 		EPUB_OUTPUT="$BUILD/$ofile-$TPL-$theme.epub"
-		pandoc $tmp_chapters -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl $addCss --metadata date="$DATETIME"
+		pandoc $FRONTMATTER $BODY $BACKMATTER -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl $addCss --metadata date="$DATETIME"
 	done
-	
-	for id in $tmp_chapters;do
-		rm -f $id;
-	done	
 }
 
 function clean() {
