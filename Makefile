@@ -1,10 +1,10 @@
 SERVER ?= api.annhe.net
 USER ?= root
 PORT ?= 22
-DIR ?= /pandoc-template
+DIR ?= /PanBook
 
 OWNER ?= annProg
-REPO ?= pandoc-template
+REPO ?= PanBook
 TAG ?= $(shell git rev-parse --short HEAD)
 
 all: ctex ctex6in elegantbook epub online
@@ -36,8 +36,8 @@ upload:
 	done
 
 online:
-	scp -P $(PORT) build/pandoc-template-ctex-pc.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/pandoc-template-ctex-mobile.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/pandoc-template-elegantbook-pc.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/pandoc-template-epub.epub $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO)-ctex-pc.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO)-ctex-mobile.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO)-elegantbook-pc.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO).epub $(USER)@$(SERVER):$(DIR)
 	

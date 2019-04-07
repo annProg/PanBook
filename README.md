@@ -3,10 +3,10 @@
 
 查看电子书效果：
 
-- [ElegantBook模板-pc](https://api.annhe.net/pandoc-template/pandoc-template-elegantbook-pc.pdf)
-- [Ctex模板-pc](https://api.annhe.net/pandoc-template/pandoc-template-ctex-pc.pdf)
-- [Ctex模板-mobile](https://api.annhe.net/pandoc-template/pandoc-template-ctex-mobile.pdf)
-- [Epub模板](https://api.annhe.net/pandoc-template/pandoc-template-epub.epub)
+- [ElegantBook模板-pc](https://api.annhe.net/PanBook/PanBook-elegantbook-pc.pdf)
+- [Ctex模板-pc](https://api.annhe.net/PanBook/PanBook-ctex-pc.pdf)
+- [Ctex模板-mobile](https://api.annhe.net/PanBook/PanBook-ctex-mobile.pdf)
+- [Epub模板](https://api.annhe.net/PanBook/PanBook-epub.epub)
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。
@@ -23,7 +23,7 @@
 
 ```
 $ cd /d/dev
-$ git clone https://github.com/annProg/pandoc-template
+$ git clone https://github.com/annProg/PanBook
 ```
 
 ### 设置环境变量
@@ -31,7 +31,7 @@ $ git clone https://github.com/annProg/pandoc-template
 
 ```
 $ tail -n 1 ~/.bashrc
-export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/pandoc-template:/c/Users/myname/AppData/Local/Pandoc
+export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```
 
 ### 开始使用
