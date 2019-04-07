@@ -104,7 +104,7 @@ $endfor$
 $if(equote)$
 \equote{$equote$}
 $else$
-\equote{使用pandoc-template编译}
+\equote{使用PanBook编译}
 $endif$
 
 $if(logo)$
@@ -141,7 +141,7 @@ $if(copyright)$
 
 \noindent Copyright \copyright\ \the\year\  $if(author)$$for(author)$$author$$sep$, $endfor$$endif$\\ % Copyright notice
 
-\noindent \textsc{Published by \LaTeX}\\ % Publisher
+\noindent \textsc{Published by PanBook}\\ % Publisher
 $if(homepage)$
 \noindent \textsc{$homepage$}\\ % URL
 $endif$
