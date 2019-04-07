@@ -144,6 +144,16 @@ $endfor$
 %\usepackage{lastpage}
 \pagestyle{fancy}
 
+% 优化不同设备封面显示
+\newcommand{\titlepc}{\Huge}
+\newcommand{\subtitlepc}{\Large}
+\newcommand{\titlemobile}{\Large}
+\newcommand{\subtitlemobile}{\large}
+\newcommand{\titlekindle}{\Large}
+\newcommand{\subtitlekindle}{\large}
+\newcommand{\vspacepc}{\vspace{.00\textheight}}
+\newcommand{\vspacemobile}{\vspace{.05\textheight}}
+\newcommand{\vspacekindle}{\vspace{.05\textheight}}
 
 \begin{document}
 \frontmatter
@@ -161,18 +171,31 @@ $else$
 	\vspace{.18\textheight}
 	\begin{center}
 	$if(title)$
-	{\Huge\bfseries $title$\par}
+		$if(device)$
+			{\title$device$\bfseries $title$\par}
+		$else$
+			{\Large\bfseries $title$\par}
+		$endif$
 	$endif$
 	\vspace{1cm}
 	$if(subtitle)$
-	{\Large $subtitle$\par}
+		$if(device)$
+			{\subtitle$device$ $subtitle$\par}
+		$else$
+			{\large $subtitle$\par}
+		$endif$
 	$endif$
 	\vspace{2.5cm}
 	$if(author)$
 		$for(author)$$author$$sep$ \par $endfor$ % Author name
 	$endif$
+	\vfill\centering{使用 PanBook 编译 \par \today\par}
+	$if(device)$
+		\vspace$device$
+	$else$
+		\vspace{.05\textheight}
+	$endif$
 	\end{center}
-	\vfill\centering 使用 PanBook 编译 \par \today
 $endif$
 \end{titlepage}
 
