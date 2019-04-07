@@ -12,6 +12,7 @@
 \usepackage[yyyymmdd,hhmmss]{datetime}
 \ctexset{today=small}
 \usepackage{geometry} 		% 設定邊界
+\usepackage{wallpaper}
 
 % 设备类型
 \newcommand{\devicemobile}{
@@ -122,10 +123,6 @@ $if(graphics)$
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
 \makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
 
 $if(verbatim-in-note)$
@@ -150,29 +147,43 @@ $endfor$
 
 \begin{document}
 \frontmatter
+
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
+\begin{titlepage}
+  \thispagestyle{empty}
+  \noindent\fboxsep=0pt
+$if(cover)$
+  \ThisTileWallPaper{\paperwidth}{\paperheight}{$cover$}
+$else$
+  \ThisTileWallPaper{\paperwidth}{\paperheight}{$if(background)$$background$$else$images/29.png$endif$}
+	\vspace{.18\textheight}
+	\begin{center}
+	$if(title)$
+	{\Huge\bfseries $title$\par}
+	$endif$
+	\vspace{1cm}
+	$if(subtitle)$
+	{\Large $subtitle$\par}
+	$endif$
+	\vspace{2.5cm}
+	$if(author)$
+		$for(author)$$author$$sep$ \par $endfor$ % Author name
+	$endif$
+	\end{center}
+	\vfill\centering 使用 PanBook 编译 \par \today
+$endif$
+\end{titlepage}
 
-\begingroup
-\thispagestyle{empty}
-\begin{tikzpicture}[remember picture,overlay]
-\node[inner sep=0pt] (background) at (current page.center) {\includegraphics[width=\paperwidth]{Pictures/background}};
-$if(title)$
-\draw (current page.center) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]
-{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}
-{\centering $title$\\[13pt] % Book title
+$if(graphics)$
+% 这条命令要放在封面后面，否则封面不能铺满整页
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
-$if(subtitle)$
-{\Large $subtitle$}\\[15pt] % Subtitle
-$endif$
-$if(author)$
-{\large $for(author)$$author$$sep$, $endfor$} % Author name
-$endif$
-}};
-\end{tikzpicture}
-\vfill
-\endgroup
+
 \addcontentsline{toc}{chapter}{封面}
 
 %----------------------------------------------------------------------------------------
@@ -185,7 +196,7 @@ $if(copyright)$
 
 \noindent Copyright \copyright\ \the\year\  $if(author)$$for(author)$$author$$sep$, $endfor$$endif$\\ % Copyright notice
 
-\noindent \textsc{Published by \LaTeX}\\ % Publisher
+\noindent \textsc{Published by PanBook}\\ % Publisher
 $if(homepage)$
 \noindent \textsc{$homepage$}\\ % URL
 $endif$
