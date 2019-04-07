@@ -109,10 +109,6 @@ $endif$
             linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
             pdfborder={0 0 0}}
 \urlstyle{same}  % don't use monospace font for urls
-$if(links-as-notes)$
-% Make links footnotes instead of hotlinks:
-\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
-$endif$
 
 $if(tables)$
 \usepackage{longtable,booktabs}
@@ -219,7 +215,7 @@ $if(copyright)$
 
 \noindent Copyright \copyright\ \the\year\  $if(author)$$for(author)$$author$$sep$, $endfor$$endif$\\ % Copyright notice
 
-\noindent \textsc{Published by PanBook}\\ % Publisher
+\noindent \textsc{Published by \href{https://github.com/annProg/PanBook}{PanBook}}\\ % Publisher
 $if(homepage)$
 \noindent \textsc{$homepage$}\\ % URL
 $endif$
@@ -227,6 +223,12 @@ $endif$
 \noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\ % License information
 
 \noindent \textit{最后编译日期, \today\ \currenttime } % Printing/edition date
+$endif$
+
+$if(links-as-notes)$
+% 放到copyright后面，以便 published by PanBook不显示脚注
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
 $endif$
 
 $if(showtitle)$

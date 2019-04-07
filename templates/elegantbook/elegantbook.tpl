@@ -141,7 +141,7 @@ $if(copyright)$
 
 \noindent Copyright \copyright\ \the\year\  $if(author)$$for(author)$$author$$sep$, $endfor$$endif$\\ % Copyright notice
 
-\noindent \textsc{Published by PanBook}\\ % Publisher
+\noindent \textsc{Published by \href{https://github.com/annProg/PanBook}{PanBook}}\\ % Publisher
 $if(homepage)$
 \noindent \textsc{$homepage$}\\ % URL
 $endif$
