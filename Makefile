@@ -11,7 +11,7 @@ all: ctex ctex6in elegantbook epub online
 pdf: ctex ctex6in elegantbook
 
 ctex: 
-	panbook pdf
+	COVER=r panbook pdf
 ctex6in: 
 	DEVICE=mobile panbook pdf
 elegantbook: 

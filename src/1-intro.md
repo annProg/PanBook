@@ -18,7 +18,7 @@
 
 ```
 $ cd /d/dev
-$ git clone https://github.com/annProg/pandoc-template
+$ git clone https://github.com/annProg/PanBook
 ```
 
 ### 设置环境变量
@@ -26,7 +26,7 @@ $ git clone https://github.com/annProg/pandoc-template
 
 ```
 $ tail -n 1 ~/.bashrc
-export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/pandoc-template:/c/Users/myname/AppData/Local/Pandoc
+export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```
 
 
@@ -54,6 +54,7 @@ ELEGANT  |   elegantbook专用设置elegantbook选项，可设置语言模板(cn
 CSS      |    指定epub自定义样式文件名，css应放置在对应模板目录下的css文件夹下|
 SRC      |   默认SRC目录名为 src ，可以通过此环境变量更改|
 IMGDIR   |   指定图片文件夹路径|
+COVER    | 为`ctex`模板指定封面背景图片编号（`1-60`或者用`r`表示随机）|
 
 : 可用环境变量\label{tab:env}
 
@@ -125,11 +126,11 @@ date: \today     # 日期
 copyright: true  # 是否生成版权页
 lof: true        # 是否生成插图列表页
 lot: true        # 是否生成表格列表页
-homepage: https://github.com/annProg/pandoc-template
+homepage: https://github.com/annProg/PanBook
 identifier:                      # epub用
   - scheme: DOI
     text: doi:10.234234.234/33
-publisher: pandoc-template       # epub用
+publisher: PanBook       # epub用
 rights: © 2017 An He, CC BY-NC   # epub用
 cover-image: images/cover.jpg    # epub用
 header-includes:

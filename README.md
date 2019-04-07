@@ -60,6 +60,7 @@ ELEGANT  |   elegantbook专用设置elegantbook选项，可设置语言模板(cn
 CSS      |    指定epub自定义样式文件名，css应放置在对应模板目录下的css文件夹下|
 SRC      |   默认SRC目录名为 src ，可以通过此环境变量更改|
 IMGDIR   |   指定图片文件夹路径|
+COVER    | 为`ctex`模板指定封面背景图片编号（`1-60`或者用`r`表示随机）|
 
 ## 注意事项
 - 在Windows上使用`Pandoc`需要`Markdown`文件保存为`UTF-8`格式

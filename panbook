@@ -110,6 +110,14 @@ function pdf()
 	# 兼容性处理
 	compatible
 	
+	# ctex模板随机选用封面背景
+	getEnv COVER "29"
+	if [ "$COVER"x == "r"x ];then
+		background="images/$(($RANDOM%60)).png"
+	else
+		background="images/$COVER.png"
+	fi
+	
 	cd $BUILD
 	# 生成前言和后记
 	pandoc -t latex $FRONTMATTER --top-level-division=chapter --listings -o frontmatter.tex
@@ -119,7 +127,7 @@ function pdf()
 	[ -f $cwd/config ] && source $cwd/config
 	
 	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
-	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today"
+	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background
 	
 	#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
 	sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
