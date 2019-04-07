@@ -72,7 +72,7 @@ function compatible()
 {	
 	cd $BUILD
 	COMPATIBLE="compatible.conf"
-	PREFIX="pandoc-template-compatible-"
+	PREFIX="PanBook-compatible-"
 	if [ -f $COMPATIBLE ];then
 		for stype in frontmatter backmatter body exclude;do
 			newName=$PREFIX$stype.md
