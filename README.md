@@ -75,10 +75,11 @@ COVER    | 为`ctex`模板指定封面背景图片编号（`1-60`或者用`r`表
 
 使用本项目编译的书籍
 
-- [人人都能用英语 李笑来](https://github.com/annProg/everyone-can-use-english)
-- [把时间当作朋友 李笑来](https://github.com/annProg/time-as-a-friend/releases)
-- [TOEFL iBT高分作文 李笑来](https://github.com/annProg/twe185/releases)
-- [翻译漫谈 余晟](https://github.com/annProg/chitchat-on-translation/releases)
+- [自学是门手艺 李笑来](https://github.com/pandoc-ebook/the-craft-of-selfteaching)
+- [人人都能用英语 李笑来](https://github.com/pandoc-ebook/everyone-can-use-english)
+- [把时间当作朋友 李笑来](https://github.com/pandoc-ebook/time-as-a-friend/releases)
+- [TOEFL iBT高分作文 李笑来](https://github.com/pandoc-ebook/twe185/releases)
+- [翻译漫谈 余晟](https://github.com/pandoc-ebook/chitchat-on-translation/releases)
 
 ## QQ群
 欢迎加入QQ群交流
