@@ -6,7 +6,7 @@
 - [ElegantBook模板-pc](https://api.annhe.net/PanBook/PanBook-elegantbook-pc.pdf)
 - [Ctex模板-pc](https://api.annhe.net/PanBook/PanBook-ctex-pc.pdf)
 - [Ctex模板-mobile](https://api.annhe.net/PanBook/PanBook-ctex-mobile.pdf)
-- [Epub模板](https://api.annhe.net/PanBook/PanBook-epub.epub)
+- [Epub模板](https://api.annhe.net/PanBook/PanBook.epub)
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。

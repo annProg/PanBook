@@ -13,7 +13,7 @@ pdf: ctex ctex6in elegantbook
 ctex: 
 	COVER=r panbook pdf
 ctex6in: 
-	DEVICE=mobile panbook pdf
+	DEVICE=mobile COVER=r panbook pdf
 elegantbook: 
 	TPL=elegantbook panbook pdf
 epub:
