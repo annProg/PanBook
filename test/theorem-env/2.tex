@@ -1,0 +1,57 @@
+\documentclass{ctexbook}
+\usepackage[most]{tcolorbox}
+\definecolor{main}{RGB}{50,50,50}%
+\definecolor{second}{RGB}{50,50,50}%
+\definecolor{third}{RGB}{50,50,50}%
+
+\tcbset{
+    common/.style={
+        fontupper=\itshape,
+        lower separated=false,
+        coltitle=white,
+        colback=gray!10,
+        fonttitle=\bfseries,
+        enhanced,
+        breakable,
+        top=8pt,
+        before skip=8pt,
+        attach boxed title to top left={yshift=-0.11in,xshift=0.15in},
+        boxed title style={boxrule=0pt,colframe=white,arc=0pt,outer arc=0pt},
+        % separator sign={:},
+    },
+    defstyle/.style={
+        common,
+        colframe=main,  
+        colbacktitle=main, 
+        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{main}{$\clubsuit$}}; }
+    },
+    thmstyle/.style={
+        common,
+        colframe=second,  
+        colbacktitle=second, 
+        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{second}{$\heartsuit$}}; }
+    },
+    propstyle/.style={
+        common,
+        colframe=third,  
+        colbacktitle=third, 
+        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{third}{$\spadesuit$}}; }
+    },
+}
+
+\newtcbtheorem[auto counter,number within=chapter]{definition}{定义}{defstyle}{def}
+\newtcbtheorem[auto counter,number within=chapter]{theorem}{定理}{thmstyle}{thm}
+\newtcbtheorem[auto counter,number within=chapter]{proposition}{命题}{propstyle}{pro}
+\newtcbtheorem[auto counter,number within=chapter]{corollary}{推论}{thmstyle}{cor}
+\newtcbtheorem[auto counter,number within=chapter]{lemma}{引理}{thmstyle}{lem}
+
+\begin{document}
+
+请看定理\ref{thm:mytest}
+
+\begin{theorem}{我的定理}{mytest}
+测试定理 \\
+Test Theorem
+\end{theorem}
+
+\end{document}
