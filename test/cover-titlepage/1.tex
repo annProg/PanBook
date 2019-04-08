@@ -1,0 +1,35 @@
+% https://tex.stackexchange.com/questions/85904/showcase-of-beautiful-title-page-done-in-tex
+\documentclass{ctexbook}
+\usepackage[T1]{fontenc}
+\usepackage{wallpaper}
+
+\newlength{\drop}
+
+\begin{document}
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \noindent\fboxsep=0pt
+    \ThisTileWallPaper{\paperwidth}{\paperheight}{../../templates/ctex/images/29.png}
+
+    %\drop=0.2\textheight
+    \centering
+    %\vspace*{\baselineskip}
+	\vspace{.18\textheight}
+    %\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+    %\rule{\textwidth}{0.4pt}\\[\baselineskip]
+    {\Huge PanBook项目使用手册}\\[0.2\baselineskip]
+    %\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+    %\rule{\textwidth}{1.6pt}\\[\baselineskip]
+	\vspace{1cm}
+	{\Large 用Markdown和Pandoc写作}
+    %\scshape
+    %\par Location, date from--to\par
+	\par
+    \vspace*{3cm}
+    {\Large An He\par}
+    %{\itshape Organisation \\ Address\par}
+    \vfill
+    {\scshape \today} \\
+    {\small 使用PanBook编译}\par
+  \end{titlepage}
+\end{document}
