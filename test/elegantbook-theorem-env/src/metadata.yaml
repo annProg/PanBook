@@ -18,5 +18,4 @@ cover-image: images/cover.png    # epub用
 header-includes:
   - \usepackage{cleveref}
   - \usepackage{float}
-  - \newtheorem{theorem}{定理}
 ...
