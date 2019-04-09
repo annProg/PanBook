@@ -164,10 +164,10 @@ function pdf()
 	source $SCRIPTDIR/config.default		
 	[ -f $cwd/config ] && source $cwd/config
 	
-	[ "$TPL"x == "latex"x ] && DEFAULT="-V CJKmainfont=$CJK -V documentclass=ctexbook" || DEFAULT=""
+	[ "$TPL"x == "latex"x ] && DEFAULT="-V CJKmainfont=$CJK -V documentclass=ctexbook -H listings-set.tex" || DEFAULT=""
 	
 	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
-	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA $TEMPLATE -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background $DEFAULT
+	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS -B frontmatter.tex -A backmatter.tex --metadata-file=$METADATA $TEMPLATE -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background $DEFAULT
 	
 	#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
 	sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
