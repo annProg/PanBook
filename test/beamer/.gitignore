@@ -1,0 +1,8 @@
+*.pdf
+*.aux
+*.gz
+*.toc
+*.log
+*.out
+build
+*.png
