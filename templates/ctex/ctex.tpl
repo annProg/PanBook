@@ -1,5 +1,4 @@
 \documentclass[fancyhdr,bookmark]{ctexbook}
-\setCJKmainfont{SimSun}
 \setmainfont{DejaVu Sans} 	% 設定英文字型
 \setromanfont{DejaVu Sans} 	% 字型
 \setmonofont{DejaVu Sans Mono}
