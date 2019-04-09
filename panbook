@@ -136,6 +136,7 @@ function compileStatus() {
 function pdf()
 {
 	getEnv TPL "ctex"
+	getEnv DOCUMENT "ctexbook"
 	init  # 首先初始化
 	
 	# 判断设备类型
@@ -163,7 +164,7 @@ function pdf()
 	source $SCRIPTDIR/config.default		
 	[ -f $cwd/config ] && source $cwd/config
 	
-	[ "$TPL"x == "latex"x ] && DEFAULT="-V documentclass=ctexbook -H listings-set.tex -V classoption=fancyhdr -V pagestyle=fancy -V geometry=top=1in -V geometry=inner=1in -V geometry=outer=1in -V geometry=bottom=1in -V geometry=headheight=3ex -V geometry=headsep=2ex" || DEFAULT=""
+	[ "$TPL"x == "latex"x ] && DEFAULT="-V documentclass=$DOCUMENT -H listings-set.tex -V classoption=fancyhdr -V pagestyle=fancy -V geometry=top=1in -V geometry=inner=1in -V geometry=outer=1in -V geometry=bottom=1in -V geometry=headheight=3ex -V geometry=headsep=2ex" || DEFAULT=""
 	
 	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
 	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS -B frontmatter.tex -A backmatter.tex --metadata-file=$METADATA $TEMPLATE -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background $DEFAULT
