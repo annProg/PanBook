@@ -50,6 +50,9 @@ function init()
 	cp -rfu $SCRIPTDIR/fonts $BUILD
 	[ -d $cwd/fonts ] && cp -rfu $cwd/fonts/* $BUILD/fonts/ 2>/dev/null
 	
+	# 此时还未复制书籍源码，build目录中的 template或者font中包含的 .md 文件应该被删除
+	rm -f $BUILD/*.md
+	
 	# 文件名规范
 	FRONTMATTER="frontmatter.md"
 	BACKMATTER="backmatter.md"
