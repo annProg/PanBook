@@ -317,8 +317,8 @@ function beamer() {
 	cd $BUILD
 	OUTPUT="$BUILD/$ofile-$TPL.pdf"
 	# output tex for debug
-	pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today"
-	pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today"
+	pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
+	pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
 	compileStatus beamer
 	
 	clean
