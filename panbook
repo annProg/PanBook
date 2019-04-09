@@ -164,7 +164,7 @@ function pdf()
 	source $SCRIPTDIR/config.default		
 	[ -f $cwd/config ] && source $cwd/config
 	
-	[ "$TPL"x == "default-latex"x ] && DEFAULT="-V CJKmainfont=$CJK -V documentclass=ctexbook" || DEFAULT=""
+	[ "$TPL"x == "latex"x ] && DEFAULT="-V CJKmainfont=$CJK -V documentclass=ctexbook" || DEFAULT=""
 	
 	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
 	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA $TEMPLATE -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background $DEFAULT
