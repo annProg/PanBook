@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function getEnv() {
-	env |grep -w $1 || eval $1=$2
+	env |grep -w $1 &>/dev/null|| eval $1=$2
 }
 
 cwd=`pwd`
@@ -24,6 +24,21 @@ function meta() {
 	cat $SCRIPTDIR/src/metadata.yaml
 }
 
+function info() {
+	echo -e "\033[43;34m[INFO] $1\033[0m"
+}
+function note() {
+	echo -e "\033[32m[NOTE] $1\033[0m"
+}
+function warn() {
+	echo -e "\033[33m[WARN] $1\033[0m"
+}
+function error() {
+	echo -e "\033[31m[ERRO] $1\033[0m"
+}
+
+info "Welcome to PanBook!"
+
 function init()
 {
 	[ ! -d $BUILD ] && mkdir $BUILD
@@ -33,7 +48,8 @@ function init()
 	[ ! -d $cwd/fonts ] && mkdir $cwd/fonts
 	# IMGDIR 相对路径
 	IMGDIRFULL=`cd $IMGDIR && pwd`
-	echo $IMGDIRFULL |grep -w $WORKDIR && r=0 || r=1
+	echo $IMGDIRFULL |grep -w $WORKDIR &>/dev/null && r=0 || r=1
+	note "IMGDIR=$IMGDIRFULL"
 	if [ $r -eq 0 ];then
 		IMGDIRRELATIVE=`echo $IMGDIRFULL|sed "s#$WORKDIR#.#g"`
 	else
@@ -67,7 +83,10 @@ function init()
 	
 	# 复制$SRC目录下资源文件到build目录
 	cp -rf $WORKDIR/* $BUILD
-	cd $BUILD	
+	cd $BUILD
+	
+	note "Template is: $TPL"
+	templateError
 }
 
 # 兼容不规范源码
@@ -98,11 +117,26 @@ function compatible()
 	fi
 }
 
+function templateError() {
+	# 指定template不存在时用默认模板编译
+	TEMPLATE="--template=$cwd/build/$TPL.tpl"
+	[ ! -f $cwd/build/$TPL.tpl ] && error "Template $TPL not found." && exit 1 #TEMPLATE="-V CJKmainfont=$CJK -V documentclass=ctexbook"	
+}
+
+function compileStatus() {
+	status=$?
+	note "$1 Compile status: $status"
+	if [ $status -ne 0 ];then
+		warn "$1 Compile status is not 0. Please Check. For pdf output, you may add VERBOSE=true to see more output"
+	else
+		note "$1 Compile SUCCESSFUL"
+	fi
+}
+
 function pdf()
 {
 	getEnv TPL "ctex"
 	getEnv CJK "SimSun"
-	echo $TPL
 	init  # 首先初始化
 	
 	# 判断设备类型
@@ -130,12 +164,10 @@ function pdf()
 	source $SCRIPTDIR/config.default		
 	[ -f $cwd/config ] && source $cwd/config
 	
-	# 指定template不存在时用默认模板编译
-	TEMPLATE="--template=$cwd/build/$TPL.tpl"
-	[ ! -f $cwd/build/$TPL.tpl ] && TEMPLATE="-V CJKmainfont=$CJK -V documentclass=ctexbook"
+	[ "$TPL"x == "default-latex"x ] && DEFAULT="-V CJKmainfont=$CJK -V documentclass=ctexbook" || DEFAULT=""
 	
 	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
-	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA $TEMPLATE -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background
+	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA $TEMPLATE -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background $DEFAULT
 	
 	#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
 	sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
@@ -151,6 +183,7 @@ function pdf()
 	
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
+	compileStatus PDF
 	
 	clean
 }
@@ -216,7 +249,8 @@ function html()
 		[ -f $cwd/config ] && source $cwd/config
 	
 		HTML_OUTPUT="$BUILD/$ofile-$TPL-$theme.html"
-		pandoc --self-contained $FRONTMATTER $BODY $BACKMATTER -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl
+		pandoc --self-contained $FRONTMATTER $BODY $BACKMATTER -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA $TEMPLATE
+		compileStatus HTML
 	done	
 	
 	clean
@@ -243,10 +277,14 @@ function epub()
 
 	for theme in ${highlightStyle[@]}
 	do
+		note "Epub compile theme: $theme"
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
 		EPUB_OUTPUT="$BUILD/$ofile-$TPL-$theme.epub"
-		pandoc $FRONTMATTER $BODY $BACKMATTER -o $EPUB_OUTPUT $EPUB_OPTIONS --template=$cwd/build/$TPL.tpl $addCss --metadata date="$DATETIME"
+		note "Epub compile Options: $EPUB_OPTIONS"
+		note "Epub Output: $EPUB_OUTPUT"
+		pandoc $FRONTMATTER $BODY $BACKMATTER -o $EPUB_OUTPUT $EPUB_OPTIONS $TEMPLATE $addCss --metadata date="$DATETIME"
+		compileStatus Epub
 	done
 	
 	clean
