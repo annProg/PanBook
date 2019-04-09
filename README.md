@@ -42,6 +42,7 @@ $ cd /d/dev/mybook
 $ panbook init                  # 初始化工作环境
 $ panbook epub                  # 生成epub电子书
 $ panbook pdf                   # 生成pdf电子书
+$ panbook beamer                # 生成beamer幻灯片
 $ panbook html                  # 生成html电子书
 $ panbook epub d                # 加d选项意为debug模式，仅生成一种代码高亮样式(epub和html格式有效)
 $ panbook eps                   # 将IMGDIR中的png或gif图片转为eps供latex使用
@@ -61,6 +62,8 @@ CSS      |    指定epub自定义样式文件名，css应放置在对应模板�
 SRC      |   默认SRC目录名为 src ，可以通过此环境变量更改|
 IMGDIR   |   指定图片文件夹路径|
 COVER    | 为`ctex`模板指定封面背景图片编号（`1-60`或者用`r`表示随机）|
+CJK      | beamer模板可用，指定CJK字体 |
+DOCUMENT | latex模板可用，指定文档类 |
 
 ## 注意事项
 - 在Windows上使用`Pandoc`需要`Markdown`文件保存为`UTF-8`格式
