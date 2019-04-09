@@ -87,6 +87,9 @@ function init()
 	
 	note "Template is: $TPL"
 	templateError
+	
+	# 兼容性处理
+	compatible
 }
 
 # 兼容不规范源码
@@ -144,9 +147,6 @@ function pdf()
 	
 	# elegantbook 模板选项
 	getEnv ELEGANT "cn"
-	
-	# 兼容性处理
-	compatible
 	
 	# ctex模板随机选用封面背景
 	getEnv COVER "29"
@@ -238,8 +238,6 @@ function html()
 {	
 	getEnv TPL "html5"
 	init
-	# 兼容性处理
-	compatible
 	pdf2jpg # html中使用jpg图片，因此需要为pdf格式的插图准备同名jpg
 	
 	cd $BUILD
@@ -264,8 +262,6 @@ function epub()
 	[ "$CSS"x != ""x ] && addCss="--css=$BUILD/css/$CSS.css"
 	
 	init
-	# 兼容性处理
-	compatible
 	pdf2jpg		
 
 	cd $BUILD
