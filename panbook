@@ -101,6 +101,7 @@ function compatible()
 function pdf()
 {
 	getEnv TPL "ctex"
+	getEnv CJK "SimSun"
 	echo $TPL
 	init  # 首先初始化
 	
@@ -129,8 +130,12 @@ function pdf()
 	source $SCRIPTDIR/config.default		
 	[ -f $cwd/config ] && source $cwd/config
 	
+	# 指定template不存在时用默认模板编译
+	TEMPLATE="--template=$cwd/build/$TPL.tpl"
+	[ ! -f $cwd/build/$TPL.tpl ] && TEMPLATE="-V CJKmainfont=$CJK -V documentclass=ctexbook"
+	
 	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
-	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA --template=$cwd/build/$TPL.tpl -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background
+	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS --include-before=frontmatter.tex --include-after=backmatter.tex --metadata-file=$METADATA $TEMPLATE -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background
 	
 	#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
 	sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
