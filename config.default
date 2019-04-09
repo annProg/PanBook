@@ -1,3 +1,3 @@
-PDF_OPTIONS="-t latex+smart --toc --number-sections --top-level-division=chapter -V links-as-notes --listings --pdf-engine=xelatex"
+PDF_OPTIONS="-t latex+smart --toc --number-sections --top-level-division=$DIVISION -V links-as-notes --listings --pdf-engine=xelatex"
 HTML_OPTIONS="-t html+smart --toc --highlight-style=$theme"
 EPUB_OPTIONS="-t epub3+smart --number-sections --highlight-style=$theme"
