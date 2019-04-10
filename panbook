@@ -328,6 +328,17 @@ function beamer() {
 	note "$THEMEOPT"
 	init
 	cd $BUILD
+	
+	# copy beamertheme
+	BEAMERTHEMEDIR=$SCRIPTDIR/templates/beamerthemes/$THEME
+	if [ -d $BEAMERTHEMEDIR ];then
+		cp -rfu $BEAMERTHEMEDIR $BUILD
+		# 需要删除.md文件
+		rm -f $THEME/*.md
+		rm -f $THEME/*.tex
+		rm -f $THEME/*.pdf
+		cp -rfu $THEME/* .
+	fi
 	OUTPUT="$BUILD/$ofile-$TPL-$THEME.pdf"
 	# output tex for debug
 	pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
