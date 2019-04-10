@@ -1,0 +1,37 @@
+\mode<presentation>
+\definecolor{arsenic}{rgb}{0.23, 0.27, 0.29}
+\definecolor{indiagreen}{rgb}{0.07, 0.53, 0.03}
+\definecolor{jade}{rgb}{0.0, 0.66, 0.42}
+\definecolor{persiangreen}{rgb}{0.0, 0.65, 0.58}
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \fill[color=arsenic] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+  \node [draw=white,fill=indiagreen,line width=0.2mm,minimum size=12cm,regular polygon,regular polygon sides=6] at (4,6.5) (a) {};
+  \node [draw=white,fill=jade,line width=0.2mm,minimum size=12cm,regular polygon,regular polygon sides=6] at (15,1.2) (a) {};
+  \node [draw=white,fill=persiangreen,line width=0.2mm,minimum size=12cm,regular polygon,regular polygon sides=6] at (14.2,13.1) (a) {};
+
+  \end{tikzpicture}
+
+}
+
+% Title page
+\defbeamertemplate*{title page}{opensuse}[1][]
+{ 
+   \vskip0.5cm
+   \includegraphics[scale=0.15]{opensuse-logo}\vskip0.1cm
+    \usebeamerfont{title}{\LARGE\inserttitle}\par
+    \vspace{0.1em}{\small\insertsubtitle}\par
+    \vspace{1em}{\large\insertdate}\par
+    
+    \begin{flushright}
+      {\large\insertauthor}\par
+      {\small\authortitle}\par
+      {\small\organization}
+    \end{flushright}
+  \vfill
+}
+
+\mode
+<all>
