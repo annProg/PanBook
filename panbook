@@ -311,14 +311,27 @@ function epub()
 }
 
 function beamer() {
+	# beamer themes
+	# Boadilla CambridgeUS default Antibes Berlin Copenhagen
+	# Madrid Montpelier Ilmenau Malmoe Berkeley Singapore Warsaw
+
 	getEnv TPL "latex"
 	getEnv CJK "微软雅黑"
+	getEnv THEME "Berlin"
+	getEnv COLORTHEME "rose"
+	getEnv FONTTHEME "default"
+	getEnv OUTERTHEME "infolines"
+	getEnv INNTERTHEME "circles"
+	getEnv RATIO "169"
+	
+	THEMEOPT="-V theme=$THEME -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME -V classoption=aspectratio=$RATIO"
+	note "$THEMEOPT"
 	init
 	cd $BUILD
-	OUTPUT="$BUILD/$ofile-$TPL.pdf"
+	OUTPUT="$BUILD/$ofile-$TPL-$THEME.pdf"
 	# output tex for debug
-	pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
-	pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
+	pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
+	pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
 	compileStatus beamer
 	
 	clean
