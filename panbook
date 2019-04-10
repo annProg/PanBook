@@ -37,6 +37,11 @@ function error() {
 	echo -e "\033[31m[ERRO] $1\033[0m"
 }
 
+function parseMeta() {
+	# 仅支持key全为字母且值为string
+	source <(grep -E "^[a-zA-Z]+: " $METADATA | sed -e 's/\s*#.*$//g;s/:[^:\/\/]/="/g;s/$/"/g;s/ *=/=/g' |grep "=")
+}
+
 info "Welcome to PanBook!"
 
 function init()
@@ -321,7 +326,20 @@ function setBeamerTheme() {
 	
 	customHeader=""
 	# 引入patch
-	[ "$1"x == "opensuse"x ] && customHeader="-H fix-opensuse.tex"
+	if [ "$1"x == "opensuse"x ];then
+		customHeader="-H fix-opensuse.tex"
+		authortitle="Author Title"
+		organization="Organization"
+		event="Event"
+		location="Beijing"
+		parseMeta  # 通过metadata.yaml重定义以上值
+		sed -i "s/AUTHORTITLE/$authortitle/g" fix-opensuse.tex
+		sed -i "s/ORGANIZATION/$organization/g" fix-opensuse.tex
+		sed -i "s/EVENT/$event/g" fix-opensuse.tex
+		sed -i "s/LOCATION/$location/g" fix-opensuse.tex
+		
+		sed -i '/shadowbox/d' listings-set.tex
+	fi
 }
 
 function beamer() {
