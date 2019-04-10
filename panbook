@@ -310,13 +310,18 @@ function epub()
 	clean
 }
 
-function randomBeamerTheme() {
+function setBeamerTheme() {
+	# random theme support
 	if [ "$1"x == "r"x ];then
 		themeList=(opensuse AnnArbor Antibes bars Bergen Berkeley Berlin Boadilla boxes CambridgeUS classic compatibility Copenhagen Darmstadt default Dresden EastLansing Frankfurt Goettingen Hannover Ilmenau JuanLesPins lined Luebeck Madrid Malmoe Marburg Montpellier PaloAlto Pittsburgh Rochester shadow sidebar Singapore split Szeged tree Warsaw cuerna detlevcm epyt jltree metropolis nirma phnompenh saintpetersburg upenn-bc)	
 		len=`echo ${#themeList[@]}`
 		index=$(($RANDOM%$len))	
 		THEME=${themeList[$index]}
 	fi
+	
+	customHeader=""
+	# 引入patch
+	[ "$1"x == "opensuse"x ] && customHeader="-H fix-opensuse.tex"
 }
 
 function beamer() {
@@ -333,10 +338,6 @@ function beamer() {
 	getEnv INNTERTHEME "circles"
 	getEnv RATIO "169"
 	
-	# 支持随机选取theme
-	randomBeamerTheme $THEME
-	THEMEOPT="-V theme=$THEME -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME -V classoption=aspectratio=$RATIO"
-	note "$THEMEOPT"
 	init
 	cd $BUILD
 	
@@ -346,14 +347,19 @@ function beamer() {
 		cp -rfu $BEAMERTHEMEDIR $BUILD
 		# 需要删除.md文件
 		rm -f $THEME/*.md
-		rm -f $THEME/*.tex
 		rm -f $THEME/*.pdf
 		cp -rfu $THEME/* .
 	fi
+	
+	# 支持随机选取theme
+	setBeamerTheme $THEME
+	THEMEOPT="-V theme=$THEME -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME -V classoption=aspectratio=$RATIO"
+	note "$THEMEOPT"
+	
 	OUTPUT="$BUILD/$ofile-$TPL-$THEME.pdf"
 	# output tex for debug
-	pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
-	pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex
+	pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
+	pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
 	compileStatus beamer
 	
 	clean
