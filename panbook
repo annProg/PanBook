@@ -35,6 +35,7 @@ function warn() {
 }
 function error() {
 	echo -e "\033[31m[ERRO] $1\033[0m"
+	exit 1
 }
 
 function parseMeta() {
@@ -316,37 +317,26 @@ function epub()
 }
 
 function setBeamerTheme() {
+	themeList=(opensuse AnnArbor Antibes bars Bergen Berkeley Berlin Boadilla boxes CambridgeUS classic Copenhagen Darmstadt default Dresden EastLansing Frankfurt Goettingen Hannover Ilmenau JuanLesPins lined Luebeck Madrid Malmoe Marburg Montpellier PaloAlto Pittsburgh Rochester shadow sidebar Singapore split Szeged tree Warsaw cuerna detlevcm jltree metropolis nirma phnompenh saintpetersburg)	
+	
+	SELECTEDTHEME=($THEME)
 	# random theme support
-	if [ "$1"x == "r"x ];then
-		themeList=(opensuse AnnArbor Antibes bars Bergen Berkeley Berlin Boadilla boxes CambridgeUS classic compatibility Copenhagen Darmstadt default Dresden EastLansing Frankfurt Goettingen Hannover Ilmenau JuanLesPins lined Luebeck Madrid Malmoe Marburg Montpellier PaloAlto Pittsburgh Rochester shadow sidebar Singapore split Szeged tree Warsaw cuerna detlevcm epyt jltree metropolis nirma phnompenh saintpetersburg upenn-bc)	
+	if [ "$1"x == "R"x ];then
 		len=`echo ${#themeList[@]}`
 		index=$(($RANDOM%$len))	
-		THEME=${themeList[$index]}
+		SELECTEDTHEME=(${themeList[$index]})
 	fi
 	
-	customHeader=""
-	# 引入patch
-	if [ "$1"x == "opensuse"x ];then
-		customHeader="-H fix-opensuse.tex"
-		authortitle="Author Title"
-		organization="Organization"
-		event="Event"
-		location="Beijing"
-		parseMeta  # 通过metadata.yaml重定义以上值
-		sed -i "s/AUTHORTITLE/$authortitle/g" fix-opensuse.tex
-		sed -i "s/ORGANIZATION/$organization/g" fix-opensuse.tex
-		sed -i "s/EVENT/$event/g" fix-opensuse.tex
-		sed -i "s/LOCATION/$location/g" fix-opensuse.tex
-		
-		sed -i '/shadowbox/d' listings-set.tex
+	if [ "$1"x == "A"x ];then
+		SELECTEDTHEME=`echo ${themeList[@]}`
 	fi
+	
+	note "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
+	
+	customHeader=""
 }
 
 function beamer() {
-	# beamer themes
-	# Boadilla CambridgeUS default Antibes Berlin Copenhagen
-	# Madrid Montpelier Ilmenau Malmoe Berkeley Singapore Warsaw
-
 	getEnv TPL "latex"
 	getEnv CJK "微软雅黑"
 	getEnv THEME "metropolis"
@@ -359,26 +349,37 @@ function beamer() {
 	init
 	cd $BUILD
 	
-	# copy beamertheme
-	BEAMERTHEMEDIR=$SCRIPTDIR/templates/beamerthemes/$THEME
-	if [ -d $BEAMERTHEMEDIR ];then
-		cp -rfu $BEAMERTHEMEDIR $BUILD
-		# 需要删除.md文件
-		rm -f $THEME/*.md
-		rm -f $THEME/*.pdf
-		cp -rfu $THEME/* .
-	fi
 	
 	# 支持随机选取theme
 	setBeamerTheme $THEME
-	THEMEOPT="-V theme=$THEME -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME -V classoption=aspectratio=$RATIO"
-	note "$THEMEOPT"
 	
-	OUTPUT="$BUILD/$ofile-$TPL-$THEME.pdf"
-	# output tex for debug
-	pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
-	pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
-	compileStatus beamer
+	for t in ${SELECTEDTHEME[@]};do
+		# copy beamertheme
+		BEAMERTHEMEDIR=$SCRIPTDIR/templates/beamerthemes/$t
+		USERDEFINETHMEME=$cwd/templates/beamerthemes/$t
+		if [ -d $BEAMERTHEMEDIR -o -d $USERDEFINETHMEME ];then
+			cp -rfu $BEAMERTHEMEDIR $BUILD 2>/dev/null
+			cp -rfu $USERDEFINETHMEME $BUILD 2>/dev/null
+			# 需要删除.md文件
+			rm -f $t/*.md
+			rm -f $t/*.pdf
+			cp -rfu $t/* .
+		else
+			echo ${themeList[@]} |grep -w "$t" &>/dev/null || error "Theme $t not found."
+		fi
+	
+		THEMEOPT="-V theme=$t -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME -V classoption=aspectratio=$RATIO"
+		note "$THEMEOPT"
+		
+		# 某些theme需要打补丁. 补丁放在theme文件夹下，命名规则 patch-$themename.sh
+		[ -f patch-$t.sh ] && source patch-$t.sh
+		
+		OUTPUT="$BUILD/$ofile-$TPL-$t.pdf"
+		# output tex for debug
+		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
+		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
+		compileStatus beamer
+	done
 	
 	clean
 }
