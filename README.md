@@ -1,5 +1,6 @@
 # 盘书 - Pandoc Template
-<div align="center"> ![](medias/panbook.png) </div>
+
+<div style="text-align:center"><img src ="medias/panbook.png"/></div>
 
 ## 简介
 此项目定义了一种`Markdown`源码组织规范，提供一个脚本`panbook`及数个`LaTeX`及`epub`模板，用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`及`epub`格式电子书。
