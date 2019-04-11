@@ -1,0 +1,58 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{beamerinnerthemeclassyslidesbackgrounds}[2017/24/12 background support for classy slides theme]
+
+\RequirePackage{pgfkeys}
+\RequirePackage{pdftexcmds}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+
+\usetikzlibrary{positioning}
+
+\makeatletter
+
+%%
+% Draw background
+%%
+\providecommand{\@classyslides@backgrounds@drawBackground}{%
+  \bgroup%
+  \pgfkeys{/classyslides/backgrounds/.cd%
+    , image/.get=\image%
+    , opacity/.get=\opacity%
+  }%
+  \ifnum\pdf@strcmp{\image}{\@empty}=0\relax%
+    \PackageError{beamerinnerthemeclassyslidesbackgrounds}{Missing value for key "/classyslides/backgrounds/image"}{}%
+  \else%
+    \usebeamercolor{normaltext}%
+    \tikz{%
+      \draw[draw=none, use as bounding box, fill=bg] (0, 0) rectangle (\paperwidth, \paperheight);%
+      \node[draw=none, opacity=\opacity, inner sep=0pt, outer sep=0pt] at (current bounding box.center) {%
+        \includegraphics[height=\paperheight, keepaspectratio]{\image}%
+      };%
+    }%
+  \fi
+  \egroup%
+}
+
+%%
+% PGFKeys key-val definitions for backgrounds extension
+%%
+\pgfkeys{%
+	/classyslides/backgrounds/.cd%
+  , image/.initial=\@empty%
+  , image/.default=\@empty%
+  , opacity/.initial=0.5%
+  , opacity/.default=0.5%
+}
+
+\define@key{beamerframe}{show background}[true]{%
+  \usebackgroundtemplate{\@classyslides@backgrounds@drawBackground}%
+}
+
+\BeforeBeginEnvironment{frame}{%
+  \usebeamercolor{normaltext}%
+  \usebackgroundtemplate{%
+    \tikz{\draw[draw=none, use as bounding box, opacity=1.0, fill=bg, inner sep=0pt, outer sep=0pt] (0, 0) rectangle (\paperwidth, \paperheight);}%
+  }%
+}
+
+\makeatother

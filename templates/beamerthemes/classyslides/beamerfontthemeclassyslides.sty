@@ -1,0 +1,23 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{beamerfontthemeclassyslides}[2018/10/12 default fonts for classy slides]
+
+\RequirePackage{bera, cmbright, lato, inconsolata}
+
+\renewcommand{\rmdefault}{lmr}
+\renewcommand{\sfdefault}{cmbr}
+\renewcommand{\ttdefault}{zi4}
+\newcommand{\inconsolatafamily}{\fontfamily{zi4}\selectfont}
+\newcommand{\cmrfamily}{\fontfamily{cmr}\selectfont}
+\newcommand{\lmrfamily}{\fontfamily{lmr}\selectfont}
+\newcommand{\cmbrfamily}{\fontfamily{cmbr}\selectfont}
+\newcommand{\berafamily}{\fontfamily{fve}\selectfont}
+
+\setbeamerfont{normal text}{family=\sffamily}
+\setbeamerfont{alerted text}{series=\bfseries, family=\flafamily}
+\setbeamerfont{title page}{family=\berafamily}
+\setbeamerfont{frametitle}{family=\flafamily, size=\LARGE, series=\bfseries\itshape\selectfont}
+\setbeamerfont{footline}{family=\flafamily}
+\setbeamerfont{section in toc}{family=\flafamily, series=\bfseries, size=\Large}
+\setbeamerfont{subsection in toc}{family=\flafamily, series=\fontseries{l}\selectfont, size=\large}
+\setbeamerfont{caption}{series=\itshape\mdseries, family=\flafamily, size=\large}
+\setbeamerfont{enumerate item}{series=\bfseries, family=\flafamily}

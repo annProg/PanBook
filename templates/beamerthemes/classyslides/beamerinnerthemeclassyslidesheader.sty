@@ -1,0 +1,54 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{beamerinnerthemeclassyslidesheader}[2018/10/25 default header for classy slides]
+
+\RequirePackage{lastpage}
+
+\setbeamercolor{progress bar}{fg=accent-color, bg=background-color!75!accent-color}
+
+%
+% Setup for header toogle
+%
+\newif\ifhideheader\hideheaderfalse
+
+\BeforeBeginEnvironment{frame}{%
+  \hideheaderfalse%
+}
+
+\define@key{beamerframe}{hide header}[true]{%
+  \hideheadertrue%
+}
+
+% Default header template
+\defbeamertemplate{headline}{classy default headline}[1][]{%
+  \bgroup%
+  \begin{beamercolorbox}[wd=\paperwidth, ht=0.25cm]{headline}%
+    \ifhideheader%
+    \else
+      % Calculate progress bar width.
+      \setcounter{@@frame}{\thepage}%
+      \setcounter{@@total}{\getpagerefnumber{LastPage}}%
+      \addtocounter{@@frame}{-1}%
+      \addtocounter{@@total}{-1}%
+      \ifnum\the@@total=0%
+          \dimen0=\paperwidth%
+      \else%
+          \dimen0=\paperwidth%
+          \divide\dimen0 by 100%
+          \multiply\dimen0 by \the@@frame%
+          \divide\dimen0 by \the@@total%
+          % This equals `<paperwidth>/100 * (<frames> - 1) / (<total> - 1) * 100`
+          \multiply\dimen 0 by 100%
+      \fi%
+      \edef\progressbarwidth{\the\dimen0}%
+      % Draw progress bar
+      \usebeamercolor{progress bar}%
+      \begin{tikzpicture}%
+          \draw[draw=none, use as bounding box] (0, 0) rectangle (\paperwidth, 0.25cm);%
+          \draw[on layer=back, draw=none, fill=bg] (0, 0) rectangle (\paperwidth, 0.25cm);%
+          \draw[on layer=main, draw=none, fill=fg] (0, 0) rectangle (\progressbarwidth, 0.25cm);%
+      \end{tikzpicture}%
+    \fi%
+  \end{beamercolorbox}%
+	\egroup%
+}
+\setbeamertemplate{headline}[classy default headline]

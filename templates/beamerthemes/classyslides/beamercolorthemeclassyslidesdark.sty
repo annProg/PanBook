@@ -1,0 +1,16 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{beamercolorthemeclassyslidesdark}[2018/10/13 dark theme for classy slides]
+
+\definecolor{background-color}{RGB}{24, 29, 38}
+\colorlet{foreground-color}{white}
+\definecolor{accent-color}{RGB}{5, 125, 185}
+\definecolor{highlight-color}{RGB}{5, 185, 245}
+
+\setbeamercolor{normal text}{bg=background-color, fg=foreground-color}
+\setbeamercolor{block}{parent=normal text, bg=background-color!85, fg=foreground-color}
+\setbeamercolor{section in section page}{fg=highlight-color, bg=}
+\setbeamercolor{subsection in section page}{fg=highlight-color, bg=}
+\setbeamercolor{itemize item}{parent=normal text, fg=highlight-color}
+\setbeamercolor{itemize subitem}{parent=itemize item}
+\setbeamercolor{enumerate item}{parent=itemize item}
+\setbeamercolor{enumerate subitem}{parent=itemize item}

@@ -1,0 +1,111 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{beamerthemeclassyslides}[2018/10/28 classy slides beamer theme]
+
+\RequirePackage{pdftexcmds}
+
+\makeatletter
+
+%
+% Declare "fonts" option and values
+%
+\def\classyslides@fonttheme@DEFAULT{default}
+\DeclareOptionBeamer{fonts}{%
+  \gdef\classyslides@fonttheme{#1}%
+}
+
+%
+% Declare "colors" option and values
+%
+\def\classyslides@colortheme@LIGHT{light}
+\def\classyslides@colortheme@DARK{dark}
+\DeclareOptionBeamer{colors}{%
+  \gdef\classyslides@colortheme{#1}%
+}
+
+%
+% Declare "header" option and values
+%
+\def\classyslides@header@DEFAULT{default}%
+\DeclareOptionBeamer{header}{%
+  \gdef\classyslides@header{#1}%
+}
+
+%
+% Declare "footer" option and value
+%
+\def\classyslides@footer@DEFAULT{default}%
+\DeclareOptionBeamer{footer}{%
+  \gdef\classyslides@footer{#1}%
+}
+
+%
+% Declare "backgrounds" option and value
+%
+\DeclareOptionBeamer{backgrounds}{%
+  \gdef\classyslides@backgrounds{true}%
+}
+%
+
+% Process options
+%
+\ProcessOptionsBeamer
+\usetheme{classyslidesbase}
+
+\ifx\classyslides@colortheme\@undefined
+\else
+  \ifnum\pdf@strcmp{\classyslides@colortheme}{\classyslides@colortheme@LIGHT}=0\relax
+    \usecolortheme{classyslides\classyslides@colortheme@LIGHT}
+  \else
+    \ifnum\pdf@strcmp{\classyslides@colortheme}{\classyslides@colortheme@DARK}=0\relax
+      \usecolortheme{classyslides\classyslides@colortheme@DARK}
+    \else
+      \PackageError{beamerthemeclassyslides}{Unknown color theme option "\classyslides@colortheme"}{}
+    \fi
+  \fi
+\fi
+
+\ifx\classyslides@fonttheme\@undefined
+\else
+  \ifnum\pdf@strcmp{\classyslides@fonttheme}{\classyslides@fonttheme@DEFAULT}=0\relax
+    \usefonttheme{classyslides}
+  \else
+    \ifnum\pdf@strcmp{\classyslides@fonttheme}{\@empty}=0\relax
+      \usefonttheme{classyslides}
+    \else
+      \PackageError{beamerthemeclassyslides}{Unknown font theme option "\classyslides@fonttheme"}{}
+    \fi
+  \fi
+\fi
+
+\ifx\classyslides@header\@undefined
+\else
+  \ifnum\pdf@strcmp{\classyslides@header}{\classyslides@header@DEFAULT}=0\relax
+    \useinnertheme{classyslidesheader}
+  \else 
+    \ifnum\pdf@strcmp{\classyslides@header}{\@empty}=0\relax
+      \useinnertheme{classyslidesheader}
+    \else
+      \PackageError{beamerthemeclassyslides}{Unknown header theme option "\classyslides@header"}{}
+    \fi
+  \fi
+\fi
+
+\ifx\classyslides@footer\@undefined
+\else
+  \ifnum\pdf@strcmp{\classyslides@footer}{\classyslides@footer@DEFAULT}=0\relax
+    \useinnertheme{classyslidesfooter}
+  \else
+    \ifnum\pdf@strcmp{\classyslides@footer}{\@empty}=0\relax
+      \useinnertheme{classyslidesfooter}
+    \else
+      \PackageError{beamerthemeclassyslides}{Unknown header theme option "\classyslides@footer"}{}
+    \fi
+  \fi
+\fi
+
+\ifx\classyslides@backgrounds\@undefined
+\else
+  \useinnertheme{classyslidesbackgrounds}
+\fi
+
+\makeatother

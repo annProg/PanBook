@@ -1,0 +1,36 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{beamerinnerthemeclassyslidesfooter}[2018/10/25 default footer for classy slides]
+
+\setbeamercolor{footline}{parent=normal text, fg=foreground-color!50!background-color, bg=}
+\setbeamerfont{footline}{family=\sffamily, size=\scriptsize}
+
+%
+% Set up footer toggle
+%
+\newif\ifhidefooter\hidefooterfalse
+
+\BeforeBeginEnvironment{frame}{%
+  \hidefooterfalse%
+}
+
+\define@key{beamerframe}{hide footer}[true]{%
+  \hidefootertrue%
+}
+
+% Set beamer template for footer
+\defbeamertemplate*{footline}{my classy default footer}[1][0]{%
+  \bgroup%
+  \begin{beamercolorbox}[sep=\dimexpr0.33\dimexpr0.5cm, ht=.5cm, wd=\paperwidth]{footline}%
+    \ifhidefooter%
+    \else%
+        \usebeamerfont{footline}%
+        \usebeamercolor{footline}%
+        \color{fg}%
+        \insertshortauthor%
+        \hfill{\usebeamerfont{title in footline}\inserttitle}%
+        \hfill\insertframenumber%
+    \fi%
+  \end{beamercolorbox}%
+  \egroup%
+}
+\setbeamertemplate{footline}[my classy default footer]

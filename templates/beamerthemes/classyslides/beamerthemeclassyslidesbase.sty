@@ -1,0 +1,346 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{beamerthemeclassyslidesbase}[2017/24/12 basic definitions/settings for classy slides theme]
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{color}
+\RequirePackage{listings, lstautogobble}
+\RequirePackage{tikz}
+% TODO rm (deprecated)?
+\RequirePackage{pdftexcmds}
+\RequirePackage{graphicx}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage[breakwords]{truncate}
+\RequirePackage{biblatex}
+\RequirePackage{refcount}
+
+% COLOR DEFINITIONS
+\colorlet{accent-color}{blue}
+\colorlet{highlight-color}{blue!75}
+
+% HYPERREF SETTINGS
+\hypersetup{colorlinks=false}
+
+% TIKZ SETTINGS
+\usetikzlibrary{positioning, shapes.arrows, shapes.misc, fadings, calc, shadows.blur, patterns}
+\tikzfading[name=fade right, left color=transparent!0, right color=transparent!100]
+\tikzfading[name=fade left, left color=transparent!100, right color=transparent!0]
+
+% Declare pgf layers for z-level in tikz pictures
+% HREF http://tex.stackexchange.com/a/20426
+\pgfdeclarelayer{back}
+\pgfdeclarelayer{front}
+\pgfsetlayers{back,main,front}
+
+% Define tikz keys for layering.
+% HREF http://tex.stackexchange.com/a/20426
+\pgfkeys{%
+    /tikz/on layer/.code={
+        \pgfonlayer{#1}\begingroup
+            \aftergroup\endpgfonlayer
+            \aftergroup
+        \endgroup
+    },
+    /tikz/node on layer/.code={
+        \gdef\node@@on@layer{%
+            \setbox\tikz@tempbox=\hbox\bgroup\pgfonlayer{#1}\unhbox\tikz@tempbox\endpgfonlayer\egroup%
+        }%
+        \aftergroup\node@on@layer%
+    },
+    /tikz/end node on layer/.code={%
+        \endpgfonlayer\endgroup\endgroup%
+    }%
+}
+\def\node@on@layer{\aftergroup\node@@on@layer}
+
+% TCOLORBOX SETTINGS
+\tcbuselibrary{skins}
+\tcbuselibrary{listings}
+
+% BEAMER SETTINGS
+\setlength{\leftmargini}{24pt}
+\usetheme{default}
+\useoutertheme{infolines}
+\useinnertheme{circles}
+\setbeamersize{text margin left=0.5cm,text margin right=0.5cm}
+
+\setbeamercolor{normal text}{bg=background-color, fg=foreground-color}
+\setbeamercolor{title page}{parent=normal text, bg=}
+\setbeamercolor{title}{parent=title page, bg=}
+\setbeamercolor{subtitle}{parent=title page, bg=}
+\setbeamercolor{section in section page}{fg=accent-color, bg=}
+\setbeamercolor{subsection in section page}{fg=accent-color, bg=}
+\setbeamercolor{frametitle}{parent=normal text, bg=}
+\setbeamercolor{alerted text}{fg=highlight-color}
+\setbeamercolor{block}{parent=normal text}
+\setbeamercolor{block title}{parent=normal text}
+\setbeamercolor{itemize item}{fg=accent-color, bg=}
+\setbeamercolor{itemize subitem}{parent=itemize item}
+\setbeamercolor{enumerate item}{parent=itemize item}
+\setbeamercolor{enumerate subitem}{parent=itemize item}
+\setbeamercolor{section in toc}{parent=normal text}
+\setbeamercolor{subsection in toc}{parent=normal text}
+\setbeamercolor{caption name}{fg=accent-color}
+\setbeamercolor*{bibliography item}{parent=normal text}
+\setbeamercolor*{bibliography entry author}{parent=normal text, fg=highlight-color}
+\setbeamercolor*{bibliography entry title}{parent=normal text}
+\setbeamercolor*{bibliography entry journal}{parent=normal text}
+\setbeamercolor*{bibliography entry location}{parent=normal text}
+\setbeamercolor*{bibliography entry note}{parent=normal text}
+
+\setbeamerfont{normal text}{family=\sffamily, size=\Large}
+\setbeamerfont{alerted text}{series=\bfseries, family=\sffamily}
+\setbeamerfont{title page}{family=\rmfamily}
+\setbeamerfont{title}{parent=title page, size=\Huge}
+\setbeamerfont{subtitle}{parent=title page, size=\LARGE}
+\setbeamerfont{author}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
+\setbeamerfont{institute}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
+\setbeamerfont{date}{family=\sffamily, size=\small, series=\fontseries{l}\selectfont}
+\setbeamerfont{section in section page}{parent=title}
+\setbeamerfont{subsection in section page}{parent=subtitle}
+\setbeamerfont{frametitle}{family=\sffamily, size=\LARGE, series=\bfseries\itshape\selectfont}
+\setbeamerfont{section in toc}{family=\sffamily, series=\bfseries}
+\setbeamerfont{subsection in toc}{family=\sffamily, series=\fontseries{l}\selectfont}
+\setbeamerfont{caption}{series=\itshape\mdseries, family=\sffamily, size=\large}
+\setbeamerfont{caption name}{parent=caption, series=\upshape\bfseries}
+\setbeamerfont{block}{parent=normal text, series=\upshape\selectfont}
+\setbeamerfont{block title}{parent=frametitle, size=\Large}
+\setbeamerfont{enumerate item}{series=\bfseries, family=\sffamily}
+
+% VARIABLES
+
+\newcounter{@@frame}
+\newcounter{@@total}
+
+\colorlet{background-color}{white}
+\colorlet{foreground-color}{black}
+\colorlet{accent-color}{blue}
+\colorlet{highlight-color}{accent-color!50}
+
+\defbeamertemplate{frametitle}{classy frametitle}[1][0]{%
+\bgroup%
+\begin{beamercolorbox}[wd=\paperwidth, ht=1.5cm]{frametitle}%
+  \begin{tikzpicture}%
+    \draw[draw=none, use as bounding box] (0, 0) rectangle (\paperwidth, 1.5cm);%
+    \node[outer sep=0pt, inner sep=12pt, minimum height=1.50cm, below right=0pt and 0pt of current bounding box.north west] {%
+    \truncate{\linewidth}{%
+        \insertframetitle%
+    }%
+    };%
+  \end{tikzpicture}%
+\end{beamercolorbox}%
+\egroup%
+}
+\setbeamertemplate{frametitle}[classy frametitle]
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+\defbeamertemplate{title page}{classy title page}[1][0]{%
+    \bgroup%
+    \noindent%
+    \vskip2em%
+    \begin{beamercolorbox}[sep=0.10cm, center]{title}%
+        \usebeamercolor{title}\usebeamerfont{title}%
+        \inserttitle\par%
+    \end{beamercolorbox}\par%
+    \vskip0.5cm\par%
+    \begin{beamercolorbox}[sep=0.10cm, center]{subtitle}%
+        \usebeamercolor{subtitle}\usebeamerfont{subtitle}
+        \ifx\insertsubtitle\@empty\relax\else\insertsubtitle\fi%
+    \end{beamercolorbox}\par%
+    \vskip0.25cm\relax%
+    \begin{beamercolorbox}[sep=0.20cm, center]{}%
+        \ifx\insertinstitute\@empty\relax\else{\usebeamerfont{institute}\usebeamercolor{institute}\insertinstitute}\\\fi%
+        {\usebeamerfont{author}\usebeamercolor{author}\insertauthor}\\%
+        \ifx\insertdate\@empty\relax\else{\usebeamerfont{date}\usebeamercolor{date}\insertdate}\\\fi%
+        \ifx\inserttitlegraphic\@empty\relax\else{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}\fi%
+    \end{beamercolorbox}\par%
+    \egroup%
+}
+\setbeamertemplate{title page}[classy title page]
+
+\defbeamertemplate*{section page}{classy section page}[1][]{%
+    \bgroup%
+    \noindent%
+		% Use a combination of `\makebox` and `\minipage` for centered content
+		\makebox[\textwidth][c]{%
+            \begin{minipage}[c]{0.85\paperwidth}%
+                \vskip2em%
+                \begin{beamercolorbox}[sep=0.10cm, center]{section in section page}%
+                    \usebeamerfont{section in section page}\usebeamercolor{section in section page}\insertsectionnumber.~\insertsection\par%
+                \end{beamercolorbox}\par%
+                % Optional subsection
+                \ifx\insertsubsection\@empty\relax%
+                \else%
+                    \vskip0.25cm\par%
+                    \begin{beamercolorbox}[sep=0.20cm, center]{subsection in section page}%
+                        \usebeamerfont{subsection in section page}\usebeamercolor{subsection in section page}\insertsectionnumber.\insertsubsectionnumber~~\insertsubsection\par%
+                    \end{beamercolorbox}\par%
+                \fi%
+            \end{minipage}
+        }%
+    \egroup%
+}
+\setbeamertemplate{classy section page}[my section page]
+
+\defbeamertemplate{itemize item}{classy itemize item}[1][]{%
+    \bgroup%
+    \usebeamercolor{itemize item}%
+    \tikz{%
+        \node[anchor=base, minimum width=0.3\baselineskip, minimum height=0.3\baselineskip, inner sep=0pt, outer sep=0pt, fill=fg, circle] (text) {}%
+    }%
+    \egroup%
+}
+\setbeamertemplate{itemize item}[classy itemize item]
+
+\defbeamertemplate{itemize subitem}{classy itemize subitem}[1][]{%
+    \bgroup%
+    \usebeamercolor{itemize subitem}\usebeamerfont{itemize subitem}\color{fg}--%
+    \egroup%
+}
+\setbeamertemplate{itemize subitem}[classy itemize subitem]
+
+\defbeamertemplate{enumerate item}{classy enumerate item}[1][]{%
+    \bgroup%
+    \usebeamercolor{enumerate item}%
+	\tikz[baseline=(text.base)]{%
+		\node[minimum width=1.5em, minimum height=1.5em, inner sep=2pt, outer sep=0pt, draw=none] (text) {\color{fg}\insertenumlabel.}%
+    }%
+    \egroup%
+}
+\setbeamertemplate{enumerate item}[classy enumerate item]
+
+\defbeamertemplate{enumerate subitem}{classy enumerate subitem}[1][]{%
+    \bgroup%
+    \usebeamercolor{enumerate subitem}%
+	\color{fg}\insertsubenumlabel%
+	\egroup%
+}
+\setbeamertemplate{enumerate subitem}[classy enumerate subitem]
+
+\setbeamertemplate{itemize/enumerate body begin}{\Large}
+\setbeamertemplate{itemize/enumerate subbody begin}{\Large}
+
+% NOTE remove headline, footline
+\defbeamertemplate{footline}{my classy footline}[1][0]{%
+}
+\setbeamertemplate{footline}[my classy footline]
+\defbeamertemplate{headline}{my classy headline}[1][0]{%
+}
+\setbeamertemplate{headline}[my classy headline]
+
+% HREF http://tex.stackexchange.com/a/69721
+\setbeamertemplate{section in toc}{%
+  \bgroup%
+  \usebeamerfont{section in toc}\usebeamercolor{section in toc}%
+  \hskip12pt\relax%
+  \inserttocsectionnumber.~\inserttocsection\par%
+  \egroup%
+}
+\setbeamertemplate{subsection in toc}{%
+  \bgroup%
+  \usebeamerfont{subsection in toc}\usebeamercolor{subsection in toc}%
+  \hskip24pt\relax%
+  \inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par%
+  \egroup%
+}
+
+% HREF https://tex.stackexchange.com/a/176862
+\setbeamertemplate{bibliography item}[text]
+
+\newenvironment<>{Block}[2][]{%
+    \bgroup%
+    \usebeamerfont{block}\usebeamercolor{block}\color{fg}%
+	\tcbset{%
+		enhanced%
+		, sharp corners%
+        , no shadow%
+		, top=0pt%
+		, right=0pt%
+		, bottom=0pt%
+		, left=0pt%
+		, toptitle=0pt%
+		, bottomtitle=-12pt%
+		, middle=0pt%
+		, boxsep=12pt%
+		, boxrule=0pt%
+		, colframe=bg%
+		, colback=bg%
+		, colbacktitle=bg%
+        , title={\usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}}%
+		, #1
+	}%
+	\begin{tcolorbox}%
+	\usebeamercolor{block}\usebeamerfont{block}\color{fg}%
+}{%
+	\end{tcolorbox}%
+	\egroup%
+}
+
+\renewenvironment<>{Theorem}[2][]{%
+	\begin{Block}[#1]{Theorem: #2}%
+}{%
+	\end{Block}
+}
+\renewenvironment<>{Proof}[1][]{%
+	\begin{Block}[#1]{Proof:}%
+}{%
+	\end{Block}
+}
+
+\renewenvironment<>{Example}[1][]{%
+	\begin{Block}[#1]{Example:}%
+}{%
+	\end{Block}
+}
+
+\renewenvironment<>{Definition}[2][]{%
+	\begin{Block}[#1]{Definition: #2}%
+}{%
+	\end{Block}
+}
+
+\newtcblisting{Code}[2][]{%
+    code={
+        \usebeamercolor{block}\usebeamerfont{block}%
+        \tcbset{%
+            , enhanced%
+            , sharp corners%
+            , no shadow%
+            , top=0pt%
+            , right=0pt%
+            , bottom=0pt%
+            , left=0pt%
+            , toptitle=0pt%
+            , bottomtitle=-12pt%
+            , middle=0pt%
+            , boxsep=12pt%
+            , boxrule=0pt%
+            , colframe=bg%
+            , colback=bg%
+            , colbacktitle=bg%
+            , title={%
+                \usebeamerfont{block title}\usebeamercolor{block title}\color{fg}{#2}
+            }%
+        }%
+    }%
+	, listing only%
+	, listing options={%
+		breaklines=true%
+		, autogobble%
+		, tabsize=2%
+		, aboveskip=0pt%
+		, belowskip=0pt%
+		, xleftmargin=0pt%
+		, xrightmargin=0pt%
+		, framesep=0pt%
+		, framerule=0pt%
+		, rulesep=0pt%
+		, framexrightmargin=0pt%
+		, framexleftmargin=0pt%		
+        , numbersep=0pt%,
+        , basicstyle=\ttfamily\small\color{fg}%
+		, language=#1%
+    }%
+}
