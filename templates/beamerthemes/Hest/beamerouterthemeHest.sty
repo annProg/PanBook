@@ -1,0 +1,158 @@
+% The Hest Beamer Theme
+%
+% This theme is a heavily modified version of the Feather beamer theme
+% It uses bits of code from various sources, hacked together by me.
+% The code is a mess. Use at your own risk.
+%
+% The TikZ code for the front page reflection is shamelessly stolen from Till Tantaus PGF-manual, 
+% since I made this theme for a presentation about TikZ.
+%
+% The Aalborg University Logo is probably copyrighted AAU (if you care about such matters),
+% so if you intend to use this theme (and you're not a student at AAU), you probably ought to replace it with something else
+% /Stian
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemeHest}[2018/03/13 v1.1.0 Hest Beamer Theme]
+
+\RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage[most]{tcolorbox}
+
+\usetikzlibrary{shadings, fadings, chains}
+
+\newcounter{unnumberedframe}
+\define@key{beamerframe}{noframenumbering}[true]{%
+  \stepcounter{unnumberedframe}
+  \beamer@noframenumberingtrue
+}
+
+\DeclareOptionBeamer{shownavsym}{\def\beamer@shownavsym{true}}
+\ProcessOptionsBeamer\relax
+
+\def\hest@defaultlogo{Hestgraphics/aau_logo}
+\def\hest@defaultlogoscale{0.82}
+
+\def\sethestlogofile#1{\def\hest@defaultlogo{#1}}
+\def\sethestlogoscale#1{\def\hest@defaultlogoscale{#1}}
+
+% the height of the header is 2.5 times the lineheight of the frame title
+\newlength{\beamer@height}
+\usebeamerfont{frametitle} %use the frame title font
+\setlength{\beamer@height}{2.5\baselineskip}
+
+% Hvad er formålet med dette?
+\reset@font
+
+% radius of the logo
+\newlength{\beamer@logoradius}
+\setlength{\beamer@logoradius}{0.95\beamer@height/2}
+
+% width of the border
+\newlength{\beamer@borderwidth}
+\setlength{\beamer@borderwidth}{1.05mm}  % as small is the thickness of the border the whole circle goes up
+ 
+% inner radius of border of the logo frame
+\newlength{\beamer@logoinnerradius}
+\setlength{\beamer@logoinnerradius}{0.85\beamer@logoradius} 
+
+% radius of the outer border of the logo frame
+\newlength{\beamer@logoouterradius}
+\setlength{\beamer@logoouterradius}{\beamer@logoinnerradius+\beamer@borderwidth}
+
+% radius of the counters
+\newlength{\beamer@counterradius}
+\setlength{\beamer@counterradius}{\beamer@logoinnerradius/2+\beamer@logoouterradius/2}
+
+\mode<presentation> {
+  \setbeamertemplate{footline}{
+    \begin{beamercolorbox}[wd=1.0\paperwidth,ht=1.25ex,dp=1ex,left]{headfoot}
+      \usebeamercolor[fg]{frametitle}
+      \usebeamerfont{section in head/foot}
+      \hspace*{3.5ex}
+      \insertshortauthor\ |\ \insertshorttitle%\ [\insertframenumber/\inserttotalframenumber]
+    %   [\insertshortsubtitle]
+    \end{beamercolorbox}
+  }
+
+  \setbeamertemplate{frametitle}{
+    \begin{minipage}[c][0.9\beamer@height][c]{\textwidth}
+      \usebeamercolor[fg]{frametitle}
+      \usebeamerfont{frametitle}
+      \insertframetitle\par
+      \usebeamercolor[fg]{framesubtitle}
+      \usebeamerfont{framesubtitle}
+      \insertframesubtitle\par
+    \end{minipage}
+  }
+  
+  % insert navigation symbols
+  \ifx\beamer@shownavsym\undefined %
+    \setbeamertemplate{navigation symbols}{}
+  \fi
+}
+
+\setbeamertemplate{headline}{
+  \usebeamercolor{Hest}
+  \begin{tikzpicture}[overlay]
+    \coordinate (UL) at (0,0); %upper left corner of the slide
+    \coordinate (HLR) at (\paperwidth,-0.9\beamer@height); %lower right of the header
+    \coordinate (ULL) at (0,-0.95\beamer@height); % upper left corner of the line 
+    \coordinate (LLR) at (\paperwidth,-1\beamer@height); % lower right corner of the line 
+    \coordinate (ULF) at (0, \dimexpr-\paperheight+1.6em\relax);
+%   \coordinate (ULF) at (0,-5.90\beamer@height); % upper left corner of the footline 
+    \coordinate (LFR) at (\paperwidth,-\paperheight);
+%   \coordinate (LFR) at (\paperwidth,-6.08\beamer@height); % lower right corner of the footline 
+    \coordinate (logopos) at ([shift={(-\beamer@logoouterradius-2.05\beamer@borderwidth,\beamer@height-\beamer@logoouterradius-5.5\beamer@borderwidth)}] HLR); % coordinate of the logo and the circ position
+
+    \draw[draw=none, top color=Hest.bg, bottom color = Hest.fg] (UL) rectangle (HLR);
+    % \shade[upper left = Hest.bg, lower left = Hest.bg, upper right = Hest.fg,  lower right = Hest.fg] (UL) rectangle (HLR);
+    \draw[draw=none,fill=Hest.fg] (ULL) rectangle (LLR); % line below the background rectangle
+    \draw[draw=none,fill=Hest.bg] (ULF) rectangle (LFR); % footline 
+
+    % draw the outer circle
+    \fill[fill=Hest.fg] (logopos) circle (\beamer@logoouterradius);
+
+    % draw the inner circle
+    \fill[fill=normal text.bg] (logopos) circle (\beamer@logoinnerradius);
+
+    % place the logo in the circle
+    \node at (logopos) {\includegraphics[width=\dimexpr \hest@defaultlogoscale \beamer@logoradius * 2\relax]{\hest@defaultlogo}};
+
+    % \pgfmathsetmacro{\effectivetotalframe}{max(\inserttotalframenumber-\theunnumberedframe,1)}
+    % \pgfmathsetmacro{\progress}{(\insertframenumber-\theunnumberedframe-3)/\effectivetotalframe*(-360)}; 
+
+   \pgfmathsetmacro{\progress}{((\insertframenumber-1)/\inserttotalframenumber*(-360)+90)}
+
+    %draw the arc
+    \draw[color=Hest.bg,line width=0.2*\beamer@borderwidth] ([yshift=\beamer@counterradius] logopos)  arc[radius=\beamer@counterradius, start angle=90, end angle=\progress];
+    \node[fill=normal text.bg,draw=Hest.fg,thick,circle,minimum width=2*\beamer@borderwidth] at ([shift={(\progress:\beamer@counterradius)}] logopos) {{\usebeamercolor[fg]{normal text}\insertframenumber}};
+  \end{tikzpicture}
+}
+
+%%setting the blocks
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercolor{block title}{fg=frametitle.fg, bg=frametitle.bg} 
+\setbeamercolor{block body}{parent=normal text, use=block title,bg=Hest.fg!30}
+
+\newtcolorbox{shadeblock}[2][]{
+  beamer,
+  title=#2,
+  fonttitle=\sffamily,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  arc=2mm,
+  colback = Hest.fg!30,
+  colupper=white,
+  colframe=frametitle.fg,
+  coltitle=white,
+  coltext=normal text.fg,
+  title style = {
+    left color = Hest.bg,
+    right color = Hest.bg!30!white
+  },
+  #1
+}
+
+\mode<all>

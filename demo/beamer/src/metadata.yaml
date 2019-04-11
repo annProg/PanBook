@@ -11,6 +11,8 @@ lot: true        # 是否生成表格列表页
 homepage: https://github.com/annProg/PanBook
 authortitle: 软件工程师
 organization: PanBook
+institute:
+  - PanBook
 location: Beijing China
 identifier:                      # epub用
   - scheme: DOI

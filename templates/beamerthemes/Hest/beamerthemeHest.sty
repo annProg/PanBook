@@ -1,0 +1,32 @@
+% The Hest Beamer Theme
+%
+% This theme is a heavily modified version of the Feather beamer theme
+% It uses bits of code from various sources, hacked together by me.
+% The code is a mess. Use at your own risk.
+%
+% The TikZ code for the front page reflection is shamelessly stolen from Till Tantaus PGF-manual, 
+% since I made this theme for a presentation about TikZ.
+%
+% The Aalborg University Logo is probably copyrighted AAU (if you care about such matters),
+% so if you intend to use this theme (and you're not a student at AAU), you probably ought to replace it with something else
+% /Stian
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeHest}[2018/03/13 v1.1.0 Hest Beamer Theme]
+
+\DeclareOptionBeamer{shownavsym}{\PassOptionsToPackage{shownavsym}{beamerouterthemeHest}}
+\ProcessOptionsBeamer
+
+\mode<presentation> {
+  \useinnertheme{Hest}
+  \useoutertheme{Hest}
+  \usecolortheme{Hest}
+}
+
+\setbeamercolor{Hest}{fg=NavyBlue!20,bg=NavyBlue} % Change the bar colors:
+\setbeamercolor{structure}{fg=NavyBlue} % Change the color of the structural elements:
+\setbeamercolor{frametitle}{fg=black!5} % Change the frame title text color:
+\setbeamercolor{normal text}{fg=black!75,bg=gray!5} % Change the normal text colors:
+\setbeamercolor{block title}{use=Hest,bg=Hest.fg,fg=black!90} %% Change the block title colors
+
+\mode<all>

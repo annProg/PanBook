@@ -1,0 +1,31 @@
+% The Hest Beamer Theme
+%
+% This theme is a heavily modified version of the Feather beamer theme
+% It uses bits of code from various sources, hacked together by me.
+% The code is a mess. Use at your own risk.
+%
+% The TikZ code for the front page reflection is shamelessly stolen from Till Tantaus PGF-manual, 
+% since I made this theme for a presentation about TikZ.
+%
+% The Aalborg University Logo is probably copyrighted AAU (if you care about such matters),
+% so if you intend to use this theme (and you're not a student at AAU), you probably ought to replace it with something else
+% /Stian
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeHest}[2018/03/13 v1.1.0 Hest Beamer Theme]
+
+\mode<presentation> { %refers to the first four modes (beamer,handout,second and trans). That is, to all modes except the article mode
+
+  %defining colors 
+  \definecolor{beamer@barcolor}{RGB}{194,193,204}% light blue
+  \definecolor{beamer@normaltextcolor}{RGB}{84,97,110}% gray blue
+  \definecolor{beamer@headercolor}{rgb}{0,0.41,0.54} % dark blue
+
+  %setting the above deffinitions
+  \setbeamercolor{structure}{fg=beamer@headercolor}
+  \setbeamercolor{normal text}{fg=beamer@normaltextcolor}
+  \setbeamercolor{frametitle}{fg=white,bg=beamer@headercolor}
+  \setbeamercolor{Hest}{fg=beamer@barcolor,bg=beamer@headercolor}
+}
+
+\mode<all>

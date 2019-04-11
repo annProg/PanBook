@@ -1,0 +1,103 @@
+% The Hest Beamer Theme
+%
+% This theme is a heavily modified version of the Feather beamer theme
+% It uses bits of code from various sources, hacked together by me.
+% The code is a mess. Use at your own risk.
+%
+% The TikZ code for the front page reflection is shamelessly stolen from Till Tantaus PGF-manual, 
+% since I made this theme for a presentation about TikZ.
+%
+% The Aalborg University Logo is probably copyrighted AAU (if you care about such matters),
+% so if you intend to use this theme (and you're not a student at AAU), you probably ought to replace it with something else
+% /Stian
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeHest}[2018/03/13 v1.1.0 Hest Beamer Theme]
+\RequirePackage{tikz}
+
+\usetikzlibrary{shadings, fadings}
+
+%     \def\nodeshadowed[#1]#2;{
+%       \node[scale=2,above,#1]{
+%       \global\setbox\mybox=\hbox{#2}
+%       \copy\mybox};
+%       \node[scale=2,above,#1,yscale=-1,
+%       scope fading=south,opacity=0.4]{\box\mybox};
+%     }
+
+\mode<presentation> {
+  \setbeamerfont{institute}{family=\rmfamily, size = \footnotesize}
+  \setbeamerfont{title}{family=\rmfamily, size = \Large} 
+  \setbeamerfont{subtitle}{family=\rmfamily, size = \large}
+  \setbeamerfont{author}{family=\rmfamily, size = \normalsize}
+  \setbeamerfont{date}{family=\rmfamily, size = \footnotesize}
+
+  \setbeamertemplate{title page}{
+    \setcounter{unnumberedframe}{0}
+    \begin{tikzpicture}[
+      overlay,
+      draw = black!80!blue,
+      text = black!80!blue,
+        textupright/.style = {
+        yslant=##1, 
+        scale = 2
+      },
+      textreflection/.style = {
+        yslant=##1, 
+        scale = 2, 
+        below=22pt, 
+        yscale=-1,
+        scope fading=south, 
+        opacity=0.4
+      }
+    ]
+      \def\mynodeshadowed(##1)##2;{
+        \node[scale=2] (bla) at (##1) {##2};
+        \node[scale=2, yshift=-18pt,yscale=-1,scope fading=south, opacity=0.4] at (##1) {##2};
+      }  
+      \mynodeshadowed (7,1) {\huge\inserttitle};
+
+      \coordinate (cb) at (5,-4);    
+      \coordinate (bl) at (4.5,-4);
+      \coordinate (br) at (5.5,-4);
+        
+      \node[textupright=0.08, anchor=east] at (bl) {\insertauthor};
+      \node[textreflection=0.08, anchor=east] at (bl) {\insertauthor};
+    
+      \node[textupright=-0.08, anchor=west] at (br) {\insertinstitute};
+      \node[textreflection=-0.08, anchor=west] at (br) {\insertinstitute};
+	  
+    \end{tikzpicture}
+%     \begin{minipage}[c][\textheight][c]{\textwidth}
+%       \centering
+%       { \usebeamerfont{institute}\insertinstitute } \vspace*{30pt}
+%       { \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle } \vspace*{10pt}
+%       { \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle } \vspace*{30pt}
+%       { \usebeamerfont{author}\insertauthor} \vspace*{30pt}
+%       { \usebeamerfont{date}\insertdate} \vspace*{\baselineskip}
+%     \end{minipage}
+  }
+    
+  \defbeamertemplate{final page}{text}[1]{
+    \begin{block}{}
+      \centering #1
+    \end{block}
+  }
+  
+  \newcommand{\finalpage}[1]{
+    \setbeamertemplate{final page}[text]{#1}
+    \usebeamertemplate{final page}
+  }
+
+%   \newcommand{\blah}{%
+%     \setbeamertemplate{background}{%
+%       \includegraphics[width=\paperwidth,height=\paperheight]{\backgroundfile}
+%       \tikz[overlay] \fill[fill opacity=0.75,fill=white] (0,0) rectangle (-\paperwidth,\paperheight);
+%     }
+%   }
+  
+  % use numbers instead of a picture for the references
+  \setbeamertemplate{bibliography item}[text]
+}
+
+\mode<all>

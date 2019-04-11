@@ -1,0 +1,64 @@
+% The Hest Beamer Theme
+%
+% This theme is a heavily modified version of the Feather beamer theme
+% It uses bits of code from various sources, hacked together by me.
+% The code is a mess. Use at your own risk.
+%
+% The TikZ code for the front page reflection is shamelessly stolen from Till Tantaus PGF-manual, 
+% since I made this theme for a presentation about TikZ.
+%
+% The Aalborg University Logo is probably copyrighted AAU (if you care about such matters),
+% so if you intend to use this theme (and you're not a student at AAU), you probably ought to replace it with something else
+% /Stian
+\documentclass[10pt,xcolor={dvipsnames}]{beamer}
+
+%the only option is shownavsym if you want navigation symbols
+\usetheme[]{Hest}
+
+%Use these commands to change the logo and the scale
+% \sethestlogofile{Hestgraphics/blabla} % default is aau_logo
+% \sethestlogoscale{0.57} %default is 0.82 for no particular reason, but it looks good with the aau logo
+
+\usepackage[english]{babel}
+
+%This is a nice font for this theme
+\usepackage{venturis}
+
+\title[Hest Beamer Theme]{Hest Theme}
+\subtitle[]{}
+\author[Stian L. Lybech]{Stian L. Lybech}
+\institute[]{Somewhere}
+\date{Some day}
+
+\begin{document}
+% the plain option removes the header from the title page, noframenumbering removes the numbering of this frame only
+\begin{frame}[plain,noframenumbering] 
+  \titlepage
+\end{frame}
+
+\begin{frame}{Content}{}
+  \tableofcontents
+\end{frame}
+
+%Section og subsection er kun relevant ift. TOC
+\section{Some section}
+\subsection{A subtitle}
+\begin{frame}{Some section}{A subtitle}
+Here is some text
+  \begin{shadeblock}{Here is a shadeblock}
+    \begin{itemize}
+      \item An item
+      \item Another item
+    \end{itemize}
+  \end{shadeblock}
+\end{frame}
+
+\begin{frame}
+This is just another frame, which I have added to demonstrate the `clock' effect of the rotating slide counter in the upper right corner.
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+  \finalpage{End of presentation}
+\end{frame}
+
+\end{document}
