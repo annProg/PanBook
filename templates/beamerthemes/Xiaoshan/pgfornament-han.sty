@@ -1,0 +1,71 @@
+% pgfornamenthan.sty v0.32 2018/04/09
+% Authors: pgf and LaTeX code by LIM LianTze
+%          based on CAD drawing by ZHANG Chennan
+
+\ProvidesPackage{pgfornament-han}
+\RequirePackage{xpatch}
+\RequirePackage{pgfornament}
+
+\def\pgfornamenthan{\pgfutil@ifnextchar[{\pgf@ornamenthan}{\pgf@ornamenthan[]}}%
+\let\pgf@ornamenthan\pgf@ornament
+\xpatchcmd{\pgf@ornamenthan}{\@pgfornamentDim}{\@pgfornamenthanDim}{}{}
+\xpatchcmd{\pgf@ornamenthan}{\@pgfornamentDim}{\@pgfornamenthanDim}{}{}
+\xpatchcmd{\pgf@ornamenthan}{\pgf@@ornament}{\pgf@@ornamenthan}{}{}
+
+\def\pgfOrnamentsHanObject{pgflibraryhan.code.tex}
+\input{\pgfOrnamentsHanObject}%
+
+\let\pgf@@ornamenthan\pgf@@ornament
+% \patchcmd{\pgf@@ornamenthan}{\OrnamentsFamily}{han}{}{}
+\pretocmd{\pgf@@ornamenthan}{%
+  \def\OrnamentsFamily{han}
+}{}{}
+
+\patchcmd{\pgf@@ornamenthan}
+  {\OrnamentsFamily#1.pgf}
+  {\OrnamentsFamily/\OrnamentsFamily#1.pgf}{}{}
+
+\tikzset{
+  ornamenthan/.style={%
+    to path={%
+      \pgfextra{%
+      \tikz@scan@one@point\pgfutil@firstofone(\tikztostart)\relax
+         \pgf@xa=\pgf@x
+         \pgf@ya=\pgf@y
+      \tikz@scan@one@point\pgfutil@firstofone(\tikztotarget)\relax
+         \pgf@xb=\pgf@x
+         \pgf@yb=\pgf@y
+         \advance\pgf@xa by-\pgf@xb
+         \advance\pgf@ya by-\pgf@yb
+      \pgfmathveclen{\pgf@xa}{\pgf@ya}%
+      \global\let\ornamentlen\pgfmathresult}
+	     --  node [pos=\ornamenttopos,options,
+		          anchor=\ornamenttoanchor]{%
+        \pgfornamenthan[width = \ornamentlen,
+		             symmetry=\ornamenttosymmetry]{#1}}
+            (\tikztotarget)\tikztonodes %end pgfextra
+    }% end to path
+  }% end style
+}
+
+\patchcmd{\pgf@@ornamenthan}
+  {\begingroup}
+  {\begingroup\def\ubb{\pgfusepath{use as bounding box}}}
+  {}{}
+
+% \def\pgf@@ornamenthan#1{%
+% \begingroup
+% \def\i{\pgfusepath{clip}}%
+% \def\k{\pgfusepath{stroke}}%
+% \let\o\pgfpathclose
+% \let\s\pgfusepathqfillstroke
+% \def\p ##1##2{\pgfqpoint{##1bp}{##2bp}}%
+% \def\m ##1 ##2 {\pgfpathmoveto{\p{##1}{##2}}}%
+% \def\l ##1 ##2 {\pgfpathlineto{\p{##1}{##2}}}%
+% \def\r ##1 ##2 ##3 ##4 {\pgfpathrectangle{\p{##1}{##2}}{\p{##3}{##4}}}%
+% \def\c ##1 ##2 ##3 ##4 ##5 ##6 {%
+% \pgfpathcurveto{\p{##1}{##2}}{\p{##3}{##4}}{\p{##5}{##6}}}%
+% \@@input han#1.pgf
+% %\@nameuse{pgf@@am@#1}%
+% \endgroup}%
+\endinput

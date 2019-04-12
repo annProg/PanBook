@@ -1,0 +1,88 @@
+% pgflibraryhan.code.tex v0.32 2018/04/09
+% Authors: pgf and LaTeX code by LIM LianTze
+%          based on CAD drawing by ZHANG Chennan
+
+\makeatletter
+\def\@pgfornamenthanDim#1{% dim in bp
+\ifcase#1\relax%
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  1
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  2
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  3
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  4
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  5
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  6
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  7
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  8
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  9
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  10
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  11
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  12
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  13
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  14
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  15
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  16
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  17
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  18
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  19
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  20
+\or\def\@pgfornamentX{260}\def\@pgfornamentY{260}%  21
+\or\def\@pgfornamentX{260}\def\@pgfornamentY{260}%  22
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  23
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  24
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  25
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  26
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  27
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  28
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{10}%  29
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{10}%  30
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{40}%  31
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{40}%  32
+\or\def\@pgfornamentX{75}\def\@pgfornamentY{60}%  33
+\or\def\@pgfornamentX{75}\def\@pgfornamentY{60}%  34
+\or\def\@pgfornamentX{100}\def\@pgfornamentY{60}%  35
+\or\def\@pgfornamentX{100}\def\@pgfornamentY{60}%  36
+\or\def\@pgfornamentX{125}\def\@pgfornamentY{110}%  37
+\or\def\@pgfornamentX{125}\def\@pgfornamentY{110}%  38
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{110}%  39
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{110}%  40
+\or\def\@pgfornamentX{115}\def\@pgfornamentY{60}%  41
+\or\def\@pgfornamentX{115}\def\@pgfornamentY{60}%  42
+\or\def\@pgfornamentX{140}\def\@pgfornamentY{60}%  43
+\or\def\@pgfornamentX{140}\def\@pgfornamentY{60}%  44
+\or\def\@pgfornamentX{130}\def\@pgfornamentY{60}%  45
+\or\def\@pgfornamentX{130}\def\@pgfornamentY{60}%  46
+\or\def\@pgfornamentX{155}\def\@pgfornamentY{60}%  47
+\or\def\@pgfornamentX{155}\def\@pgfornamentY{60}%  48
+\or\def\@pgfornamentX{360}\def\@pgfornamentY{360}%  49
+\or\def\@pgfornamentX{360}\def\@pgfornamentY{360}%  50
+\or\def\@pgfornamentX{360}\def\@pgfornamentY{360}%  51
+\or\def\@pgfornamentX{360}\def\@pgfornamentY{360}%  52
+\or\def\@pgfornamentX{360}\def\@pgfornamentY{360}%  53
+\or\def\@pgfornamentX{360}\def\@pgfornamentY{360}%  54
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  55
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  56
+\or\def\@pgfornamentX{200}\def\@pgfornamentY{200}%  57
+\or\def\@pgfornamentX{810}\def\@pgfornamentY{270}%  58
+\or\def\@pgfornamentX{810}\def\@pgfornamentY{270}%  59
+\or\def\@pgfornamentX{450}\def\@pgfornamentY{120}%  60
+\or\def\@pgfornamentX{450}\def\@pgfornamentY{120}%  61
+\or\def\@pgfornamentX{400}\def\@pgfornamentY{180}%  62
+\or\def\@pgfornamentX{400}\def\@pgfornamentY{180}%  63
+\or\def\@pgfornamentX{350}\def\@pgfornamentY{210}%  64
+\or\def\@pgfornamentX{350}\def\@pgfornamentY{210}%  65
+\or\def\@pgfornamentX{400}\def\@pgfornamentY{180}%  66
+\or\def\@pgfornamentX{400}\def\@pgfornamentY{180}%  67
+\or\def\@pgfornamentX{400}\def\@pgfornamentY{170}%  68
+\or\def\@pgfornamentX{400}\def\@pgfornamentY{170}%  69
+\or\def\@pgfornamentX{400}\def\@pgfornamentY{140}%  70
+\or\def\@pgfornamentX{400}\def\@pgfornamentY{140}%  71
+\or\def\@pgfornamentX{300}\def\@pgfornamentY{300}%  72
+\or\def\@pgfornamentX{300}\def\@pgfornamentY{300}%  73
+\or\def\@pgfornamentX{300}\def\@pgfornamentY{300}%  74
+\or\def\@pgfornamentX{300}\def\@pgfornamentY{300}%  75
+\or\def\@pgfornamentX{120}\def\@pgfornamentY{122.5}%  76
+\or\def\@pgfornamentX{120}\def\@pgfornamentY{122.5}%  77
+\fi%
+}%
+\endinput
+\makeatother

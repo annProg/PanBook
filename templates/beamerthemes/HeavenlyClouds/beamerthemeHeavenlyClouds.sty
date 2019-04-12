@@ -1,0 +1,183 @@
+% beamerthemeHeavenlyClouds.sty v1.0 2018/05/15
+% by LianTze Lim (liantze@gmail.com)
+\ProvidesPackage{beamerthemeHeavenlyClouds}
+
+\RequirePackage{cncolours}
+\RequirePackage{pgfornament-han}
+\RequirePackage{tikz}
+\usetikzlibrary{decorations,decorations.markings}
+\RequirePackage{calc}
+
+\setbeamercolor{structure}{fg=殷红}
+\setbeamercolor{headline}{fg=殷红}
+\setbeamercolor{page number in head/foot}{fg=殷红}
+\setbeamercolor{normal text}{bg=牙色}
+\setbeamercolor{alerted text}{fg=紫棠}
+\setbeamercolor{example text}{fg=松花绿}
+% \setbeamercolor{section name}{fg=structure!80!black}
+\setbeamerfont{section name}{size=\Huge,family=\lishu}
+\setbeamerfont{section title}{size=\Huge,family=\lishu}
+\setbeamerfont{section in toc}{family=\lishu}
+
+\usefonttheme[stillsansserifsmall]{serif}
+
+\renewcommand{\CJKrmdefault}{zhfs}
+
+\setbeamerfont{frametitle}{shape=\itshape,family=\lishu,series=\bfseries,size=\LARGE}
+% \setbeamercolor{frametitle}{fg=茜色}
+
+\setbeamerfont{title}{family=\lishu,series=\bfseries,size=\huge}
+
+\setbeamertemplate{itemize items}{$\diamond$}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle continuation}[from second]
+
+\newif\if@clouds@alttitlecircle
+\newcommand{\alttitlecircle}{%
+  \@clouds@alttitlecircletrue%
+}
+
+\preto{\maketitle}{%
+  \def\title@circle@rotate{45}%
+  \def\title@circle@symmetry{none}%
+  \if@clouds@alttitlecircle
+    \def\title@circle@rotate{0}%
+    \def\title@circle@symmetry{h}%
+  \fi%
+  \newbox{\clouds@title@circle@elem}%
+  \savebox{\clouds@title@circle@elem}{%
+    \tikzset{pgfornamentstyle/.style={transform shape,rotate=\title@circle@rotate}}%
+    \usebeamercolor{headline}%
+    \pgfornamenthan[width=1.0471cm,
+       color=headline.fg!80!black,
+       symmetry=\title@circle@symmetry]{74}%
+  }
+  \begin{minipage}{4cm}
+  \begin{tikzpicture}
+    \begin{scope}[decoration={markings, mark=between positions 0 and 1 step 1.0471cm
+    with { \node[transform shape,inner sep=0pt,outer sep=0pt]{\usebox{\clouds@title@circle@elem}}; }} ]
+    \path [postaction={decorate}] circle (2cm);
+    \end{scope}%
+    \node {\inserttitlegraphic};
+  \end{tikzpicture}%
+  \end{minipage}%
+  \hfill\titlegraphic{}
+  \begin{minipage}{\dimexpr\textwidth-5cm}
+}
+\appto{\maketitle}{\end{minipage}}
+
+
+% \setbeamerfont{block title}{series=\centering}
+% \addtobeamertemplate{block alerted begin}{}{\centering}
+% \addtobeamertemplate{block example begin}{}{\centering}
+\addtobeamertemplate{block begin}{
+  \preto{\insertblocktitle}{\raisebox{0.75ex}{\pgfornamenthan[width=1em]{44}\space}}
+  % \appto{\insertblocktitle}{\raisebox{0.5ex}{\space\pgfornamenthan[width=1em]{44}}}
+}{}
+
+\addtobeamertemplate{block alerted begin}{
+  \preto{\insertblocktitle}{\raisebox{0.75ex}{\pgfornamenthan[width=1em]{44}\space}}
+  % \appto{\insertblocktitle}{\raisebox{0.5ex}{\space\pgfornamenthan[width=1em]{44}}}
+}{}
+
+\addtobeamertemplate{block example begin}{
+  \preto{\insertblocktitle}{\raisebox{0.75ex}{\pgfornamenthan[width=1em]{44}\space}}
+  % \appto{\insertblocktitle}{\raisebox{0.5ex}{\space\pgfornamenthan[width=1em]{44}}}
+}{}
+
+\newlength{\clouds@frametitle@rawwidth}%
+\newlength{\clouds@frametitle@actualwidth}%
+\AtBeginDocument{%
+  \newbox{\clouds@title@deco}
+  \savebox{\clouds@title@deco}{%
+    \usebeamercolor{headline}%
+    \pgfornamenthan[width=3.5em,color=headline.fg]{70}%
+  }
+  \setbeamertemplate{frametitle}{%
+    \settowidth{\clouds@frametitle@rawwidth}{\insertframetitle}%
+    \pgfmathsetlength{\clouds@frametitle@actualwidth}{max(\clouds@frametitle@rawwidth,\textwidth)}
+    \vskip.25em\centering%
+    \usebeamerfont{frametitle}\usebeamercolor{frametitle}%
+    \begin{minipage}{\clouds@frametitle@actualwidth}%
+      \raisebox{0.5ex}{\reflectbox{\usebox{\clouds@title@deco}}}\hfill%
+      \parbox{\dimexpr\clouds@frametitle@actualwidth-5em}{\centering\insertframetitle}%
+      \hfill\raisebox{0.5ex}{\usebox{\clouds@title@deco}}%
+    \end{minipage}\par%
+  }
+
+  \newbox{\clouds@smallhuiwen}
+  \savebox{\clouds@smallhuiwen}{\usebeamerfont{headline}\usebeamercolor{headline}\pgfornamenthan[width=2.5em,color=headline.fg]{39}}
+  \setbeamertemplate{headline}{%
+  \tikzset{every node/.append style={inner xsep=0pt}}%
+  \begin{tikzpicture}[decoration={markings, mark=between positions 0 and 1 step 2.5em
+    with { \node[transform shape]{\usebox{\clouds@smallhuiwen}}; }} ]
+  \path [postaction={decorate}] (0,0) -- (\paperwidth,0);
+  \end{tikzpicture}
+  }
+
+  \newlength{\clouds@progressinheadfoot}
+  \setbeamertemplate{footline}{%
+  \tikzset{every node/.append style={inner xsep=0pt}}%
+  \setlength{\clouds@progressinheadfoot}{%
+    \paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt} - 1.25em%
+  }
+  \begin{tikzpicture}[decoration={markings, mark=between positions 0 and 1 step 2.5em
+    with { \node[transform shape]{\usebox{\clouds@smallhuiwen}}; }} ]
+  \path [postaction={decorate}] (0,0) -- (\paperwidth,0);
+  \draw[headline.fg!50,line width=0.6pt] (-1.25em,1.25em) -- (\paperwidth,1.25em);
+  \clip (-1.25em,2em) rectangle (\paperwidth,0pt);
+  \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt);
+  \end{tikzpicture}
+  }
+}
+
+\AtBeginSection{\begin{frame}\sectionpage\end{frame}}
+%\renewcommand{\thesection}{\chinese{section}}
+\setbeamertemplate{section page}{
+\usebeamercolor{section title}\usebeamercolor{section name}
+\newbox{\clouds@section@circle@elem}
+\savebox{\clouds@section@circle@elem}{%
+  \usebeamercolor{headline}%
+  \pgfornamenthan[width=1.0471cm,color=headline.fg!80!black]{59}%
+}
+\newlength{\cloud@secname@height}
+\settototalheight{\cloud@secname@height}{\usebeamerfont{section name}节}
+\begin{tikzpicture}
+  \begin{scope}[decoration={markings, mark=between positions 0 and 1 step 1.0471cm
+  with { \node[transform shape,inner sep=0pt,outer sep=0pt,draw=none]{\usebox{\clouds@section@circle@elem}}; }} ]
+  \path [postaction={decorate}] circle (1.5cm);
+  \end{scope}%
+  \node[anchor=center,text height=\cloud@secname@height,text=section name.fg,font=\usebeamerfont{section name}] {\thesection};
+  \node[anchor=west,text=section title.fg,font=\usebeamerfont{section title},
+  text width=\dimexpr\textwidth-5cm\relax] at (2.5cm,0) {\insertsection};
+\end{tikzpicture}
+}
+
+\RequirePackage{pgfmath}
+\newcommand{\randorn}[1]{%
+  \pgfmathsetmacro{\myscale}{(rnd * 0.4 + 0.1)}
+  \pgfmathsetmacro{\myintensity}{rnd * 20 + 65}
+  \pgfmathsetmacro{\mychoice}{int (ifthenelse(rand > 0, 1, -1)}
+  % \pgfmathparse{int(rand)}
+  \ifnum\mychoice > 0\relax
+    \def\myflip{v}
+  \else
+    \def\myflip{none}
+  \fi
+  \pgfmathsetmacro{\myx}{rnd * 0.8}
+  \pgfmathsetmacro{\myy}{rnd * 0.8}
+  \pgfmathtruncatemacro{\myorn}{random(0,1) + #1}
+  \node at (\myx * \paperwidth, \myy * \paperheight) {\pgfornamenthan[
+  color=normal text.bg!\myintensity!white,symmetry=\myflip,scale=\myscale]{\myorn}};
+}
+\setbeamertemplate{background}{%
+\begin{tikzpicture}
+  \clip (0,0) rectangle (\paperwidth,\paperheight);
+  \randorn{66}\randorn{68}\randorn{66}\randorn{70}\randorn{68}
+\end{tikzpicture}
+}
+
+%% 默认寿字纹图案
+\titlegraphic{\usebeamercolor{headline}\pgfornamenthan[width=2.5cm,color=headline.fg]{56}}
+
+\endinput
