@@ -1,0 +1,185 @@
+\documentclass[aspectratio=43]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+
+\title{Material Design theme \\manual}
+\date{\today}
+\author[Šubert]{Eduard Šubert}
+
+\usetheme{material}
+
+\useDarkTheme
+\usePrimaryRed
+\useAccentGreen
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\begin{card}
+Material Design theme is a theme for Beamer inspired by Google's Material Design. \\[5mm]
+This manual only covers the theme itself, for more information on Material Design go to: 
+\\\url{https://material.io}
+\end{card}
+\end{frame}
+
+\begin{frame}{Table of contents}
+\begin{card}
+\tableofcontents
+\end{card}
+\end{frame}
+
+\section{Setup}
+\begin{frame}{Setup}
+\begin{card}
+Setup is really easy: 
+{\color{primary}\textbackslash usetheme\{material\}}
+\end{card}
+\begin{card}
+Further you might want to customize the background with: \\[2mm]
+{\color{primary}\textbackslash useLightTheme} or {\color{primary}\textbackslash useDarkTheme} \\[2mm]
+and primary and accent colors.
+\end{card}
+\end{frame}
+
+\begin{frame}{Setup -- colors}
+\begin{card}
+There are some colors from the Material Design guidelines coded in. You access those by: \\[2mm]
+{\color{primary} \textbackslash usePrimary[Color]} and {\color{primary}\textbackslash useAccent[Color]}\\[2mm]
+{\tiny {\color{primary}Color} $\in \{$ Red, Pink, Purple, Deep Purple, Indigo, Blue, Light Blue, Cyan, Teal, Green, Light Green, Lime, Yellow, Amber, Orange, Deep Orange, Brown, Grey, Blue Grey $\}$} \\[2mm]
+or you can pick your own:\\[2mm]
+{\color{primary} \textbackslash usePrimary\{primary color, darker primary color, text color\}}
+{\color{primary} \textbackslash useAccent\{primary color, text color\}}\\[2mm]
+{\color{primary} darker primary color} is just darker version of {\color{primary} primary color} and {\color{primary} text color} is color of text on {\color{primary} primary} or {\color{primary} accent colors}.
+\end{card}
+\end{frame}
+
+\section{Card environment}
+\begin{frame}{Card}
+\begin{card}
+All content should only appear in cards. There are several variants:
+\begin{itemize}
+\item plain card
+\item card with a title
+\item card with an image
+\item tiny card
+\end{itemize}
+\end{card}
+\end{frame}
+
+\begin{frame}{plain card}
+\begin{card}
+\end{card}
+
+\begin{card}
+{\color{primary} \textbackslash begin\{card\}\\[2mm]}
+\null\qquad \textit{[your content here]}\\[2mm]
+{\color{primary} \textbackslash end\{card\}}
+\end{card}
+\end{frame}
+
+\begin{frame}{card with a title}
+\begin{card}[Title]
+\end{card}
+
+\begin{card}
+{\color{primary} \textbackslash begin\{card\}[Title]\\[2mm]}
+\null\qquad \textit{[your content here]}\\[2mm]
+{\color{primary} \textbackslash end\{card\}}
+\end{card}
+\end{frame}
+
+\begin{frame}{card with an image}
+\centering
+\cardImg{img/rudolfinum.jpg}{0.5\textwidth}
+
+\begin{card}
+{\color{primary} \textbackslash cardImg\{file name\}\{width\}}
+\end{card}
+\end{frame}
+
+\begin{frame}{tiny card}
+\begin{cardTiny}
+\end{cardTiny}
+
+\begin{card}
+{\color{primary} \textbackslash begin\{cardTiny\}\\[2mm]}
+\null\qquad \textit{[your content here]}\\[2mm]
+{\color{primary} \textbackslash end\{cardTiny\}}
+\end{card}
+\begin{card}
+Tiny card is useful for labels where too much whitespace gets in the way. 
+\end{card}
+\end{frame}
+
+\begin{frame}{Cards can be filled with anything you want}
+
+\begin{card}
+\centering$V(x) = \left\{ y \in \mathbb{R}^n \,|\, \forall z \in P, z\neq x:\, \|y-x\|\leq\|y-z\| \right\}$
+\end{card}
+
+\begin{card}
+\centering
+\begin{tabular}{lcr}
+left & center & right \\
+\hline
+1 & 2 & 3 \\
+\end{tabular}
+\end{card}
+
+\begin{card}
+\begin{theorem}[Pythagorean]
+The sum of the areas of the two squares on the legs equals the area of the square on the hypotenuse.
+\end{theorem}
+\end{card}
+\end{frame}
+
+\section{Image background}
+\begin{frameImg}{img/rudolfinum.jpg}
+\vspace*{60mm}
+\begin{cardTiny}
+Lastly it is possible to set image as a background for a frame:\\[2mm]
+{\color{primary} \textbackslash begin\{frameImg\}["height"]\{file name\}\\[2mm]}
+\null\qquad \textit{[your content here]}\\[2mm]
+{\color{primary} \textbackslash end\{frameImg\}}
+\end{cardTiny}
+\end{frameImg}
+
+\begin{frameImg}[height]{img/rudolfinum.jpg}
+\vspace*{60mm}
+\begin{cardTiny}
+Parameter {\color{primary} ["height"]} determines the dimension that is stretched to cover the frame ({\color{primary} ["width"]} is default).
+\end{cardTiny}
+\end{frameImg}
+
+\begin{frame}
+\begin{multicols}{2}
+[
+\begin{cardTiny}
+Two images side by side with columns.
+\end{cardTiny}
+]
+\centering
+\cardImg{img/rudolfinum.jpg}{0.48\textwidth}
+
+\cardImg{img/rudolfinum.jpg}{0.48\textwidth}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\begin{card}
+That is all for now. Despite having successfully presented several project with this theme, it is still work in progress. If this manual is not clear enough, you can also review it's source, that may bring more clarity.
+\end{card}
+\begin{card}
+Feel free to submit any issues you find on github: \\
+{\footnotesize \url{https://github.com/edasubert/beamerMaterialDesign}}
+\end{card}
+\begin{card}
+This theme is released under MIT license. Feel free to modify or improve or whatever. 
+\end{card}
+\end{frame}
+
+\end{document}
