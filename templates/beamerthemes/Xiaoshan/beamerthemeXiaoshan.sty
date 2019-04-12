@@ -1,0 +1,157 @@
+% beamerthemeXiaoshan.sty v1.0 2018/04/09
+% by LianTze Lim (liantze@gmail.com)
+\ProvidesPackage{beamerthemeXiaoshan}
+
+\usetheme[progressbar=frametitle]{metropolis}
+
+\RequirePackage{pgfornament-han}
+\RequirePackage{tikz}
+\usetikzlibrary{decorations,decorations.markings}
+\RequirePackage{cncolours}
+\RequirePackage{needspace}
+
+\setbeamertemplate{frametitle continuation}[from second]
+
+\renewcommand{\metropolis@colors@dark}{
+  \setbeamercolor{normal text}{%
+    fg=black!2,
+    bg=漆黑
+  }
+  \usebeamercolor[fg]{normal text}
+}
+\renewcommand{\metropolis@colors@light}{
+  \setbeamercolor{normal text}{%
+    fg=漆黑,
+    bg=black!2
+  }
+  \usebeamercolor[fg]{normal text}
+}
+
+\metroset{background=light}
+
+\setbeamercolor{alerted text}{fg=酡红}
+\setbeamercolor{example text}{fg=靛蓝}
+
+\AtBeginEnvironment{theorem}{%
+  \setbeamercolor{block title}{fg=松花绿}
+}
+
+\AtBeginEnvironment{proof}{%
+  \setbeamercolor{block title}{fg=松花绿}
+}
+
+\setbeamercolor{qed symbol}{fg=松花绿}
+
+\setbeamertemplate{title}{
+\raggedleft%
+\linespread{1.0}%
+\inserttitle%
+\hspace*{2em}\par%
+\vspace*{0.5em}
+}
+
+\setbeamertemplate{subtitle}{
+\raggedleft%
+\insertsubtitle%
+\hspace*{2em}\par%
+\vspace*{0.5em}
+}
+\addtobeamertemplate{author}{\raggedleft}{}
+\addtobeamertemplate{date}{\raggedleft}{}
+
+\setbeamertemplate{progress bar in head/foot}{
+  \nointerlineskip
+  \setlength{\metropolis@progressinheadfoot}{%
+    \paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+  }%
+  \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
+    \begin{tikzpicture}%
+      \newbox{\orn}
+      \savebox{\orn}{\pgfornamenthan[width=1em]{39}}
+      \fill[bg!60] (0,0) rectangle (\paperwidth, .55em);
+       \clip (0,0) rectangle (\metropolis@progressinheadfoot, .55em);
+       \begin{scope}[decoration={markings, mark=between positions 0 and 1 step 1em
+  with { \node[transform shape,inner sep=0pt,outer sep=0pt,draw=none]{\usebox{\orn}}; }} ]
+       \path [postaction={decorate}] (.5em,.275em) -- (\dimexpr\metropolis@progressinheadfoot+0.5em, .275em);
+     \end{scope}%
+    \end{tikzpicture}%
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{progress bar in section page}{
+  \setlength{\metropolis@progressonsectionpage}{%
+    \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+  }%
+  \begin{tikzpicture}
+    \newbox{\orn}
+    \savebox{\orn}{\pgfornamenthan[width=.8em]{39}}
+    \fill[bg!60] (0,0) rectangle (\textwidth, .44em);
+     \clip (0,0) rectangle (\metropolis@progressonsectionpage, .44em);
+     \begin{scope}[decoration={markings, mark=between positions 0 and 1 step .8em
+with { \node[transform shape,inner sep=0pt,outer sep=0pt,draw=none]{\usebox{\orn}}; }} ]
+     \path [postaction={decorate}] (.4em,.22em) -- (\dimexpr\metropolis@progressonsectionpage+0.5em, .22em);
+   \end{scope}%
+  \end{tikzpicture}%
+}
+
+\setbeamertemplate{title separator}{%
+  \vspace*{-5em}%
+  \begin{tikzpicture}
+    \newbox{\orn}
+    \savebox{\orn}{\pgfornamenthan[width=2em]{31}}
+    \node[anchor=south east,inner sep=0pt,outer sep=0pt] (endmotif) at (\textwidth,0){\pgfornamenthan[width=2em,symmetry=c]{13}};
+    % \node[rotate=90,anchor=south west,inner sep=0pt,outer sep=0pt] at (endmotif.north east) {\pgfornamenthan[width=2em]{31}};
+    \begin{scope}[decoration={markings, mark=between positions 0 and 1 step 2em
+      with { \node[transform shape,inner sep=0pt,outer sep=0pt,anchor=south]{\usebox{\orn}}; }} ]
+    \path [postaction={decorate}] ([yshift=1em]endmotif.north east) -- ++(0,2em);
+    \clip (0,1em) rectangle ([yshift=-2pt]endmotif.south west);
+    \path [postaction={decorate}] (1em, 0) -- (\textwidth,0);
+    \end{scope}%
+  \end{tikzpicture}%
+\par
+}
+
+\@ifpackageloaded{ctex}{%
+  \renewcommand{\metropolis@strut}{%
+    \vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz()\rule[-6pt]{1em}{0pt}}%
+  }
+}{}
+
+\@ifpackageloaded{CJK}{%
+  \renewcommand{\metropolis@strut}{%
+    \vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz()\rule[-6pt]{1em}{0pt}}%
+  }
+}{}
+
+
+\addtobeamertemplate{block begin}{%
+  \needspace{3em}%
+  \begin{tikzpicture}[overlay]
+    \tikzset{every node/.style={inner sep=0pt,outer sep=0pt,draw=none,松花绿!60}}
+    \node[anchor=north]{\pgfornamenthan[width=1.8em]{9}};%
+    \node[anchor=north west,xscale=0.5] at (0.9em,0) {\pgfornamenthan[width=1.8em]{29}};%
+    \node[anchor=south west,yscale=0.5,rotate=-90] at (-0.9em,-1.8em) {\pgfornamenthan[width=1.8em]{29}};%
+  \end{tikzpicture}\vskip-3pt%
+ }{}
+
+\addtobeamertemplate{block alerted begin}{%
+  \needspace{3em}%
+  \begin{tikzpicture}[overlay]
+    \tikzset{every node/.style={inner sep=0pt,outer sep=0pt,draw=none, alerted text.fg!60}}
+    \node[anchor=north]{\pgfornamenthan[width=1.8em]{9}};%
+    \node[anchor=north west,xscale=0.5] at (0.9em,0) {\pgfornamenthan[width=1.8em]{29}};%
+    \node[anchor=south west,yscale=0.5,rotate=-90] at (-0.9em,-1.8em) {\pgfornamenthan[width=1.8em]{29}};%
+  \end{tikzpicture}\vskip-3pt%
+}{}
+
+\addtobeamertemplate{block example begin}{%
+  \needspace{3em}%
+  \begin{tikzpicture}[overlay]
+    \tikzset{every node/.style={inner sep=0pt,outer sep=0pt,draw=none, example text.fg!60}}
+    \node[anchor=north]{\pgfornamenthan[width=1.8em]{9}};%
+    \node[anchor=north west,xscale=0.5] at (0.9em,0) {\pgfornamenthan[width=1.8em]{29}};%
+    \node[anchor=south west,yscale=0.5,rotate=-90] at (-0.9em,-1.8em) {\pgfornamenthan[width=1.8em]{29}};%
+  \end{tikzpicture}\vskip-3pt%
+}{}
+
+\endinput
