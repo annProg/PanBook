@@ -1,4 +1,5 @@
 #!/bin/bash
+[ "$TRACE"x == "x"x ] && set -x
 
 function getEnv() {
 	env |grep -w $1 &>/dev/null|| eval $1=$2
@@ -44,6 +45,9 @@ function parseMeta() {
 }
 
 info "Welcome to PanBook!"
+note "ScriptDir: $SCRIPTDIR"
+note "WorkDir: $WORKDIR"
+note "ImgDir: $IMGDIR"
 
 function init()
 {
@@ -343,13 +347,13 @@ function setBeamerTheme() {
 }
 
 function beamer() {
-	getEnv TPL ""
+	getEnv TPL "latex"
 	getEnv CJK "微软雅黑"
 	getEnv THEME "metropolis"
-	getEnv COLORTHEME "rose"
-	getEnv FONTTHEME "default"
-	getEnv OUTERTHEME "infolines"
-	getEnv INNTERTHEME "circles"
+	getEnv COLORTHEME ""
+	getEnv FONTTHEME ""
+	getEnv OUTERTHEME ""
+	getEnv INNTERTHEME ""
 	getEnv RATIO "169"
 	
 	init
@@ -383,8 +387,8 @@ function beamer() {
 		
 		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
 		# output tex for debug
-		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
-		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
+		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA -V date="\today" --listings -H listings-set.tex $customHeader
+		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA -V date="\today" --listings -H listings-set.tex $customHeader
 		compileStatus beamer
 	done
 	
