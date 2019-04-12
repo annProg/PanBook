@@ -323,7 +323,7 @@ function epub()
 }
 
 function setBeamerTheme() {
-	themeList=(classyslides Hest opensuse AnnArbor Antibes bars Bergen Berkeley Berlin Boadilla boxes CambridgeUS classic Copenhagen Darmstadt default Dresden EastLansing Frankfurt Goettingen Hannover Ilmenau JuanLesPins lined Luebeck Madrid Malmoe Marburg Montpellier PaloAlto Pittsburgh Rochester shadow sidebar Singapore split Szeged tree Warsaw cuerna detlevcm jltree metropolis nirma phnompenh saintpetersburg)	
+	themeList=(Execushares classyslides Hest opensuse AnnArbor Antibes bars Bergen Berkeley Berlin Boadilla boxes CambridgeUS classic Copenhagen Darmstadt default Dresden EastLansing Frankfurt Goettingen Hannover Ilmenau JuanLesPins lined Luebeck Madrid Malmoe Marburg Montpellier PaloAlto Pittsburgh Rochester shadow sidebar Singapore split Szeged tree Warsaw cuerna detlevcm jltree metropolis nirma phnompenh saintpetersburg)	
 	
 	SELECTEDTHEME=($THEME)
 	# random theme support
