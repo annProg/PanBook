@@ -127,6 +127,8 @@ function compatible()
 }
 
 function templateError() {
+	# TPL变量为空时不做判断
+	[ "$TPL"x == ""x ] && return
 	# 指定template不存在时用默认模板编译
 	TEMPLATE="--template=$cwd/build/$TPL.tpl"
 	[ ! -f $cwd/build/$TPL.tpl ] && error "Template $TPL not found." && exit 1 #TEMPLATE="-V CJKmainfont=$CJK -V documentclass=ctexbook"	
@@ -333,11 +335,15 @@ function setBeamerTheme() {
 	
 	note "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
 	
-	customHeader=""
+	if [ "$TPL"x != ""x ];then
+		customHeader="--template=$TPL.tpl"
+	else
+		customHeader=""
+	fi
 }
 
 function beamer() {
-	getEnv TPL "latex"
+	getEnv TPL ""
 	getEnv CJK "微软雅黑"
 	getEnv THEME "metropolis"
 	getEnv COLORTHEME "rose"
@@ -375,7 +381,7 @@ function beamer() {
 		# 某些theme需要打补丁. 补丁放在theme文件夹下，命名规则 patch-$themename.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
-		OUTPUT="$BUILD/$ofile-$TPL-$t.pdf"
+		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
 		# output tex for debug
 		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
 		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA $TEMPLATE -V date="\today" --listings -H listings-set.tex $customHeader
