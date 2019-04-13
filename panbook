@@ -328,7 +328,7 @@ function setBeamerTheme() {
 	SELECTEDTHEME=($THEME)
 	# random theme support
 	if [ "$1"x == "R"x ];then
-		len=`echo ${#themeList[@]}`
+		len=`echo ${#randomList[@]}`
 		index=$(($RANDOM%$len))	
 		SELECTEDTHEME=(${randomList[$index]})
 	fi
