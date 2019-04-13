@@ -1,5 +1,5 @@
 THEME ?= R
-CONVERT ?= convert
+CONVERT ?= /mingw64/bin/convert
 
 run:
 	THEME=$(THEME) panbook beamer

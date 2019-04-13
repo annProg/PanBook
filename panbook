@@ -323,14 +323,13 @@ function epub()
 }
 
 function setBeamerTheme() {
-	themeList=(material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse AnnArbor Antibes bars Bergen Berkeley Berlin Boadilla boxes CambridgeUS classic Copenhagen Darmstadt default Dresden EastLansing Frankfurt Goettingen Hannover Ilmenau JuanLesPins lined Luebeck Madrid Malmoe Marburg Montpellier PaloAlto Pittsburgh Rochester shadow sidebar Singapore split Szeged tree Warsaw cuerna detlevcm jltree metropolis nirma phnompenh saintpetersburg)	
-	randomList=(material Xiaoshan Execushares classyslides Hest opensuse CambridgeUS metropolis classic Singapore)
+	themeList=(material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse boxes CambridgeUS classic Dresden EastLansing lined Singapore cuerna   metropolis)	
 	SELECTEDTHEME=($THEME)
 	# random theme support
 	if [ "$1"x == "R"x ];then
-		len=`echo ${#randomList[@]}`
+		len=`echo ${#themeList[@]}`
 		index=$(($RANDOM%$len))	
-		SELECTEDTHEME=(${randomList[$index]})
+		SELECTEDTHEME=(${themeList[$index]})
 	fi
 	
 	if [ "$1"x == "A"x ];then
@@ -374,8 +373,6 @@ function beamer() {
 			rm -f $t/*.md
 			rm -f $t/*.pdf
 			cp -rfu $t/* .
-		else
-			echo ${themeList[@]} |grep -w "$t" &>/dev/null || error "Theme $t not found."
 		fi
 	
 		# -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME
