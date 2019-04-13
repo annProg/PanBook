@@ -1,0 +1,104 @@
+\input{preamble.tex}
+\input{title.tex}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Themes}
+
+\subsection{Background images}
+
+\begin{xframe}{Themes for the Elegance}
+
+    You need a \hl{style/images} directory
+    with these files inside:
+
+    \begin{itemize}
+        \item background-section.pdf
+        \item background-slide.pdf
+        \item background-title.pdf
+        \item logo.png
+    \end{itemize}
+
+\end{xframe}
+
+
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../screenshots/theme-1.png}}
+\begin{frame}[plain]
+    .
+\end{frame}
+}
+
+
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../screenshots/theme-2.png}}
+\begin{frame}[plain]
+    .
+\end{frame}
+}
+
+
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{../screenshots/theme-3.png}}
+\begin{frame}[plain]
+    .
+\end{frame}
+}
+
+
+
+
+
+\section{Examples}
+
+\subsection{Showing code}
+
+\begin{xframe}{Code snippets}
+
+    Do you have some code to show on the slide?
+
+    And the same frame should also contain text?
+
+    \begin{cxxcodebox}
+        class example {
+            // \codedots shows grayed-out dots
+            @ \codedots @
+        };
+    \end{cxxcodebox}
+
+    You can use \verb|cxxcodebox| environment.
+    It has \verb|cxx| in the name,
+    but no syntax highlighting is performed.
+
+    For short code snippets,
+    it is better just to highlight the important parts.
+
+\end{xframe}
+
+
+\subsection{Code slides and escapes}
+
+\begin{xframe}{Second slide}
+
+    \begin{cxxcode}
+        class example {
+            // There are a few useful escapes here
+            @ \codedots @ // \codedots shows grayed-out dots
+
+            // Invalid parts can be marked with \hlErr
+            @\hlErr{operator;}@
+
+            // Good parts can be marked with \hlOk
+            @\hlOk{operator() ()}@
+
+            // Other highlighting commands can be seen in
+            // the preamble.tex file
+        };
+    \end{cxxcode}
+
+\end{xframe}
+
+\end{document}

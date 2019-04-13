@@ -1,0 +1,96 @@
+\documentclass[compress]{beamer}
+
+\usepackage{thumbpdf}
+\usepackage{wasysym}
+\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps,pgfshade}
+\usepackage{pgfpages}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{multimedia}
+\usepackage{subcaption}
+\usepackage{ulem}
+\usepackage{textcomp}
+\usepackage{tikz}
+
+\usepackage{listings}
+
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{.8\textwidth}
+
+\usepackage{DejaVuSansMono}
+
+% Adjust the colours to fit your design
+\definecolor{mainthemecolour}{rgb}{0.42,0.48,0.37}
+\definecolor{mainthemecolourlight}{rgb}{0.63,0.72,0.57}
+\definecolor{mainthemecolourstrong}{rgb}{0.40,0.68,0.18}
+\definecolor{mid-gray}{gray}{0.7}
+
+\definecolor{greenstrong}{rgb}{0.58,0.77,0.29}
+\definecolor{redstrong}{rgb}{0.81,0.22,0.23}
+\definecolor{fglisting}{gray}{0.3}
+\definecolor{bglisting}{gray}{1}
+\definecolor{fgshell}{gray}{1}
+\definecolor{bgshell}{gray}{0.1}
+\definecolor{bgshelllight}{gray}{0.8}
+
+
+% Some in-code macros - a bit buggy, but useful
+\newcommand{\hl}[1]{\textcolor{greenstrong}{\texttt{#1}}}
+\newcommand{\hlErr}[1]{\textcolor{redstrong}{\texttt{#1}}}
+\newcommand{\hlOk}[1]{\textcolor{green}{\texttt{#1}}}
+\newcommand{\hlInv}[1]{\colorbox{bgshell}{\textcolor{fgshell}{\texttt{#1}}}}
+
+\newcommand{\unhl}[1]{\textcolor{gray}{#1}}
+\newcommand{\clda}[0]{$\textcolor{blue}{\lambda}$}
+\newcommand{\carr}[0]{$\textcolor{purple}{\rightarrow}$}
+\newcommand{\cbind}[0]{\textbf{\texttt{$>\!\!>\!\!=$}}}
+\newcommand{\codedots}[0]{\textcolor{mid-gray}{...}}
+
+\usetheme{elegance}
+
+\lstnewenvironment{cxxcode}
+    {\lstset
+        { escapeinside={@}{@}
+        , gobble=8
+        , showstringspaces=false
+        , basicstyle=\color{fglisting}
+        , rulecolor=\color{mainthemecolourlight}
+        }
+    }
+    {}
+
+\lstnewenvironment{cxxcodebox}
+    {\lstset
+        { escapeinside={@}{@}
+        , gobble=6
+        , showstringspaces=false
+        , basicstyle=\color{fglisting}
+        , frame=lr
+        , rulecolor=\color{mainthemecolourlight}
+        }
+    }
+    {}
+
+\lstnewenvironment{shellcode}
+    {\lstset
+        { escapeinside={@}{@}
+        , gobble=7
+        , showstringspaces=false
+        , basicstyle=\color{fgshell}
+        , backgroundcolor=\color{bgshell}
+        }
+    }
+    {}
+
+
+% Marking points to use in Tikz
+\usetikzlibrary{arrows,shapes}
+\newcommand{\tikzmark}[1]{\tikz[remember picture] \node[coordinate] (#1) {#1};}
+
+% Fragile frames
+\newenvironment{xframe}[1][]
+  {\begin{frame}[fragile,environment=xframe,#1]}
+  {\end{frame}}
+
