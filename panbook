@@ -50,6 +50,9 @@ do
 	--tpl=*)
 		TPL=${key#*=}
 		shift;;
+	--class=*)
+		DOCUMENTCLASS=${key#*=}
+		shift;;
 	--theme=*)
 		THEME=${key#*=}
 		shift;;
