@@ -53,3 +53,5 @@ for item in `echo $V`;do
 done
 
 echo "$pandocV"
+
+$func
