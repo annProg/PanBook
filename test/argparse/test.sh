@@ -55,3 +55,5 @@ done
 echo "$pandocV"
 
 $func
+
+type -t $func

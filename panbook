@@ -22,11 +22,49 @@ note "ScriptDir: $SCRIPTDIR"
 note "WorkDir: $WORKDIR"
 note "ImgDir: $IMGDIR"
 
-source $SCRIPTDIR/libs/module-*.sh
+# 引入模块
+for module in `ls $SCRIPTDIR/libs/module-*`;do
+	item=`basename $module`
+	source $SCRIPTDIR/libs/$item
+done
 
-case $# in
-	0) printhelp;;
-	1) [ $1 == "help" ] && printhelp  || eval `echo $1`;;
-	2) [ "$2"x = "d"x ] && DEBUG="true";eval `echo $1`;;
-	*) printhelp;;
-esac
+
+if [ $# -ge 1 ];then
+	[ "$1"x == "help"x ] && printhelp
+	func=$1
+	shift
+else
+	printhelp
+fi
+
+# pandoc 通过 -V 传递给模板的变量
+PANDOCVARS=""
+
+for i in "$@"
+do
+	key=$1
+	case $key in
+	-h|--help)
+		FUNCHELP=true
+		shift;;
+	--tpl=*)
+		TPL=${key#*=}
+		shift;;
+	--theme=*)
+		THEME=${key#*=}
+		shift;;
+	-d|--debug)
+		DEBUG=true
+		shift;;
+	-V)
+		PANDOCVARS="$PANDOCVARS -V $2"
+		shift 2;;
+	*);;
+	esac
+done
+
+if [ "`type -t $func`"x == "function"x ];then
+	$func
+else
+	error "Function: $func  not defined"
+fi
