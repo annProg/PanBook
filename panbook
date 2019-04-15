@@ -7,9 +7,9 @@ ofile=`echo $cwd |awk -F '/' '{print $NF}'`
 source $SCRIPTDIR/libs/helper.sh
 source $SCRIPTDIR/libs/env.sh
 
-getEnv SRC "src"
+getVar SRC "src"
 WORKDIR="$cwd/$SRC"
-getEnv IMGDIR "$WORKDIR/images"
+getVar IMGDIR "$WORKDIR/images"
 
 BUILD="$cwd/build"
 METADATA="$WORKDIR/metadata.yaml"
@@ -55,6 +55,12 @@ do
 	-d|--debug)
 		DEBUG=true
 		shift;;
+	--src=*)
+		SRC=${key#*=}
+		shift;;
+	--imgdir=*)
+		IMGDIR=${key#*=}
+		shift;;		
 	--trace)
 		TRACE=true
 		shift;;
