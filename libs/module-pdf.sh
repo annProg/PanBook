@@ -22,10 +22,10 @@ function pagestyle() {
 
 function pdf()
 {
-	getVar TPL "ctex"
-	getVar DOCUMENT "ctexbook"
+	getVar TPL "latex"
+	getVar DOCUMENTCLASS "ctexbook"
 	getVar PAGESTYLE ""
-	getVar CJK ""
+	
 	init  # 首先初始化
 	
 	# 判断设备类型
