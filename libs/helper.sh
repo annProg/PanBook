@@ -9,11 +9,11 @@ function info() {
 }
 
 function note() {
-	echo -e "\033[32m[NOTE] $1\033[0m"
+	[ "$DEBUG"x == "true"x ] && echo -e "\033[32m[NOTE] $1\033[0m"
 }
 
 function warn() {
-	echo -e "\033[33m[WARN] $1\033[0m"
+	[ "$DEBUG"x == "true"x ] && echo -e "\033[33m[WARN] $1\033[0m"
 }
 
 function error() {
