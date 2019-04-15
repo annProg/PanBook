@@ -15,9 +15,9 @@ function setBeamerTheme() {
 	info "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
 	
 	if [ "$TPL"x != ""x ];then
-		addOptions="--template=$TPL.tpl"
+		origAddOptions="--template=$TPL.tpl"
 	else
-		addOptions=""
+		origAddOptions=""
 	fi
 }
 
@@ -33,8 +33,11 @@ function beamer() {
 	
 	# 支持随机选取theme
 	setBeamerTheme $THEME
-	
+	origHighLight="--listings -H listings-set.tex"
+
 	for t in ${SELECTEDTHEME[@]};do
+		addOptions="$origAddOptions"
+		highLight="$origHighLight"
 		# copy beamertheme
 		BEAMERTHEMEDIR=$SCRIPTDIR/templates/beamerthemes/$t
 		USERDEFINETHMEME=$cwd/templates/beamerthemes/$t
@@ -46,18 +49,19 @@ function beamer() {
 			rm -f $t/*.pdf
 			cp -rfu $t/* .
 		fi
-	
-		# -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME
-		PANDOCVARS="$PANDOCVARS -V theme=$t"
-		info "PANDOCVARS: $PANDOCVARS"
 		
 		# 某些theme需要打补丁. 补丁放在theme文件夹下，命名规则 patch-$themename.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
+		info "PANDOCVARS: $PANDOCVARS"
+		info "addOptions: $addOptions"
+		info "highLight: $highLight"
+		
 		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
 		# output tex for debug
-		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA --listings -H listings-set.tex $addOptions
-		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA --listings -H listings-set.tex $addOptions
+		[ "$DEBUG"x == "true"x ] && \
+		pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA  $highLight $addOptions
+		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $highLight $addOptions
 		compileStatus beamer
 	done
 	
