@@ -17,11 +17,6 @@ METADATA="$WORKDIR/metadata.yaml"
 
 source $SCRIPTDIR/libs/core.sh
 
-info "Welcome to PanBook!"
-note "ScriptDir: $SCRIPTDIR"
-note "WorkDir: $WORKDIR"
-note "ImgDir: $IMGDIR"
-
 # 引入模块
 for module in `ls $SCRIPTDIR/libs/module-*`;do
 	item=`basename $module`
@@ -65,6 +60,11 @@ do
 	*);;
 	esac
 done
+
+info "Welcome to PanBook!"
+note "ScriptDir: $SCRIPTDIR"
+note "WorkDir: $WORKDIR"
+note "ImgDir: $IMGDIR"
 
 if [ "`type -t $func`"x == "function"x ];then
 	$func
