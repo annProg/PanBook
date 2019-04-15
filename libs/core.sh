@@ -82,7 +82,7 @@ function templateError() {
 
 function compileStatus() {
 	status=$?
-	note "$1 Compile status: $status"
+	info "$1 Compile status: $status"
 	if [ $status -ne 0 ];then
 		warn "$1 Compile status is not 0. Please Check. For pdf output, you may add VERBOSE=true to see more output"
 	else
@@ -96,7 +96,7 @@ function compatible()
 	# IMGDIR 相对路径
 	IMGDIRFULL=`cd $IMGDIR && pwd`
 	echo $IMGDIRFULL |grep -w $WORKDIR &>/dev/null && r=0 || r=1
-	note "IMGDIR=$IMGDIRFULL"
+	info "IMGDIR=$IMGDIRFULL"
 	if [ $r -eq 0 ];then
 		IMGDIRRELATIVE=`echo $IMGDIRFULL|sed "s#$WORKDIR#.#g"`
 	else
@@ -165,7 +165,7 @@ function init()
 	cp -rf $WORKDIR/* $BUILD
 	cd $BUILD
 	
-	note "Template is: $TPL"
+	info "Template is: $TPL"
 	templateError
 	
 	# 兼容性处理

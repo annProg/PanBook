@@ -17,12 +17,12 @@ function epub()
 
 	for theme in ${highlightStyle[@]}
 	do
-		note "Epub compile theme: $theme"
+		info "Epub compile theme: $theme"
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
 		EPUB_OUTPUT="$BUILD/$ofile-$TPL-$theme.epub"
-		note "Epub compile Options: $EPUB_OPTIONS"
-		note "Epub Output: $EPUB_OUTPUT"
+		info "Epub compile Options: $EPUB_OPTIONS"
+		info "Epub Output: $EPUB_OUTPUT"
 		pandoc $FRONTMATTER $BODY $BACKMATTER -o $EPUB_OUTPUT $EPUB_OPTIONS $TEMPLATE $addCss --metadata date="$DATETIME"
 		compileStatus Epub
 	done
