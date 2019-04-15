@@ -4,12 +4,12 @@ function getEnv() {
 	env |grep -w $1 &>/dev/null|| eval $1=$2
 }
 
-function info() {
-	echo -e "\033[43;34m[INFO] $1\033[0m"
+function note() {
+	echo -e "\033[43;34m[NOTE] $1\033[0m"
 }
 
-function note() {
-	[ "$DEBUG"x == "true"x ] && echo -e "\033[32m[NOTE] $1\033[0m"
+function info() {
+	[ "$DEBUG"x == "true"x ] && echo -e "\033[32m[INFO] $1\033[0m"
 }
 
 function warn() {

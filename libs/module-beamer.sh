@@ -12,7 +12,7 @@ function setBeamerTheme() {
 		SELECTEDTHEME=`echo ${themeList[@]}`
 	fi
 	
-	note "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
+	info "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
 	
 	if [ "$TPL"x != ""x ];then
 		customHeader="--template=$TPL.tpl"
@@ -53,7 +53,7 @@ function beamer() {
 	
 		# -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME
 		THEMEOPT="-V theme=$t -V classoption=aspectratio=$RATIO"
-		note "$THEMEOPT"
+		info "$THEMEOPT"
 		
 		# 某些theme需要打补丁. 补丁放在theme文件夹下，命名规则 patch-$themename.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
