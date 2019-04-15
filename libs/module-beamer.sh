@@ -25,7 +25,6 @@ function beamer() {
 	getVar TPL "latex"
 	getVar THEME "metropolis"
 	getVar DOCUMENTCLASS "ctexbeamer"
-	setPandocVar "classoption=aspectratio" "169"
 	
 	init
 	cd $BUILD
@@ -38,6 +37,8 @@ function beamer() {
 	for t in ${SELECTEDTHEME[@]};do
 		addOptions="$origAddOptions"
 		highLight="$origHighLight"
+		PANDOCVARS="$ORIGPANDOCVARS"
+		setPandocVar "classoption=aspectratio" "169" # setPandocVar需在PANDOCVARS被ORIGPANDOCVARS赋值之后执行
 		# copy beamertheme
 		BEAMERTHEMEDIR=$SCRIPTDIR/templates/beamerthemes/$t
 		USERDEFINETHMEME=$cwd/templates/beamerthemes/$t

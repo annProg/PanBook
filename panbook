@@ -32,7 +32,7 @@ else
 fi
 
 # pandoc 通过 -V 传递给模板的变量
-PANDOCVARS=""
+ORIGPANDOCVARS=""
 
 for i in "$@"
 do
@@ -63,7 +63,7 @@ do
 		TRACE=true
 		shift;;
 	-V)
-		PANDOCVARS="$PANDOCVARS -V $2"
+		ORIGPANDOCVARS="$ORIGPANDOCVARS -V $2"
 		shift 2;;
 	-E)
 		eval $2
@@ -81,7 +81,7 @@ info "TPL: $TPL"
 info "DOCUMENTCLASS: $DOCUMENTCLASS"
 info "THEME: $THEME"
 info "DEBUG: $DEBUG"
-info "PANDOCVARS: $PANDOCVARS"
+info "ORIGPANDOCVARS: $ORIGPANDOCVARS"
 info "TRACE: $TRACE"
 
 
