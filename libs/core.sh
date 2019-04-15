@@ -9,6 +9,10 @@ function parseMeta() {
 	source <(grep -E "^[a-zA-Z]+: " $METADATA | sed -e 's/\s*#.*$//g;s/:[^:\/\/]/="/g;s/$/"/g;s/ *=/=/g' |grep "=")
 }
 
+function setPandocVar() {
+	echo "$PANDOCVARS" |grep -w "$1" &>/dev/null || PANDOCVARS="$PANDOCVARS -V $1=$2"
+}
+
 function clean() {
 	cd $BUILD
 	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`

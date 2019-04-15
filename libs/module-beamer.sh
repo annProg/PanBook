@@ -23,13 +23,9 @@ function setBeamerTheme() {
 
 function beamer() {
 	getEnv TPL "latex"
-	getEnv CJK "微软雅黑"
 	getEnv THEME "metropolis"
-	getEnv COLORTHEME ""
-	getEnv FONTTHEME ""
-	getEnv OUTERTHEME ""
-	getEnv INNTERTHEME ""
-	getEnv RATIO "169"
+	setPandocVar "classoption=aspectratio" "169"
+	setPandocVar "documentclass" "ctexbeamer"
 	
 	init
 	cd $BUILD
@@ -52,16 +48,16 @@ function beamer() {
 		fi
 	
 		# -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME
-		THEMEOPT="-V theme=$t -V classoption=aspectratio=$RATIO"
-		info "$THEMEOPT"
+		PANDOCVARS="$PANDOCVARS -V theme=$t"
+		info "PANDOCVARS: $PANDOCVARS"
 		
 		# 某些theme需要打补丁. 补丁放在theme文件夹下，命名规则 patch-$themename.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
 		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
 		# output tex for debug
-		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA -V date="\today" --listings -H listings-set.tex $customHeader
-		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA -V date="\today" --listings -H listings-set.tex $customHeader
+		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA --listings -H listings-set.tex $customHeader
+		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA --listings -H listings-set.tex $customHeader
 		compileStatus beamer
 	done
 	

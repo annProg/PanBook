@@ -1,5 +1,4 @@
 #!/bin/bash
-[ "$TRACE"x == "x"x ] && set -x
 
 SCRIPTDIR=`cd $(dirname $0);pwd`
 cwd=`pwd`
@@ -47,12 +46,17 @@ do
 		shift;;
 	--class=*)
 		DOCUMENTCLASS=${key#*=}
+		PANDOCVARS="$PANDOCVARS -V documentclass=$DOCUMENTCLASS"
 		shift;;
 	--theme=*)
 		THEME=${key#*=}
+		PANDOCVARS="$PANDOCVARS -V theme=$THEME"
 		shift;;
 	-d|--debug)
 		DEBUG=true
+		shift;;
+	--trace)
+		TRACE=true
 		shift;;
 	-V)
 		PANDOCVARS="$PANDOCVARS -V $2"
@@ -65,8 +69,17 @@ note "Welcome to PanBook!"
 info "ScriptDir: $SCRIPTDIR"
 info "WorkDir: $WORKDIR"
 info "ImgDir: $IMGDIR"
+info "Function: $func"
+info "TPL: $TPL"
+info "DOCUMENTCLASS: $DOCUMENTCLASS"
+info "THEME: $THEME"
+info "DEBUG: $DEBUG"
+info "PANDOCVARS: $PANDOCVARS"
+info "TRACE: $TRACE"
+
 
 if [ "`type -t $func`"x == "function"x ];then
+	[ "$TRACE"x == "true"x ] && set -x
 	$func
 else
 	error "Function: $func  not defined"
