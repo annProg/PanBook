@@ -65,6 +65,9 @@ do
 	-V)
 		PANDOCVARS="$PANDOCVARS -V $2"
 		shift 2;;
+	-E)
+		eval $2
+		shift 2;;
 	*);;
 	esac
 done
