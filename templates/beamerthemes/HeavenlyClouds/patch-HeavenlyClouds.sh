@@ -1,2 +1,2 @@
 #!/bin/bash
-customHeader="-H fix-heavenlyclouds.tex"
+addOptions="-H fix-heavenlyclouds.tex"

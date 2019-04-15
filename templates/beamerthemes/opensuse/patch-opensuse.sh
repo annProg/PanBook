@@ -2,7 +2,7 @@
 
 # fix opensuse theme for newcommand
 
-customHeader="-H fix-opensuse.tex"
+addOptions="-H fix-opensuse.tex"
 authortitle="Author Title"
 organization="Organization"
 event="Event"

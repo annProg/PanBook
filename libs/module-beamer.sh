@@ -15,9 +15,9 @@ function setBeamerTheme() {
 	info "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
 	
 	if [ "$TPL"x != ""x ];then
-		customHeader="--template=$TPL.tpl"
+		addOptions="--template=$TPL.tpl"
 	else
-		customHeader=""
+		addOptions=""
 	fi
 }
 
@@ -56,8 +56,8 @@ function beamer() {
 		
 		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
 		# output tex for debug
-		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA --listings -H listings-set.tex $customHeader
-		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA --listings -H listings-set.tex $customHeader
+		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA --listings -H listings-set.tex $addOptions
+		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA --listings -H listings-set.tex $addOptions
 		compileStatus beamer
 	done
 	

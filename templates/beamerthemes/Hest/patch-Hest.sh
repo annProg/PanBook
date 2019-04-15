@@ -1,3 +1,3 @@
 #!/bin/bash
 
-customHeader="-V classoption=xcolor={dvipsnames}"
+addOptions="-V classoption=xcolor={dvipsnames}"
