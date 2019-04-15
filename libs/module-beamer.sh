@@ -24,8 +24,8 @@ function setBeamerTheme() {
 function beamer() {
 	getVar TPL "latex"
 	getVar THEME "metropolis"
+	getVar DOCUMENTCLASS "ctexbeamer"
 	setPandocVar "classoption=aspectratio" "169"
-	setPandocVar "documentclass" "ctexbeamer"
 	
 	init
 	cd $BUILD
@@ -50,6 +50,7 @@ function beamer() {
 			cp -rfu $t/* .
 		fi
 		
+		PANDOCVARS="$PANDOCVARS -V theme=$t -V documentclass=$DOCUMENTCLASS"
 		# 某些theme需要打补丁. 补丁放在theme文件夹下，命名规则 patch-$themename.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		

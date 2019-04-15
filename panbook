@@ -46,11 +46,9 @@ do
 		shift;;
 	--class=*)
 		DOCUMENTCLASS=${key#*=}
-		PANDOCVARS="$PANDOCVARS -V documentclass=$DOCUMENTCLASS"
 		shift;;
 	--theme=*)
 		THEME=${key#*=}
-		PANDOCVARS="$PANDOCVARS -V theme=$THEME"
 		shift;;
 	-d|--debug)
 		DEBUG=true
