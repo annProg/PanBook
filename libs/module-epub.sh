@@ -21,7 +21,7 @@ function epub()
 		info "Epub compile theme: $theme"
 		source $SCRIPTDIR/config.default
 		[ -f $cwd/config ] && source $cwd/config
-		EPUB_OUTPUT="$BUILD/$ofile-$TPL-$theme.epub"
+		EPUB_OUTPUT="$BUILD/$ofile-$CSS-$theme.epub"
 		info "Epub compile Options: $EPUB_OPTIONS"
 		info "Epub Output: $EPUB_OUTPUT"
 		pandoc $FRONTMATTER $BODY $BACKMATTER -o $EPUB_OUTPUT $EPUB_OPTIONS $TEMPLATE $addCss --metadata date="$DATETIME"
