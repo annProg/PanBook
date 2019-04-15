@@ -50,6 +50,9 @@ do
 	--theme=*)
 		THEME=${key#*=}
 		shift;;
+	--css=*)
+		CSS=${key#*=}
+		shift;;
 	-d|--debug)
 		DEBUG=true
 		shift;;

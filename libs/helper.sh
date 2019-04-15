@@ -39,9 +39,11 @@ function printhelp() {
 	echo -e "\t--tpl       specify template for pandoc"
 	echo -e "\t--class     specify documentclass for latex"
 	echo -e "\t--theme     specify beamer theme"
+	echo -e "\t--css       specify epub css"
 	echo -e "\t--src       specify src dir name(default src)"
 	echo -e "\t--imgdir    specify image dir name(default src/images)"
-	echo -e "\t-V key=val  simple add to pandoc command. Same with pandoc -V option"
+	echo -e "\t-V key=val  same with pandoc -V option"
+	echo -e "\t-E key=val  set variable for template or beamer theme"
 	echo -e "\t-d --debug  debug mode"
 	echo -e "\t-h --help   function help(if exists)"
 	exit 0
