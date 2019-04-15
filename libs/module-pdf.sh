@@ -22,20 +22,20 @@ function pagestyle() {
 
 function pdf()
 {
-	getEnv TPL "ctex"
-	getEnv DOCUMENT "ctexbook"
-	getEnv PAGESTYLE ""
-	getEnv CJK ""
+	getVar TPL "ctex"
+	getVar DOCUMENT "ctexbook"
+	getVar PAGESTYLE ""
+	getVar CJK ""
 	init  # 首先初始化
 	
 	# 判断设备类型
-	getEnv DEVICE "pc"
+	getVar DEVICE "pc"
 	
 	# elegantbook 模板选项
-	getEnv ELEGANT "cn"
+	getVar ELEGANT "cn"
 	
 	# ctex模板随机选用封面背景
-	getEnv COVER "29"
+	getVar COVER "29"
 	if [ "$COVER"x == "r"x ];then
 		background="images/$(($RANDOM%60)).png"
 	else

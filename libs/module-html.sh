@@ -1,6 +1,6 @@
 function html()
 {	
-	getEnv TPL "html5"
+	getVar TPL "html5"
 	init
 	pdf2jpg # html中使用jpg图片，因此需要为pdf格式的插图准备同名jpg
 	

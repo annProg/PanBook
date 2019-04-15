@@ -1,5 +1,5 @@
 #!/bin/bash
-getEnv BACKGROUND "simple"
+getVar BACKGROUND "simple"
 STYLEIMAGE="$cwd/build/style/images"
 note "StyleImage: $STYLEIMAGE-$BACKGROUND"
 [ ! -d $STYLEIMAGE ] && mkdir -p $STYLEIMAGE

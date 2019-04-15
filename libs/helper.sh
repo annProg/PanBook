@@ -1,7 +1,9 @@
 #!/bin/bash
 
-function getEnv() {
-	env |grep -w $1 &>/dev/null|| eval $1=$2
+function getVar() {
+	cmd="echo \$$1"
+	val=`eval $cmd`
+	[ "$val"x == ""x ] && eval $1=$2
 }
 
 function note() {

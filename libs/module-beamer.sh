@@ -22,8 +22,8 @@ function setBeamerTheme() {
 }
 
 function beamer() {
-	getEnv TPL "latex"
-	getEnv THEME "metropolis"
+	getVar TPL "latex"
+	getVar THEME "metropolis"
 	setPandocVar "classoption=aspectratio" "169"
 	setPandocVar "documentclass" "ctexbeamer"
 	
