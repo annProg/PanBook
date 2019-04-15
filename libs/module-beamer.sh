@@ -35,6 +35,7 @@ function beamer() {
 	origHighLight="--listings -H listings-set.tex"
 
 	for t in ${SELECTEDTHEME[@]};do
+		note "THEME: $t"
 		addOptions="$origAddOptions"
 		highLight="$origHighLight"
 		PANDOCVARS="$ORIGPANDOCVARS"

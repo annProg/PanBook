@@ -2,7 +2,7 @@ THEME ?= R
 CONVERT ?= /mingw64/bin/convert
 
 run:
-	THEME=$(THEME) panbook beamer
+	panbook beamer --theme=$(THEME)
 	
 png:
 	cd build && mkdir all-beamer && mkdir all-beamer-title && \
