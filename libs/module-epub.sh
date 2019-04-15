@@ -2,6 +2,7 @@ function epub()
 {
 	getVar TPL "epub"
 	getVar CSS "epub"
+	note "CSS: $CSS"
 	addCss=""
 	[ "$CSS"x != ""x ] && addCss="--css=$BUILD/css/$CSS.css"
 	
