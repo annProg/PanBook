@@ -1,38 +1,16 @@
-function setBeamerTheme() {
-	themeList=(material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse boxes CambridgeUS classic Dresden EastLansing lined Singapore cuerna   metropolis)	
-	SELECTEDTHEME=($THEME)
-	# random theme support
-	if [ "$1"x == "R"x ];then
-		len=`echo ${#themeList[@]}`
-		index=$(($RANDOM%$len))	
-		SELECTEDTHEME=(${themeList[$index]})
-	fi
-	
-	if [ "$1"x == "A"x ];then
-		SELECTEDTHEME=`echo ${themeList[@]}`
-	fi
-	
-	info "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
-	
-	if [ "$TPL"x != ""x ];then
-		origAddOptions="--template=$TPL.tpl"
-	else
-		origAddOptions=""
-	fi
-}
-
 function beamer() {
 	getVar TPL "latex"
 	getVar THEME "metropolis"
 	getVar DOCUMENTCLASS "ctexbeamer"
 	
+	themeList=(material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse boxes CambridgeUS classic Dresden EastLansing lined Singapore cuerna   metropolis)	
+
 	init
 	cd $BUILD
 	
 	
 	# 支持随机选取theme
-	setBeamerTheme $THEME
-	origHighLight="--listings -H listings-set.tex"
+	setTheme $themeList
 
 	for t in ${SELECTEDTHEME[@]};do
 		note "THEME: $t"
@@ -68,5 +46,5 @@ function beamer() {
 		compileStatus beamer
 	done
 	
-	#clean
+	clean
 }

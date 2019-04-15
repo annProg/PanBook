@@ -176,3 +176,28 @@ function init()
 	compatible
 }
 
+function setTheme() {
+	themeList=$1
+	SELECTEDTHEME=($THEME)
+	# random theme support
+	if [ "$THEME"x == "R"x ];then
+		len=`echo ${#themeList[@]}`
+		index=$(($RANDOM%$len))	
+		SELECTEDTHEME=(${themeList[$index]})
+	fi
+	
+	if [ "$THEME"x == "A"x ];then
+		SELECTEDTHEME=`echo ${themeList[@]}`
+	fi
+	
+	info "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
+	
+	if [ "$TPL"x != ""x ];then
+		origAddOptions="--template=$TPL.tpl"
+	else
+		origAddOptions=""
+	fi
+	
+	origHighLight="--listings -H listings-set.tex"	
+}
+
