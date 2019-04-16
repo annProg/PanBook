@@ -88,7 +88,7 @@ function compileStatus() {
 	status=$?
 	info "$1 Compile status: $status"
 	if [ $status -ne 0 ];then
-		warn "$1 Compile status is not 0. Please Check. For pdf output, you may add VERBOSE=true to see more output"
+		error "$1 Compile status is not 0. Please Check. you may add -d to see more output"
 	else
 		note "$1 Compile SUCCESSFUL"
 	fi
@@ -176,28 +176,70 @@ function init()
 	compatible
 }
 
-function setTheme() {
-	themeList=$1
-	SELECTEDTHEME=($THEME)
-	# random theme support
-	if [ "$THEME"x == "R"x ];then
-		len=`echo ${#themeList[@]}`
+function setBase() {
+	Type=$1
+	Select=$2
+	List=$3
+	
+	SELECTED=($Select)
+	
+	if [ "$Select"x == "R"x ];then
+		len=`echo ${#List[@]}`
 		index=$(($RANDOM%$len))	
-		SELECTEDTHEME=(${themeList[$index]})
+		SELECTED=(${List[$index]})
+	fi
+		
+	if [ "$Select"x == "A"x ];then
+		SELECTED=`echo ${themeList[@]}`
 	fi
 	
-	if [ "$THEME"x == "A"x ];then
-		SELECTEDTHEME=`echo ${themeList[@]}`
-	fi
-	
-	info "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
-	
+	info "SELECTED $Type: $SELECTED"
 	if [ "$TPL"x != ""x ];then
 		origAddOptions="--template=$TPL.tpl"
 	else
 		origAddOptions=""
 	fi
 	
-	origHighLight="--listings -H listings-set.tex"	
+	origHighLight="--listings -H listings-set.tex"
+}
+function setTheme() {
+	setBase BeamerTheme $THEME $1	
 }
 
+function setClass() {
+	setBase PdfClass $DOCUMENTCLASS $1
+}
+
+function copyrightPage() {	
+	getVar copyright "true"
+	getVar licence "ccncnd"
+	getVar homepage "https://github.com/annProg/PanBook"
+	
+	case licence in
+	ccnd) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
+	ccnc) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
+	ccncnd) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
+	ccncsa) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
+	ccncsand) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
+	pd) licenceContent="Licensed under Public Domain";;
+	*) licenceContent="版权所有，未经许可，禁止以任何方式复制本书内容";;
+	esac
+	
+	if [ "$1"x == "pdf"x ];then
+	
+		COPYRIGHTPAGE="add-copyright-page.tex"
+		if [ "$copyright"x == "true" ];then
+			cat > $COPYRIGHTPAGE <<EOF
+\newpage
+~\vfill
+\thispagestyle{empty}
+\noindent Copyright \copyright\ \the\year\  \@author
+\noindent \textsc{Published by \href{https://github.com/annProg/PanBook}{PanBook}}\\ % Publisher
+\noindent \textsc{$homepage}
+\noindent $licenceContent
+\noindent \textit{最后编译日期, \today\ \currenttime }
+EOF
+			echo "-B $COPYRIGHTPAGE"
+		fi
+	fi
+}

@@ -12,7 +12,7 @@ function beamer() {
 	# 支持随机选取theme
 	setTheme $themeList
 
-	for t in ${SELECTEDTHEME[@]};do
+	for t in ${SELECTED[@]};do
 		note "THEME: $t"
 		addOptions="$origAddOptions"
 		highLight="$origHighLight"
