@@ -219,8 +219,13 @@ $if(homepage)$
 \noindent \textsc{$homepage$}\\ % URL
 $endif$
 
-\noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\ % License information
+$if(licence)$
+\l$licence$
 
+$else$
+\noindent 版权所有，未经许可，不得复制本书任何内容。\\
+
+$endif$
 \noindent \textit{最后编译日期, \today\ \currenttime } % Printing/edition date
 $endif$
 
