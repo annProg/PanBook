@@ -1,25 +1,3 @@
-# 设置一些变量
-function pagestyle() {
-	CLASSOPTION=""
-	DIVISION="default"
-	COMPLEXOPTION=""
-	if [ "$PAGESTYLE"x == ""x ];then
-		case $DOCUMENT in
-		ctexbook) PAGESTYLE="fancy"; CLASSOPTION="-V classoption=fancyhdr"; DIVISION="chapter";;
-		article) PAGESTYLE="headings"; DIVISION="default"; [ "$CJK"x == ""x ] && CJK="SimSun";;
-		*) PAGESTYLE="plain";DIVISION="default"; [ "$CJK"x == ""x ] && CJK="SimSun";;
-		esac
-	fi
-	
-	if [ "$CJK"x != ""x ];then
-		CJKOPT="-V CJKmainfont=$CJK"
-	fi
-	
-	if [ "$TPL"x == "latex"x ];then
-		COMPLEXOPTION="-V documentclass=$DOCUMENT $CLASSOPTION $CJKOPT -H listings-set.tex -V pagestyle=$PAGESTYLE -V geometry=top=1in -V geometry=inner=1in -V geometry=outer=1in -V geometry=bottom=1in -V geometry=headheight=3ex -V geometry=headsep=2ex"	
-	fi
-}
-
 function pdf()
 {
 	getVar TPL "latex"
