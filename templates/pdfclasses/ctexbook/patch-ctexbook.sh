@@ -101,14 +101,14 @@ cat >> $TITLEPAGE <<EOF
 EOF
 else
 cat >> $TITLEPAGE <<EOF
-  \ThisTileWallPaper{\paperwidth}{\paperheight}{$background}
+  %\ThisTileWallPaper{\paperwidth}{\paperheight}{$background}
 	\vspace{.18\textheight}
 	\begin{center}
-		{\title$device\bfseries Test\par}
+		{\title$device\bfseries $title\par}
 	\vspace{1cm}
-		{\subtitle$device Test\par}
+		{\subtitle$device $subtitle\par}
 	\vspace{2.5cm}
-		Ann He
+		$author
 	\vfill\centering{使用 PanBook 编译 \par \today\par}
 		\vspace$device
 	\end{center}
