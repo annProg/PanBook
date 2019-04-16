@@ -200,7 +200,7 @@ function setBase() {
 		origAddOptions=""
 	fi
 	
-	origHighLight="--listings -H listings-set.tex"
+	origHighLight="--listings -H $SCRIPTDIR/templates/latex/listings-set.tex"
 }
 function setTheme() {
 	setBase BeamerTheme $THEME $1	
