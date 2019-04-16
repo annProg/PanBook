@@ -3,17 +3,17 @@
 # use this path to set custom addOptions, PANDOCVARS and highLight
 
 note "use -E device=(pc|mobile|kindel) to produce different size of pdf"
-note "use -E cover=(1-60|R) to select cover page background. R means random"
+note "use -E cover=(1-60|R|N) to select cover page background. R means random. N means don't add cover image"
 note "use -E coverimg=path to use custom titlepage"
+note "use -E privatetpl=(true|false) to use custom template define by this class"
 
 FIX="header-ctexbook.tex"
 TITLEPAGE="titlepage-ctexbook.tex"
 
-addOptions="$addOptions -H $FIX -H $TITLEPAGE"
-
 setPandocVar "classoption" "fancyhdr,bookmark"
 setPandocVar "pagestyle" "fancy"
 division="--top-level-division=chapter"
+getVar privatetpl "true"
 
 # ctex模板随机选用封面背景
 getVar cover "29"
@@ -23,11 +23,18 @@ else
 	background="images/$cover.png"
 fi
 
+if [ "$privatetpl"x == "true"x ];then
+	addOptions="--template=ctexbook.tpl -V background=$background -V device=$device"
+	highLight=""
+else
+	addOptions="$addOptions -H $FIX -H $TITLEPAGE"
+fi
+
 parseMeta
+
 cat > $FIX <<EOF
 \usepackage{wallpaper}
 \usepackage{geometry}
-\usepackage{fancyhdr}
 % 设备类型
 \newcommand{\devicemobile}{
 	\geometry{
@@ -56,11 +63,11 @@ cat > $FIX <<EOF
 \newcommand{\devicepc}{
 	\geometry{
 		top=1in,
-		inner=1in,
-		outer=1in,
+		%inner=1in,
+		%outer=1in,
 		bottom=1in,
-		headheight=3ex,
-		headsep=2ex
+		%headheight=3ex,
+		%headsep=2ex
 	}
 }
 
@@ -80,9 +87,9 @@ EOF
 cat > $TITLEPAGE <<EOF
 \renewcommand*{\maketitle}{%
 \begin{titlepage}
+  \setkeys{Gin}{width=\paperwidth,height=100pt}
   \thispagestyle{empty}
   \noindent\fboxsep=0pt
-  \setkeys{Gin}{width=\paperwidth,height=\paperheight}
 EOF
 
 if [ "$coverimg"x != ""x ];then
@@ -106,7 +113,7 @@ EOF
 fi
 
 cat >> $TITLEPAGE <<EOF
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 \end{titlepage}
 }
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 EOF
