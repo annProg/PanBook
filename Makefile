@@ -11,16 +11,16 @@ all: ctex ctex6in ctexart elegantbook epub online
 pdf: ctex ctex6in elegantbook
 
 ctex: 
-	COVER=r panbook pdf
+	panbook pdf -E cover=R
 ctex6in: 
-	DEVICE=mobile COVER=r panbook pdf
-article:
-	DOCUMENT=ctexart TPL=latex panbook pdf
+	panbook pdf -E cover=R -E device=mobile
+ctexart:
+	panbook pdf --class=ctexart
 elegantbook: 
-	TPL=elegantbook panbook pdf
+	panbook pdf --class=elegantbook
 epub:
 	rm -f build/*.epub
-	panbook epub d
+	panbook epub -d
 	mv build/$(REPO)-*.epub build/$(REPO).epub
 	
 up: release upload
@@ -38,9 +38,9 @@ upload:
 	done
 
 online:
-	scp -P $(PORT) build/$(REPO)-ctex-pc.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/$(REPO)-latex-pc.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/$(REPO)-ctex-mobile.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/$(REPO)-elegantbook-pc.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO)-latex-ctexbook-pc.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO)-latex-ctexbook-mobile.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO)-latex-ctexart-pc.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO)-latex-elegantbook-pc.pdf $(USER)@$(SERVER):$(DIR)
 	scp -P $(PORT) build/$(REPO).epub $(USER)@$(SERVER):$(DIR)
 	

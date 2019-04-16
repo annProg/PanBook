@@ -1,429 +1,96 @@
 #!/bin/bash
-[ "$TRACE"x == "x"x ] && set -x
 
-function getEnv() {
-	env |grep -w $1 &>/dev/null|| eval $1=$2
-}
-
-cwd=`pwd`
 SCRIPTDIR=`cd $(dirname $0);pwd`
+cwd=`pwd`
 ofile=`echo $cwd |awk -F '/' '{print $NF}'`
-DEBUG="false"
-BUILD="$cwd/build"
-getEnv SRC "src"
+
+source $SCRIPTDIR/libs/helper.sh
+source $SCRIPTDIR/libs/env.sh
+
+getVar SRC "src"
 WORKDIR="$cwd/$SRC"
+getVar IMGDIR "$WORKDIR/images"
+
+BUILD="$cwd/build"
 METADATA="$WORKDIR/metadata.yaml"
-getEnv IMGDIR "$WORKDIR/images"
-highlightStyle=(pygments kate monochrome espresso haddock tango zenburn breezedark)
-DATE=`date +%Y/%m/%d`
-DATETIME=`date +%Y/%m/%d\ %H:%M:%S`
 
-CMD_CONVERT="convert"
-[ "`uname -o`"x == "Msys"x ] && CMD_CONVERT="/mingw64/bin/convert"
+source $SCRIPTDIR/libs/core.sh
 
-function meta() {
-	cat $SCRIPTDIR/src/metadata.yaml
-}
+# 引入模块
+for module in `ls $SCRIPTDIR/libs/module-*`;do
+	item=`basename $module`
+	source $SCRIPTDIR/libs/$item
+done
 
-function info() {
-	echo -e "\033[43;34m[INFO] $1\033[0m"
-}
-function note() {
-	echo -e "\033[32m[NOTE] $1\033[0m"
-}
-function warn() {
-	echo -e "\033[33m[WARN] $1\033[0m"
-}
-function error() {
-	echo -e "\033[31m[ERRO] $1\033[0m"
-	exit 1
-}
 
-function parseMeta() {
-	# 仅支持key全为字母且值为string
-	source <(grep -E "^[a-zA-Z]+: " $METADATA | sed -e 's/\s*#.*$//g;s/:[^:\/\/]/="/g;s/$/"/g;s/ *=/=/g' |grep "=")
-}
+if [ $# -ge 1 ];then
+	[ "$1"x == "help"x ] && printhelp
+	func=$1
+	shift
+else
+	printhelp
+fi
 
-info "Welcome to PanBook!"
-note "ScriptDir: $SCRIPTDIR"
-note "WorkDir: $WORKDIR"
-note "ImgDir: $IMGDIR"
+# pandoc 通过 -V 传递给模板的变量
+ORIGPANDOCVARS=""
 
-function init()
-{
-	[ ! -d $BUILD ] && mkdir $BUILD
-	[ ! -d $WORKDIR ] && mkdir $WORKDIR
-	[ ! -d $IMGDIR ] && mkdir $IMGDIR
-	[ ! -d $cwd/templates ] && mkdir $cwd/templates
-	[ ! -d $cwd/fonts ] && mkdir $cwd/fonts
-	# IMGDIR 相对路径
-	IMGDIRFULL=`cd $IMGDIR && pwd`
-	echo $IMGDIRFULL |grep -w $WORKDIR &>/dev/null && r=0 || r=1
-	note "IMGDIR=$IMGDIRFULL"
-	if [ $r -eq 0 ];then
-		IMGDIRRELATIVE=`echo $IMGDIRFULL|sed "s#$WORKDIR#.#g"`
-	else
-		IMGDIRRELATIVE=`echo $IMGDIRFULL|sed "s#$cwd#..#g"`
-	fi
+for i in "$@"
+do
+	key=$1
+	case $key in
+	-h|--help)
+		FUNCHELP=true
+		shift;;
+	--tpl=*)
+		TPL=${key#*=}
+		shift;;
+	--class=*)
+		DOCUMENTCLASS=${key#*=}
+		shift;;
+	--theme=*)
+		THEME=${key#*=}
+		shift;;
+	--css=*)
+		CSS=${key#*=}
+		shift;;
+	-d|--debug)
+		DEBUG=true
+		shift;;
+	--src=*)
+		SRC=${key#*=}
+		shift;;
+	--imgdir=*)
+		IMGDIR=${key#*=}
+		shift;;		
+	--trace)
+		TRACE=true
+		shift;;
+	-V)
+		ORIGPANDOCVARS="$ORIGPANDOCVARS -V $2"
+		shift 2;;
+	-E)
+		eval $2
+		shift 2;;
+	*);;
+	esac
+done
 
-	cd $WORKDIR
+note "Welcome to PanBook!"
+info "ScriptDir: $SCRIPTDIR"
+info "WorkDir: $WORKDIR"
+info "ImgDir: $IMGDIR"
+info "Function: $func"
+info "TPL: $TPL"
+info "DOCUMENTCLASS: $DOCUMENTCLASS"
+info "THEME: $THEME"
+info "DEBUG: $DEBUG"
+info "ORIGPANDOCVARS: $ORIGPANDOCVARS"
+info "TRACE: $TRACE"
 
-	# 模板, 支持用户自定义模板
-	[ -d $SCRIPTDIR/templates/$TPL ] && cp -rfu $SCRIPTDIR/templates/$TPL/* $BUILD
-	[ -d $cwd/templates/$TPL ] && cp -rfu $cwd/templates/$TPL/* $BUILD 2>/dev/null
-	
-	# 字体
-	cp -rfu $SCRIPTDIR/fonts $BUILD
-	[ -d $cwd/fonts ] && cp -rfu $cwd/fonts/* $BUILD/fonts/ 2>/dev/null
-	
-	# 此时还未复制书籍源码，build目录中的 template或者font中包含的 .md 文件应该被删除
-	rm -f $BUILD/*.md
-	
-	# 文件名规范
-	FRONTMATTER="frontmatter.md"
-	BACKMATTER="backmatter.md"
-	chapters=`ls *.md |grep -vE "$FRONTMATTER|$BACKMATTER" 2>/dev/null`
-	BODY="$chapters"
-	
-	# 前言和后记部分
-	[ ! -f $FRONTMATTER ] && touch $FRONTMATTER
-	[ ! -f $BACKMATTER ] && touch $BACKMATTER
-	[ ! -f metadata.yaml ] && meta > metadata.yaml
-	[ "$DEBUG"x = "true"x ] && highlightStyle=(tango)
-	
-	# 复制$SRC目录下资源文件到build目录
-	cp -rf $WORKDIR/* $BUILD
-	cd $BUILD
-	
-	note "Template is: $TPL"
-	templateError
-	
-	# 兼容性处理
-	compatible
-}
 
-# 兼容不规范源码
-function compatible()
-{	
-	cd $BUILD
-	COMPATIBLE="compatible.conf"
-	PREFIX="PanBook-compatible-"
-	if [ -f $COMPATIBLE ];then
-		for stype in frontmatter backmatter body exclude;do
-			newName=$PREFIX$stype.md
-			echo > $newName
-			for item in `grep -E "$stype$" $COMPATIBLE |awk '{print $1}'`;do
-				if [ "$stype" == "exclude" ];then
-					rm -f $item
-				else
-					cat $item >> $newName
-					echo -e "\n\n" >> $newName
-				fi
-				
-				# 被删除及写入frontmatter和backmatter的源码，需要从BODY中排除
-				BODY=`echo $BODY |sed -r "s/($item | $item)//g"`
-				[ $stype == "frontmatter" ] && FRONTMATTER=$newName
-				[ $stype == "backmatter" ] && BACKMATTER=$newName
-				[ $stype == "body" ] && BODY=$newName				
-			done
-		done
-	fi
-}
-
-function templateError() {
-	# TPL变量为空时不做判断
-	[ "$TPL"x == ""x ] && return
-	# 指定template不存在时用默认模板编译
-	TEMPLATE="--template=$cwd/build/$TPL.tpl"
-	[ ! -f $cwd/build/$TPL.tpl ] && error "Template $TPL not found." && exit 1 #TEMPLATE="-V CJKmainfont=$CJK -V documentclass=ctexbook"	
-}
-
-function compileStatus() {
-	status=$?
-	note "$1 Compile status: $status"
-	if [ $status -ne 0 ];then
-		warn "$1 Compile status is not 0. Please Check. For pdf output, you may add VERBOSE=true to see more output"
-	else
-		note "$1 Compile SUCCESSFUL"
-	fi
-}
-
-# 设置一些变量
-function pagestyle() {
-	CLASSOPTION=""
-	DIVISION="default"
-	COMPLEXOPTION=""
-	if [ "$PAGESTYLE"x == ""x ];then
-		case $DOCUMENT in
-		ctexbook) PAGESTYLE="fancy"; CLASSOPTION="-V classoption=fancyhdr"; DIVISION="chapter";;
-		article) PAGESTYLE="headings"; DIVISION="default"; [ "$CJK"x == ""x ] && CJK="SimSun";;
-		*) PAGESTYLE="plain";DIVISION="default"; [ "$CJK"x == ""x ] && CJK="SimSun";;
-		esac
-	fi
-	
-	if [ "$CJK"x != ""x ];then
-		CJKOPT="-V CJKmainfont=$CJK"
-	fi
-	
-	if [ "$TPL"x == "latex"x ];then
-		COMPLEXOPTION="-V documentclass=$DOCUMENT $CLASSOPTION $CJKOPT -H listings-set.tex -V pagestyle=$PAGESTYLE -V geometry=top=1in -V geometry=inner=1in -V geometry=outer=1in -V geometry=bottom=1in -V geometry=headheight=3ex -V geometry=headsep=2ex"	
-	fi
-}
-
-function pdf()
-{
-	getEnv TPL "ctex"
-	getEnv DOCUMENT "ctexbook"
-	getEnv PAGESTYLE ""
-	getEnv CJK ""
-	init  # 首先初始化
-	
-	# 判断设备类型
-	getEnv DEVICE "pc"
-	
-	# elegantbook 模板选项
-	getEnv ELEGANT "cn"
-	
-	# ctex模板随机选用封面背景
-	getEnv COVER "29"
-	if [ "$COVER"x == "r"x ];then
-		background="images/$(($RANDOM%60)).png"
-	else
-		background="images/$COVER.png"
-	fi
-		
-	# 根据模板适配变量
-	pagestyle	
-	source $SCRIPTDIR/config.default		
-	[ -f $cwd/config ] && source $cwd/config
-	
-	cd $BUILD
-	# 生成前言和后记
-	pandoc -t latex $FRONTMATTER --top-level-division=$DIVISION --listings -o frontmatter.tex
-	pandoc -t latex $BACKMATTER --top-level-division=$DIVISION --listings -o backmatter.tex
-
-	TEX_OUTPUT="$ofile-$TPL-$DEVICE.tex"
-	pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS -B frontmatter.tex -A backmatter.tex --metadata-file=$METADATA $TEMPLATE -V device=$DEVICE -V elegantoption=$ELEGANT -V date="\today" -V background=$background $COMPLEXOPTION
-	
-	#sed -i 's/\DefineVerbatimEnvironment{Highlighting}.*/\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\\\\{\\},fontsize=\\small,xleftmargin=3mm,frame=lines}/g' $TEX_OUTPUT
-	sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
-	sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
-	#sed -i -E "s/begin\{lstlisting\}$/begin\{lstlisting\}\[float=htbp\]/g" $TEX_OUTPUT
-	#sed -i "s/\.jpg/\.eps/g" $TEX_OUTPUT
-	
-	# gif格式图片编译报错，需要引用eps格式，需转换后使用
-	sed -i -r "s#(\includegraphics\{.*?).(gif)(\})#\1.eps\3#g" $TEX_OUTPUT
-	
-	# 网络图片需要替换为本地文件
-	sed -i -r "s#(\includegraphics\{)http(s)?://(.*)#\1$IMGDIRRELATIVE/\3#g" $TEX_OUTPUT
-	
-	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
-	xelatex -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
-	compileStatus PDF
-	
-	clean
-}
-
-# 保存网络图片至本地
-function saveimg() 
-{
-	cd $IMGDIR
-	for item in `ls $WORKDIR/*.md`;do
-		for url in `grep -E "^\!\[.*?\]\(http(s)?://.*\)" $item |awk -F"(" '{print $2}' |tr -d ')'`;do
-			wget -m -np $url
-			localpath=`echo $url |sed -r 's#http(s)?://##g'`
-			echo $localpath |grep -E "\.gif$" && r=0 || r=1
-			if [ $r -eq 0 ];then
-				new=`echo $localpath |sed -r "s/\.gif$//g"`
-				$CMD_CONVERT $localpath $new.eps
-				mv $new-0.eps $new.eps 2>/dev/null
-				rm -f $new-*.eps
-			fi
-		done
-	done
-	cd $cwd
-}
-
-function toeps()
-{
-	cd $IMGDIR
-	for item in `ls *.$1`;do
-		new=`echo $item |sed -r "s/.$1$//g"`
-		$CMD_CONVERT $item $new.eps
-		mv $new-0.eps $new.eps 2>/dev/null
-		rm -f $new-*.eps
-	done
-	cd $cwd
-}
-
-# 转换为eps格式
-function eps()
-{
-	toeps gif
-}
-
-function pdf2jpg()
-{
-	cd $BUILD
-	for id in $BODY $FRONTMATTER $BACKMATTER;do
-		sed -i -r 's/(!\[.*?\]\(.*?)(\.pdf\))/\1.jpg)/g' $id
-	done
-}
-
-function html()
-{	
-	getEnv TPL "html5"
-	init
-	pdf2jpg # html中使用jpg图片，因此需要为pdf格式的插图准备同名jpg
-	
-	cd $BUILD
-	for theme in ${highlightStyle[@]}
-	do
-		source $SCRIPTDIR/config.default
-		[ -f $cwd/config ] && source $cwd/config
-	
-		HTML_OUTPUT="$BUILD/$ofile-$TPL-$theme.html"
-		pandoc --self-contained $FRONTMATTER $BODY $BACKMATTER -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA $TEMPLATE
-		compileStatus HTML
-	done	
-	
-	clean
-}
-
-function epub()
-{
-	getEnv TPL "epub"
-	getEnv CSS "epub"
-	addCss=""
-	[ "$CSS"x != ""x ] && addCss="--css=$BUILD/css/$CSS.css"
-	
-	init
-	pdf2jpg		
-
-	cd $BUILD
-	merge="/tmp/epub-meta-"`echo $RANDOM$RANDOM$RANDOM$RANDOM`
-	cat $METADATA > $merge
-	echo -e "\n\n\n" >> $merge
-	cat $FRONTMATTER >> $merge
-	mv $merge $FRONTMATTER
-
-	for theme in ${highlightStyle[@]}
-	do
-		note "Epub compile theme: $theme"
-		source $SCRIPTDIR/config.default
-		[ -f $cwd/config ] && source $cwd/config
-		EPUB_OUTPUT="$BUILD/$ofile-$TPL-$theme.epub"
-		note "Epub compile Options: $EPUB_OPTIONS"
-		note "Epub Output: $EPUB_OUTPUT"
-		pandoc $FRONTMATTER $BODY $BACKMATTER -o $EPUB_OUTPUT $EPUB_OPTIONS $TEMPLATE $addCss --metadata date="$DATETIME"
-		compileStatus Epub
-	done
-	
-	clean
-}
-
-function setBeamerTheme() {
-	themeList=(material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse boxes CambridgeUS classic Dresden EastLansing lined Singapore cuerna   metropolis)	
-	SELECTEDTHEME=($THEME)
-	# random theme support
-	if [ "$1"x == "R"x ];then
-		len=`echo ${#themeList[@]}`
-		index=$(($RANDOM%$len))	
-		SELECTEDTHEME=(${themeList[$index]})
-	fi
-	
-	if [ "$1"x == "A"x ];then
-		SELECTEDTHEME=`echo ${themeList[@]}`
-	fi
-	
-	note "SELECTEDTHEME: ${SELECTEDTHEME[@]}"
-	
-	if [ "$TPL"x != ""x ];then
-		customHeader="--template=$TPL.tpl"
-	else
-		customHeader=""
-	fi
-}
-
-function beamer() {
-	getEnv TPL "latex"
-	getEnv CJK "微软雅黑"
-	getEnv THEME "metropolis"
-	getEnv COLORTHEME ""
-	getEnv FONTTHEME ""
-	getEnv OUTERTHEME ""
-	getEnv INNTERTHEME ""
-	getEnv RATIO "169"
-	
-	init
-	cd $BUILD
-	
-	
-	# 支持随机选取theme
-	setBeamerTheme $THEME
-	
-	for t in ${SELECTEDTHEME[@]};do
-		# copy beamertheme
-		BEAMERTHEMEDIR=$SCRIPTDIR/templates/beamerthemes/$t
-		USERDEFINETHMEME=$cwd/templates/beamerthemes/$t
-		if [ -d $BEAMERTHEMEDIR -o -d $USERDEFINETHMEME ];then
-			cp -rfu $BEAMERTHEMEDIR $BUILD 2>/dev/null
-			cp -rfu $USERDEFINETHMEME $BUILD 2>/dev/null
-			# 需要删除.md文件
-			rm -f $t/*.md
-			rm -f $t/*.pdf
-			cp -rfu $t/* .
-		fi
-	
-		# -V colortheme=$COLORTHEME -V fonttheme=$FONTTHEME -V outertheme=$OUTERTHEME -V innertheme=$INNTERTHEME
-		THEMEOPT="-V theme=$t -V classoption=aspectratio=$RATIO"
-		note "$THEMEOPT"
-		
-		# 某些theme需要打补丁. 补丁放在theme文件夹下，命名规则 patch-$themename.sh
-		[ -f patch-$t.sh ] && source patch-$t.sh
-		
-		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
-		# output tex for debug
-		[ "$DEBUG"x == "true"x ] && pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA -V date="\today" --listings -H listings-set.tex $customHeader
-		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $THEMEOPT -V CJKmainfont=$CJK --metadata-file=$METADATA -V date="\today" --listings -H listings-set.tex $customHeader
-		compileStatus beamer
-	done
-	
-	#clean
-}
-
-function clean() {
-	cd $BUILD
-	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
-	release="/tmp/release-$rand"
-	mkdir $release
-	mv *.pdf *.tex *.epub *.html $release 2>/dev/null
-	rm -fr *
-	mv $release/* .
-	rm -fr $release
-}
-
-function cleanall()
-{
-	cd $BUILD
-	rm -fr *
-}
-
-function printhelp() {
-	echo -e "  eBook maker base pandoc\n"
-	echo -e "\tpanbook init        initialize work environment"
-	echo -e "\tpanbook pdf         make pdf ebook"
-	echo -e "\tpanbook html        make html ebook"
-	echo -e "\tpanbook epub        make epub ebook"
-	echo -e "\tpanbook beamer      make beamer"
-	echo -e "\tpanbook help        print help info"
-	echo -e "\tpanbook saveimg     save image url to local"
-	echo -e "\tpanbook eps         convert gif to eps"
-}
-
-case $# in
-	0) printhelp;;
-	1) [ $1 == "help" ] && printhelp  || eval `echo $1`;;
-	2) [ "$2"x = "d"x ] && DEBUG="true";eval `echo $1`;;
-	*) printhelp;;
-esac
+if [ "`type -t $func`"x == "function"x ];then
+	[ "$TRACE"x == "true"x ] && set -x
+	$func
+else
+	error "Function: $func  not defined"
+fi
