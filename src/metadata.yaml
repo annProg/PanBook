@@ -4,6 +4,7 @@ subtitle: 用Markdown和Pandoc写作
 #cover: images/cover.jpg          # 是否使用自定义封面，如果不使用，则自动生成封面（仅ctex模板有效）
 author:          # 作者（数组）
   - An He
+  - He An
 date: \today     # 日期
 copyright: true  # 是否生成版权页
 lof: true        # 是否生成插图列表页
