@@ -213,33 +213,8 @@ function setClass() {
 function copyrightPage() {	
 	getVar copyright "true"
 	getVar licence "ccncnd"
-	getVar homepage "https://github.com/annProg/PanBook"
 	
-	case licence in
-	ccnd) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
-	ccnc) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
-	ccncnd) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
-	ccncsa) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
-	ccncsand) licenceContent="Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.";;
-	pd) licenceContent="Licensed under Public Domain";;
-	*) licenceContent="版权所有，未经许可，禁止以任何方式复制本书内容";;
-	esac
-	
-	if [ "$1"x == "pdf"x ];then
-	
-		COPYRIGHTPAGE="add-copyright-page.tex"
-		if [ "$copyright"x == "true" ];then
-			cat > $COPYRIGHTPAGE <<EOF
-\newpage
-~\vfill
-\thispagestyle{empty}
-\noindent Copyright \copyright\ \the\year\  \@author
-\noindent \textsc{Published by \href{https://github.com/annProg/PanBook}{PanBook}}\\ % Publisher
-\noindent \textsc{$homepage}
-\noindent $licenceContent
-\noindent \textit{最后编译日期, \today\ \currenttime }
-EOF
-			echo "-B $COPYRIGHTPAGE"
-		fi
+	if [ "$copyright"x == "true"x ];then
+		echo "-H $SCRIPTDIR/templates/latex/add-copyright-page.tex -V copyright=true -V licence=$licence"	
 	fi
 }

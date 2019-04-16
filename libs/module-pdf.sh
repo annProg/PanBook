@@ -63,7 +63,7 @@ function pdf()
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
 		# 版权页
-		addOptions="$addOptions `copyrightPage pdf`"
+		addOptions="$addOptions `copyrightPage`"
 		
 		info "PANDOCVARS: $PANDOCVARS"
 		info "addOptions: $addOptions"
