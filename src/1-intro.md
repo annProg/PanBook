@@ -31,7 +31,7 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 
 
 ### 开始使用
-假设电子书目录为 `/d/dev/mybook`，使用方法见代码\ref{#panbookhelp}。
+假设电子书目录为 `/d/dev/mybook`，使用方法见代码\ref{panbookhelp}。
 
 ```{#panbookhelp .bash caption="Panbook Help"}
 $ cd /d/dev/mybook
