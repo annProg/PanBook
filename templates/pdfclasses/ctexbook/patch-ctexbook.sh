@@ -6,12 +6,13 @@ note "use -E device=(pc|mobile|kindel) to produce different size of pdf"
 note "use -E cover=(1-60|R|N) to select cover page background. R means random. N means don't add cover image"
 note "use -E coverimg=path to use custom titlepage"
 note "use -E privatetpl=(true|false) to use custom template define by this class"
+note "use -E pagestyle=style to set pagestyle"
 
 FIX="header-ctexbook.tex"
 TITLEPAGE="titlepage-ctexbook.tex"
 
 setPandocVar "classoption" "fancyhdr,bookmark"
-setPandocVar "pagestyle" "fancy"
+getVar "pagestyle" "fancy"
 division="--top-level-division=chapter"
 getVar privatetpl "true"
 
@@ -35,6 +36,8 @@ parseMeta
 cat > $FIX <<EOF
 \usepackage{wallpaper}
 \usepackage{geometry}
+\usepackage{fancyhdr}
+\pagestyle{$pagestyle}
 % 设备类型
 \newcommand{\devicemobile}{
 	\geometry{
@@ -66,8 +69,8 @@ cat > $FIX <<EOF
 		%inner=1in,
 		%outer=1in,
 		bottom=1in,
-		%headheight=3ex,
-		%headsep=2ex
+		headheight=3ex,
+		headsep=2ex
 	}
 }
 
@@ -87,7 +90,7 @@ EOF
 cat > $TITLEPAGE <<EOF
 \renewcommand*{\maketitle}{%
 \begin{titlepage}
-  \setkeys{Gin}{width=\paperwidth,height=100pt}
+  \setkeys{Gin}{width=10pt,height=100pt}
   \thispagestyle{empty}
   \noindent\fboxsep=0pt
 EOF
