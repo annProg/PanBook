@@ -14,6 +14,14 @@
 - [Ctex模板-mobile](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-mobile.pdf)
 - [Epub模板](https://api.annhe.net/PanBook/PanBook.epub)
 
+查看beamer幻灯片效果
+
+- [beamer幻灯片](./demo/beamer/README.md)
+
+查看论文效果
+
+- [ElegantPaper](https://api.annhe.net/PanBook/PanBook-latex-elegantpaper-pc.pdf)
+
 ## 快速开始
 以`Windows 10`为例，演示如何使用。
 
