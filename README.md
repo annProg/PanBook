@@ -53,31 +53,35 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 
 ```
 $ cd /d/dev/mybook
-$ panbook init                  # 初始化工作环境
-$ panbook epub                  # 生成epub电子书
-$ panbook pdf                   # 生成pdf电子书
-$ panbook beamer                # 生成beamer幻灯片
-$ panbook html                  # 生成html电子书
-$ panbook epub d                # 加d选项意为debug模式，仅生成一种代码高亮样式(epub和html格式有效)
-$ panbook eps                   # 将IMGDIR中的png或gif图片转为eps供latex使用
-$ SRC=markdown panbook epub     # 使用环境变量
+$ panbook help
+  eBook maker base pandoc
+
+        Usage: panbook <functions> [OPTIONS]
+
+  Available functions:
+        init        initialize work environment
+        pdf         make pdf ebook
+        html        make html ebook
+        epub        make epub ebook
+        beamer      make beamer
+        help        print help info
+        saveimg     save image url to local
+        eps         convert gif to eps
+  Available OPTIONS:
+        --tpl       specify template for pandoc
+        --class     specify documentclass for latex
+        --theme     specify beamer theme
+        --css       specify epub css
+        --src       specify src dir name(default src)
+        --imgdir    specify image dir name(default src/images)
+        -V key=val  same with pandoc -V option
+        -E key=val  set variable for template or beamer theme
+        -d --debug  debug mode
+        -h --help   function help(if exists)
 ```
 
+
 之后在`src`目录进行写作, `src/images`目录存放图片
-
-### 可用环境变量
-
-| 环境变量 | 用途 |
-| ------ | ---- |
-|TPL     |    指定模板           elegantbook\|ctex\|epub\|html5 |
-DEVICE   |   指定设备类型       mobile\|kindle\|pc  需要模板支持|
-ELEGANT  |   elegantbook专用设置elegantbook选项，可设置语言模板(cn\|en)，颜色主题(green\|blue\|cyan\|plain)，章标题显示风格(hang\|display)，比如  ELEGANT=cn,blue  即使用中文，蓝色主题编译|
-CSS      |    指定epub自定义样式文件名，css应放置在对应模板目录下的css文件夹下|
-SRC      |   默认SRC目录名为 src ，可以通过此环境变量更改|
-IMGDIR   |   指定图片文件夹路径|
-COVER    | 为`ctex`模板指定封面背景图片编号（`1-60`或者用`r`表示随机）|
-CJK      | beamer模板可用，指定CJK字体 |
-DOCUMENT | latex模板可用，指定文档类 |
 
 ## 注意事项
 - 在Windows上使用`Pandoc`需要`Markdown`文件保存为`UTF-8`格式
