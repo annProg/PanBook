@@ -7,7 +7,7 @@ OWNER ?= annProg
 REPO ?= PanBook
 TAG ?= $(shell git rev-parse --short HEAD)
 
-all: ctex ctex6in ctexart elegantbook epub online
+all: ctex ctex6in ctexart elegantbook elegantnote elegantpaper epub online
 pdf: ctex ctex6in elegantbook
 
 ctex: 
@@ -18,6 +18,10 @@ ctexart:
 	panbook pdf --class=ctexart
 elegantbook: 
 	panbook pdf --class=elegantbook
+elegantnote: 
+	panbook pdf --class=elegantnote
+elegantpaper: 
+	panbook pdf --class=elegantpaper	
 epub:
 	rm -f build/*.epub
 	panbook epub -d
@@ -38,9 +42,6 @@ upload:
 	done
 
 online:
-	scp -P $(PORT) build/$(REPO)-latex-ctexbook-pc.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/$(REPO)-latex-ctexbook-mobile.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/$(REPO)-latex-ctexart-pc.pdf $(USER)@$(SERVER):$(DIR)
-	scp -P $(PORT) build/$(REPO)-latex-elegantbook-pc.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/$(REPO)-latex-*.pdf $(USER)@$(SERVER):$(DIR)
 	scp -P $(PORT) build/$(REPO).epub $(USER)@$(SERVER):$(DIR)
 	
