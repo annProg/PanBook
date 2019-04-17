@@ -9,6 +9,7 @@
 查看电子书效果：
 
 - [ElegantBook模板-pc](https://api.annhe.net/PanBook/PanBook-latex-elegantbook-pc.pdf)
+- [ElegantNote模板](https://api.annhe.net/PanBook/PanBook-latex-elegantnote-pc.pdf)
 - [Ctex模板-pc](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-pc.pdf)
 - [Ctexart模板-pc](https://api.annhe.net/PanBook/PanBook-latex-ctexart-pc.pdf)
 - [Ctex模板-mobile](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-mobile.pdf)
