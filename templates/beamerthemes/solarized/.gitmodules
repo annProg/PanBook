@@ -1,0 +1,3 @@
+[submodule "latex_style"]
+	path = latex_style
+	url = https://github.com/homerours/latex_style

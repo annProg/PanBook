@@ -1,0 +1,46 @@
+% Template Maths LaTeX de léo
+
+% Packages
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathrsfs}
+\usepackage{graphicx,graphics}
+\usepackage{epsfig}
+\usepackage{latexsym} % symbols
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{lmodern}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%   TEST IF BEAMER   %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter%
+\@ifclassloaded{beamer}%
+{%
+	% Special beamer packages
+	%Bilio
+	\usepackage[backend=bibtex,natbib=true, bibstyle=authoryear, citestyle=authoryear-comp, maxcitenames=2]{biblatex}
+	\defbibheading{bibliography}[\bibname]{}
+}%
+{%
+	% Special article packages
+	\usepackage[a4paper,vmargin={2.4cm,2.8cm},hmargin={2.4cm,2.4cm}]{geometry}
+	\usepackage[labelfont={bf}, margin=1cm]{caption}
+	% Hyperrefs
+	\usepackage[pdfpagemode=UseNone,bookmarksopen=false,colorlinks=true,urlcolor=blue,citecolor=blue,citebordercolor=blue,linkcolor=blue]{hyperref}
+	% Biblio
+	\usepackage[nottoc, notlof, notlot]{tocbibind}
+	% Theorems
+	\usepackage{thmtools}
+	\declaretheorem[thmbox=L,name=Theorem]{theorem}
+	\declaretheorem[name=Proposition,thmbox=M,numberlike=theorem]{proposition}
+	\declaretheorem[name=Lemma,thmbox=S,numberlike=theorem]{lemma}
+	\declaretheorem[name=Definition,thmbox=M,numberlike=theorem]{definition}
+	\declaretheorem[name=Corollary,thmbox=M,numberlike=theorem]{corollary}
+	\declaretheorem[name=Conjecture,thmbox=M,numberlike=theorem]{conjecture}
+
+	% Proofs
+	\renewenvironment{proof}[1][\unskip]{\noindent\textbf{Proof #1.} }{\hfill$\square$}
+}%
+\makeatother%

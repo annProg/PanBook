@@ -1,0 +1,57 @@
+\documentclass[10pt, compress]{beamer}
+\usepackage{latex_style/packages}
+\usepackage{latex_style/notations}
+\usepackage[light,sectionframe]{latex_style/beamerthemesolarized} % if the .sty file is in ../
+
+\addbibresource{./references.bib}
+
+\title{}
+\subtitle{}
+\date{\today}
+\author{}
+\institute{}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Contents}
+	\tableofcontents
+\end{frame}
+
+% First section
+\section{Motivation}
+
+\subsection{History}
+
+\begin{frame}{Introduction}{Model}
+
+	% Blocks
+	\begin{block}{Block title}
+	\end{block}
+
+	% Columns
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\hspace*{-0.68 cm}
+				\includegraphics[width=6.7cm]{ph_diag.pdf}
+				\vspace{-0.20 cm}
+				\caption{caption}
+			\end{figure}
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\section*{Bibliography}
+\begin{frame}[allowframebreaks]
+	\frametitle{References}
+	\printbibliography
+\end{frame}
+
+
+\end{document}
