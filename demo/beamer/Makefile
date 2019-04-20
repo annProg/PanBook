@@ -22,3 +22,6 @@ link:
 	for item in `grep "themeList=" ../../libs/module-beamer.sh |awk -F'=' '{print $$2}' |tr -d '()'`;do echo "- [$$item](https://$(SERVER)/PanBook/beamer-beamer-$$item.pdf)";done
 online:
 	scp -P $(PORT) build/beamer-*.pdf $(USER)@$(SERVER):$(DIR)
+	
+single:
+	scp -P $(PORT) build/beamer-beamer-$(THEME).pdf $(USER)@$(SERVER):$(DIR)
