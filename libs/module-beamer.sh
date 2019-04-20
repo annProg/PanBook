@@ -3,7 +3,7 @@ function beamer() {
 	getVar THEME "metropolis"
 	getVar DOCUMENTCLASS "ctexbeamer"
 	
-	themeList=(material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse boxes CambridgeUS classic Dresden EastLansing lined Singapore cuerna   metropolis)	
+	themeList=(solarized material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse boxes CambridgeUS classic Dresden EastLansing lined Singapore cuerna   metropolis)	
 
 	init
 	cd $BUILD

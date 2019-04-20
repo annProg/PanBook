@@ -2,6 +2,7 @@
 
 演示：
 
+- [solarized](https://api.annhe.net/PanBook/beamer-beamer-solarized.pdf)
 - [material](https://api.annhe.net/PanBook/beamer-beamer-material.pdf)
 - [HeavenlyClouds](https://api.annhe.net/PanBook/beamer-beamer-HeavenlyClouds.pdf)
 - [Xiaoshan](https://api.annhe.net/PanBook/beamer-beamer-Xiaoshan.pdf)
