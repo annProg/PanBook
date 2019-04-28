@@ -6,6 +6,20 @@
 
 \usepackage[yyyymmdd,hhmmss]{datetime}
 
+\usepackage{ifxetex,ifluatex}
+$if(CJKmainfont)$
+  \ifxetex
+    \usepackage{xeCJK}
+    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+  \fi
+$endif$
+$if(CJKmainfont)$
+  \ifluatex
+    \usepackage[$for(luatexjafontspecoptions)$$luatexjafontspecoptions$$sep$,$endfor$]{luatexja-fontspec}
+    \setmainjfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
+  \fi
+$endif$
+
 % 设备类型
 \newcommand{\devicemobile}{
 	\geometry{
