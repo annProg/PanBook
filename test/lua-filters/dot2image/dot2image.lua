@@ -22,6 +22,8 @@ function CodeBlock(block)
         local img = dot2image(block.text, filetype)
         local fname = pandoc.sha1(img) .. "." .. filetype
         pandoc.mediabag.insert(fname, mimetype, img)
-        return pandoc.Para{ pandoc.Image({pandoc.Str("dot tune")}, fname) }
+		-- 增加 "fig:" 可以给生成的图片加caption，pandoc.Str中内容为caption
+		-- 可以研究如何将codeblock的caption传递到这里
+        return pandoc.Para{ pandoc.Image({pandoc.Str("dot tune")}, fname, "fig:") }
     end
 end
