@@ -1,5 +1,5 @@
 # Dot code to Image Test
 
-```ci-dot
+```{#dotcode .ci-dot caption="Test Graphviz"}
 digraph G { a->b;}
 ```
