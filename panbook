@@ -101,7 +101,9 @@ info "ORIGPANDOCVARS: $ORIGPANDOCVARS"
 info "TRACE: $TRACE"
 
 
-PANDOC_REFERENCE_PARAM="-F pandoc-crossref -M \"crossrefYaml=$CFS\" -F pandoc-citeproc $BIB --csl=$CSL"
+PANDOC_REFERENCE_PARAM="-F pandoc-crossref -M listings=true -M \"crossrefYaml=$CFS\" -F pandoc-citeproc $BIB --csl=$CSL"
+
+info "PANDOC_REFERENCE_PARAM: $PANDOC_REFERENCE_PARAM"
 
 if [ "`type -t $func`"x == "function"x ];then
 	[ "$TRACE"x == "true"x ] && set -x

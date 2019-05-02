@@ -22,7 +22,9 @@ function parse_yaml {
    }'
 }
 
-source <(parse_yaml $METADATA |sed 's/_item//' |tr -d '"' |awk -F'=' '{print $1"=\""$2"`[ \"$"$1"\"x != \"\"x ] && echo \", $"$1"\"`\""}')
+# 如果一个变量有定义，第二行的方式将得到拼接的结果，因此除了数组，其他变量不使用第二行的方式
+source <(parse_yaml $METADATA)
+source <(parse_yaml $METADATA |grep "_item=" |sed 's/_item//' |tr -d '"' |awk -F'=' '{print $1"=\""$2"`[ \"$"$1"\"x != \"\"x ] && echo \", $"$1"\"`\""}')
 
 #parseMeta
 

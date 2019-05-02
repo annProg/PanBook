@@ -36,7 +36,7 @@ function pdf()
 		fi
 	
 		PANDOCVARS="$PANDOCVARS -V documentclass=$t"
-		
+
 		# 打补丁. 补丁放在templates/pdfclasses/classname 文件夹下，命名规则 patch-$classname.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
@@ -47,6 +47,8 @@ function pdf()
 		info "addOptions: $addOptions"
 		info "highLight: $highLight"
 		info "division: $division"
+		info "copyright: $copyright"
+		info "licence: $licence"
 		
 		# 生成前言和后记		
 		pandoc -t latex $FRONTMATTER $division --listings -o frontmatter.tex

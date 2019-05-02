@@ -24,7 +24,8 @@ function parse_yaml {
 
 function parseMeta() {
 	# 仅支持key全为字母
-	source <(parse_yaml $METADATA |sed 's/_item//' |tr -d '"' |awk -F'=' '{print $1"=\""$2"`[ \"$"$1"\"x != \"\"x ] && echo \", $"$1"\"`\""}')
+	source <(parse_yaml $METADATA)
+	source <(parse_yaml $METADATA |grep "_item=" |sed 's/_item//' |tr -d '"' |awk -F'=' '{print $1"=\""$2"`[ \"$"$1"\"x != \"\"x ] && echo \", $"$1"\"`\""}')
 }
 
 function setPandocVar() {
@@ -229,7 +230,7 @@ function setClass() {
 	setBase PdfClass $DOCUMENTCLASS $1
 }
 
-function copyrightPage() {	
+function copyrightPage() {
 	getVar copyright "true"
 	getVar licence "ccncnd"
 	
