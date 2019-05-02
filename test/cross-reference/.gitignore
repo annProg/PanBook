@@ -3,3 +3,5 @@
 *.toc
 *.aux
 *.log
+*.html
+*.tex

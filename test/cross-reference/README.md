@@ -10,22 +10,11 @@
 
 ## 代码
 
-```{#code:test .bash caption="Test Code Reference"}
+- `\ref`方式： 如代码\ref{lst:test}所示
+- `[@id]`语法: 如代码[@lst:test]所示
+- `[Prefix @id]`语法: 如[代码 @lst:test]所示
+
+```{#lst:test .bash caption="Test Code Reference"}
 #/bin/bash
 echo "hello world"
 ```
-
-## Numbered example lists
-
-此语法可能和crossref冲突
-
-(@)  My first example will be numbered (1).
-(@)  My second example will be numbered (2).
-
-Explanation of examples.
-
-(@)  My third example will be numbered (3).
-
-(@good)  This is a good example.
-
-As (@good) illustrates, ...
