@@ -10,6 +10,7 @@ source $SCRIPTDIR/libs/env.sh
 getVar SRC "src"
 WORKDIR="$cwd/$SRC"
 getVar IMGDIR "$WORKDIR/images"
+getVar csl "chinese-gb7714-2005-numeric.csl"
 
 BUILD="$cwd/build"
 METADATA="$WORKDIR/metadata.yaml"
@@ -24,8 +25,7 @@ done
 
 
 if [ $# -ge 1 ];then
-	[ "$1"x == "help"x ] && printhelp
-	func=$1
+	[ "$1"x == "-help"x -o "$1"x == "-h"x -o "$1"x == "help"x ] && printhelp
 	shift
 else
 	printhelp
@@ -53,6 +53,12 @@ do
 	--css=*)
 		CSS=${key#*=}
 		shift;;
+	--csl=*)
+		CSL=${key#*=}
+		shift;;
+	--bib=*)
+		BIB=${key#*=}
+		shift;;		
 	-d|--debug)
 		DEBUG=true
 		shift;;
