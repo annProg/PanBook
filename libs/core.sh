@@ -180,6 +180,7 @@ function init()
 	# 前言和后记部分
 	[ ! -f $FRONTMATTER ] && touch $FRONTMATTER
 	[ ! -f $BACKMATTER ] && touch $BACKMATTER
+	[ ! -f $BIB ] && touch $BIB
 	[ ! -f metadata.yaml ] && meta > metadata.yaml
 	[ "$DEBUG"x = "true"x ] && highlightStyle=(tango)
 	

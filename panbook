@@ -28,6 +28,7 @@ done
 
 if [ $# -ge 1 ];then
 	[ "$1"x == "-help"x -o "$1"x == "-h"x -o "$1"x == "help"x ] && printhelp
+	func=$1
 	shift
 else
 	printhelp
