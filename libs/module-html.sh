@@ -11,7 +11,7 @@ function html()
 		[ -f $cwd/config ] && source $cwd/config
 	
 		HTML_OUTPUT="$BUILD/$ofile-$TPL-$theme.html"
-		pandoc --self-contained $FRONTMATTER $BODY $BACKMATTER -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA $TEMPLATE
+		pandoc $PANDOC_REFERENCE_PARAM --self-contained $FRONTMATTER $BODY $BACKMATTER -o $HTML_OUTPUT $HTML_OPTIONS --metadata-file=$METADATA $TEMPLATE
 		compileStatus HTML
 	done	
 	

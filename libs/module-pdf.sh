@@ -57,7 +57,7 @@ function pdf()
 
 		TEX_OUTPUT="$ofile-$TPL-$t-$device.tex"
 		PDF_OPTIONS="$PDF_OPTIONS -B frontmatter.tex -A backmatter.tex --metadata-file=$METADATA"
-		pandoc $BODY -o $TEX_OUTPUT $PDF_OPTIONS $division $highLight $addOptions $PANDOCVARS
+		pandoc $PANDOC_REFERENCE_PARAM $BODY -o $TEX_OUTPUT $PDF_OPTIONS $division $highLight $addOptions $PANDOCVARS
 		
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT

@@ -41,8 +41,8 @@ function beamer() {
 		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
 		# output tex for debug
 		[ "$DEBUG"x == "true"x ] && \
-		pandoc -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA  $highLight $addOptions
-		pandoc -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $highLight $addOptions
+		pandoc $PANDOC_REFERENCE_PARAM -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA  $highLight $addOptions
+		pandoc $PANDOC_REFERENCE_PARAM -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $highLight $addOptions
 		compileStatus beamer
 	done
 	

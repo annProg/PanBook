@@ -10,7 +10,9 @@ source $SCRIPTDIR/libs/env.sh
 getVar SRC "src"
 WORKDIR="$cwd/$SRC"
 getVar IMGDIR "$WORKDIR/images"
-getVar csl "chinese-gb7714-2005-numeric.csl"
+getVar CSL "$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl"
+getVar BIB "$WORKDIR/src/bibliography.bib"
+getVar CFS "$SCRIPTDIR/pandoc-crossref-settings.yaml"
 
 BUILD="$cwd/build"
 METADATA="$WORKDIR/metadata.yaml"
@@ -56,8 +58,12 @@ do
 	--csl=*)
 		CSL=${key#*=}
 		shift;;
+	--cfs=*)
+		CFS=${key#*=}
+		shift;;		
 	--bib=*)
-		BIB=${key#*=}
+		bibtmp=${key#*=}
+		BIB="$BIB --bibliography=$bibtmp"
 		shift;;		
 	-d|--debug)
 		DEBUG=true
@@ -93,6 +99,8 @@ info "DEBUG: $DEBUG"
 info "ORIGPANDOCVARS: $ORIGPANDOCVARS"
 info "TRACE: $TRACE"
 
+
+PANDOC_REFERENCE_PARAM="-F pandoc-crossref -M \"crossrefYaml=$CFS\" -F pandoc-citeproc $BIB --csl=$CSL"
 
 if [ "`type -t $func`"x == "function"x ];then
 	[ "$TRACE"x == "true"x ] && set -x

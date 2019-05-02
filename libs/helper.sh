@@ -42,6 +42,7 @@ function printhelp() {
 	echo -e "\t--css       specify epub css"
 	echo -e "\t---bib      specify bibliography file(default src/bibliography.bib)"
 	echo -e "\t--csl       specify csl file for pandoc-citeproc(default chinese-gb7714-2005-numeric.csl)"
+	echo -e "\t--cfs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)"
 	echo -e "\t--src       specify src dir name(default src)"
 	echo -e "\t--imgdir    specify image dir name(default src/images)"
 	echo -e "\t-V key=val  same with pandoc -V option"
