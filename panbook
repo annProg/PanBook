@@ -11,7 +11,7 @@ getVar SRC "src"
 WORKDIR="$cwd/$SRC"
 getVar IMGDIR "$WORKDIR/images"
 getVar CSL "$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl"
-getVar BIB "$WORKDIR/src/bibliography.bib"
+getVar BIB "$WORKDIR/bibliography.bib"
 getVar CFS "$SCRIPTDIR/pandoc-crossref-settings.yaml"
 
 BUILD="$cwd/build"
