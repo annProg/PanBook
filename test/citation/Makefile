@@ -11,5 +11,8 @@ run-bib:
 pandoc:
 	pandoc -F pandoc-citeproc --bibliography=test.bib --csl=chinese-gb7714-2005-numeric.csl test-pandoc.md -o test-pandoc.tex -s -V documentclass=ctexbook
 	pandoc -F pandoc-citeproc --bibliography=test.bib --csl=chinese-gb7714-2005-numeric.csl test-pandoc.md -o test.pdf --pdf-engine=xelatex -V CJKmainfont="NSimSun" -V documentclass=ctexbook -V classoption=fancyhdr -V pagestyle=fancy --top-level-division=chapter
+epub:	
+	pandoc -F pandoc-citeproc --bibliography=test.bib --csl=chinese-gb7714-2005-numeric.csl test-pandoc.md -o test.epub
+
 clean:
 	rm -f *.log *.aux *.bbl *.blg
