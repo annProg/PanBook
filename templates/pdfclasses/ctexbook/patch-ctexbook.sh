@@ -2,7 +2,7 @@
 
 # use this path to set custom addOptions, PANDOCVARS and LSTSET, COPYPAGE
 
-note "use -E device=(pc|mobile|kindel) to produce different size of pdf"
+note "use -E device=(pc|mobile|kindle) to produce different size of pdf"
 note "use -E cover=(1-60|R|N) to select cover page background. R means random. N means don't add cover image"
 note "use -E coverimg=path to use custom titlepage"
 note "use -E privatetpl=(true|false) to use custom template define by this class"

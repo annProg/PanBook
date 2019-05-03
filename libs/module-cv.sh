@@ -34,7 +34,9 @@ function cv() {
 		OUTPUT="$BUILD/$ofile-cv-$t.pdf"
 		trimHeader
 		
-		CV_REFERENCE_PARAM="-F pandoc-citeproc $BIB --csl=$CSL --lua-filter $SCRIPTDIR/filters/add-header.lua --template=$CV.tpl"
+		CV_REFERENCE_PARAM="-F pandoc-citeproc $BIB --csl=$CSL --lua-filter $SCRIPTDIR/filters/add-header.lua --template=$t.tpl"
+		[ -f $t.lua ] && CV_REFERENCE_PARAM="$CV_REFERENCE_PARAM --lua-filter $t.lua"
+		info "CV_REFERENCE_PARAM: $CV_REFERENCE_PARAM"
 		# output tex for debug
 		[ "$DEBUG"x == "true"x ] && \
 		pandoc $CV_REFERENCE_PARAM --listings $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $addOptions

@@ -1,11 +1,15 @@
-\documentclass[11pt,a4paper,sans]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
+\documentclass[$if(fontsize)$$fontsize$$else$11pt$endif$,$if(size)$$size$$else$a4paper$endif$,$if(fontfamily)$$fontfamily$$else$sans$endif$]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
 
 $if(style)$
 \moderncvstyle{$style$} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
+$else$
+\moderncvstyle{classic}
 $endif$
 
 $if(color)$
 \moderncvcolor{$color$} % CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+$else$
+\moderncvcolor{blue}
 $endif$
 
 \usepackage{fontspec}
@@ -37,6 +41,8 @@ $endif$
 %----------------------------------------------------------------------------------------
 $if(author)$
 \name{$author$}{}
+$else$
+\name{名}{姓}
 $endif$
 % All information in this block is optional, comment out any lines you don't need
 $if(title)$

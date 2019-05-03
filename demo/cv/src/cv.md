@@ -1,6 +1,6 @@
 ---
-author: 
-title: \LaTeX排版工程师
+author: \LaTeX
+title: \LaTeX 排版工程师
 mobile: 13000001111
 github: annProg
 onlinecv: true
