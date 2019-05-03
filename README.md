@@ -17,11 +17,15 @@
 
 查看beamer幻灯片效果
 
-- [beamer幻灯片](./demo/beamer/README.md)
+- [beamer幻灯片](./demo/beamer/)
 
 查看论文效果
 
 - [ElegantPaper](https://api.annhe.net/PanBook/PanBook-latex-elegantpaper-pc.pdf)
+
+查看简历效果
+
+- [简历](./demo/cv/)
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。
