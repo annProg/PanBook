@@ -13,4 +13,5 @@ echo "\useAccent$accent" >> material-theme.tex
 info "colortheme: $colortheme"
 info "primary: $primary"
 info "accent: $accent"
-addOptions="-H material-theme.tex"
+
+(cat material-theme.tex;echo) >> $HEADERS
