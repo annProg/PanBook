@@ -37,7 +37,7 @@ function clean() {
 	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
 	release="/tmp/release-$rand"
 	mkdir $release
-	mv *.pdf *.tex *.epub *.html $release 2>/dev/null
+	mv *.pdf *.tex *.epub *.html *.bib $release 2>/dev/null
 	rm -fr *
 	mv $release/* .
 	rm -fr $release
