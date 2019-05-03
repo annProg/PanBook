@@ -54,6 +54,9 @@ do
 	--theme=*)
 		THEME=${key#*=}
 		shift;;
+	--cv=*)
+		CV=${key#*=}
+		shift;;		
 	--css=*)
 		CSS=${key#*=}
 		shift;;

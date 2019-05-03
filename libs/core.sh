@@ -233,6 +233,10 @@ function setClass() {
 	setBase PdfClass $DOCUMENTCLASS $1
 }
 
+function setCV() {
+	setBase CVTPL $CV $1
+}
+
 function copyrightPage() {
 	getVar copyright "true"
 	getVar licence "ccncnd"
