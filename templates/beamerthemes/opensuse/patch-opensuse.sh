@@ -8,7 +8,6 @@ note "use -E organization=string to define your organization"
 note "use -E event=string to define event"
 note "use -E location=string to define location"
 
-addOptions="-H $FIX"
 getVar authortitle "软件工程师"
 getVar organization "盘书-PanBook"
 getVar event "\LaTeX交流"
@@ -23,3 +22,4 @@ cat > $FIX <<EOF
 \newcommand{\location}{$location}
 EOF
 
+(cat $FIX;echo) >> $HEADERS
