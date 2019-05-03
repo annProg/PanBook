@@ -76,8 +76,6 @@ function pdf()
 		sed -i -r "s#(\includegraphics\{)http(s)?://(.*)#\1$IMGDIRRELATIVE/\3#g" $TEX_OUTPUT
 		
 		xelatex $interaction -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
-		bibtex $ofile-$TPL-$t-$device
-		xelatex $interaction -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 		xelatex $interaction -output-directory=$BUILD $TEX_OUTPUT #1&>/dev/null
 		compileStatus PDF
 	done
