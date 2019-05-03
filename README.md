@@ -31,6 +31,7 @@
 - 下载[msys2](https://www.msys2.org/) 并安装
 - 下载[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本并安装
 - 下载[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本并安装
+- 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下
 
 ### 下载本项目
 
@@ -54,7 +55,7 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 
 ```
 $ cd /d/dev/mybook
-$ panbook help
+$ panbook -h
   eBook maker base pandoc
 
         Usage: panbook <functions> [OPTIONS]
@@ -65,6 +66,7 @@ $ panbook help
         html        make html ebook
         epub        make epub ebook
         beamer      make beamer
+        cv          make cv
         help        print help info
         saveimg     save image url to local
         eps         convert gif to eps
@@ -72,7 +74,11 @@ $ panbook help
         --tpl       specify template for pandoc
         --class     specify documentclass for latex
         --theme     specify beamer theme
+        --cv        specify cv template
         --css       specify epub css
+        ---bib      specify bibliography file(default src/bibliography.bib)
+        --csl       specify csl file for pandoc-citeproc(default chinese-gb7714-2005-numeric.csl)
+        --cfs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)
         --src       specify src dir name(default src)
         --imgdir    specify image dir name(default src/images)
         -V key=val  same with pandoc -V option
