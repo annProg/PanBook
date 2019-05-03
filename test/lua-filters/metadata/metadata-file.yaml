@@ -1,0 +1,6 @@
+---
+header-includes:
+  - |
+    \usepackage{coloremoji}
+    \usepackage{ctexbook}
+...

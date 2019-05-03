@@ -1,0 +1,5 @@
+*.pdf
+*.aux
+*.toc
+*.log
+README.tex
