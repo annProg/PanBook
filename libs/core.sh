@@ -151,6 +151,10 @@ function compatible()
 	fi
 }
 
+function gitignore() {
+	[ ! -f $cwd/.gitignore ] && cp $SCRIPTDIR/.gitignore $cwd
+}
+
 function init()
 {
 	[ ! -d $BUILD ] && mkdir $BUILD
@@ -159,11 +163,12 @@ function init()
 	[ ! -d $cwd/templates ] && mkdir $cwd/templates
 	[ ! -d $cwd/fonts ] && mkdir $cwd/fonts
 
+	gitignore
 	cd $WORKDIR
 
 	# 模板, 支持用户自定义模板
-	[ -d $SCRIPTDIR/templates/$TPL ] && cp -rfu $SCRIPTDIR/templates/$TPL/* $BUILD
-	[ -d $cwd/templates/$TPL ] && cp -rfu $cwd/templates/$TPL/* $BUILD 2>/dev/null
+	[ "$TPL"x != ""x ] && [ -d $SCRIPTDIR/templates/$TPL ] && cp -rfu $SCRIPTDIR/templates/$TPL/* $BUILD
+	[ "$TPL"x != ""x ] && [ -d $cwd/templates/$TPL ] && cp -rfu $cwd/templates/$TPL/* $BUILD 2>/dev/null
 	
 	# 字体
 	cp -rfu $SCRIPTDIR/fonts $BUILD
