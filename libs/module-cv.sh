@@ -1,7 +1,5 @@
 function cv() {
-	getVar CV "moderncv"
-	getVar TPL "$CV"	
-	
+	getVar CV "moderncv"	
 	cvList=(moderncv limecv)	
 
 	init
@@ -36,7 +34,7 @@ function cv() {
 		OUTPUT="$BUILD/$ofile-cv-$t.pdf"
 		trimHeader
 		
-		CV_REFERENCE_PARAM="-F pandoc-citeproc $BIB --csl=$CSL --lua-filter $SCRIPTDIR/filters/add-header.lua"
+		CV_REFERENCE_PARAM="-F pandoc-citeproc $BIB --csl=$CSL --lua-filter $SCRIPTDIR/filters/add-header.lua --template=$CV.tpl"
 		# output tex for debug
 		[ "$DEBUG"x == "true"x ] && \
 		pandoc $CV_REFERENCE_PARAM --listings $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $addOptions
