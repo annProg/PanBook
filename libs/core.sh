@@ -180,7 +180,7 @@ function init()
 	# 文件名规范
 	FRONTMATTER="frontmatter.md"
 	BACKMATTER="backmatter.md"
-	chapters=`ls *.md |grep -vE "$FRONTMATTER|$BACKMATTER" 2>/dev/null`
+	chapters=`ls *.md 2>/dev/null |grep -vE "$FRONTMATTER|$BACKMATTER"`
 	BODY="$chapters"
 	
 	# 前言和后记部分
