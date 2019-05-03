@@ -1,3 +1,4 @@
+
 # Merge metadata from file
 This filter causes metadata defined in an external file (metadata-file.yaml) to be used as default values in a document’s metadata:
 
@@ -36,10 +37,18 @@ return {
 	{
 		Meta = function(meta)
 			for k, v in pairs(custom_header) do
+				-- MetaBlock?MetaList??????
+				t = meta[k].tag
 				if meta[k] == nil then
 					meta[k] = v
 				else
-					table.insert(meta[k], v[1][1])
+					if t == "MetaList" then
+						for i=1, #v do
+							meta[k][#meta[k]+1] = v[i]
+						end
+					else
+						table.insert(meta[k], v[1][1])
+					end
 				end
 			end
 			return meta

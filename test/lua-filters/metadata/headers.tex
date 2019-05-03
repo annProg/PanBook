@@ -1,2 +1,84 @@
-\newcommand{\lishu}{\LiSu}
-\newcommand{\kaishu}{\SimKai}
+\usepackage{wallpaper}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand{\devicemobile}{
+	\geometry{
+		paperwidth=9.0cm,
+		paperheight=16cm,
+		margin=0.5cm,
+		left=0.1cm,
+		right=0.1cm,
+		top=0.1cm,
+		bottom=0.2cm
+	}
+}
+\newcommand{\devicekindle}{
+	\geometry{
+		paperwidth=9.0cm,
+		paperheight=11.7cm,
+		margin=0.5cm,
+		left=0.1cm,
+		right=0.1cm,
+		top=0.1cm,
+		bottom=0.2cm
+	}
+}
+\newcommand{\devicepc}{
+	\geometry{
+		top=1in,
+		bottom=1in,
+		headheight=3ex,
+		headsep=2ex
+	}
+}
+\devicepc
+\newcommand{\titlepc}{\Huge}
+\newcommand{\subtitlepc}{\Large}
+\newcommand{\titlemobile}{\Large}
+\newcommand{\subtitlemobile}{\large}
+\newcommand{\titlekindle}{\Large}
+\newcommand{\subtitlekindle}{\large}
+\newcommand{\vspacepc}{\vspace{.00\textheight}}
+\newcommand{\vspacemobile}{\vspace{.05\textheight}}
+\newcommand{\vspacekindle}{\vspace{.05\textheight}}
+\renewcommand*{\maketitle}{
+\begin{titlepage}
+  \setkeys{Gin}{width=10pt,height=100pt}
+  \thispagestyle{empty}
+  \noindent\fboxsep=0pt
+	\vspace{.18\textheight}
+	\begin{center}
+		{\titlepc\bfseries PanBook项目使用手册\par}
+	\vspace{1cm}
+		{\subtitlepc 用Markdown和Pandoc写作\par}
+	\vspace{2.5cm}
+		He An, An He
+	\vfill\centering{使用 PanBook 编译 \par \today\par}
+		\vspacepc
+	\end{center}
+\end{titlepage}
+}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\definecolor{ocre}{RGB}{243,102,25} 
+\definecolor{lightgray}{rgb}{0.97,0.97,1}
+\renewcommand{\passthrough}[1]{\colorbox{lightgray}{#1}}
+\newfontfamily\code{Courier New}
+\lstset{
+	basicstyle=\small\linespread{1}\code,
+	keywordstyle=\color[rgb]{0.13,0.29,0.53}\textbf,
+	commentstyle=\color{gray},
+	identifierstyle=\color[rgb]{0.00,0.00,0.00},
+	stringstyle=\color[rgb]{0.31,0.60,0.02},
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	backgroundcolor=\color[rgb]{0.97,0.97,0.97},
+	tabsize=4,
+	breaklines=tr,
+	showstringspaces=false,
+}
+\renewcommand{\lstlistingname}{代码}
+\newcommand{\lccnd}{\noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\}
+\newcommand{\lccnc}{\noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\}
+\newcommand{\lccncnd}{\noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\}
+\newcommand{\lccncsand}{\noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\}
+\newcommand{\lpd}{\noindent Licensed under Public Domain.\\}
