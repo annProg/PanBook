@@ -4,7 +4,7 @@ function pdf()
 	getVar DOCUMENTCLASS "ctexbook"
 	getVar device "pc"
 	interaction="-interaction=batchmode"
-	[ "$DEBUG"x == "true"x ] && interaction=""
+	[ "$TRACE"x == "true"x ] && interaction=""
 	classList=(ctexbook book elegantbook ctexart article)
 	
 	init  # 首先初始化
@@ -19,7 +19,6 @@ function pdf()
 		note "use -E copyright=(true|false) to control whether or not to compile copyright page"
 		note "use -E licence=(ccnd|ccnc|ccncnd|ccncsa|ccncsand|pd"		
 		addOptions="$origAddOptions"
-		highLight="$origHighLight"
 		PANDOCVARS="$ORIGPANDOCVARS"
 		division="--top-level-division=default"
 		
@@ -40,12 +39,16 @@ function pdf()
 		# 打补丁. 补丁放在templates/pdfclasses/classname 文件夹下，命名规则 patch-$classname.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
+		[ "$LSTSET"x != ""x ] && (cat $LSTSET;echo) >> $HEADERS
+		
 		# 版权页
-		addOptions="$addOptions `copyrightPage`"
+		copyrightPage
+		[ "$copyright"x == "true"x ] && (cat $COPYPAGE;echo) >> $HEADERS
+		addOptions="$addOptions $copyoption"
 		
 		info "PANDOCVARS: $PANDOCVARS"
 		info "addOptions: $addOptions"
-		info "highLight: $highLight"
+		info "LSTSET: $LSTSET"
 		info "division: $division"
 		info "copyright: $copyright"
 		info "licence: $licence"
@@ -59,7 +62,11 @@ function pdf()
 
 		TEX_OUTPUT="$ofile-$TPL-$t-$device.tex"
 		PDF_OPTIONS="$PDF_OPTIONS -B frontmatter.tex -A backmatter.tex --metadata-file=$METADATA"
-		pandoc $PANDOC_REFERENCE_PARAM $BODY -o $TEX_OUTPUT $PDF_OPTIONS $division $highLight $addOptions $PANDOCVARS
+		
+		# 删除$HEADERS空行，注释行
+		sed -i -r 's/%.*$//g' $HEADERS
+		sed -i -r '/^[\s\t ]*$|^%/d' $HEADERS
+		pandoc $PANDOC_REFERENCE_PARAM $BODY -o $TEX_OUTPUT $PDF_OPTIONS $division $addOptions $PANDOCVARS
 		
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT

@@ -3,6 +3,7 @@
 SCRIPTDIR=`cd $(dirname $0);pwd`
 cwd=`pwd`
 ofile=`echo $cwd |awk -F '/' '{print $NF}'`
+HEADERS="add-headers.tex"
 
 source $SCRIPTDIR/libs/helper.sh
 source $SCRIPTDIR/libs/env.sh
@@ -100,8 +101,10 @@ info "DEBUG: $DEBUG"
 info "ORIGPANDOCVARS: $ORIGPANDOCVARS"
 info "TRACE: $TRACE"
 
-
-PANDOC_REFERENCE_PARAM="-F pandoc-crossref -M listings=true -M \"crossrefYaml=$CFS\" -F pandoc-citeproc $BIB --csl=$CSL"
+# 由于pandoc-crossref需要使用metadata中的header-includes变量，命令行参数中不能包含 -H，需要使用lua filter将-H参数内容转换为metadata变量
+# 参见 https://github.com/annProg/PanBook/issues/8
+# -H 参数引入的tex文件，命名为 add-header-*.tex，pandoc执行前，cat add-header-*.tex > add-header.tex
+PANDOC_REFERENCE_PARAM="-F pandoc-crossref -M listings=true -M \"crossrefYaml=$CFS\" -F pandoc-citeproc $BIB --csl=$CSL --lua-filter $SCRIPTDIR/filters/add-header.lua"
 
 info "PANDOC_REFERENCE_PARAM: $PANDOC_REFERENCE_PARAM"
 

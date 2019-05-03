@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# use this path to set custom addOptions, PANDOCVARS and highLight
+# use this path to set custom addOptions, PANDOCVARS and LSTSET, COPYPAGE
 
 note "use -E device=(pc|mobile|kindel) to produce different size of pdf"
 note "use -E cover=(1-60|R|N) to select cover page background. R means random. N means don't add cover image"
@@ -22,13 +22,6 @@ if [ "$cover"x == "R"x ];then
 	background="images/$(($RANDOM%60)).png"
 else
 	background="images/$cover.png"
-fi
-
-if [ "$privatetpl"x == "true"x ];then
-	addOptions="--template=ctexbook.tpl -V background=$background -V device=$device"
-	highLight=""
-else
-	addOptions="$addOptions -H $FIX -H $TITLEPAGE"
 fi
 
 parseMeta
@@ -120,3 +113,11 @@ cat >> $TITLEPAGE <<EOF
 }
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 EOF
+
+if [ "$privatetpl"x == "true"x ];then
+	addOptions="--template=ctexbook.tpl -V background=$background -V device=$device"
+	LSTSET="" # 清空LSTSET，因为模板中已经有lstset了
+else
+	(cat $FIX;echo) >> $HEADERS
+	(cat $TITLEPAGE;echo) >> $HEADERS
+fi

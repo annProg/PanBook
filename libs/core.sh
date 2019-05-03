@@ -189,6 +189,9 @@ function init()
 	cp -rf $WORKDIR/* $BUILD
 	cd $BUILD
 	
+	# 清空$HEADERS 以后都是追加
+	echo > $HEADERS
+	
 	info "Template is: $TPL"
 	templateError
 	
@@ -220,7 +223,7 @@ function setBase() {
 		origAddOptions=""
 	fi
 	
-	origHighLight="--listings -H $SCRIPTDIR/templates/latex/listings-set.tex"
+	getVar LSTSET "$SCRIPTDIR/templates/latex/listings-set.tex"
 }
 function setTheme() {
 	setBase BeamerTheme $THEME $1	
@@ -233,8 +236,8 @@ function setClass() {
 function copyrightPage() {
 	getVar copyright "true"
 	getVar licence "ccncnd"
-	
+	getVar COPYPAGE "$SCRIPTDIR/templates/latex/add-copyright-page.tex"
 	if [ "$copyright"x == "true"x ];then
-		echo "-H $SCRIPTDIR/templates/latex/add-copyright-page.tex -V copyright=true -V licence=$licence"	
+		copyoption="-V copyright=true -V licence=$licence"	
 	fi
 }
