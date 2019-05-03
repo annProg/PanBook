@@ -3,7 +3,6 @@
 SCRIPTDIR=`cd $(dirname $0);pwd`
 cwd=`pwd`
 ofile=`echo $cwd |awk -F '/' '{print $NF}'`
-HEADERS="add-headers.tex"
 
 source $SCRIPTDIR/libs/helper.sh
 source $SCRIPTDIR/libs/env.sh
@@ -16,6 +15,7 @@ getVar BIB "$WORKDIR/bibliography.bib"
 getVar CFS "$SCRIPTDIR/pandoc-crossref-settings.yaml"
 
 BUILD="$cwd/build"
+HEADERS="$BUILD/add-headers.tex"
 METADATA="$WORKDIR/metadata.yaml"
 
 source $SCRIPTDIR/libs/core.sh
