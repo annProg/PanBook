@@ -1,2 +1,2 @@
 #!/bin/bash
-addOptions="-H fix-heavenlyclouds.tex"
+(cat fix-heavenlyclouds.tex;echo) >> $HEADERS
