@@ -1,6 +1,10 @@
-% Test Citation
-% Ann
-% 2019/5/2
+---
+nocite: |
+  @foz
+title: Test Citation
+author: 
+  - Ann
+...
 
 # Test Citation
 
