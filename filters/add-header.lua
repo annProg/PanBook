@@ -43,6 +43,11 @@ end
 local header = headers:read("*a")
 headers:close()
 
+-- 空字符串直接退出
+if string.len(header) == 0 then
+	return
+end
+
 -- 将header拼成meta yaml格式
 header = '---\nheader-includes:\n  - |\n    ' .. string.gsub(header, '\n', '\n    ') .. '\n...'
 custom_header = pandoc.read(header, "markdown").meta
