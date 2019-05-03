@@ -15,7 +15,6 @@ function beamer() {
 	for t in ${SELECTED[@]};do
 		note "THEME: $t"
 		addOptions="$origAddOptions"
-		highLight="$origHighLight"
 		PANDOCVARS="$ORIGPANDOCVARS"
 		setPandocVar "classoption=aspectratio" "169" # setPandocVar需在PANDOCVARS被ORIGPANDOCVARS赋值之后执行
 		# copy beamertheme
@@ -43,8 +42,8 @@ function beamer() {
 		trimHeader
 		# output tex for debug
 		[ "$DEBUG"x == "true"x ] && \
-		pandoc $PANDOC_REFERENCE_PARAM -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA  $highLight $addOptions
-		pandoc $PANDOC_REFERENCE_PARAM -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $highLight $addOptions
+		pandoc $PANDOC_REFERENCE_PARAM --listings -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $addOptions
+		pandoc $PANDOC_REFERENCE_PARAM --listings -t beamer $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $addOptions
 		compileStatus beamer
 	done
 	

@@ -5,4 +5,5 @@ STYLEIMAGE="$cwd/build/style/images"
 info "StyleImage: $STYLEIMAGE-$background"
 [ ! -d $STYLEIMAGE ] && mkdir -p $STYLEIMAGE
 cp -rf $cwd/build/style/images-$background/* $STYLEIMAGE
-addOptions="-H fix-elegance.tex"
+
+(cat fix-elegance.tex;echo) >> $HEADERS
