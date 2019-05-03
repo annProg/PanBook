@@ -63,9 +63,7 @@ function pdf()
 		TEX_OUTPUT="$ofile-$TPL-$t-$device.tex"
 		PDF_OPTIONS="$PDF_OPTIONS -B frontmatter.tex -A backmatter.tex --metadata-file=$METADATA"
 		
-		# 删除$HEADERS空行，注释行
-		sed -i -r 's/%.*$//g' $HEADERS
-		sed -i -r '/^[\s\t ]*$|^%/d' $HEADERS
+		trimHeader
 		pandoc $PANDOC_REFERENCE_PARAM $BODY -o $TEX_OUTPUT $PDF_OPTIONS $division $addOptions $PANDOCVARS
 		
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT

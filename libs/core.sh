@@ -241,3 +241,9 @@ function copyrightPage() {
 		copyoption="-V copyright=true -V licence=$licence"	
 	fi
 }
+
+function trimHeader() {
+	# 删除$HEADERS空行，注释行
+	sed -i -r 's/%.*$//g' $HEADERS
+	sed -i -r '/^[\s\t ]*$|^%/d' $HEADERS
+}

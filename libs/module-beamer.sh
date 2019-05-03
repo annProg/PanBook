@@ -34,11 +34,13 @@ function beamer() {
 		# 某些theme需要打补丁. 补丁放在theme文件夹下，命名规则 patch-$themename.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
+		[ "$LSTSET"x != ""x ] && (cat $LSTSET;echo) >> $HEADERS
 		info "PANDOCVARS: $PANDOCVARS"
 		info "addOptions: $addOptions"
-		info "highLight: $highLight"
+		info "LSTSET: $LSTSET"
 		
 		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
+		trimHeader
 		# output tex for debug
 		[ "$DEBUG"x == "true"x ] && \
 		pandoc $PANDOC_REFERENCE_PARAM -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA  $highLight $addOptions
