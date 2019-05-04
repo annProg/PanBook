@@ -13,7 +13,8 @@ getVar IMGDIR "$WORKDIR/images"
 getVar CSL "$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl"
 getVar BIB "$WORKDIR/bibliography.bib"
 BIB_PARAM="--bibliography=$BIB"
-getVar CFS "$SCRIPTDIR/pandoc-crossref-settings.yaml"
+DEFAULT_CRS="$SCRIPTDIR/pandoc-crossref-settings.yaml"
+getVar CRS "$cwd/pandoc-crossref.yaml"
 
 BUILD="$cwd/build"
 HEADERS="$BUILD/add-headers.tex"
@@ -64,8 +65,8 @@ do
 	--csl=*)
 		CSL=${key#*=}
 		shift;;
-	--cfs=*)
-		CFS=${key#*=}
+	--crs=*)
+		CRS=${key#*=}
 		shift;;		
 	--bib=*)
 		bibtmp=${key#*=}
@@ -105,7 +106,7 @@ info "DEBUG: $DEBUG"
 info "ORIGPANDOCVARS: $ORIGPANDOCVARS"
 info "TRACE: $TRACE"
 
-CROSSREF_PARAM="-F pandoc-crossref -M listings=true -M \"crossrefYaml=$CFS\""
+CROSSREF_PARAM="-F pandoc-crossref"
 CITEPROC_PARAM="-F pandoc-citeproc $BIB_PARAM --csl=$CSL"
 # 由于pandoc-crossref需要使用metadata中的header-includes变量，命令行参数中不能包含 -H，需要使用lua filter将-H参数内容转换为metadata变量
 # 参见 https://github.com/annProg/PanBook/issues/8

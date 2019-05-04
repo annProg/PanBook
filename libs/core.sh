@@ -162,6 +162,7 @@ function init()
 	[ ! -d $IMGDIR ] && mkdir $IMGDIR
 	[ ! -d $cwd/templates ] && mkdir $cwd/templates
 	[ ! -d $cwd/fonts ] && mkdir $cwd/fonts
+	[ -f $CRS ] && cp $CRS $BUILD/pandoc-crossref.yaml || cp $DEFAULT_CRS $BUILD/pandoc-crossref.yaml
 
 	gitignore
 	cd $WORKDIR

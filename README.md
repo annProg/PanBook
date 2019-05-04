@@ -82,7 +82,7 @@ $ panbook -h
         --css       specify epub css
         ---bib      specify bibliography file(default src/bibliography.bib)
         --csl       specify csl file for pandoc-citeproc(default chinese-gb7714-2005-numeric.csl)
-        --cfs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)
+        --crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)
         --src       specify src dir name(default src)
         --imgdir    specify image dir name(default src/images)
         -V key=val  same with pandoc -V option
