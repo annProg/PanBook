@@ -18,4 +18,7 @@ cover-image: images/cover.png    # epub用
 header-includes:
   - \usepackage{cleveref}
   - \usepackage{float}
+# 不引用，但是显示在参考文献列表里。通配符 @* 表示全部在列表里显示  
+nocite: |
+  @pandocManual,@foz
 ...
