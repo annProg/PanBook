@@ -42,18 +42,37 @@ function setAttr(attr)
 	end
 end
 
-function Header(block)
-    if block.level == 1 then
-        return pandoc.RawBlock("latex", "\\section{" .. block.content[1]['text'] .. "}")
-    end
-	
-	-- table.print(block)
-	if block.level == 2 then
-		local entry = block.content[1]['text']
-		local dt = setAttr(block.attr.attributes.date)
-		local title = setAttr(block.attr.attributes.title)
-		local city = setAttr(block.attr.attributes.city)
-		local score = setAttr(block.attr.attributes.score)
-		return pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. title .. "}{" .. entry .. "}{" .. city .. "}{" .. score .. "}")
+function Pandoc(doc)
+	local nblocks = {}
+	local nel = {}
+	for i,el in pairs(doc.blocks) do
+		local addEl = nil
+		if el.t == "Header" and el.level == 1 then
+			nel = pandoc.RawBlock("latex", "\\section{" .. el.content[1]['text'] .. "}")
+		elseif el.t == "Header" and el.level == 2 then
+			local entry = el.content[1]['text']
+			local dt = setAttr(el.attr.attributes.date)
+			local title = setAttr(el.attr.attributes.title)
+			local city = setAttr(el.attr.attributes.city)
+			local score = setAttr(el.attr.attributes.score)
+			local bracket = ""
+			if i+1 <= #doc.blocks and doc.blocks[i+1].t ~= "BulletList" then
+				bracket = "}"
+			end
+			nel = pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. title .. "}{" .. entry .. "}{" .. city .. "}{" .. score .. "}{" .. bracket)
+		elseif el.t == "BulletList" then
+			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 2 then
+				addEl = pandoc.RawBlock("latex", "}")
+			end
+			nel = el
+		else
+			nel = el
+		end
+		table.insert(nblocks, nel)
+		
+		if addEl ~= nil then
+			table.insert(nblocks, addEl)
+		end
 	end
+	return pandoc.Pandoc(nblocks, doc.meta)
 end
