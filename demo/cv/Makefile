@@ -1,3 +1,8 @@
+SERVER ?= api.annhe.net
+USER ?= root
+PORT ?= 22
+DIR ?= /PanBook
+
 STYLE ?= classic
 COLOR ?= blue
 ALL_STYLE=classic banking casual oldstyle fancy
