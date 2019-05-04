@@ -19,4 +19,9 @@ moderncv-all-style-color:
 	
 moderncv:
 	panbook cv -E style=$(STYLE) -E color=$(COLOR)
+
+link:
+	for item in `echo $(ALL_STYLE)`;do echo "- [moderncv-$$item](https://$(SERVER)/PanBook/cv-cv-moderncv-$$item-blue.pdf)";done
 	
+online:
+	scp -P $(PORT) build/cv-cv-moderncv-*-blue.pdf $(USER)@$(SERVER):$(DIR)
