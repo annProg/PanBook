@@ -18,3 +18,19 @@ OUTPUT="$BUILD/$ofile-cv-$t-$style-$color.tex"
 
 note "cv style is $style"
 note "cv color is $color"
+
+note "This Template support the following variables, they can set via metadata or -V option\n
+\tauthor               Your name
+\ttitle                Your title
+\tmobile               Your mobile phone number
+\tfixed                Your fixed phone number
+\tgithub               Your Github user name
+\thomepage             Your website link
+\tdatewidth            Change the width of the dates column. default 3cm
+\temail                Your Email address
+\taddress              Your address
+\textrainfo            Additional information
+\tphoto                Your photo(put photo to src/images/ dir; photo value should be images/filename)
+\tquote                Some quote
+\tonlinecv             Your cv url
+\tshowdate             Show cv compile date (true|false)"

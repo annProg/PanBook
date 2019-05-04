@@ -1,9 +1,15 @@
 ---
 author: \LaTeX
 title: \LaTeX 排版工程师
+homepage: baidu.com
+showdate: true
+address: 地球中国北京
+quote: \LaTeX 写简历漂不漂亮呀
+photo: images/photo.png
+extrainfo: 附加信息干嘛的
 mobile: 13000001111
 github: annProg
-onlinecv: true
+onlinecv: http://github.com/annProg/PanBook/demo/cv
 nocite: |
   @*
 ...

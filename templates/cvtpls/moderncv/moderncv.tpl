@@ -24,8 +24,10 @@ $endif$
 
 $if(onlinecv)$
 \fancyfoot[L]{\fontsize{8}{10} \selectfont 更新地址：$onlinecv$}
-$endif$                                                       
+$endif$
+$if(showdate)$                                                       
 \fancyfoot[R]{\fontsize{8}{10} \selectfont 编译日期：\zhtoday}
+$endif$
 
 $if(font)$
 \setCJKmainfont{$font$}
@@ -59,6 +61,10 @@ $if(mobile)$
 \phone[mobile]{$mobile$}
 $endif$
 
+$if(fixed)$
+\phone[fixed]{$fixed$}
+$endif$
+
 $if(email)$
 \email{$email$}
 $endif$
@@ -71,11 +77,16 @@ $if(github)$
 \social[github]{$github$}
 $endif$
 
-%\address{首都师范大学}{海淀区, 北京市 100048}
-%\extrainfo{additional information}
+$if(address)$
+\address{$address$}{}
+$endif$
+
+$if(extrainfo)$
+\extrainfo{$extrainfo$}
+$endif$
 
 $if(photo)$
-\photo[55pt][0pt]{photo} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
+\photo[55pt][0pt]{$photo$} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
 $endif$
 
 $if(quote)$

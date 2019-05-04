@@ -4,7 +4,7 @@ function cv() {
 	interaction="-interaction=batchmode"
 	[ "$TRACE"x == "true"x ] && interaction=""
 
-	init
+	init nometa
 	cd $BUILD
 	
 	
@@ -40,7 +40,7 @@ function cv() {
 		CV_REFERENCE_PARAM="-F pandoc-citeproc $BIB_PARAM --csl=$CSL --lua-filter $SCRIPTDIR/filters/add-header.lua --template=$t.tpl"
 		[ -f $t.lua ] && CV_REFERENCE_PARAM="$CV_REFERENCE_PARAM --lua-filter $t.lua"
 		info "CV_REFERENCE_PARAM: $CV_REFERENCE_PARAM"
-		pandoc $CV_REFERENCE_PARAM --listings $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $addOptions
+		pandoc $CV_REFERENCE_PARAM --listings $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS $addOptions
 		
 		# 删除空行，空行会影响某些模板编译
 		sed -i '/^$/d' $OUTPUT

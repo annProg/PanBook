@@ -188,7 +188,11 @@ function init()
 	[ ! -f $FRONTMATTER ] && touch $FRONTMATTER
 	[ ! -f $BACKMATTER ] && touch $BACKMATTER
 	[ ! -f $BIB ] && touch $BIB
-	[ ! -f metadata.yaml ] && meta > metadata.yaml
+	
+	# 支持不生成默认metadata.yaml
+	if [ "$1"x != "nometa"x ];then
+		[ ! -f metadata.yaml ] && meta > metadata.yaml
+	fi
 	[ "$DEBUG"x = "true"x ] && highlightStyle=(tango)
 	
 	# 复制$SRC目录下资源文件到build目录
