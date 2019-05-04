@@ -9,7 +9,7 @@ photo: images/photo.png
 extrainfo: 附加信息干嘛的
 mobile: 13000001111
 github: annProg
-onlinecv: http://github.com/annProg/PanBook/demo/cv
+onlinecv: http://github.com/annProg/PanBook/tree/master/demo/cv
 nocite: |
   @*
 ...
