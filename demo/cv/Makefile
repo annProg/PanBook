@@ -1,6 +1,6 @@
 STYLE ?= classic
 COLOR ?= blue
-ALL_STYLE=classic banking casual oldstyle
+ALL_STYLE=classic banking casual oldstyle fancy
 ALL_COLOR=blue orange green red purple grey black burgundy
 
 all: moderncv-all-style-color
