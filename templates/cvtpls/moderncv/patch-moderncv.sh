@@ -33,4 +33,5 @@ note "This Template support the following variables, they can set via metadata o
 \tphoto                Your photo(put photo to src/images/ dir; photo value should be images/filename)
 \tquote                Some quote
 \tonlinecv             Your cv url
-\tshowdate             Show cv compile date (true|false)"
+\tshowdate             Show cv compile date (true|false)
+\tfont                 Change CJKmainfont. default SimSun"
