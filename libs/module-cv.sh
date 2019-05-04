@@ -26,6 +26,8 @@ function cv() {
 			rm -f $t/*.pdf
 			cp -rfu $t/* .
 		fi
+
+		OUTPUT="$BUILD/$ofile-cv-$t.tex"
 		
 		# 某些cv需要打补丁. 补丁放在cv文件夹下，命名规则 patch-$cvname.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
@@ -33,7 +35,6 @@ function cv() {
 		info "PANDOCVARS: $PANDOCVARS"
 		info "addOptions: $addOptions"
 		
-		OUTPUT="$BUILD/$ofile-cv-$t.tex"
 		trimHeader
 		
 		CV_REFERENCE_PARAM="-F pandoc-citeproc $BIB_PARAM --csl=$CSL --lua-filter $SCRIPTDIR/filters/add-header.lua --template=$t.tpl"
