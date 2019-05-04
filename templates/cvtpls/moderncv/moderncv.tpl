@@ -1,4 +1,6 @@
 \documentclass[$if(fontsize)$$fontsize$$else$11pt$endif$,$if(size)$$size$$else$a4paper$endif$,$if(fontfamily)$$fontfamily$$else$sans$endif$]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 $if(style)$
 \moderncvstyle{$style$} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
