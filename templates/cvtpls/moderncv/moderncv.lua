@@ -42,6 +42,20 @@ function setAttr(attr)
 	end
 end
 
+function citeproc(cite)
+	local newcite = pandoc.Div({}, cite.attr)
+	for k,v in pairs(cite.content) do
+		if v.t == "Div" then
+			table.insert(newcite.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
+			table.insert(newcite.content, v)
+			table.insert(newcite.content, pandoc.RawBlock("latex", "}"))
+		else
+			table.insert(newcite.content, v)
+		end
+	end
+	return newcite
+end
+
 function Pandoc(doc)
 	local nblocks = {}
 	local nel = {}
@@ -65,6 +79,8 @@ function Pandoc(doc)
 				addEl = pandoc.RawBlock("latex", "}")
 			end
 			nel = el
+		elseif el.t == "Div" and el.attr.identifier == "refs" then
+			nel = citeproc(el)
 		else
 			nel = el
 		end

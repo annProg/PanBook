@@ -45,8 +45,6 @@ function cv() {
 		# 删除空行，空行会影响某些模板编译
 		sed -i '/^$/d' $OUTPUT
 		
-		# citeproc \leavevmode 需要换行
-		sed -i '/^\\leavevmode/i\\n' $OUTPUT
 		xelatex $interaction -output-directory=$BUILD $OUTPUT
 		compileStatus cv
 	done
