@@ -1,12 +1,12 @@
 ---
-author: \LaTeX
+author: 盘\ 书        # 空格可用反斜杠转义
 title: \LaTeX 排版工程师
 homepage: baidu.com
 showdate: true
-address: 地球中国北京
+address: 本星系群银河系本星际云太阳系地球 - 中国北京
 quote: \LaTeX 写简历漂不漂亮呀
 photo: images/photo.png
-extrainfo: 附加信息干嘛的
+extrainfo: 用Markdown写的简历
 mobile: 13000001111
 github: annProg
 onlinecv: http://github.com/annProg/PanBook/tree/master/demo/cv

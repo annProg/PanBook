@@ -14,6 +14,11 @@ getVar fontfamily "sans"
 
 addOptions="$addOptions -V style=$style -V color=$color -V fontsize=$fontsize -V size=$size -V fontfamily=$fontfamily"
 
+# casual样式个人信息在底部，和foot有冲突，加vspace处理
+if [ "$style"x == "casual"x ];then
+	addOptions="$addOptions -V vspace=0.7cm -V geometry=top=2cm,bottom=2cm,left=2cm,right=2cm,includefoot"
+fi
+
 OUTPUT="$BUILD/$ofile-cv-$t-$style-$color.tex"
 
 note "cv style is $style"

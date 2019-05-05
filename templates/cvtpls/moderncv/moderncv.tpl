@@ -23,10 +23,10 @@ $endif$
 
 
 $if(onlinecv)$
-\fancyfoot[L]{\fontsize{8}{10} \selectfont 更新地址：$onlinecv$}
+\fancyfoot[L]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont 更新地址：$onlinecv$}
 $endif$
 $if(showdate)$                                                       
-\fancyfoot[R]{\fontsize{8}{10} \selectfont 编译日期：\zhtoday}
+\fancyfoot[R]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont 编译日期：\zhtoday}
 $endif$
 
 $if(font)$
@@ -35,8 +35,12 @@ $else$
 \setCJKmainfont{SimSun}
 $endif$
 
-
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry} % Reduce document margins
+$else$
 \usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry} % Reduce document margins
+$endif$
+
 $if(datewidth)$
 \setlength{\hintscolumnwidth}{$datewidth$}
 $else$

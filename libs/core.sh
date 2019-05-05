@@ -107,7 +107,7 @@ function compileStatus() {
 	status=$?
 	info "$1 Compile status: $status"
 	if [ $status -ne 0 ];then
-		error "$1 Compile status is not 0. Please Check. you may add -d to see more output"
+		error "$1 Compile status is not 0. Please Check. you may add -d or --trace to see more output"
 	else
 		note "$1 Compile SUCCESSFUL"
 	fi
