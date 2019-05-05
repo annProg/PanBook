@@ -19,6 +19,8 @@ getVar CRS "$cwd/pandoc-crossref.yaml"
 BUILD="$cwd/build"
 HEADERS="$BUILD/add-headers.tex"
 METADATA="$WORKDIR/metadata.yaml"
+COLUMNS_SUPPORT="$SCRIPTDIR/latex/support-columns-env.tex"
+getVar columns "true"
 
 source $SCRIPTDIR/libs/core.sh
 

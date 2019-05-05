@@ -36,6 +36,8 @@ function cv() {
 		info "addOptions: $addOptions"
 		
 		[ "$LSTSET"x != ""x ] && (cat $LSTSET;echo) >> $HEADERS
+		# 支持 fenced_divs语法的columns
+		[ "$columns"x == "true"x ] && (cat $COLUMNS_SUPPORT;echo) >> $HEADERS		
 		
 		trimHeader
 		

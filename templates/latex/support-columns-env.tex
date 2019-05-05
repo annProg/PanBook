@@ -1,0 +1,13 @@
+\usepackage{keyval}
+\newlength\Colsep
+\setlength\Colsep{10pt}
+\makeatletter
+\define@key{columns@col}{T}[true]{\vskip-1ex\nointerlineskip}
+\makeatother
+\newenvironment{columns}[1][]
+	{\setkeys{columns@col}{#1}
+	 \noindent\begin{minipage}{\textwidth}}
+	{\end{minipage}}
+\newenvironment{column}[1]
+	{\begin{minipage}[c][2cm][c]{\dimexpr#1 -0.5\Colsep\relax}}
+	{\end{minipage}}
