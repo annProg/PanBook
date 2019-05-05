@@ -6,7 +6,7 @@ showdate: true
 address: 本星系群银河系本星际云太阳系地球 - 中国北京
 quote: \LaTeX 写简历漂不漂亮呀
 photo: images/photo.png
-extrainfo: 用Markdown写的简历
+extrainfo: 个人信息不需要的项目删除即可
 mobile: 13000001111
 github: annProg
 onlinecv: http://github.com/annProg/PanBook/tree/master/demo/cv
@@ -22,6 +22,7 @@ nocite: |
 - 可以有一些说明
 - 用Markdown列表语法
   - 列表可以多级
+- `metadata`变量中信息除了`author`之外基本都是可选项，不需要删除即可
 
 ### YY大学 {date="2023.5 - 2026.5" title="计算机应用技术 工学硕士" city="北京" score="是个学渣"}
 

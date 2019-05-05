@@ -21,6 +21,12 @@ $endif$
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
+$if(listings)$
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+$endif$
 
 $if(onlinecv)$
 \fancyfoot[L]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont 更新地址：$onlinecv$}
@@ -98,6 +104,9 @@ $if(quote)$
 $endif$
 
 %----------------------------------------------------------------------------------------
+$for(header-includes)$
+$header-includes$
+$endfor$
 
 \begin{document}
 

@@ -35,6 +35,8 @@ function cv() {
 		info "PANDOCVARS: $PANDOCVARS"
 		info "addOptions: $addOptions"
 		
+		[ "$LSTSET"x != ""x ] && (cat $LSTSET;echo) >> $HEADERS
+		
 		trimHeader
 		
 		CV_REFERENCE_PARAM="-F pandoc-citeproc $BIB_PARAM --csl=$CSL --lua-filter $SCRIPTDIR/filters/add-header.lua --template=$t.tpl"
