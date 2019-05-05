@@ -73,6 +73,8 @@ function Pandoc(doc)
 		if el.t == "Header" and el.level == 1 then
 			nel = pandoc.RawBlock("latex", "\\section{" .. el.content[1]['text'] .. "}")
 		elseif el.t == "Header" and el.level == 2 then
+			nel = pandoc.RawBlock("latex", "\\subsection{" .. el.content[1]['text'] .. "}")
+		elseif el.t == "Header" and el.level == 3 then
 			local entry = el.content[1]['text']
 			local dt = setAttr(el.attr.attributes.date)
 			local title = setAttr(el.attr.attributes.title)
@@ -84,7 +86,7 @@ function Pandoc(doc)
 			end
 			nel = pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. title .. "}{" .. entry .. "}{" .. city .. "}{" .. score .. "}{" .. bracket)
 		elseif el.t == "BulletList" then
-			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 2 then
+			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 3 then
 				addEl = pandoc.RawBlock("latex", "}")
 				nel = el
 			else
