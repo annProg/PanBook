@@ -56,6 +56,15 @@ function citeproc(cite)
 	return newcite
 end
 
+-- 一级标题后的列表转为cvlistitem
+function cvlistitem(list)
+	local content = ""
+	for k,v in pairs(list.content) do
+		content = content .. "\\cvlistitem{" .. v[1]['content'][1]['text'] .. "}\n"
+	end
+	return pandoc.RawBlock("latex", content)
+end
+
 function Pandoc(doc)
 	local nblocks = {}
 	local nel = {}
@@ -77,8 +86,10 @@ function Pandoc(doc)
 		elseif el.t == "BulletList" then
 			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 2 then
 				addEl = pandoc.RawBlock("latex", "}")
+				nel = el
+			else
+				nel = cvlistitem(el)
 			end
-			nel = el
 		elseif el.t == "Div" and el.attr.identifier == "refs" then
 			nel = citeproc(el)
 		else
