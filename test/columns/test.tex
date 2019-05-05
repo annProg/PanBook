@@ -1,27 +1,25 @@
-\documentclass{article}
-\usepackage{lipsum}
+\documentclass[]{article}
 \usepackage{keyval}
 \newlength\Colsep
 \setlength\Colsep{10pt}
 
 \makeatletter
-\define@key{columns@col}{T}[true]{\vskip-1ex\nointerlineskip}
+\define@key{columns@col}{T}[true]{\vspace{.5cm}}
 \makeatother
 
 \newenvironment{columns}[1][]
 	{\setkeys{columns@col}{#1}
 	 \noindent\begin{minipage}{\textwidth}}
-	{\end{minipage}}
+	{\end{minipage}\vspace{.5cm}}
 
 \newenvironment{column}[1]
-	{\begin{minipage}[c][2cm][c]{\dimexpr#1 -0.5\Colsep\relax}}
+	{\begin{minipage}[t]{#1}} %{\dimexpr#1 -0.5\Colsep\relax}}
 	{\end{minipage}}
 
 
 \begin{document}
 
 \section{columns}
-\lipsum[4]
 
 \begin{columns}[T]
 \begin{column}{0.5\textwidth}
@@ -43,32 +41,4 @@
 \end{column}
 \end{columns}
 
-\lipsum[4]
-
-
-\section{minipage}
-\lipsum[4]
-
-\noindent\begin{minipage}{\textwidth}
-\begin{minipage}[c][1cm][c]{\dimexpr0.5\textwidth-0.5\Colsep\relax}
-\begin{itemize}
-\item
-  item1
-\item
-  item2
-\end{itemize}
-\end{minipage}\hfill
-\begin{minipage}[c][1cm][c]{\dimexpr0.5\textwidth-0.5\Colsep\relax}
-\begin{itemize}
-\item
-  item1
-\item
-  item2
-\end{itemize}
-\end{minipage}%
-\end{minipage}
-
-\lipsum[4]
-
-\end{document}
 \end{document}
