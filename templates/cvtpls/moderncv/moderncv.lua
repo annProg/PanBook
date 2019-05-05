@@ -34,6 +34,22 @@ end
 
 table.print = print_r
 
+-- 获取一个table的所有text
+function getText(content)
+	local newcontent = ""
+	for k,v in pairs(content) do
+		if next(v) == nil then
+			newcontent = newcontent .. " "
+		elseif v.text ~= nil then
+			newcontent = newcontent .. v.text
+		else
+			newcontent = newcontent .. getText(v)
+		end
+	end
+	
+	return newcontent
+end
+
 function setAttr(attr)
 	if attr == nil then
 		return ""
@@ -60,7 +76,7 @@ end
 function cvlistitem(list)
 	local content = ""
 	for k,v in pairs(list.content) do
-		content = content .. "\\cvlistitem{" .. v[1]['content'][1]['text'] .. "}\n"
+		content = content .. "\\cvlistitem{" .. getText(v) .. "}\n"
 	end
 	return pandoc.RawBlock("latex", content)
 end
@@ -71,11 +87,11 @@ function Pandoc(doc)
 	for i,el in pairs(doc.blocks) do
 		local addEl = nil
 		if el.t == "Header" and el.level == 1 then
-			nel = pandoc.RawBlock("latex", "\\section{" .. el.content[1]['text'] .. "}")
+			nel = pandoc.RawBlock("latex", "\\section{" .. getText(el.content) .. "}")
 		elseif el.t == "Header" and el.level == 2 then
-			nel = pandoc.RawBlock("latex", "\\subsection{" .. el.content[1]['text'] .. "}")
+			nel = pandoc.RawBlock("latex", "\\subsection{" .. getText(el.content) .. "}")
 		elseif el.t == "Header" and el.level == 3 then
-			local entry = el.content[1]['text']
+			local entry = getText(el.content)
 			local dt = setAttr(el.attr.attributes.date)
 			local title = setAttr(el.attr.attributes.title)
 			local city = setAttr(el.attr.attributes.city)
