@@ -184,6 +184,10 @@ function init()
 	chapters=`ls *.md 2>/dev/null |grep -vE "$FRONTMATTER|$BACKMATTER"`
 	BODY="$chapters"
 	
+	if [ "$BODY"x == ""x ];then
+		error "No markdown source file"
+	fi
+	
 	# 前言和后记部分
 	[ ! -f $FRONTMATTER ] && touch $FRONTMATTER
 	[ ! -f $BACKMATTER ] && touch $BACKMATTER

@@ -37,8 +37,16 @@ table.print = print_r
 -- 获取一个table的所有text
 function getText(content)
 	local newcontent = ""
+	if type(content) ~= "table" then
+		return newcontent
+	end
+
 	for k,v in pairs(content) do
-		if next(v) == nil then
+		if v.t == "Strong" then
+			newcontent = newcontent .. "\\textbf{" .. getText(v) .. "}"
+		elseif v.t == "Code" then
+			newcontent = newcontent .. "\\passthrough{\\lstinline!" .. v.text .. "!}"
+		elseif v.t == "Space" then
 			newcontent = newcontent .. " "
 		elseif v.text ~= nil then
 			newcontent = newcontent .. v.text
