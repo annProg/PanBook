@@ -44,9 +44,20 @@ nocite: |
 # 发表作品
 :::
 
-# 技能
+# 列表
 
-- \LaTeX
-- Shell
-- Markdown
-- Pandoc
+- Markdown语法简单列表
+- 不支持多级
+
+# 多列列表
+
+:::: {.columns}
+::: {.column width="50%"}
+- fenced_divs语法
+- 带 .columns属性
+:::
+::: {.column width="50%"}
+- 每一列使用 .column属性
+- 通过 width 控制列宽度
+:::
+::::
