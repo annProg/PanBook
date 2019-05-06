@@ -1,4 +1,4 @@
----[[ only for debug
+--[[ only for debug
 table_print = require('table_print')
 table.print = table_print.print_r
 --]]
@@ -90,8 +90,6 @@ function cvlist(list)
 					table.insert(ritem.content, val)
 				end
 			else
-				--table.print(val.t)
-				--table.print(val)
 				table.insert(item.content, val)
 			end
 		end
@@ -126,9 +124,6 @@ function cvlist(list)
 		end
 	end
 	
-	for i,v in pairs(nlist.content) do
-		table.print(v)
-	end
 	return nlist
 end
 
