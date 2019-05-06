@@ -46,12 +46,13 @@ nocite: |
 
 # 列表
 
-- Markdown无序列表格式
-- 使用英文冒号产生不同形式的列表，没有冒号是普通列表
-- 一个冒号: 带有类别
-- 两个冒号: 带类别 : 和评论
-- 三个冒号: 带类别双栏 : 第二栏 : 内容
-- 不打算支持moderncv的`\cvlistdoubleitem`，请用分栏替代
+- 简单列表直接使用Markdown无序列表格式
+- 使用`bracketed_spans`语法生成不同形式列表
+- `[这里显示一列]{.double}` 双列列表[这里显示一列]{.double}
+- `[类别]{.cat}`生成带类别的列表[类别]{.cat}
+- `[评论]{.comment}` 同时带类别和评论[类别]{.cat}[评论]{.comment}
+- `[Java,PHP]{.double cat="编程语言"} [Markdown,LaTeX]{.double cat="排版}`双栏带类别
+- [Java,PHP]{.double cat="编程语言"} [Markdown,LaTeX]{.double cat="排版}
 
 # 分栏
 
