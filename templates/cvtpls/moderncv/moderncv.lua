@@ -51,13 +51,85 @@ end
 
 -- 一级标题后的列表转为cvlistitem
 -- 此函数可能可以优化，不需要getText，定义一个空的Div table，把元素加进去更好
-function cvlistitem(list)
-	local content = ""
+function cvlist(list)
+	local nlist = pandoc.Div({})
 	for k,v in pairs(list.content) do
-		table.print(v)
-		content = content .. "\\cvlistitem{" .. getText(v) .. "}\n"
+		local spanCount = 0
+		local item = pandoc.Plain({})
+		local lcat = ""
+		local litem = pandoc.Plain({})
+		local comment = pandoc.Plain({})
+		local rcat = ""
+		local ritem = pandoc.Plain({})
+		local classes = {}
+		local doubleItem = nil
+		for i,val in pairs(v[1].content) do
+			if val.t == "Span" then
+				spanCount = spanCount + 1
+				if #val.attr.classes > 0 then
+					table.insert(classes, val.attr.classes[1])
+					if val.attr.classes[1] == "comment" then
+						table.insert(comment.content, val)
+					end
+					if val.attr.classes[1] == "cat" then
+						lcat = getText(val.content)
+					end
+				end
+				
+				cat = val.attr.attributes.cat
+				if spanCount == 1 then
+					if cat ~= nil then
+						lcat = cat
+						doubleItem = true
+					end
+					table.insert(litem.content, val)
+				else
+					if cat ~= nil then
+						rcat = cat
+					end
+					table.insert(ritem.content, val)
+				end
+			else
+				--table.print(val.t)
+				--table.print(val)
+				table.insert(item.content, val)
+			end
+		end
+		
+		-- \cvitemwithcomment 优先级最高
+		if next(comment.content) ~= nil then
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitemwithcomment{" .. lcat .. "}{"))
+			table.insert(nlist.content, item)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
+			table.insert(nlist.content, comment)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
+		elseif spanCount == 1 and classes[1] == "double" then
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistdoubleitem{"))
+			table.insert(nlist.content, item)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
+			table.insert(nlist.content, litem)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
+		elseif spanCount == 1 and classes[1] == "cat" then
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitem{" .. lcat .. "}{"))
+			table.insert(nlist.content, item)
+			table.insert(nlist.content,pandoc.RawBlock("latex","}"))
+		elseif doubleItem ~= nil then
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvdoubleitem{" .. lcat .. "}{"))
+			table.insert(nlist.content, litem)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}{" .. rcat .. "}{"))
+			table.insert(nlist.content, ritem)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
+		else
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
+			table.insert(nlist.content, item)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
+		end
 	end
-	return pandoc.RawBlock("latex", content)
+	
+	for i,v in pairs(nlist.content) do
+		table.print(v)
+	end
+	return nlist
 end
 
 function cvcolumns(el)
@@ -105,7 +177,7 @@ function Pandoc(doc)
 				addEl = pandoc.RawBlock("latex", "}")
 				nel = el
 			else
-				nel = cvlistitem(el)
+				nel = cvlist(el)
 			end
 		elseif el.t == "Div" and el.attr.identifier == "refs" then
 			nel = citeproc(el)
