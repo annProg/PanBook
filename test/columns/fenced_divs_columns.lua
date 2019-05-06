@@ -3,6 +3,43 @@ table_print = require('table_print')
 table.print = table_print.print_r
 --]]
 
+local addHeader = [[
+---
+header-includes:
+  - |
+    \usepackage{keyval}
+    \newlength\Colsep
+    \setlength\Colsep{10pt}
+    \newenvironment{columns}[1][]
+    	{\vspace{.5cm}
+    	 \noindent\begin{minipage}{\textwidth}}
+    	{\end{minipage}\vspace{.5cm}}
+    \newenvironment{column}[1]
+    	{\begin{minipage}[t]{#1}}
+    	{\end{minipage}}
+...
+]]
+
+function getMeta(meta) 
+	local custom_header = pandoc.read(addHeader, "markdown").meta
+	for k, v in pairs(custom_header) do
+		if meta[k] == nil then
+			meta[k] = v
+		else
+			-- MetaBlock和MetaList处理方式不同
+			t = meta[k].tag
+			if t == "MetaList" then
+				for i=1, #v do
+					meta[k][#meta[k]+1] = v[i]
+				end
+			else
+				table.insert(meta[k], v[1][1])
+			end
+		end
+	end
+	return meta
+end
+
 function getWidth(width)
 	width = string.match(width, "(%d+)%%$")
 	if width ~= nil then
@@ -51,5 +88,5 @@ function Pandoc(doc)
 			table.insert(nblocks, el)
 		end
 	end
-	return pandoc.Doc(nblocks, doc.meta)
+	return pandoc.Doc(nblocks, getMeta(doc.meta))
 end
