@@ -1,4 +1,4 @@
---[[ only for debug
+---[[ only for debug
 table_print = require('table_print')
 table.print = table_print.print_r
 --]]
@@ -54,6 +54,7 @@ end
 function cvlistitem(list)
 	local content = ""
 	for k,v in pairs(list.content) do
+		table.print(v)
 		content = content .. "\\cvlistitem{" .. getText(v) .. "}\n"
 	end
 	return pandoc.RawBlock("latex", content)
@@ -88,11 +89,7 @@ function Pandoc(doc)
 	local nel = {}
 	for i,el in pairs(doc.blocks) do
 		local addEl = nil
-		if el.t == "Header" and el.level == 1 then
-			nel = pandoc.RawBlock("latex", "\\section{" .. getText(el.content) .. "}")
-		elseif el.t == "Header" and el.level == 2 then
-			nel = pandoc.RawBlock("latex", "\\subsection{" .. getText(el.content) .. "}")
-		elseif el.t == "Header" and el.level == 3 then
+		if el.t == "Header" and el.level == 3 then
 			local entry = getText(el.content)
 			local dt = setAttr(el.attr.attributes.date)
 			local title = setAttr(el.attr.attributes.title)
