@@ -45,7 +45,7 @@ function pdf()
 		copyrightPage
 		[ "$copyright"x == "true"x ] && (cat $COPYPAGE;echo) >> $HEADERS
 		# 支持 fenced_divs语法的columns
-		[ "$columns"x == "true"x ] && (cat $COLUMNS_SUPPORT;echo) >> $HEADERS
+		[ "$columns"x == "true"x ] && addOptions="$addOptions $COLUMNS_SUPPORT"
 		addOptions="$addOptions $copyoption"
 		
 		info "PANDOCVARS: $PANDOCVARS"
