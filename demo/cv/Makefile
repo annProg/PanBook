@@ -13,7 +13,7 @@ all: moderncv-all-style-color
 
 moderncv-all-style:
 	for style in `echo $(ALL_STYLE)`;do \
-		panbook cv -E style=$$style -E color=$(COLOR); \
+		panbook cv -E style=$$style -E color=$(COLOR) -V onlinecv="" -V showdate=false; \
 	done
 moderncv-all-style-color:
 	for style in `echo $(ALL_STYLE)`;do \
