@@ -44,25 +44,26 @@ function getWidth(width)
 end
 
 function divColumns(el)
-	local column = {}
+	-- 新建 Div 类型的空table，返回结果可以之间加入blocks列表
+	local column = pandoc.Div({})
 	for k,v in pairs(el) do
 		if v.t == "Div" and v.attr.classes[1] == "column" then
 			if k > 1 and el[k-1].t == "Div" and el[k-1].attr.classes[1] == "column" then
 				-- do nothing
 			else
-				table.insert(column, pandoc.RawBlock("latex", "\\begin{column}{" .. getWidth(v.attr.attributes.width) .. "\\textwidth}"))
+				table.insert(column.content, pandoc.RawBlock("latex", "\\begin{column}{" .. getWidth(v.attr.attributes.width) .. "\\textwidth}"))
 			end
 			for c,content in pairs(v.content) do
-				table.insert(column, content)
+				table.insert(column.content, content)
 			end
 			
 			if k+1 <= #el and el[k+1].t == "Div" and el[k+1].attr.classes[1] == "column" then
-				table.insert(column, pandoc.RawBlock("latex", "\\end{column}\n\\begin{column}{" .. getWidth(el[k+1].attr.attributes.width) .. "\\textwidth}"))
+				table.insert(column.content, pandoc.RawBlock("latex", "\\end{column}\n\\begin{column}{" .. getWidth(el[k+1].attr.attributes.width) .. "\\textwidth}"))
 			else
-				table.insert(column, pandoc.RawBlock("latex", "\\end{column}"))
+				table.insert(column.content, pandoc.RawBlock("latex", "\\end{column}"))
 			end
 		else
-			table.insert(column, v)
+			table.insert(column.content, v)
 		end
 	end
 	
@@ -74,9 +75,7 @@ function Pandoc(doc)
 	for i,el in pairs(doc.blocks) do
 		if el.t == "Div" and el.attr.classes[1] == "columns" then
 			table.insert(nblocks, pandoc.RawBlock("latex", "\\begin{columns}"))
-			for k,v in pairs(divColumns(el.content)) do
-				table.insert(nblocks, v)
-			end
+			table.insert(nblocks, divColumns(el.content))
 			table.insert(nblocks, pandoc.RawBlock("latex", "\\end{columns}"))
 		else
 			table.insert(nblocks, el)
