@@ -1,5 +1,5 @@
 :::: {.columns}
-::: {.column width="50%"}
+::: {.column width="40%"}
 - item1
 - item2
 :::

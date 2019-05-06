@@ -1,24 +1,35 @@
---[[ only for debug
+---[[ only for debug
 table_print = require('table_print')
 table.print = table_print.print_r
 --]]
+
+function getWidth(width)
+	width = string.match(width, "(%d+)%%$")
+	if width ~= nil then
+		return width/100
+	else
+		return "0.5"
+	end
+end
 
 function divColumns(el)
 	local column = {}
 	for k,v in pairs(el) do
 		if v.t == "Div" and v.attr.classes[1] == "column" then
-			local width = v.attr.attributes.width
-			if type(width) == string and string.find(width, "%d+%%$") then
-				width = string.gsub(width, "%", "")
-				width = width/100
+			if k > 1 and el[k-1].t == "Div" and el[k-1].attr.classes[1] == "column" then
+				-- do nothing
 			else
-				width = "0.5"
+				table.insert(column, pandoc.RawBlock("latex", "\\begin{column}{" .. getWidth(v.attr.attributes.width) .. "\\textwidth}"))
 			end
-			table.insert(column, pandoc.RawBlock("latex", "\\begin{column}{" .. width .. "\\textwidth}"))
 			for c,content in pairs(v.content) do
 				table.insert(column, content)
 			end
-			table.insert(column, pandoc.RawBlock("latex", "\\end{column}"))
+			
+			if k+1 <= #el and el[k+1].t == "Div" and el[k+1].attr.classes[1] == "column" then
+				table.insert(column, pandoc.RawBlock("latex", "\\end{column}\n\\begin{column}{" .. getWidth(el[k+1].attr.attributes.width) .. "\\textwidth}"))
+			else
+				table.insert(column, pandoc.RawBlock("latex", "\\end{column}"))
+			end
 		else
 			table.insert(column, v)
 		end
