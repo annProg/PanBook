@@ -1,38 +1,7 @@
-function print_r ( t )
-    local print_r_cache={}
-    local function sub_print_r(t,indent)
-        if (print_r_cache[tostring(t)]) then
-            print(indent.."*"..tostring(t))
-        else
-            print_r_cache[tostring(t)]=true
-            if (type(t)=="table") then
-                for pos,val in pairs(t) do
-                    if (type(val)=="table") then
-                        print(indent.."["..pos.."] => "..tostring(t).." {")
-                        sub_print_r(val,indent..string.rep(" ",string.len(pos)+8))
-                        print(indent..string.rep(" ",string.len(pos)+6).."}")
-                    elseif (type(val)=="string") then
-                        print(indent.."["..pos..'] => "'..val..'"')
-                    else
-                        print(indent.."["..pos.."] => "..tostring(val))
-                    end
-                end
-            else
-                print(indent..tostring(t))
-            end
-        end
-    end
-    if (type(t)=="table") then
-        print(tostring(t).." {")
-        sub_print_r(t,"  ")
-        print("}")
-    else
-        sub_print_r(t,"  ")
-    end
-    print()
-end
-
-table.print = print_r
+--[[ only for debug
+table_print = require('table_print')
+table.print = table_print.print_r
+--]]
 
 -- 获取一个table的所有text
 function getText(content)
@@ -81,12 +50,37 @@ function citeproc(cite)
 end
 
 -- 一级标题后的列表转为cvlistitem
+-- 此函数可能可以优化，不需要getText，定义一个空的Div table，把元素加进去更好
 function cvlistitem(list)
 	local content = ""
 	for k,v in pairs(list.content) do
 		content = content .. "\\cvlistitem{" .. getText(v) .. "}\n"
 	end
 	return pandoc.RawBlock("latex", content)
+end
+
+function cvcolumns(el)
+	local nblocks = pandoc.Div({})
+	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{cvcolumns}"))
+	
+	for k,v in pairs(el.content) do
+		if v.t == "Div" and v.attr.classes[1] == "cvcolumn" then
+			local cat = "Cat"
+			if v.attr.attributes.cat ~= nil then
+				cat = v.attr.attributes.cat
+			end
+			table.insert(nblocks.content, pandoc.RawBlock("latex", "\\cvcolumn{" .. cat .. "}{"))
+			for j,val in pairs(v.content) do
+				table.insert(nblocks.content, val)
+			end
+			table.insert(nblocks.content, pandoc.RawBlock("latex", "}"))
+		else
+			table.insert(nblocks.content, v.content)
+		end
+	end
+	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\end{cvcolumns}"))
+	
+	return nblocks
 end
 
 function Pandoc(doc)
@@ -118,6 +112,8 @@ function Pandoc(doc)
 			end
 		elseif el.t == "Div" and el.attr.identifier == "refs" then
 			nel = citeproc(el)
+		elseif el.t == "Div" and el.attr.classes[1] == "cvcolumns" then
+			nel = cvcolumns(el)
 		else
 			nel = el
 		end

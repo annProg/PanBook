@@ -49,15 +49,15 @@ nocite: |
 - Markdown语法简单列表
 - 不支持多级
 
-# 多列列表
+# 分栏
 
-:::: {.columns}
-::: {.column width="50%"}
-- fenced_divs语法
-- 带 .columns属性
+:::: {.cvcolumns}
+::: {.cvcolumn cat="Test"}
+- fenced_divs语法变体
+- 带 .cvcolumns样式
 :::
-::: {.column width="50%"}
-- 每一列使用 .column属性
-- 通过 width 控制列宽度
+::: {.cvcolumn cat="测试"}
+- 每一列使用 .cvcolumn样式
+- cat 属性设置类别标题
 :::
 ::::
