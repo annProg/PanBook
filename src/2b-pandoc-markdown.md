@@ -418,3 +418,26 @@ last paragraph...
 如此一来参考书目就会被放在这个标题后面了。
 
 
+## 分栏
+
+```
+:::::::::::::: {.columns}
+::: {.column width="40%"}
+contents...
+:::
+::: {.column width="60%"}
+contents...
+:::
+::::::::::::::
+```
+
+显示效果如下：
+
+:::::::::::::: {.columns}
+::: {.column width="40%"}
+contents...
+:::
+::: {.column width="60%"}
+contents...
+:::
+::::::::::::::

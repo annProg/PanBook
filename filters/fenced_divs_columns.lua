@@ -6,9 +6,8 @@ header-includes:
     \newlength\Colsep
     \setlength\Colsep{10pt}
     \newenvironment{columns}[1][]
-    	{\vspace{.5cm}
-    	 \noindent\begin{minipage}{\textwidth}}
-    	{\end{minipage}\vspace{.5cm}}
+    	{\noindent\begin{minipage}{\textwidth}}
+    	{\end{minipage}}
     \newenvironment{column}[1]
     	{\begin{minipage}[t]{#1}}
     	{\end{minipage}}
