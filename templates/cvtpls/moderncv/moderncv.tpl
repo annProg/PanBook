@@ -14,6 +14,7 @@ $else$
 \moderncvcolor{blue}
 $endif$
 
+\usepackage{indentfirst}
 \usepackage{fontspec}
 \usepackage{xunicode}
 \usepackage[BoldFont,SlantFont]{xeCJK}

@@ -187,7 +187,7 @@ function Pandoc(doc)
 	local nblocks = {}
 	local inletter = nil
 	local letterContent = pandoc.Div({})
-	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makelettertitle"))
+	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makelettertitle\n\\setlength{\\parindent}{2em}"))
 	for i,el in pairs(doc.blocks) do
 		local addEl = nil
 		local nel = pandoc.Null()
