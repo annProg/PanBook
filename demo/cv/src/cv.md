@@ -48,7 +48,8 @@ nocite: |
 
 - 简单列表直接使用Markdown无序列表格式
 - 使用`bracketed_spans`语法生成不同形式列表
-- `[这里显示一列]{.double}` 双列列表[这里显示一列]{.double}
+- `[双列列表]{.double} [第二列]{.double}`
+- [双列列表]{.double} [第二列]{.double}
 - `[类别]{.cat}`生成带类别的列表[类别]{.cat}
 - `[评论]{.comment}[类别]{.cat}` 同时带类别和评论[类别]{.cat}[评论]{.comment}
 - `[Java]{.double cat="编程"} [LaTeX]{.double cat="排版"}`[双栏带类别]{.cat}

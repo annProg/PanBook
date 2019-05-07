@@ -101,12 +101,6 @@ function cvlist(list)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
 			table.insert(nlist.content, comment)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
-		elseif spanCount == 1 and classes[1] == "double" then
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistdoubleitem{"))
-			table.insert(nlist.content, item)
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
-			table.insert(nlist.content, litem)
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
 		elseif spanCount == 1 and classes[1] == "cat" then
 			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitem{" .. lcat .. "}{"))
 			table.insert(nlist.content, item)
@@ -117,6 +111,13 @@ function cvlist(list)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}{" .. rcat .. "}{"))
 			table.insert(nlist.content, ritem)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
+		-- cvlistdoubleitem 和 cvdoubleitem 语法只差一个cat属性，因此 cvdoubleitem 优先级高于 cvlistdoubleitem
+		elseif spanCount == 2 and classes[1] == "double" and classes[2] == "double" then
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistdoubleitem{"))
+			table.insert(nlist.content, litem)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
+			table.insert(nlist.content, ritem)
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))			
 		else
 			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
 			table.insert(nlist.content, item)
