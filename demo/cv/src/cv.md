@@ -52,6 +52,7 @@ nocite: |
 - 使用`bracketed_spans`语法生成复杂列表
 - 双栏列表语法：`[双栏列表]{.double} [第二栏]{.double}`
 - 双栏带类别语法：`[Java]{.double cat="编程"} [LaTeX]{.double cat="排版"}`
+- 有点郁闷，好像还不如原生的`\cvitem`命令简单
 
 ## 双栏列表
 
