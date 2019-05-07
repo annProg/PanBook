@@ -156,6 +156,14 @@ function cvcolumns(el)
 	return nblocks
 end
 
+function getValue(v, d)
+	if v ~= nil then
+		return v
+	else
+		return d
+	end
+end
+
 -- 求职信
 function letter(el)
 	local rawtex = ""
@@ -168,25 +176,21 @@ function letter(el)
 	elseif el.attr.classes[2] == "closing" then
 		rawtex = "\\closing{" .. getText(el.content) .. "}"
 	elseif el.attr.classes[2] == "enclosure" then
-		if el.attr.attributes.enclosure ~= nil then
-			rawtex = "\\enclosure[" .. el.attr.attributes.enclosure .. "]{" .. getText(el.content) .. "}"
-		else
-			rawtex = "\\enclosure{" .. getText(el.content) .. "}"
-		end
+		rawtex = "\\enclosure[" .. getValue(el.attr.attributes.enclosure, "Enclosure") .. "]{" .. getText(el.content) .. "}"
 	else
 	end
-
+	
 	return pandoc.RawBlock("latex", rawtex)
 end
 
 function Pandoc(doc)
 	local nblocks = {}
-	local nel = {}
 	local inletter = nil
 	local letterContent = pandoc.Div({})
 	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makelettertitle"))
 	for i,el in pairs(doc.blocks) do
 		local addEl = nil
+		local nel = pandoc.Null()
 		if el.t == "Header" and el.attr.classes[1] == "letter" then
 			inletter = true
 			nel = letter(el)
