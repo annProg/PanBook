@@ -38,22 +38,35 @@ nocite: |
 
 - 描述经历可用Markdown列表语法
   - 列表可以多级
-- 列表中支持Markdown加粗和行内代码语法（一级二级标题下的列表不支持高亮）  
+- 列表中支持Markdown加粗和行内代码语法
 
 ::: {#refs}
 # 发表作品
 :::
 
-# 列表
+# 普通列表
 
-- 简单列表直接使用Markdown无序列表格式
-- 使用`bracketed_spans`语法生成不同形式列表
-- `[双列列表]{.double} [第二列]{.double}`
-- [双列列表]{.double} [第二列]{.double}
-- `[类别]{.cat}`生成带类别的列表[类别]{.cat}
+- 简单列表直接使用Markdown无序列表格式，不支持多级嵌套
+- 使用`bracketed_spans`语法生成复杂列表
+- 双栏列表语法：`[双栏列表]{.double} [第二栏]{.double}`
+- 双栏带类别语法：`[Java]{.double cat="编程"} [LaTeX]{.double cat="排版"}`
+
+# 双栏列表
+
+- [双栏列表]{.double} [第二栏]{.double}
+
+# 带类别列表
+- `[类别]{.cat}`生成带类别的列表[语法]{.cat}
+
+# 带评论列表
+
 - `[评论]{.comment}[类别]{.cat}` 同时带类别和评论[类别]{.cat}[评论]{.comment}
-- `[Java]{.double cat="编程"} [LaTeX]{.double cat="排版"}`[双栏带类别]{.cat}
-- [Java,PHP]{.double cat="编程"} [Markdown,LaTeX]{.double cat="排版"}
+- [英语]{.cat} 不会读不会写 [四级是啥]{.comment}
+
+# 带类别的双栏列表
+
+- [Java,PHP,Lisp,Haskell,Golang,C++]{.double cat="编程"} [Markdown,LaTeX,Pandoc,PanBook]{.double cat="排版"}
+- [MySQL,MongoDB,Redis,InfluxDB]{.double cat="数据库"}
 
 # 分栏
 
