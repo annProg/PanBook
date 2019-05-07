@@ -156,12 +156,47 @@ function cvcolumns(el)
 	return nblocks
 end
 
+-- 求职信
+function letter(el)
+	local rawtex = ""
+	if el.level == 1 then
+		rawtex = "\n\\clearpage\n\\recipient{" .. getText(el.content) .. "}{" .. el.attr.attributes.company .. "\\\\" .. el.attr.attributes.addr .. "\\\\" .. el.attr.attributes.city .. "}"
+	elseif el.attr.classes[2] == "date" then
+		rawtex = "\\date{" .. getText(el.content) .. "}"
+	elseif el.attr.classes[2] == "opening" then
+		rawtex = "\\opening{" .. getText(el.content) .. "}"
+	elseif el.attr.classes[2] == "closing" then
+		rawtex = "\\closing{" .. getText(el.content) .. "}"
+	elseif el.attr.classes[2] == "enclosure" then
+		if el.attr.attributes.enclosure ~= nil then
+			rawtex = "\\enclosure[" .. el.attr.attributes.enclosure .. "]{" .. getText(el.content) .. "}"
+		else
+			rawtex = "\\enclosure{" .. getText(el.content) .. "}"
+		end
+	else
+	end
+
+	return pandoc.RawBlock("latex", rawtex)
+end
+
 function Pandoc(doc)
 	local nblocks = {}
 	local nel = {}
+	local inletter = nil
+	local letterContent = pandoc.Div({})
+	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makelettertitle"))
 	for i,el in pairs(doc.blocks) do
 		local addEl = nil
-		if el.t == "Header" and el.level == 3 then
+		if el.t == "Header" and el.attr.classes[1] == "letter" then
+			inletter = true
+			nel = letter(el)
+		elseif el.t ~= "Header" and inletter ~= nil then
+			table.insert(letterContent.content, el)
+			-- 显式分段 module-cv.sh 中会删除所有空行
+			if el.t == "Para" then
+				table.insert(letterContent.content, pandoc.RawBlock("latex", "\\par"))
+			end
+		elseif el.t == "Header" and el.level == 3 and inletter == nil then
 			local entry = getText(el.content)
 			local dt = setAttr(el.attr.attributes.date)
 			local title = setAttr(el.attr.attributes.title)
@@ -172,16 +207,16 @@ function Pandoc(doc)
 				bracket = "}"
 			end
 			nel = pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. title .. "}{" .. entry .. "}{" .. city .. "}{" .. score .. "}{" .. bracket)
-		elseif el.t == "BulletList" then
+		elseif el.t == "BulletList" and inletter == nil then
 			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 3 then
 				addEl = pandoc.RawBlock("latex", "}")
 				nel = el
 			else
 				nel = cvlist(el)
 			end
-		elseif el.t == "Div" and el.attr.identifier == "refs" then
+		elseif el.t == "Div" and el.attr.identifier == "refs" and inletter == nil then
 			nel = citeproc(el)
-		elseif el.t == "Div" and el.attr.classes[1] == "cvcolumns" then
+		elseif el.t == "Div" and el.attr.classes[1] == "cvcolumns" and inletter == nil then
 			nel = cvcolumns(el)
 		else
 			nel = el
@@ -192,5 +227,9 @@ function Pandoc(doc)
 			table.insert(nblocks, addEl)
 		end
 	end
+	
+	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makeletterclosing"))
+	table.insert(nblocks, letterContent)
+	
 	return pandoc.Pandoc(nblocks, doc.meta)
 end

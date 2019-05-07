@@ -46,7 +46,8 @@ function cv() {
 		info "CV_REFERENCE_PARAM: $CV_REFERENCE_PARAM"
 		pandoc $CV_REFERENCE_PARAM --listings $BODY -o $OUTPUT --pdf-engine=xelatex $PANDOCVARS $addOptions
 		
-		# 删除空行，空行会影响某些模板编译
+		# 删除空行，空行会被认为是分段，处理很麻烦。干脆全删掉。一般简历中需要用分段的场景是求职信，
+		#转求职信的时候用\par显式分段
 		sed -i '/^$/d' $OUTPUT
 		
 		xelatex $interaction -output-directory=$BUILD $OUTPUT

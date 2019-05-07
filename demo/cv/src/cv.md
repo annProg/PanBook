@@ -68,8 +68,8 @@ nocite: |
 :::
 ::::
 
-# 韩荆州 {.letter company="大唐帝国" addr="荆州襄阳大都督府"}
-## 开元22年，734 {.letter .date}
+# 韩荆州 {.letter company="大唐帝国" addr="荆州大都督府" city="襄阳"}
+## 开元22年 {.letter .date}
 ## Dear Sir or Madam， {.letter .opening}
 ## Yours faithfully, {.letter .closing}
 ## curriculum vit\ae {.letter .enclosure enclosure="附件"}
@@ -91,7 +91,7 @@ nocite: |
 求职信语法
 
 - 使用一级标题和二级标题定义求职信基础信息，第一个样式必须为`.letter`
-- 一级标题用于定义接收方，可用属性 `company="公司"`，`addr="地址"`
+- 一级标题用于定义接收方，可用属性 `company="公司"`，`addr="地址"`，`city="城市"`
 - 二级标题第二个属性
   - `.date` 日期
   - `.opening` 称呼
