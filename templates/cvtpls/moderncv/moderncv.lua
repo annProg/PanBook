@@ -122,6 +122,10 @@ function cvlist(list)
 			table.insert(nlist.content, item)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
 		end
+		
+		if spanCount > 2 then
+			print("\nModerncv Warning!\nYou use more than 2 bracketed_spans in one list item. May cause unexpect result\nPlease Check\n\n")
+		end
 	end
 	
 	return nlist
