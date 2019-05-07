@@ -13,7 +13,7 @@ all: moderncv-all-style-color
 
 moderncv-all-style:
 	for style in `echo $(ALL_STYLE)`;do \
-		panbook cv -E style=$$style -E color=$(COLOR) -V onlinecv="" -V showdate=false; \
+		panbook cv -E style=$$style -E color=$(COLOR) -V onlinecv="" -V showdate=""; \
 	done
 moderncv-all-style-color:
 	for style in `echo $(ALL_STYLE)`;do \
@@ -24,6 +24,14 @@ moderncv-all-style-color:
 	
 moderncv:
 	panbook cv -E style=$(STYLE) -E color=$(COLOR)
+	
+png:
+	cd build;for pdf in `ls cv-cv-moderncv-*-blue.pdf`; do \
+		pdftocairo -png $$pdf; \
+		n=`echo $$pdf |sed 's/\.pdf//g'`; \
+		convert +append `ls $$n-*.png` $$n.png; \
+		rm -f $$n-*.png; \
+	done
 
 link:
 	for item in `echo $(ALL_STYLE)`;do echo "- [moderncv-$$item](https://$(SERVER)/PanBook/cv-cv-moderncv-$$item-blue.pdf)";done
