@@ -29,7 +29,7 @@ png:
 	cd build;for pdf in `ls cv-cv-moderncv-*-blue.pdf`; do \
 		pdftocairo -png $$pdf; \
 		n=`echo $$pdf |sed 's/\.pdf//g'`; \
-		convert +append `ls $$n-*.png` $$n.png; \
+		convert -append `ls $$n-*.png` $$n.png; \
 		rm -f $$n-*.png; \
 	done
 
