@@ -30,6 +30,8 @@ note "This Template support the following variables, they can set via metadata o
 \tmobile               Your mobile phone number
 \tfixed                Your fixed phone number
 \tgithub               Your Github user name
+\tlinkedin             Your LinkedIn account
+\ttwitter              Your Twitter account
 \thomepage             Your website link
 \tdatewidth            Change the width of the dates column. default 3cm
 \temail                Your Email address

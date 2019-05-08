@@ -88,6 +88,15 @@ $if(github)$
 \social[github]{$github$}
 $endif$
 
+$if(linkedin)$
+\social[linkedin]{$linkedin$}
+$endif$
+
+$if(twitter)$
+\social[twitter]{$twitter$}
+$endif$
+
+
 $if(address)$
 \address{$address$}{}
 $endif$
