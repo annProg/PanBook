@@ -105,10 +105,16 @@ $endif$
 % makes a http hyperlink
 % usage: \httplink[optional text]{link}
 % 考虑一般情况下link为空更常见，所以改为判断#2是否为nolink
-\renewcommand*{\httplink}[2][]{%
-  \ifthenelse{\equal{#2}{nolink}}%
-    {#1}%
-    {\href{http://#2}{#1}}}
+% 要兼容homepage，改为多次判断
+\renewcommand*{\httplink}[2][]{
+	\ifthenelse{\equal{#1}{}}
+	{\href{http://#2}{#2}}
+	{
+		\ifthenelse{\equal{#2}{nolink}}
+		{#1}
+		{\href{http://#2}{#1}}
+	}
+}
 
 $if(weibo)$
 \social[weibo][weibo.com/$weibo$]{$weibo$}
