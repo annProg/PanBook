@@ -96,6 +96,35 @@ $if(twitter)$
 \social[twitter]{$twitter$}
 $endif$
 
+\usepackage{fontawesome}
+\newcommand*\weibosocialsymbol{{\small\faWeibo~}}
+\newcommand*\wechatsocialsymbol{{\small\faWechat~}}
+\newcommand*\qqsocialsymbol{{\small\faQq~}}
+\newcommand*\skypesocialsymbol{{\small\faSkype~}}
+
+% makes a http hyperlink
+% usage: \httplink[optional text]{link}
+% 考虑一般情况下link为空更常见，所以改为判断#2是否为nolink
+\renewcommand*{\httplink}[2][]{%
+  \ifthenelse{\equal{#2}{nolink}}%
+    {#1}%
+    {\href{http://#2}{#1}}}
+
+$if(weibo)$
+\social[weibo][weibo.com/$weibo$]{$weibo$}
+$endif$
+
+$if(wechat)$
+\social[wechat][nolink]{$wechat$}
+$endif$
+
+$if(qq)$
+\social[qq][nolink]{$qq$}
+$endif$
+
+$if(skype)$
+\social[skype][nolink]{$skype$}
+$endif$
 
 $if(address)$
 \address{$address$}{}

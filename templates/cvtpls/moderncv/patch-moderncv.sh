@@ -32,6 +32,10 @@ note "This Template support the following variables, they can set via metadata o
 \tgithub               Your Github user name
 \tlinkedin             Your LinkedIn account
 \ttwitter              Your Twitter account
+\twechat               Your WeChat account
+\tweibo                Your Weibo account
+\tqq                   Your QQ number
+\tskype                Your Skype
 \thomepage             Your website link
 \tdatewidth            Change the width of the dates column. default 3cm
 \temail                Your Email address
