@@ -15,15 +15,18 @@
 - [Ctex模板-mobile](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-mobile.pdf)
 - [Epub模板](https://api.annhe.net/PanBook/PanBook.epub)
 
-查看beamer幻灯片效果
+## 业务范围扩张
+
+原本只是想盘书的，后来发现`beamer`，论文，简历都时一样的套路，于是就都盘一盘吧。
+### 幻灯片效果(beamer)
 
 - [beamer幻灯片](./demo/beamer/)
 
-查看论文效果
+### 论文效果
 
 - [ElegantPaper](https://api.annhe.net/PanBook/PanBook-latex-elegantpaper-pc.pdf)
 
-查看简历效果
+### 简历效果
 
 - [简历](./demo/cv/)
 
