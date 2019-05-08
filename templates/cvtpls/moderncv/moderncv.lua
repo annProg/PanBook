@@ -47,8 +47,9 @@ function citeproc(cite)
 			table.insert(newcite.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
 			table.insert(newcite.content, v)
 			table.insert(newcite.content, pandoc.RawBlock("latex", "}"))
+		elseif v.t == "Header" and v.level == 1 then
+			table.insert(newcite.content, pandoc.RawBlock("latex", "\\section{" .. getText(v.content) .. "}"))
 		else
-			table.insert(newcite.content, v)
 		end
 	end
 	return newcite
@@ -209,6 +210,11 @@ function Pandoc(doc)
 			if el.t == "Para" then
 				table.insert(letterContent.content, pandoc.RawBlock("latex", "\\par"))
 			end
+		-- 带label的section和subsection会影响fancy样式显示，所以手动转一下
+		elseif el.t == "Header" and el.level == 1 and inletter == nil then
+			nel = pandoc.RawBlock("latex", "\\section{" .. getText(el.content) .. "}")
+		elseif el.t == "Header" and el.level == 2 and inletter == nil then
+			nel = pandoc.RawBlock("latex", "\\subsection{" .. getText(el.content) .. "}")
 		elseif el.t == "Header" and el.level == 3 and inletter == nil then
 			local entry = getText(el.content)
 			local dt = setAttr(el.attr.attributes.date)
