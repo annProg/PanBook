@@ -87,12 +87,12 @@ nocite: |
 # 求职信语法
 
 - 使用一级标题和二级标题定义求职信基础信息，第一个样式必须为`.letter`
-- 一级标题用于定义接收方，可用属性 `company="公司"`，`addr="地址"`，`city="城市"`
+- 一级标题用于定义接收方（必选），必选属性 `company="公司"`，`addr="地址"`，`city="城市"`
 - 二级标题通过第二个样式定义不同的功能
-- [日期]{.cat}  `.date`
-- [称呼]{.cat} `.opening`
-- [祝颂语]{.cat} `.closing` 
-- [附件]{.cat} `.enclosure` 
+- [日期]{.cat}  `.date`，可选
+- [称呼]{.cat} `.opening` ，必选
+- [祝颂语]{.cat} `.closing` ，必选
+- [附件]{.cat} `.enclosure` ，可选
 - 二级标题样式为附件时，可用`enclosure`属性定义显示名称
 - 举例：`## 我的简历 {.letter .enclosure enclosure="附件"}`
 - 接下来开始写正文

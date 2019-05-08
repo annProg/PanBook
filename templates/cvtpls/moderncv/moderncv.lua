@@ -3,6 +3,11 @@ table_print = require('table_print')
 table.print = table_print.print_r
 --]]
 
+-- 打印警告信息
+function printWarn(text)
+	print("\nModerncv Warning!\n" .. text .. "\nPlease Check\n\n")
+end
+
 -- 获取一个table的所有text
 function getText(content)
 	local newcontent = ""
@@ -125,7 +130,7 @@ function cvlist(list)
 		end
 		
 		if spanCount > 2 then
-			print("\nModerncv Warning!\nYou use more than 2 bracketed_spans in one list item. May cause unexpect result\nPlease Check\n\n")
+			printWarn("You use more than 2 bracketed_spans in one list item. May cause unexpect result")
 		end
 	end
 	
@@ -165,16 +170,20 @@ function getValue(v, d)
 end
 
 -- 求职信
+local letterMeta = 0   -- recipient, opening, closing 都设置才能添加求职信
 function letter(el)
 	local rawtex = ""
 	if el.level == 1 then
-		rawtex = "\n\\clearpage\n\\recipient{" .. getText(el.content) .. "}{" .. el.attr.attributes.company .. "\\\\" .. el.attr.attributes.addr .. "\\\\" .. el.attr.attributes.city .. "}"
+		rawtex = "\n\\clearpage\n\\recipient{" .. getText(el.content) .. "}{" .. getValue(el.attr.attributes.company, "Please set company attr") .. "\\\\" .. getValue(el.attr.attributes.addr, "Please set addr attr") .. "\\\\" .. getValue(el.attr.attributes.city, "Please set city attr") .. "}"
+		letterMeta = letterMeta + 1
 	elseif el.attr.classes[2] == "date" then
 		rawtex = "\\date{" .. getText(el.content) .. "}"
 	elseif el.attr.classes[2] == "opening" then
 		rawtex = "\\opening{" .. getText(el.content) .. "}"
+		letterMeta = letterMeta + 1
 	elseif el.attr.classes[2] == "closing" then
 		rawtex = "\\closing{" .. getText(el.content) .. "}"
+		letterMeta = letterMeta + 1
 	elseif el.attr.classes[2] == "enclosure" then
 		rawtex = "\\enclosure[" .. getValue(el.attr.attributes.enclosure, "Enclosure") .. "]{" .. getText(el.content) .. "}"
 	else
@@ -233,7 +242,13 @@ function Pandoc(doc)
 	end
 	
 	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makeletterclosing"))
-	table.insert(nblocks, letterContent)
+	
+	if letterMeta == 3 then
+		table.insert(nblocks, letterContent)
+	elseif letterMeta > 0 and letterMeta < 3 then
+		printWarn("If you want to use letter, you need to provide recipient, opening and closing")
+	else
+	end
 	
 	return pandoc.Pandoc(nblocks, doc.meta)
 end
