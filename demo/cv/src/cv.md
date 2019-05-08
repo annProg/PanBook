@@ -9,7 +9,7 @@ photo: images/photo.png
 extrainfo: 个人信息不需要的项目删除即可
 mobile: 13000001111
 github: annProg
-weibo: panbook
+weibo: Weibo
 qq: 123456789
 wechat: panbook
 skype: skype
