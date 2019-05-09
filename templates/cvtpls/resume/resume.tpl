@@ -18,6 +18,10 @@ $if(CJKmainfont)$
 \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
 $endif$
 
+$for(header-includes)$
+$header-includes$
+$endfor$
+
 \begin{document}
 \pagenumbering{gobble} % suppress displaying page number
 
