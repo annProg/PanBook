@@ -20,15 +20,15 @@
 % loading fonts
 \RequirePackage{fontspec}
 % Main document font
-\setmainfont[
-  Path = fonts/Main/ ,
-  Extension = .otf ,
-  UprightFont = *-regular ,
-  BoldFont = *-bold ,
-  ItalicFont = *-italic ,
-  BoldItalicFont = *-bolditalic ,
-  SmallCapsFont = Fontin-SmallCaps
-]{texgyretermes}
+%\setmainfont[
+%  Path = fonts/Main/ ,
+%  Extension = .otf ,
+%  UprightFont = *-regular ,
+%  BoldFont = *-bold ,
+%  ItalicFont = *-italic ,
+%  BoldItalicFont = *-bolditalic ,
+%  SmallCapsFont = Fontin-SmallCaps
+%]{texgyretermes}
 
 \RequirePackage[
 	a4paper,
