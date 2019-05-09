@@ -17,7 +17,6 @@ $endif$
 \usepackage{indentfirst}
 \usepackage{fontspec}
 \usepackage{xunicode}
-\usepackage[BoldFont,SlantFont]{xeCJK}
 \usepackage{zhnumber}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
