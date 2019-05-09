@@ -36,10 +36,9 @@ $if(showdate)$
 \fancyfoot[R]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont 编译日期：\zhtoday}
 $endif$
 
-$if(font)$
-\setCJKmainfont{$font$}
-$else$
-\setCJKmainfont{SimSun}
+$if(CJKmainfont)$
+\usepackage{xeCJK}
+\setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
 $endif$
 
 $if(geometry)$

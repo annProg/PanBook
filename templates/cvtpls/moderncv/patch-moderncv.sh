@@ -6,6 +6,9 @@ note "use -E fontsize=(10pt|11pt|12pt) default 11pt"
 note "use -E size=(a4paper|letterpaper|a5paper|legalpaper|executivepaper|landscape) default a4paper"
 note "use -E fontfamily=(roman|sans) default sans"
 
+setPandocVar CJKmainfont "SimSun"
+setPandocVar CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
+
 getVar style "classic"
 getVar color "blue"
 getVar fontsize "11pt"
@@ -45,4 +48,5 @@ note "This Template support the following variables, they can set via metadata o
 \tquote                Some quote
 \tonlinecv             Your cv url
 \tshowdate             Show cv compile date (true|false)
-\tfont                 Change CJKmainfont. default SimSun"
+\tCJKmainfont          Change CJKmainfont. default SimSun
+\tCJKoptions           Change CJKoptions default (BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑)"
