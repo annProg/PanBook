@@ -59,6 +59,8 @@ nocite: |
 - 双栏列表语法：`[双栏列表]{.double} [第二栏]{.double}`
 - 双栏带类别语法：`[编程]{.cat}[Java]{.double} [排版]{.cat}[LaTeX]{.double}`
 - 有点郁闷，好像还不如原生的`\cvitem`命令简单
+- [一]{.double} [二]{.double} [三]{.double}
+- [cat1]{.cat}[一]{.double} [cat2]{.cat}[二]{.double} [cat3]{.cat}[三]{.double}
 
 ## 双栏列表
 

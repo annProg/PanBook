@@ -95,21 +95,22 @@ function cvlist(list)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitem{" .. cat[1] .. "}{"))
 			table.insert(nlist.content, item)
 			table.insert(nlist.content,pandoc.RawBlock("latex","}"))
-		elseif spanCount >= 2 and #cat >= 1 and #double >= 1 then
+		elseif spanCount >= 2 and #cat >= 1 and #double >= 1 and spanCount < 5 then
 			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvdoubleitem{" .. cat[1] .. "}{"))
 			table.insert(nlist.content, double[1])
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}{" .. getValue(cat[2], "") .. "}{"))
 			table.insert(nlist.content, getValue(double[2], pandoc.Plain({})))
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
-		elseif spanCount >= 1 and #cat == 0 and #double >= 1 then
+		elseif spanCount == 2 and #cat == 0 and #double == 2 then
 			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistdoubleitem{"))
 			table.insert(nlist.content, double[1])
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
-			table.insert(nlist.content, getValue(double[2], pandoc.Plain({})))
+			table.insert(nlist.content, double[2])
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))			
 		else
 			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
-			table.insert(nlist.content, item)
+			-- 如果以上都不满足，按普通列表，远样返回
+			table.insert(nlist.content, v[1])
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
 		end
 		
