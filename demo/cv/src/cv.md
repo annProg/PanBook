@@ -7,6 +7,7 @@ address: 本星系群银河系本星际云太阳系地球 - 中国北京
 quote: \LaTeX 写简历漂不漂亮呀
 photo: images/photo.png
 extrainfo: 个人信息不需要的项目删除即可
+email: email@qq.com
 mobile: 13000001111
 github: annProg
 weibo: Weibo
