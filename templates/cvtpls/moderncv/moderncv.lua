@@ -62,38 +62,22 @@ function cvlist(list)
 	for k,v in pairs(list.content) do
 		local spanCount = 0
 		local item = pandoc.Plain({})
-		local lcat = ""
-		local litem = pandoc.Plain({})
 		local comment = pandoc.Plain({})
-		local rcat = ""
-		local ritem = pandoc.Plain({})
-		local classes = {}
-		local doubleItem = nil
+		local cat = {}
+		local double = {}
 		for i,val in pairs(v[1].content) do
 			if val.t == "Span" then
 				spanCount = spanCount + 1
 				if #val.attr.classes > 0 then
-					table.insert(classes, val.attr.classes[1])
 					if val.attr.classes[1] == "comment" then
 						table.insert(comment.content, val)
 					end
 					if val.attr.classes[1] == "cat" then
-						lcat = getText(val.content)
+						table.insert(cat, getText(val.content))
 					end
-				end
-				
-				cat = val.attr.attributes.cat
-				if spanCount == 1 then
-					if cat ~= nil then
-						lcat = cat
-						doubleItem = true
+					if val.attr.classes[1] == "double" then
+						table.insert(double, pandoc.Plain({val}))
 					end
-					table.insert(litem.content, val)
-				else
-					if cat ~= nil then
-						rcat = cat
-					end
-					table.insert(ritem.content, val)
 				end
 			else
 				table.insert(item.content, val)
@@ -101,28 +85,27 @@ function cvlist(list)
 		end
 		
 		-- \cvitemwithcomment 优先级最高
-		if next(comment.content) ~= nil then
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitemwithcomment{" .. lcat .. "}{"))
+		if spanCount == 2 and next(comment.content) ~= nil and #cat > 0 then
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitemwithcomment{" .. cat[1] .. "}{"))
 			table.insert(nlist.content, item)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
 			table.insert(nlist.content, comment)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
-		elseif spanCount == 1 and classes[1] == "cat" then
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitem{" .. lcat .. "}{"))
+		elseif spanCount == 1 and #cat == 1 then
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitem{" .. cat[1] .. "}{"))
 			table.insert(nlist.content, item)
 			table.insert(nlist.content,pandoc.RawBlock("latex","}"))
-		elseif doubleItem ~= nil then
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvdoubleitem{" .. lcat .. "}{"))
-			table.insert(nlist.content, litem)
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}{" .. rcat .. "}{"))
-			table.insert(nlist.content, ritem)
+		elseif spanCount >= 2 and #cat >= 1 and #double >= 1 then
+			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvdoubleitem{" .. cat[1] .. "}{"))
+			table.insert(nlist.content, double[1])
+			table.insert(nlist.content, pandoc.RawBlock("latex", "}{" .. getValue(cat[2], "") .. "}{"))
+			table.insert(nlist.content, getValue(double[2], pandoc.Plain({})))
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
-		-- cvlistdoubleitem 和 cvdoubleitem 语法只差一个cat属性，因此 cvdoubleitem 优先级高于 cvlistdoubleitem
-		elseif spanCount == 2 and classes[1] == "double" and classes[2] == "double" then
+		elseif spanCount >= 1 and #cat == 0 and #double >= 1 then
 			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistdoubleitem{"))
-			table.insert(nlist.content, litem)
+			table.insert(nlist.content, double[1])
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
-			table.insert(nlist.content, ritem)
+			table.insert(nlist.content, getValue(double[2], pandoc.Plain({})))
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))			
 		else
 			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
@@ -130,8 +113,8 @@ function cvlist(list)
 			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
 		end
 		
-		if spanCount > 2 then
-			printWarn("You use more than 2 bracketed_spans in one list item. May cause unexpect result")
+		if spanCount > 4 then
+			printWarn("You use more than 4 bracketed_spans in one list item. May cause unexpect result")
 		end
 	end
 	

@@ -57,25 +57,26 @@ nocite: |
 - 简单列表直接使用Markdown无序列表格式，不支持多级嵌套
 - 使用`bracketed_spans`语法生成复杂列表
 - 双栏列表语法：`[双栏列表]{.double} [第二栏]{.double}`
-- 双栏带类别语法：`[Java]{.double cat="编程"} [LaTeX]{.double cat="排版"}`
+- 双栏带类别语法：`[编程]{.cat}[Java]{.double} [排版]{.cat}[LaTeX]{.double}`
 - 有点郁闷，好像还不如原生的`\cvitem`命令简单
 
 ## 双栏列表
 
 - [双栏列表]{.double} [第二栏]{.double}
+- [仅一列的双栏样式]{.double}
 
 ## 带类别列表
 - `[类别]{.cat}`生成带类别的列表[语法]{.cat}
 
 ## 带评论列表
 
-- `[评论]{.comment}[类别]{.cat}` 同时带类别和评论[类别]{.cat}[评论]{.comment}
+- `[类别]{.cat}描述[评论]{.comment}` [类别]{.cat}同时带类别和评论[评论]{.comment}
 - [英语]{.cat} 不会读不会写 [四级是啥]{.comment}
 
 ## 带类别的双栏列表
 
-- [Java,PHP,Lisp,Haskell,Golang,C++]{.double cat="编程"} [Markdown,LaTeX,Pandoc,PanBook]{.double cat="排版"}
-- [MySQL,MongoDB,Redis,InfluxDB]{.double cat="数据库"}
+- [编程]{.cat}[Java,PHP,Lisp,Haskell,Golang,C++]{.double} [排版]{.cat}[Markdown,LaTeX,Pandoc,PanBook]{.double}
+- [数据库]{.cat}[MySQL,MongoDB,Redis,InfluxDB]{.double}
 
 # 分栏语法
 
