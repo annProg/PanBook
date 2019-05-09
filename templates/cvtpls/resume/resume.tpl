@@ -27,10 +27,11 @@ $if(mobile)$
   \phone{$mobile$} \textperiodcentered\ 
 $endif$
 
-
-  \linkedin[billryan8]{https://www.linkedin.com/in/billryan8 }
+$if(linkedin)$
+  \linkedin[$linkedin$]{https://www.linkedin.com/in/$linkedin$ }
+$endif$
 }
- 
+
 \section{\faGraduationCap\  教育背景}
 \datedsubsection{\textbf{上海交通大学}, 上海}{2013 -- 至今}
 \textit{在读硕士研究生}\ 信息与通信工程, 预计 2016 年 3 月毕业
