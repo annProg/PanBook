@@ -6,6 +6,7 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \usepackage{xcolor}
+\usepackage{coverletter}
 $if(listings)$
 \usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
