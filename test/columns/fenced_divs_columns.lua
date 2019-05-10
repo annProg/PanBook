@@ -41,7 +41,9 @@ function getMeta(meta)
 end
 
 function getWidth(width)
-	width = string.match(width, "(%d+)%%$")
+	if width ~= nil then
+		width = string.match(width, "(%d+)%%$")
+	end
 	if width ~= nil then
 		return width/100
 	else
