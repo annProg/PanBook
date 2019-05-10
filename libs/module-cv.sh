@@ -103,9 +103,9 @@ EOF
 }
 
 function cv() {
-	note "use --cv=<template> to change cv template"
+	note "use --cv=<template|R|A> to change cv template. R means radom, A means all"
 	getVar CV "moderncv"	
-	cvList=(moderncv limecv)	
+	cvList=(moderncv resume)
 	interaction="-interaction=batchmode"
 	[ "$TRACE"x == "true"x ] && interaction=""
 
