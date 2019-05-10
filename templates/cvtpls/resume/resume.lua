@@ -115,7 +115,7 @@ function cvcolumns(el)
 end
 
 function getValue(v, d)
-	if v ~= nil then
+	if v ~= nil and v ~= "" then
 		return v
 	else
 		return d
@@ -145,11 +145,21 @@ function letter(el)
 	return pandoc.RawBlock("latex", rawtex)
 end
 
+function letterHeader(meta)
+	local header = ""
+	
+	header = "\\name{" .. getValue(string.gsub(getText(meta.name)," ","~"), "Your Name") .. "}\n\\basicInfo{"
+		.. "\\email{" .. getValue(getText(meta.email), "you@qq.com") .. "} \\textperiodcentered\\ \n"
+		.. "\\phone{" .. getValue(getText(meta.mobile), "13000000000") .. "}}\n\\vspace{1cm}\n"
+		
+	return header	
+end
+
 function Pandoc(doc)
 	local nblocks = {}
 	local inletter = nil
 	local letterContent = pandoc.Div({})
-	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makelettertitle\n\\setlength{\\parindent}{2em}"))
+	table.insert(letterContent.content, pandoc.RawBlock("latex", letterHeader(doc.meta) .. "\\makelettertitle\n\\setlength{\\parindent}{2em}"))
 	for i,el in pairs(doc.blocks) do
 		local nel = pandoc.Null()
 		if el.t == "Header" and el.attr.classes[1] == "letter" then
