@@ -218,6 +218,8 @@ function setBase() {
 	Select=$2
 	List=$3
 	
+	info "List: ${List[@]}"
+	
 	SELECTED=($Select)
 	
 	if [ "$Select"x == "R"x ];then
@@ -227,7 +229,7 @@ function setBase() {
 	fi
 		
 	if [ "$Select"x == "A"x ];then
-		SELECTED=`echo ${themeList[@]}`
+		SELECTED=`echo ${List[@]}`
 	fi
 	
 	info "SELECTED $Type: $SELECTED"
@@ -240,15 +242,18 @@ function setBase() {
 	getVar LSTSET "$SCRIPTDIR/templates/latex/listings-set.tex"
 }
 function setTheme() {
-	setBase BeamerTheme $THEME $1	
+	arr=$1
+	setBase BeamerTheme $THEME "${arr[@]}"
 }
 
 function setClass() {
-	setBase PdfClass $DOCUMENTCLASS $1
+	arr=$1
+	setBase PdfClass $DOCUMENTCLASS "${arr[@]}"
 }
 
 function setCV() {
-	setBase CVTPL $CV $1
+	arr=$1
+	setBase CVTPL $CV "${arr[@]}"
 }
 
 function copyrightPage() {

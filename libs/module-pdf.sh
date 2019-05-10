@@ -10,7 +10,7 @@ function pdf()
 	init  # 首先初始化
 			
 	# 支持随机选取theme
-	setClass $classList
+	setClass "${classList[*]}"
 
 	cd $BUILD	
 	

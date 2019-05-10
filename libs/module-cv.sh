@@ -116,7 +116,7 @@ function cv() {
 	
 	
 	# 支持随机选取theme
-	setCV $cvList
+	setCV "${cvList[*]}"
 
 	for t in ${SELECTED[@]};do
 		note "CV Template: $t"
