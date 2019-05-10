@@ -28,7 +28,7 @@ note "cv style is $style"
 note "cv color is $color"
 
 note "This Template support the following variables, they can set via metadata or -V option\n
-\tauthor               Your name
+\tname                 Your name
 \ttitle                Your title
 \tmobile               Your mobile phone number
 \tfixed                Your fixed phone number

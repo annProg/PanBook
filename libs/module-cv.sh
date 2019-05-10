@@ -8,7 +8,7 @@ function cvMeta() {
 	[ ! -f $photoFile ] && cp $SCRIPTDIR/medias/photo.png $photoFile
 	[ ! -f $cvFile ] && cat > $cvFile <<EOF
 ---
-author: 姓\ 名        # use backslash to escape space
+name: 姓\ 名        # use backslash to escape space
 title: \LaTeX 排版工程师
 homepage: baidu.com
 showdate: true

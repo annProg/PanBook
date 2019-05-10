@@ -1,5 +1,5 @@
 ---
-author: 盘\ 书        # 空格可用反斜杠转义
+name: 盘\ 书        # 空格可用反斜杠转义
 title: \LaTeX 排版工程师
 homepage: baidu.com
 showdate: true

@@ -5,7 +5,7 @@ setPandocVar CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=�
 
 
 note "This Template support the following variables, they can set via metadata or -V option\n
-\tauthor               Your name
+\tname                 Your name
 \ttitle                Your title
 \tmobile               Your mobile phone number
 \tfixed                Your fixed phone number

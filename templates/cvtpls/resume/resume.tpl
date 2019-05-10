@@ -26,8 +26,8 @@ $endfor$
 \begin{document}
 \pagenumbering{gobble} % suppress displaying page number
 
-$if(author)$
-\name{$author$}
+$if(name)$
+\name{$name$}
 $else$
 \name{姓名}
 $endif$
