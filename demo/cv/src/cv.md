@@ -22,7 +22,7 @@ nocite: |
 ...
 
 
-# 教育经历
+# \faGraduationCap 教育经历
 
 ### XX大学 {date="2019.5 - 2023.5" title="计算机科学与技术" city="北京" score="成绩不好"}
 
@@ -39,7 +39,7 @@ nocite: |
   - `score` 表示成绩
   - 不需要的属性不设置即可
 
-# 工作经验
+# \faUsers 工作经验
 
 ### ZZ公司 {date="2026.7 - 2027.7" title="软件工程师" city="北京"}
 
@@ -48,10 +48,10 @@ nocite: |
 - 列表中支持Markdown加粗和行内代码语法
 
 ::: {#refs}
-# 发表作品
+# \faBook 发表作品
 :::
 
-# 列表语法
+# \faList 列表语法
 	  
 ## 普通列表
 
@@ -81,7 +81,7 @@ nocite: |
 - [编程]{.cat}[Java,PHP,Lisp,Haskell,Golang,C++]{.double} [排版]{.cat}[Markdown,LaTeX,Pandoc,PanBook]{.double}
 - [数据库]{.cat}[MySQL,MongoDB,Redis,InfluxDB]{.double}
 
-# 分栏语法
+# \faColumns 分栏语法
 
 :::: {.cvcolumns}
 ::: {.cvcolumn cat="Test"}
@@ -94,7 +94,7 @@ nocite: |
 :::
 ::::
 
-# 求职信语法
+# \faEnvelope 求职信语法
 
 - 使用一级标题和二级标题定义求职信基础信息，第一个样式必须为`.letter`
 - 一级标题用于定义接收方（必选），必选属性 `company="公司"`，`addr="地址"`，`city="城市"`
