@@ -5,7 +5,7 @@
 \documentclass{resume}
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
+\usepackage{xcolor}
 $if(listings)$
 \usepackage{listings}
 \newcommand{\passthrough}[1]{#1}

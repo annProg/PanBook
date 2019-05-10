@@ -44,9 +44,7 @@ function citeproc(cite)
 	local newcite = pandoc.Div({}, cite.attr)
 	for k,v in pairs(cite.content) do
 		if v.t == "Div" then
-			table.insert(newcite.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
 			table.insert(newcite.content, v)
-			table.insert(newcite.content, pandoc.RawBlock("latex", "}"))
 		elseif v.t == "Header" and v.level == 1 then
 			table.insert(newcite.content, pandoc.RawBlock("latex", "\\section{" .. getText(v.content) .. "}"))
 		else
@@ -55,93 +53,63 @@ function citeproc(cite)
 	return newcite
 end
 
--- 一级标题后的列表转为cvlistitem
--- 此函数可能可以优化，不需要getText，定义一个空的Div table，把元素加进去更好
+-- resume没有专门的list语法，因此只需要把cat样式的替换为加粗即可
 function cvlist(list)
 	local nlist = pandoc.Div({})
 	for k,v in pairs(list.content) do
-		local spanCount = 0
-		local item = pandoc.Plain({})
-		local comment = pandoc.Plain({})
-		local cat = {}
-		local double = {}
 		for i,val in pairs(v[1].content) do
-			if val.t == "Span" then
-				spanCount = spanCount + 1
-				if #val.attr.classes > 0 then
-					if val.attr.classes[1] == "comment" then
-						table.insert(comment.content, val)
-					end
-					if val.attr.classes[1] == "cat" then
-						table.insert(cat, getText(val.content))
-					end
-					if val.attr.classes[1] == "double" then
-						table.insert(double, pandoc.Plain({val}))
-					end
-				end
+			local item = pandoc.Plain({})
+			if val.t == "Span" and val.attr.classes[1] == "cat" then
+				table.insert(item.content, {
+					pandoc.RawBlock("latex", "\\textbf{"),
+					val,
+					pandoc.RawBlock("latex", "}")
+				})
 			else
 				table.insert(item.content, val)
 			end
 		end
 		
-		-- \cvitemwithcomment 优先级最高
-		if spanCount == 2 and next(comment.content) ~= nil and #cat > 0 then
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitemwithcomment{" .. cat[1] .. "}{"))
-			table.insert(nlist.content, item)
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
-			table.insert(nlist.content, comment)
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
-		elseif spanCount == 1 and #cat == 1 then
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvitem{" .. cat[1] .. "}{"))
-			table.insert(nlist.content, item)
-			table.insert(nlist.content,pandoc.RawBlock("latex","}"))
-		elseif spanCount >= 2 and #cat >= 1 and #double >= 1 and spanCount < 5 then
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvdoubleitem{" .. cat[1] .. "}{"))
-			table.insert(nlist.content, double[1])
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}{" .. getValue(cat[2], "") .. "}{"))
-			table.insert(nlist.content, getValue(double[2], pandoc.Plain({})))
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
-		elseif spanCount == 2 and #cat == 0 and #double == 2 then
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistdoubleitem{"))
-			table.insert(nlist.content, double[1])
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}{"))
-			table.insert(nlist.content, double[2])
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))			
-		else
-			table.insert(nlist.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
-			-- 如果以上都不满足，按普通列表，远样返回
-			table.insert(nlist.content, v[1])
-			table.insert(nlist.content, pandoc.RawBlock("latex", "}"))
-		end
-		
-		if spanCount > 4 then
-			printWarn("You use more than 4 bracketed_spans in one list item. May cause unexpect result")
-		end
+		table.insert(nlist.content, item)
 	end
 	
 	return nlist
 end
 
+function getWidth(width, count)
+	if width ~= nil then
+		width = string.match(width, "(%d+)%%$")
+	end
+	if width ~= nil then	
+		return width/100
+	else
+		return 1/count
+	end
+end
+
 function cvcolumns(el)
 	local nblocks = pandoc.Div({})
-	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{cvcolumns}"))
+	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{columns}[T]"))
 	
+	-- column数量
+	local count = #el.content
 	for k,v in pairs(el.content) do
 		if v.t == "Div" and v.attr.classes[1] == "cvcolumn" then
 			local cat = "Cat"
 			if v.attr.attributes.cat ~= nil then
 				cat = v.attr.attributes.cat
 			end
-			table.insert(nblocks.content, pandoc.RawBlock("latex", "\\cvcolumn{" .. cat .. "}{"))
+			table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{column}{" .. getWidth(v.attr.attributes.width, count) .. "\\textwidth}"))
+			table.insert(nblocks, pandoc.RawBlock("latex", "\\subsection{" .. cat .. "}\n"))
 			for j,val in pairs(v.content) do
 				table.insert(nblocks.content, val)
 			end
-			table.insert(nblocks.content, pandoc.RawBlock("latex", "}"))
+			table.insert(nblocks.content, pandoc.RawBlock("latex", "\\end{column}"))
 		else
 			table.insert(nblocks.content, v.content)
 		end
 	end
-	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\end{cvcolumns}"))
+	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\end{columns}"))
 	
 	return nblocks
 end
@@ -183,7 +151,6 @@ function Pandoc(doc)
 	local letterContent = pandoc.Div({})
 	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makelettertitle\n\\setlength{\\parindent}{2em}"))
 	for i,el in pairs(doc.blocks) do
-		local addEl = nil
 		local nel = pandoc.Null()
 		if el.t == "Header" and el.attr.classes[1] == "letter" then
 			inletter = true
@@ -208,7 +175,6 @@ function Pandoc(doc)
 			nel = pandoc.RawBlock("latex", "\\datedsubsection{\\textbf{" .. entry .. "}, " .. city .. "}{" .. dt .. "}\n\\textit{" .. title .. "}\\ " .. score .. "\n")
 		elseif el.t == "BulletList" and inletter == nil then
 			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 3 then
-				addEl = pandoc.RawBlock("latex", "}")
 				nel = el
 			else
 				nel = cvlist(el)
@@ -221,10 +187,6 @@ function Pandoc(doc)
 			nel = el
 		end
 		table.insert(nblocks, nel)
-		
-		if addEl ~= nil then
-			table.insert(nblocks, addEl)
-		end
 	end
 	
 	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makeletterclosing"))
