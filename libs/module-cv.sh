@@ -103,6 +103,7 @@ EOF
 }
 
 function cv() {
+	note "use --cv=<template> to change cv template"
 	getVar CV "moderncv"	
 	cvList=(moderncv limecv)	
 	interaction="-interaction=batchmode"
