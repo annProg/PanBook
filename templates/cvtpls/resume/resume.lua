@@ -45,6 +45,7 @@ function citeproc(cite)
 	for k,v in pairs(cite.content) do
 		if v.t == "Div" then
 			table.insert(newcite.content, v)
+			table.insert(newcite.content, pandoc.RawBlock("latex", "\\par %"))
 		elseif v.t == "Header" and v.level == 1 then
 			table.insert(newcite.content, pandoc.RawBlock("latex", "\\section{" .. getText(v.content) .. "}"))
 		else
@@ -100,7 +101,7 @@ function cvcolumns(el)
 				cat = v.attr.attributes.cat
 			end
 			table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{column}{" .. getWidth(v.attr.attributes.width, count) .. "\\textwidth}"))
-			table.insert(nblocks, pandoc.RawBlock("latex", "\\subsection{" .. cat .. "}\n"))
+			table.insert(nblocks.content, pandoc.RawBlock("latex", "\\subsection{" .. cat .. "}\n"))
 			for j,val in pairs(v.content) do
 				table.insert(nblocks.content, val)
 			end
