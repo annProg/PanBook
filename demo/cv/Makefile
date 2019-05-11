@@ -8,7 +8,7 @@ COLOR ?= blue
 ALL_STYLE=classic banking casual oldstyle fancy
 ALL_COLOR=blue orange green red purple grey black burgundy
 
-all: moderncv-all-style-color
+all: moderncv-all-style-color resume png online
 
 
 moderncv-all-style:
