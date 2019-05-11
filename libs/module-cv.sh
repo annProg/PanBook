@@ -30,23 +30,23 @@ nocite: |
 ...
 
 
-# 教育经历
+# \faGraduationCap 教育经历
 
 ### 大学 {date="2019.5 - 2023.5" title="计算机科学与技术" city="北京" score="成绩不好"}
 
 - 一些说明
 
-# 工作经验
+# \faUsers 工作经验
 
 ### 公司 {date="2026.7 - 2027.7" title="软件工程师" city="北京"}
 
 - 一些说明
 
 ::: {#refs}
-# 发表作品
+# \faBook 发表作品
 :::
 
-# 列表语法
+# \faList 列表语法
 	  
 ## 普通列表
 
@@ -68,7 +68,7 @@ nocite: |
 - [Java,PHP,Lisp]{.double cat="编程"} [Markdown,LaTeX,Pandoc]{.double cat="排版"}
 - [MySQL,MongoDB,Redis]{.double cat="数据库"}
 
-# 分栏语法
+# \faColumns 分栏语法
 
 :::: {.cvcolumns}
 ::: {.cvcolumn cat="数据库"}
