@@ -56,24 +56,19 @@ end
 
 -- resume没有专门的list语法，因此只需要把cat样式的替换为加粗即可
 function cvlist(list)
-	local nlist = pandoc.Div({})
+	local nlist = pandoc.BulletList({})
 	for k,v in pairs(list.content) do
+		local item = pandoc.Plain({})
 		for i,val in pairs(v[1].content) do
-			local item = pandoc.Plain({})
 			if val.t == "Span" and val.attr.classes[1] == "cat" then
-				table.insert(item.content, {
-					pandoc.RawBlock("latex", "\\textbf{"),
-					val,
-					pandoc.RawBlock("latex", "}")
-				})
+				table.insert(item.content, pandoc.RawInline("latex", "\\textbf{" .. getText(val.content) .. ": }"))
 			else
 				table.insert(item.content, val)
 			end
 		end
 		
-		table.insert(nlist.content, item)
+		table.insert(nlist.content, {item})
 	end
-	
 	return nlist
 end
 

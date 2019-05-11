@@ -24,9 +24,13 @@ moderncv-all-style-color:
 	
 moderncv:
 	panbook cv -E style=$(STYLE) -E color=$(COLOR)
-	
+
+resume:
+	panbook cv --cv=resume
+all-tpl:
+	panbook cv --cv=A
 png:
-	cd build;for pdf in `ls cv-cv-moderncv-*-blue.pdf`; do \
+	cd build;for pdf in `ls cv-cv-*.pdf`; do \
 		pdftocairo -png $$pdf; \
 		n=`echo $$pdf |sed 's/\.pdf//g'`; \
 		convert -append `ls $$n-*.png` $$n.png; \
@@ -35,6 +39,8 @@ png:
 
 link:
 	for item in `echo $(ALL_STYLE)`;do echo "- [moderncv-$$item](https://$(SERVER)/PanBook/cv-cv-moderncv-$$item-blue.pdf)";done
+	echo "- [resume](https://$(SERVER)/PanBook/cv-cv-resume.pdf)"
 	
 online:
 	scp -P $(PORT) build/cv-cv-moderncv-*-blue.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/cv-cv-resume.pdf $(USER)@$(SERVER):$(DIR)
