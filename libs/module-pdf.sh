@@ -6,15 +6,14 @@ function pdf()
 	interaction="-interaction=batchmode"
 	[ "$TRACE"x == "true"x ] && interaction=""
 	classList=(ctexbook book elegantbook ctexart article)
-	
-	init  # 首先初始化
-			
+
 	# 支持随机选取theme
 	setClass "${classList[*]}"
 
 	cd $BUILD	
 	
 	for t in ${SELECTED[@]};do
+		init
 		note "pdfClass: $t"
 		note "use -E copyright=(true|false) to control whether or not to compile copyright page"
 		note "use -E licence=(ccnd|ccnc|ccncnd|ccncsa|ccncsand|pd"		
