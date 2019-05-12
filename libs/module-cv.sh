@@ -17,6 +17,7 @@ quote: \LaTeX 写简历漂不漂亮呀
 photo: images/photo.png
 extrainfo: 不需要的项目删除即可
 mobile: 13000001111
+email: email@qq.com
 github: Github
 weibo: Weibo
 qq: 123456789
