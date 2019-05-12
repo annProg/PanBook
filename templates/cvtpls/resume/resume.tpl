@@ -27,9 +27,13 @@ $endfor$
 \pagenumbering{gobble} % suppress displaying page number
 
 $if(name)$
-\name{$name$}
+$if(title)$
+\name{$name$}{$title$}
 $else$
-\name{姓名}
+\name{$name$}{}
+$endif$
+$else$
+\name{姓名}{}
 $endif$
 
 \basicInfo{

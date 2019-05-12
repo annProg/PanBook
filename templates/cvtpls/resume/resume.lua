@@ -144,7 +144,7 @@ end
 function letterHeader(meta)
 	local header = ""
 	
-	header = "\\name{" .. getValue(string.gsub(getText(meta.name)," ","~"), "Your Name") .. "}\n\\basicInfo{"
+	header = "\\name{" .. getValue(string.gsub(getText(meta.name)," ","~"), "Your Name") .. "}{" .. getValue(getText(meta.title), " ") .. "}\n\\basicInfo{"
 		.. "\\email{" .. getValue(getText(meta.email), "you@qq.com") .. "} \\textperiodcentered\\ \n"
 		.. "\\phone{" .. getValue(getText(meta.mobile), "13000000000") .. "}}\n\\vspace{1cm}\n"
 		
@@ -195,7 +195,7 @@ function Pandoc(doc)
 		table.insert(nblocks, nel)
 	end
 	
-	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makeletterclosing"))
+	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\setlength{\\parindent}{0em}\\makeletterclosing"))
 	
 	if letterMeta == 3 then
 		table.insert(nblocks, letterContent)

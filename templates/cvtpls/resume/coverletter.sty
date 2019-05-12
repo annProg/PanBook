@@ -41,9 +41,9 @@
 \definecolor{color2}{rgb}{0,0,0}% secondary scheme color
 \definecolor{color3}{rgb}{0,0,0}% tertiary scheme color
 
-\renewcommand{\name}[1]{
+\renewcommand{\name}[2]{
   \def\@name{#1}
-  \centerline{\Huge\scshape{#1}}
+  \centerline{\Huge\scshape{#1} | \Huge\textnormal{#2}}
   \vspace{1.25ex}
 }
 
@@ -118,8 +118,9 @@
 % makes the letter closing
 % usage: \makeletterclosing
 \newcommand*{\makeletterclosing}{
-\vspace{1cm}\par
+\vspace{0.2cm}\par
 \textit{\@closing}\par
+\vspace{1cm}
 \textbf{\@name}
 }
   

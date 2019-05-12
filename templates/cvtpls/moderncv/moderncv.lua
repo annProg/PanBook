@@ -231,7 +231,7 @@ function Pandoc(doc)
 		end
 	end
 	
-	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\makeletterclosing"))
+	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\setlength{\\parindent}{0em}\\makeletterclosing"))
 	
 	if letterMeta == 3 then
 		table.insert(nblocks, letterContent)
