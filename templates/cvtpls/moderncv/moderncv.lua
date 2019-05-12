@@ -177,6 +177,22 @@ function letter(el)
 	return pandoc.RawBlock("latex", rawtex)
 end
 
+function cventry(el,meta,bracket)
+	local entry = getText(el.content)
+	local dt = setAttr(el.attr.attributes.date)
+	local title = setAttr(el.attr.attributes.title)
+	local city = setAttr(el.attr.attributes.city)
+	local score = setAttr(el.attr.attributes.score)
+	
+	local tmp
+	if meta.style == "banking" then
+		tmp = entry
+		entry = title
+		title = tmp
+	end
+	return pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. entry .. "}{" .. title .. "}{" .. city .. "}{" .. score .. "}{" .. bracket)
+end
+
 function Pandoc(doc)
 	local nblocks = {}
 	local inletter = nil
@@ -200,16 +216,11 @@ function Pandoc(doc)
 		elseif el.t == "Header" and el.level == 2 and inletter == nil then
 			nel = pandoc.RawBlock("latex", "\\subsection{" .. getText(el.content) .. "}")
 		elseif el.t == "Header" and el.level == 3 and inletter == nil then
-			local entry = getText(el.content)
-			local dt = setAttr(el.attr.attributes.date)
-			local title = setAttr(el.attr.attributes.title)
-			local city = setAttr(el.attr.attributes.city)
-			local score = setAttr(el.attr.attributes.score)
 			local bracket = ""
 			if i+1 <= #doc.blocks and doc.blocks[i+1].t ~= "BulletList" then
 				bracket = "}"
-			end
-			nel = pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. title .. "}{" .. entry .. "}{" .. city .. "}{" .. score .. "}{" .. bracket)
+			end	
+			nel = cventry(el, doc.meta, bracket)
 		elseif el.t == "BulletList" and inletter == nil then
 			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 3 then
 				addEl = pandoc.RawBlock("latex", "}")

@@ -15,7 +15,8 @@ getVar fontsize "11pt"
 getVar size "a4paper"
 getVar fontfamily "sans"
 
-addOptions="$addOptions -V style=$style -V color=$color -V fontsize=$fontsize -V size=$size -V fontfamily=$fontfamily"
+# 设置 -M style=$style 用于在Lua filter中判断选择的style
+addOptions="$addOptions -V style=$style -V color=$color -V fontsize=$fontsize -V size=$size -V fontfamily=$fontfamily -M style=$style"
 
 # casual样式个人信息在底部，和foot有冲突，加vspace处理
 if [ "$style"x == "casual"x ];then
