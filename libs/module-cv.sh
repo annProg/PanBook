@@ -110,7 +110,6 @@ function cv() {
 	[ "$TRACE"x == "true"x ] && interaction=""
 
 	cvMeta	
-	cd $BUILD
 	
 	# 支持随机选取theme
 	setCV "${cvList[*]}"
@@ -118,6 +117,8 @@ function cv() {
 	for t in ${SELECTED[@]};do
 		# 每个模板都需要重新init，否则HEADERS会重复添加内容
 		init nometa
+		cd $BUILD		
+
 		note "CV Template: $t"
 		addOptions="$origAddOptions"
 		PANDOCVARS="$ORIGPANDOCVARS"

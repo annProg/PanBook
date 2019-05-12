@@ -9,11 +9,11 @@ function pdf()
 
 	# 支持随机选取theme
 	setClass "${classList[*]}"
-
-	cd $BUILD	
 	
 	for t in ${SELECTED[@]};do
 		init
+		cd $BUILD
+
 		note "pdfClass: $t"
 		note "use -E copyright=(true|false) to control whether or not to compile copyright page"
 		note "use -E licence=(ccnd|ccnc|ccncnd|ccncsa|ccncsand|pd"		

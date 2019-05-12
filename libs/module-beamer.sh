@@ -4,14 +4,14 @@ function beamer() {
 	getVar DOCUMENTCLASS "ctexbeamer"
 	
 	themeList=(solarized material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse boxes CambridgeUS classic Dresden EastLansing lined Singapore cuerna   metropolis)	
-
-	cd $BUILD
 	
 	# 支持随机选取theme
 	setTheme "${themeList[*]}"
 
 	for t in ${SELECTED[@]};do
 		init
+		cd $BUILD
+
 		note "THEME: $t"
 		addOptions="$origAddOptions"
 		PANDOCVARS="$ORIGPANDOCVARS"
