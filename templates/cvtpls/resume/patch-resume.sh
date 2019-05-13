@@ -17,7 +17,6 @@ note "This Template support the following variables, they can set via metadata o
 \tqq                   Your QQ number
 \tskype                Your Skype
 \thomepage             Your website link
-\tdatewidth            Change the width of the dates column. default 3cm
 \temail                Your Email address
 \taddress              Your address
 \textrainfo            Additional information
