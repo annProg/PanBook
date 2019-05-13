@@ -45,6 +45,10 @@ $if(mobile)$
   \phone{$mobile$} \textperiodcentered\ 
 $endif$
 
+$if(github)$
+	\github{$github$} \textperiodcentered\
+$endif$
+
 $if(linkedin)$
   \linkedin[$linkedin$]{https://www.linkedin.com/in/$linkedin$ }
 $endif$
