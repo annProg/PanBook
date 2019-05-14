@@ -10,6 +10,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		
 \documentclass{TMR}
+\makeatletter
+\newcommand{\mytitle}[1]{\def\@mytitle{#1}}
+
+\renewcommand{\tmrheader}{
+	\begin{center}
+	
+	% Author name
+	{\Huge\textbf{\@name} \ifdefined\@mytitle{ | \Huge\textnormal{\@mytitle}}\fi\\}
+	
+	% Address & phone number
+	\textit{\faicon{map-marker}
+	\@address\quad\faicon{mobile} \@phone}\\
+	
+	% Social/online accounts
+	{\small
+		\mbox{\faEnvelope~\href{mailto:\@email}{\@email}}
+		\ifdefined\@homepage\mbox{\pipe\faHome~\href{http://\@homepage}{\@homepage}}\fi
+		\ifdefined\@github\mbox{\pipe\faGithubSquare~\href{https://github.com/\@github}{\@github}}\fi%
+		\ifdefined\@linkedin\mbox{\pipe\faLinkedinSquare~\href{https://www.linkedin.com/in/\@linkedin}{\@linkedin}}\fi
+		\ifdefined\@twitter\mbox{\pipe\faTwitterSquare~\href{https://twitter.com/\@twitter}{\@twitter}}\fi
+		\ifdefined\@instagram\mbox{\pipe\faInstagram~\href{https://www.instagram.com/\@instagram}{\@twitter}}\fi
+		\ifdefined\@flickr\mbox{\pipe\faFlickr~\href{https://www.flickr.com/photos/\@flickr}{\@flickr}}\fi
+		\ifdefined\@wechat\mbox{\pipe\faWechat~\@wechat}\fi
+	}	
+	\end{center}
+}
+\makeatother
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -29,6 +56,10 @@ $if(name)$
 \name[]{$name$}[]
 $else$
 \name[Dr]{Author Name}[JP.]% Pre- and post-nominals optional
+$endif$
+
+$if(title)$
+\mytitle{$title$}
 $endif$
 
 $if(address)$
