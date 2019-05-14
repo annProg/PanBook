@@ -1,20 +1,22 @@
+\makeatletter
 \usepackage{wallpaper}
 \renewcommand*{\maketitle}{%
+\setkeys{Gin}{width=\paperwidth,height=\paperheight,keepaspectratio}
 \begin{titlepage}
-  %\setkeys{Gin}{width=10pt,height=100pt}
   \thispagestyle{empty}
   \noindent\fboxsep=0pt
   \ThisTileWallPaper{\paperwidth}{\paperheight}{../../templates/book/ctexbook/images/53.png}
 	\vspace{.18\textheight}
 	\begin{center}
-		{\Large\bfseries Test\par}
+		{\Huge\bfseries\@title\par}
 	\vspace{1cm}
-		{\large Test\par}
+		{\ifdefined\@subtitle{\Large\@subtitle}\fi\par}
 	\vspace{2.5cm}
-		Author
+		\@author
 	\vfill\centering{build with pandoc \par \today\par}
 		\vspace{.05\textheight}
 	\end{center}
 \end{titlepage}
 }
 %\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\makeatother
