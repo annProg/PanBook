@@ -204,6 +204,7 @@ function cventry(el,meta,bracket)
 		end
 	end
 	
+	entry = pandoc.Str(getText(entry))
 	local tmp
 	if meta.style == "banking" then
 		tmp = entry
@@ -214,7 +215,7 @@ function cventry(el,meta,bracket)
 	local sep = pandoc.RawInline("latex", "}{")
 	return pandoc.Plain({
 		pandoc.RawInline("latex", "\\cventry{"),
-		dt, sep , pandoc.Str(getText(entry)), sep, title, sep, tag, sep, desc, sep,
+		dt, sep , entry, sep, title, sep, tag, sep, desc, sep,
 		pandoc.RawInline("latex", bracket)
 	})
 end
