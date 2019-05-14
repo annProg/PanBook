@@ -241,7 +241,10 @@ function Pandoc(doc)
 			local bracket = ""
 			if i+1 <= #doc.blocks and doc.blocks[i+1].t ~= "BulletList" then
 				bracket = "}"
-			end	
+			end
+			if i+1 > #doc.blocks then
+				bracket = "}"
+			end
 			nel = cventry(el, doc.meta, bracket)
 		elseif el.t == "BulletList" and inletter == nil then
 			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 3 then
