@@ -108,7 +108,8 @@ EOF
 function cv() {
 	note "use --cv=<template|R|A> to change cv template. R means radom, A means all"
 	getVar CV "moderncv"	
-	cvList=(`ls $SCRIPTDIR/templates/cvtpls/`)
+	CVTPLDIR="cv"
+	cvList=(`ls $SCRIPTDIR/templates/$CVTPLDIR/`)
 	interaction="-interaction=batchmode"
 	[ "$TRACE"x == "true"x ] && interaction=""
 
@@ -126,8 +127,8 @@ function cv() {
 		addOptions="$origAddOptions"
 		PANDOCVARS="$ORIGPANDOCVARS"
 		# copy cv template
-		CVTPLDIR=$SCRIPTDIR/templates/cvtpls/$t
-		USERDEFINECV=$cwd/templates/cvtpls/$t
+		CVTPLDIR=$SCRIPTDIR/templates/$CVTPLDIR/$t
+		USERDEFINECV=$cwd/templates/$CVTPLDIR/$t
 		if [ -d $CVTPLDIR -o -d $USERDEFINECV ];then
 			cp -rfu $CVTPLDIR $BUILD 2>/dev/null
 			cp -rfu $USERDEFINECV $BUILD 2>/dev/null
