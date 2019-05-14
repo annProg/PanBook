@@ -40,7 +40,9 @@ png:
 link:
 	for item in `echo $(ALL_STYLE)`;do echo "- [moderncv-$$item](https://$(SERVER)/PanBook/cv-cv-moderncv-$$item-blue.pdf)";done
 	echo "- [resume](https://$(SERVER)/PanBook/cv-cv-resume.pdf)"
+	echo "- [TMR](https://$(SERVER)/PanBook/cv-cv-tmr.pdf)"
 	
 online:
 	scp -P $(PORT) build/cv-cv-moderncv-*-blue.pdf $(USER)@$(SERVER):$(DIR)
 	scp -P $(PORT) build/cv-cv-resume.pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/cv-cv-tmr.pdf $(USER)@$(SERVER):$(DIR)

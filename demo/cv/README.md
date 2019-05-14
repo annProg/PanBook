@@ -11,3 +11,7 @@
 ## resume
 
 - [resume](https://api.annhe.net/PanBook/cv-cv-resume.pdf)
+
+## TMR
+
+- [TMR](https://api.annhe.net/PanBook/cv-cv-tmr.pdf)
