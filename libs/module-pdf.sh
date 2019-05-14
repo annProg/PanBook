@@ -4,6 +4,7 @@ function pdf()
 	getVar DOCUMENTCLASS "ctexbook"
 	getVar device "pc"
 	interaction="-interaction=batchmode"
+	BOOKTPLDIR="book"
 	[ "$TRACE"x == "true"x ] && interaction=""
 	classList=(ctexbook book elegantbook ctexart article)
 
@@ -22,8 +23,8 @@ function pdf()
 		division="--top-level-division=default"
 		
 		# copy pdf class
-		PDFCLASSDIR=$SCRIPTDIR/templates/pdfclasses/$t
-		USERDEFINECLASS=$cwd/templates/pdfclasses/$t
+		PDFCLASSDIR=$SCRIPTDIR/templates/$BOOKTPLDIR/$t
+		USERDEFINECLASS=$cwd/templates/$BOOKTPLDIR/$t
 		if [ -d $PDFCLASSDIR -o -d $USERDEFINECLASS ];then
 			cp -rfu $PDFCLASSDIR $BUILD 2>/dev/null
 			cp -rfu $USERDEFINECLASS $BUILD 2>/dev/null
@@ -35,7 +36,7 @@ function pdf()
 	
 		PANDOCVARS="$PANDOCVARS -V documentclass=$t"
 
-		# 打补丁. 补丁放在templates/pdfclasses/classname 文件夹下，命名规则 patch-$classname.sh
+		# 打补丁. 补丁放在templates/$BOOKTPLDIR/classname 文件夹下，命名规则 patch-$classname.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
 		[ "$LSTSET"x != ""x ] && (cat $LSTSET;echo) >> $HEADERS
