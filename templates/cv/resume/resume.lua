@@ -154,6 +154,37 @@ function letterHeader(meta)
 	return header	
 end
 
+function cventry(el)
+	local entry = pandoc.Plain({})
+	local dt = ""
+	local title = ""
+	local tag = ""
+	local desc = ""
+	
+	for k,v in pairs(el.content) do
+		if v.t == "Str" then
+			table.insert(entry.content, v)
+		elseif v.t == "Span" then
+			if v.attr.classes[1] == "date" then
+				dt = getText(v)
+			elseif v.attr.classes[1] == "title" then
+				title = getText(v)
+			elseif v.attr.classes[1] == "tag" then
+				tag = getText(v)
+			elseif v.attr.classes[1] == "desc" then
+				desc = getText(v)
+			else
+				table.insert(entry.content, v)
+			end
+		else
+			table.insert(entry.content, v)
+		end
+	end
+	
+	entry = getText(entry)
+	return pandoc.RawBlock("latex", "\\datedsubsection{\\textbf{" .. entry .. "}, " .. tag .. "}{" .. dt .. "}\n\\textit{" .. title .. "}\\ " .. desc .. "\n")
+end
+
 function Pandoc(doc)
 	local nblocks = {}
 	local inletter = nil
@@ -176,12 +207,7 @@ function Pandoc(doc)
 		elseif el.t == "Header" and el.level == 2 and inletter == nil then
 			nel = pandoc.RawBlock("latex", "\\subsection{" .. getText(el.content) .. "}")
 		elseif el.t == "Header" and el.level == 3 and inletter == nil then
-			local entry = getText(el.content)
-			local dt = setAttr(el.attr.attributes.date)
-			local title = setAttr(el.attr.attributes.title)
-			local city = setAttr(el.attr.attributes.city)
-			local score = setAttr(el.attr.attributes.score)
-			nel = pandoc.RawBlock("latex", "\\datedsubsection{\\textbf{" .. entry .. "}, " .. city .. "}{" .. dt .. "}\n\\textit{" .. title .. "}\\ " .. score .. "\n")
+			nel = cventry(el)
 		elseif el.t == "BulletList" and inletter == nil then
 			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 3 then
 				nel = el
