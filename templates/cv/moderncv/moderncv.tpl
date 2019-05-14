@@ -28,6 +28,10 @@ $if(listings)$
 \lstset{defaultdialect=[x86masm]Assembler}
 $endif$
 
+$if(tables)$
+\usepackage{longtable,booktabs}
+$endif$
+
 $if(onlinecv)$
 \fancyfoot[L]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont 更新地址：$onlinecv$}
 $endif$
@@ -150,6 +154,34 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
+
+\makeatletter
+\newcommand{\grade}[1]{%
+	\ifthenelse{\equal{#1}{1}}{{\raggedright{\small{\color{color1}\faStar\faStarO\faStarO\faStarO\faStarO}}}}{}
+	\ifthenelse{\equal{#1}{2}}{{\raggedright{\small{\color{color1}\faStar\faStar\faStarO\faStarO\faStarO}}}}{}
+	\ifthenelse{\equal{#1}{3}}{{\raggedright{\small{\color{color1}\faStar\faStar\faStar\faStarO\faStarO}}}}{}
+	\ifthenelse{\equal{#1}{4}}{{\raggedright{\small{\color{color1}\faStar\faStar\faStar\faStar\faStarO}}}}{}
+	\ifthenelse{\equal{#1}{5}}{{\raggedright{\small{\color{color1}\faStar\faStar\faStar\faStar\faStar}}}}{}
+}
+
+\usepackage{tikz}
+\definecolor{backColor}{RGB}{200,200,200}% grey
+\renewcommand{\grade}[1]{%
+    \begin{tikzpicture}
+    \clip (1em-.4em,-.35em) rectangle (5em +.5em ,0.7em);
+    \foreach \x in {1,2,...,5}{
+        \path[{fill=backColor}] (\x em,0) circle (.35em);
+    }
+    \begin{scope}
+    \clip (1em-.4em,-.35em) rectangle (#1em +.5em ,0.7em);
+    \foreach \x in {1,2,...,5}{
+        \path[{fill=color1}] (\x em,0) circle (.35em);
+    }
+    \end{scope}
+
+    \end{tikzpicture}%
+}
+\makeatother
 
 \begin{document}
 
