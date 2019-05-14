@@ -5,7 +5,7 @@ table.print = table_print.print_r
 
 -- 打印警告信息
 function printWarn(text)
-	print("\nResume Warning!\n" .. text .. "\nPlease Check\n\n")
+	print("\nTMR Warning!\n" .. text .. "\nPlease Check\n\n")
 end
 
 -- 获取一个table的所有text
@@ -54,7 +54,7 @@ function citeproc(cite)
 	return newcite
 end
 
--- resume没有专门的list语法，因此只需要把cat样式的替换为加粗即可
+-- TMR没有专门的list语法，因此只需要把cat样式的替换为加粗即可
 function cvlist(list)
 	local nlist = pandoc.BulletList({})
 	for k,v in pairs(list.content) do
@@ -85,7 +85,7 @@ end
 
 function cvcolumns(el)
 	local nblocks = pandoc.Div({})
-	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{columns}[T]"))
+	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{columns}"))
 	
 	-- column数量
 	local count = #el.content
@@ -128,10 +128,10 @@ function letter(el)
 	elseif el.attr.classes[2] == "date" then
 		rawtex = "\\date{" .. getText(el.content) .. "}"
 	elseif el.attr.classes[2] == "opening" then
-		rawtex = "\\opening{" .. getText(el.content) .. "}"
+		rawtex = "\\greeting{" .. getText(el.content) .. "}"
 		letterMeta = letterMeta + 1
 	elseif el.attr.classes[2] == "closing" then
-		rawtex = "\\closing{" .. getText(el.content) .. "}"
+		rawtex = "\\farewell{" .. getText(el.content) .. "}"
 		letterMeta = letterMeta + 1
 	elseif el.attr.classes[2] == "enclosure" then
 		rawtex = "\\enclosure[" .. getValue(el.attr.attributes.enclosure, "Enclosure") .. "]{" .. getText(el.content) .. "}"
@@ -141,24 +141,11 @@ function letter(el)
 	return pandoc.RawBlock("latex", rawtex)
 end
 
-function letterHeader(meta)
-	local header = ""
-	
-	-- 姓\ 名 空格转义 生成的空格可用string.byte 打印出来,是  194 160
-	-- k1,k2,k3,k4,k5,k6,k7,k8,k9 = string.byte(getText(meta.name), 1,9)
-	-- print(k1,k2,k3,k4,k5,k6,k7,k8,k9)
-	header = "\\name{" .. getValue(string.gsub(getText(meta.name),'\194\160',"~"), "Your Name") .. "}{" .. getValue(getText(meta.title), " ") .. "}\n\\basicInfo{"
-		.. "\\email{" .. getValue(getText(meta.email), "you@qq.com") .. "} \\textperiodcentered\\ \n"
-		.. "\\phone{" .. getValue(getText(meta.mobile), "13000000000") .. "}}\n\\vspace{1cm}\n"
-		
-	return header	
-end
-
 function Pandoc(doc)
 	local nblocks = {}
 	local inletter = nil
 	local letterContent = pandoc.Div({})
-	table.insert(letterContent.content, pandoc.RawBlock("latex", letterHeader(doc.meta) .. "\\makelettertitle\n\\setlength{\\parindent}{2em}"))
+	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\begin{coverletter}\n\\setlength{\\parindent}{2em}"))
 	for i,el in pairs(doc.blocks) do
 		local nel = pandoc.Null()
 		if el.t == "Header" and el.attr.classes[1] == "letter" then
@@ -181,7 +168,7 @@ function Pandoc(doc)
 			local title = setAttr(el.attr.attributes.title)
 			local city = setAttr(el.attr.attributes.city)
 			local score = setAttr(el.attr.attributes.score)
-			nel = pandoc.RawBlock("latex", "\\datedsubsection{\\textbf{" .. entry .. "}, " .. city .. "}{" .. dt .. "}\n\\textit{" .. title .. "}\\ " .. score .. "\n")
+			nel = pandoc.RawBlock("latex", "\\entry{" .. entry .. "}{" .. score .. "}{" .. dt .. "}{" .. title .. "}{" .. city .. "}\n")
 		elseif el.t == "BulletList" and inletter == nil then
 			if i > 1 and doc.blocks[i-1].t == "Header" and doc.blocks[i-1].level == 3 then
 				nel = el
@@ -198,7 +185,7 @@ function Pandoc(doc)
 		table.insert(nblocks, nel)
 	end
 	
-	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\setlength{\\parindent}{0em}\\makeletterclosing"))
+	table.insert(letterContent.content, pandoc.RawBlock("latex", "\\setlength{\\parindent}{0em}\\end{coverletter}"))
 	
 	if letterMeta == 3 then
 		table.insert(nblocks, letterContent)

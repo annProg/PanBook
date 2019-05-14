@@ -10,6 +10,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		
 \documentclass{TMR}
+\usepackage{zhnumber}
 \makeatletter
 \newcommand{\mytitle}[1]{\def\@mytitle{#1}}
 
@@ -17,7 +18,7 @@
 	\begin{center}
 	
 	% Author name
-	{\Huge\textbf{\@name} \ifdefined\@mytitle{ | \Huge\textnormal{\@mytitle}}\fi\\}
+	{\Huge\textbf{\@name} \ifdefined\@mytitle{~\textbar~\huge\textnormal{\@mytitle}}\fi\\}
 	
 	% Address & phone number
 	\textit{\faicon{map-marker}
@@ -36,6 +37,48 @@
 	}	
 	\end{center}
 }
+
+\newcommand{\enclosure}[2][]{
+	\def\@enclosurename{#1}
+	\def\@enclosure{#2}
+}
+\renewcommand{\date}[1]{\def\@date{#1}}
+
+% Makes recipient section from details & dates letter
+\renewcommand{\tmrtitle}{ 
+	
+    \textbf{\@recipientname}\hfill\textit{\@date}\\
+  	\@recipientaddress \\\\\\
+	\@greeting
+}
+
+% Signs off letter
+\renewcommand{\tmrclosing}{
+	\vspace{10mm}\filbreak
+	\@farewell \\\\ \textbf{\@name} \\\\
+	\textit{\ifdefined\@enclosurename{\@enclosurename}\else{Attathed}\fi: \ifdefined\@enclosure{\@enclosure}\else{R\'esum\'e	}\fi }%
+}
+
+% 5-field double row entries
+\renewcommand{\entry}[5]{\filbreak\normalsize\textbf{#1}\ \textit{#5}\hfill#3\\\textit{#2}\hfill\textit{#4}\small}
+
+\renewcommand{\tmrfooter}{
+	
+	% Empty header fields
+	\fancyhead{}
+	
+	\iffullfooter
+		% Set left field to today's date
+		\lfoot{\foottext{\zhtoday}}
+			
+		% Set middle field to name, document type
+		\cfoot{\foottext{\@name~\textbar~\@mytitle}}	
+		
+		% Set right field to page number
+		\rfoot{\foottext{\thepage}}	
+	\fi
+}
+
 \makeatother
 
 \providecommand{\tightlist}{%
@@ -50,6 +93,11 @@ $if(CJKmainfont)$
 \usepackage{xeCJK}
 \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
 $endif$
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
 
 % Author details
 $if(name)$
@@ -90,6 +138,10 @@ $if(twitter)$
 \twitter{$twitter$}
 $endif$
 
+$if(wechat)$
+\wechat{$wechat$}
+$endif$
+
 % Letter details
 %\greeting{Your personal greeting}
 %\farewell{Your customised farewell}
@@ -112,9 +164,9 @@ $endif$
 %
 %% Toggle inclusion in output PDF
 %%\hidecoverletter
-%
-%% Toggle how many values in footer
-%\fullfooter
+
+% Toggle how many values in footer
+\fullfooter
 
 \begin{document}
 %\begin{coverletter}
@@ -124,7 +176,9 @@ $endif$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{resume}
-Test
+
+$body$
+
 %% Import any number of sections
 %% This will dictate the order in which they display
 %\import{sections/}{section-1.tex}
