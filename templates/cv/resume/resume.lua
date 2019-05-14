@@ -102,7 +102,7 @@ function cvcolumns(el)
 			end
 			table.insert(nblocks.content, pandoc.RawBlock("latex", "\\end{column}"))
 		else
-			table.insert(nblocks.content, v.content)
+			table.insert(nblocks.content, v)
 		end
 	end
 	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\end{columns}"))
@@ -156,23 +156,23 @@ end
 
 function cventry(el)
 	local entry = pandoc.Plain({})
-	local dt = ""
-	local title = ""
-	local tag = ""
-	local desc = ""
+	local dt = pandoc.Str("")
+	local title = pandoc.Str("")
+	local tag = pandoc.Str("")
+	local desc = pandoc.Str("")
 	
 	for k,v in pairs(el.content) do
 		if v.t == "Str" then
 			table.insert(entry.content, v)
 		elseif v.t == "Span" then
 			if v.attr.classes[1] == "date" then
-				dt = getText(v)
+				dt = v
 			elseif v.attr.classes[1] == "title" then
-				title = getText(v)
+				title = v
 			elseif v.attr.classes[1] == "tag" then
-				tag = getText(v)
+				tag = v
 			elseif v.attr.classes[1] == "desc" then
-				desc = getText(v)
+				desc = v
 			else
 				table.insert(entry.content, v)
 			end
@@ -180,9 +180,19 @@ function cventry(el)
 			table.insert(entry.content, v)
 		end
 	end
-	
-	entry = getText(entry)
-	return pandoc.RawBlock("latex", "\\datedsubsection{\\textbf{" .. entry .. "}, " .. tag .. "}{" .. dt .. "}\n\\textit{" .. title .. "}\\ " .. desc .. "\n")
+
+	local sep = pandoc.RawInline("latex", "}{")
+	return pandoc.Plain({
+		pandoc.RawInline("latex", "\\datedsubsection{\\textbf{"),
+		pandoc.Str(getText(entry)), 
+		pandoc.RawInline("latex", "}, "),
+		tag, sep, dt, 
+		pandoc.RawInline("latex", "}\n\\textit{"),
+		title, 
+		pandoc.RawInline("latex", "}\\ "),
+		desc,
+		pandoc.RawInline("latex", "\n")
+	})
 end
 
 function Pandoc(doc)
