@@ -21,12 +21,14 @@
 	{\Huge\textbf{\@name} \ifdefined\@mytitle{~\textbar~\huge\textnormal{\@mytitle}}\fi\\}
 	
 	% Address & phone number
+	\ifdefined\@address{
 	\textit{\faicon{map-marker}
-	\@address\quad\faicon{mobile} \@phone}\\
+	\@address\\}}\fi
 	
 	% Social/online accounts
 	{\small
 		\mbox{\faEnvelope~\href{mailto:\@email}{\@email}}
+		\ifdefined\@phone\mbox{\pipe\faMobile~ \@phone}\fi
 		\ifdefined\@homepage\mbox{\pipe\faHome~\href{http://\@homepage}{\@homepage}}\fi
 		\ifdefined\@github\mbox{\pipe\faGithubSquare~\href{https://github.com/\@github}{\@github}}\fi%
 		\ifdefined\@linkedin\mbox{\pipe\faLinkedinSquare~\href{https://www.linkedin.com/in/\@linkedin}{\@linkedin}}\fi
