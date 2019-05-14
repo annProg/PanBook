@@ -1,21 +1,21 @@
 ---
 name: 盘\ 书        # 空格可用反斜杠转义
 title: \LaTeX 排版工程师
-homepage: baidu.com
+homepage: me.homepage
 showdate: true
 address: 本星系群银河系本星际云太阳系地球 - 中国北京
 quote: \LaTeX 写简历漂不漂亮呀
 photo: images/photo.png
 extrainfo: 个人信息不需要的项目删除即可
-email: email@qq.com
+email: me@email.me
 mobile: 13000001111
 github: annProg
 weibo: Weibo
 qq: 123456789
-wechat: panbook
-skype: skype
-twitter: twitter
-linkedin: linkedin
+wechat: WeChat
+skype: Skype
+twitter: Twitter
+linkedin: LinkedIn
 onlinecv: http://github.com/annProg/PanBook/tree/master/demo/cv
 nocite: |
   @*
