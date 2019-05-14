@@ -179,23 +179,23 @@ end
 
 function cventry(el,meta,bracket)
 	local entry = pandoc.Plain({})
-	local dt = ""
-	local title = ""
-	local tag = ""
-	local desc = ""
+	local dt = pandoc.Str("")
+	local title = pandoc.Str("")
+	local tag = pandoc.Str("")
+	local desc = pandoc.Str("")
 	
 	for k,v in pairs(el.content) do
 		if v.t == "Str" then
 			table.insert(entry.content, v)
 		elseif v.t == "Span" then
 			if v.attr.classes[1] == "date" then
-				dt = getText(v)
+				dt = v
 			elseif v.attr.classes[1] == "title" then
-				title = getText(v)
+				title = v
 			elseif v.attr.classes[1] == "tag" then
-				tag = getText(v)
+				tag = v
 			elseif v.attr.classes[1] == "desc" then
-				desc = getText(v)
+				desc = v
 			else
 				table.insert(entry.content, v)
 			end
@@ -204,15 +204,19 @@ function cventry(el,meta,bracket)
 		end
 	end
 	
-	entry = getText(entry)
-	
 	local tmp
 	if meta.style == "banking" then
 		tmp = entry
 		entry = title
 		title = tmp
 	end
-	return pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. entry .. "}{" .. title .. "}{" .. tag .. "}{" .. desc .. "}{" .. bracket)
+
+	local sep = pandoc.RawInline("latex", "}{")
+	return pandoc.Plain({
+		pandoc.RawInline("latex", "\\cventry{"),
+		dt, sep , pandoc.Str(getText(entry)), sep, title, sep, tag, sep, desc, sep,
+		pandoc.RawInline("latex", bracket)
+	})
 end
 
 function Pandoc(doc)
