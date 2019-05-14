@@ -216,7 +216,8 @@ function init()
 function setBase() {
 	Type=$1
 	Select=$2
-	List=$3
+	shift 2
+	List=($@)
 	
 	info "List: ${List[@]}"
 	
@@ -242,18 +243,15 @@ function setBase() {
 	getVar LSTSET "$SCRIPTDIR/templates/latex/listings-set.tex"
 }
 function setTheme() {
-	arr=$1
-	setBase BeamerTheme $THEME "${arr[@]}"
+	setBase BeamerTheme $THEME $@
 }
 
 function setClass() {
-	arr=$1
-	setBase PdfClass $DOCUMENTCLASS "${arr[@]}"
+	setBase PdfClass $DOCUMENTCLASS $@
 }
 
 function setCV() {
-	arr=$1
-	setBase CVTPL $CV "${arr[@]}"
+	setBase CVTPL $CV $@
 }
 
 function copyrightPage() {
