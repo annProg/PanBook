@@ -1,4 +1,4 @@
---[[ only for debug
+---[[ only for debug
 table_print = require('table_print')
 table.print = table_print.print_r
 --]]
@@ -178,11 +178,33 @@ function letter(el)
 end
 
 function cventry(el,meta,bracket)
-	local entry = getText(el.content)
-	local dt = setAttr(el.attr.attributes.date)
-	local title = setAttr(el.attr.attributes.title)
-	local city = setAttr(el.attr.attributes.city)
-	local score = setAttr(el.attr.attributes.score)
+	local entry = pandoc.Plain({})
+	local dt = ""
+	local title = ""
+	local tag = ""
+	local desc = ""
+	
+	for k,v in pairs(el.content) do
+		if v.t == "Str" then
+			table.insert(entry.content, v)
+		elseif v.t == "Span" then
+			if v.attr.classes[1] == "date" then
+				dt = getText(v)
+			elseif v.attr.classes[1] == "title" then
+				title = getText(v)
+			elseif v.attr.classes[1] == "tag" then
+				tag = getText(v)
+			elseif v.attr.classes[1] == "desc" then
+				desc = getText(v)
+			else
+				table.insert(entry.content, v)
+			end
+		else
+			table.insert(entry.content, v)
+		end
+	end
+	
+	entry = getText(entry)
 	
 	local tmp
 	if meta.style == "banking" then
@@ -190,7 +212,7 @@ function cventry(el,meta,bracket)
 		entry = title
 		title = tmp
 	end
-	return pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. entry .. "}{" .. title .. "}{" .. city .. "}{" .. score .. "}{" .. bracket)
+	return pandoc.RawBlock("latex", "\\cventry{" .. dt .. "}{" .. entry .. "}{" .. title .. "}{" .. tag .. "}{" .. desc .. "}{" .. bracket)
 end
 
 function Pandoc(doc)
