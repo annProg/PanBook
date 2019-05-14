@@ -2,6 +2,7 @@ function beamer() {
 	getVar TPL "latex"
 	getVar THEME "metropolis"
 	getVar DOCUMENTCLASS "ctexbeamer"
+	SLIDETPLDIR="slide"
 	
 	themeList=(solarized material HeavenlyClouds Xiaoshan Execushares classyslides Hest opensuse boxes CambridgeUS classic Dresden EastLansing lined Singapore cuerna   metropolis)	
 	
@@ -17,8 +18,8 @@ function beamer() {
 		PANDOCVARS="$ORIGPANDOCVARS"
 		setPandocVar "classoption=aspectratio" "169" # setPandocVar需在PANDOCVARS被ORIGPANDOCVARS赋值之后执行
 		# copy beamertheme
-		BEAMERTHEMEDIR=$SCRIPTDIR/templates/beamerthemes/$t
-		USERDEFINETHMEME=$cwd/templates/beamerthemes/$t
+		BEAMERTHEMEDIR=$SCRIPTDIR/templates/$SLIDETPLDIR/$t
+		USERDEFINETHMEME=$cwd/templates/$SLIDETPLDIR/$t
 		if [ -d $BEAMERTHEMEDIR -o -d $USERDEFINETHMEME ];then
 			cp -rfu $BEAMERTHEMEDIR $BUILD 2>/dev/null
 			cp -rfu $USERDEFINETHMEME $BUILD 2>/dev/null
