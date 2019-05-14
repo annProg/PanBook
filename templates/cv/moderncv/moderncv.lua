@@ -138,7 +138,7 @@ function cvcolumns(el)
 			end
 			table.insert(nblocks.content, pandoc.RawBlock("latex", "}"))
 		else
-			table.insert(nblocks.content, v.content)
+			table.insert(nblocks.content, v)
 		end
 	end
 	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\end{cvcolumns}"))
