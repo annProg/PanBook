@@ -61,7 +61,7 @@ $ panbook -h
 
   Available functions:
         init        initialize work environment
-        pdf         make pdf ebook
+        book        make pdf ebook
         html        make html ebook
         epub        make epub ebook
         beamer      make beamer

@@ -1,4 +1,4 @@
-function beamer() {
+function func_beamer() {
 	getVar TPL "latex"
 	getVar THEME "metropolis"
 	getVar DOCUMENTCLASS "ctexbeamer"

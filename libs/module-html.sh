@@ -1,4 +1,4 @@
-function html()
+function func_html()
 {	
 	getVar TPL "html5"
 	init

@@ -28,7 +28,7 @@ function printhelp() {
 	echo -e "\tUsage: panbook <functions> [OPTIONS]\n"
 	echo -e "  Available functions:"
 	echo -e "\tinit        initialize work environment"
-	echo -e "\tpdf         make pdf ebook"
+	echo -e "\tbook        make ebook"
 	echo -e "\thtml        make html ebook"
 	echo -e "\tepub        make epub ebook"
 	echo -e "\tbeamer      make beamer"

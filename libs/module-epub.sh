@@ -1,4 +1,4 @@
-function epub()
+function func_epub()
 {
 	getVar TPL "epub"
 	getVar CSS "epub"

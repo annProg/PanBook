@@ -105,7 +105,7 @@ EOF
 	
 }
 
-function cv() {
+function func_cv() {
 	note "use --cv=<template|R|A> to change cv template. R means radom, A means all"
 	getVar CV "moderncv"	
 	CVTPLDIR="cv"

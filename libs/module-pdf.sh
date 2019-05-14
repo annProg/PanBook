@@ -1,12 +1,10 @@
 function pdf()
 {
-	getVar TPL "latex"
-	getVar DOCUMENTCLASS "ctexbook"
-	getVar device "pc"
 	interaction="-interaction=batchmode"
-	BOOKTPLDIR="book"
 	[ "$TRACE"x == "true"x ] && interaction=""
-	classList=(ctexbook book elegantbook ctexart article)
+	TPLDIR=$1
+	shift
+	classList=($@)
 
 	# 支持随机选取theme
 	setClass "${classList[*]}"
@@ -23,8 +21,8 @@ function pdf()
 		division="--top-level-division=default"
 		
 		# copy pdf class
-		PDFCLASSDIR=$SCRIPTDIR/templates/$BOOKTPLDIR/$t
-		USERDEFINECLASS=$cwd/templates/$BOOKTPLDIR/$t
+		PDFCLASSDIR=$SCRIPTDIR/templates/$TPLDIR/$t
+		USERDEFINECLASS=$cwd/templates/$TPLDIR/$t
 		if [ -d $PDFCLASSDIR -o -d $USERDEFINECLASS ];then
 			cp -rfu $PDFCLASSDIR $BUILD 2>/dev/null
 			cp -rfu $USERDEFINECLASS $BUILD 2>/dev/null
@@ -36,7 +34,7 @@ function pdf()
 	
 		PANDOCVARS="$PANDOCVARS -V documentclass=$t"
 
-		# 打补丁. 补丁放在templates/$BOOKTPLDIR/classname 文件夹下，命名规则 patch-$classname.sh
+		# 打补丁. 补丁放在templates/$TPLDIR/classname 文件夹下，命名规则 patch-$classname.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
 		
 		[ "$LSTSET"x != ""x ] && (cat $LSTSET;echo) >> $HEADERS
@@ -83,4 +81,21 @@ function pdf()
 	done
 	
 	clean
+}
+
+function func_thesis()
+{
+	getVar TPL "latex"
+	getVar DOCUMENTCLASS "elegantpaper"
+	classList=(elegantpaper)
+	pdf "thesis" "${classList[*]}"
+}
+
+function func_book()
+{
+	getVar TPL "latex"
+	getVar DOCUMENTCLASS "ctexbook"
+	getVar device "pc"
+	classList=(ctexbook book elegantbook ctexart article)
+	pdf "book" "${classList[*]}"
 }
