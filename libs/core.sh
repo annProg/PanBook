@@ -184,10 +184,6 @@ function init()
 	chapters=`ls *.md 2>/dev/null |grep -vE "$FRONTMATTER|$BACKMATTER"`
 	BODY="$chapters"
 	
-	if [ "$BODY"x == ""x ];then
-		error "No markdown source file"
-	fi
-	
 	# 前言和后记部分
 	[ ! -f $FRONTMATTER ] && touch $FRONTMATTER
 	[ ! -f $BACKMATTER ] && touch $BACKMATTER
@@ -197,6 +193,11 @@ function init()
 	if [ "$1"x != "nometa"x ];then
 		[ ! -f metadata.yaml ] && meta > metadata.yaml
 	fi
+	
+	if [ "$BODY"x == ""x ];then
+		error "No markdown source file"
+	fi
+	
 	[ "$DEBUG"x = "true"x ] && highlightStyle=(tango)
 	
 	# 复制$SRC目录下资源文件到build目录
