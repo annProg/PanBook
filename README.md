@@ -60,8 +60,8 @@ $ panbook -h
         Usage: panbook <functions> [OPTIONS]
 
   Available functions:
-        init        initialize work environment
-        book        make pdf ebook
+        book        make ebook
+		thesis      make thesis
         html        make html ebook
         epub        make epub ebook
         beamer      make beamer

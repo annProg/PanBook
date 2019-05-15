@@ -27,7 +27,6 @@ function printhelp() {
 	echo -e "  eBook maker base pandoc\n"
 	echo -e "\tUsage: panbook <functions> [OPTIONS]\n"
 	echo -e "  Available functions:"
-	echo -e "\tinit        initialize work environment"
 	echo -e "\tbook        make ebook"
 	echo -e "\tthesis      make thesis"
 	echo -e "\thtml        make html ebook"
