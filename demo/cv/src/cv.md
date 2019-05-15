@@ -46,20 +46,20 @@ nocite: |
 - 简历条目之后可以用列表描述此条目
   - 并且列表支持多级，支持`Markdown`加粗和行内代码语法
   
-# \faBook 出版物列表  
-
-如果需要插入`bibtex`，请在`metadata`中设置 `nocite`变量为 
+# \faBook 出版物  
 
 ```yaml
+# 请在`metadata`中设置 `nocite`变量为 
 nocite: |
   @*`
-```
-使用`fenced_div`语法引用`bibtex`
 
-```
+# 使用`fenced_div`语法引用`bibtex`
+
 ::: {#refs}
 # 已发表作品
 :::
+
+# 在 src/bibliography.bib 文件里填写出版物
 ```
 
 ::: {#refs}

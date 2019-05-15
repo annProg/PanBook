@@ -40,12 +40,20 @@ function setAttr(attr)
 	end
 end
 
-function citeproc(cite)
+function citeproc(cite, meta)
 	local newcite = pandoc.Div({}, cite.attr)
+	local rawend = "\\par %"
+	if meta.style == "fancy" then
+		rawend = "}"
+	end
+	
 	for k,v in pairs(cite.content) do
 		if v.t == "Div" then
+			if meta.style == "fancy" then
+				table.insert(newcite.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
+			end
 			table.insert(newcite.content, v)
-			table.insert(newcite.content, pandoc.RawBlock("latex", "\\par %"))
+			table.insert(newcite.content, pandoc.RawBlock("latex", rawend))
 		elseif v.t == "Header" and v.level == 1 then
 			table.insert(newcite.content, pandoc.RawBlock("latex", "\\section{" .. getText(v.content) .. "}"))
 		else
@@ -258,7 +266,7 @@ function Pandoc(doc)
 				nel = cvlist(el)
 			end
 		elseif el.t == "Div" and el.attr.identifier == "refs" and inletter == nil then
-			nel = citeproc(el)
+			nel = citeproc(el, doc.meta)
 		elseif el.t == "Div" and el.attr.classes[1] == "cvcolumns" and inletter == nil then
 			nel = cvcolumns(el)
 		else
