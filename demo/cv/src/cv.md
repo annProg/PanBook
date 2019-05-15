@@ -22,30 +22,45 @@ nocite: |
 ...
 
 
-# \faGraduationCap 教育经历
+# \faUser 个人信息
 
-### XX大学 [2019 - 2023.5]{.date}  [计算机应用技术]{.title}  [北京]{.tag}  [成绩不好]{.desc}
+- 简历开头用`yaml`格式设置个人信息数据，不需要的变量不设置即可
 
-- 在简历开头用`yaml`格式设置`metadata`变量，不需要的变量不设置即可
-- 如果需要插入`bibtex`，请在`metadata`中设置 `nocite`变量为 `nocite: |\n  @*`（请把`\n`改成换行）
-  - 使用`fenced_div`语法引用`bibtex`，例如`::: {#refs}\n# 大标题\n:::`（请把`\n`改成换行）
+# \faDatabase  标题
 
-### YY大学 [2023.5 - 2026.5]{.date} [计算机应用技术 工学硕士]{.title}   [北京]{.tag}  [是个学渣]{.desc}
+### 一级和二级标题 [2019.7 - 2019.8]{.date} [支持`fontawesome`]{.desc}
 
-- 标题可用 1 - 3 级，1级表示大类别，2级表示小类别，3级用来表示一段经历并使用`bracketed_spans`语法添加经历信息
+- 大类别用`Markdown`一级标题语法，可在开头直接使用`fontawesome`图表，如`# \faUser 个人信息`
+- 带有`{.side}`属性的大标题表示显示在边栏（需模板支持）
+- `Markdown`二级标题用来表示小类别
+
+
+### 简历条目 [2019.8 - 2019.9]{.date} [`Markdown`三级标题]{.title} [`bracketed_spans`]{.tag}
+
+- 简历条目用`Markdown`三级标题表示，使用`bracketed_spans`语法添加条目属性
   - `[content]{.date}` 表示这段经历的时间段
   - `[content]{.title}` 表示职位 或者 专业 或者 学位等
   - `[content]{.tag}` 表示标签（比如 城市，或项目用到的技术等）
   - `[content]{.desc}` 简短的描述
-  - 未使用`bracketed_spans`语法的部分做为经历标题，不需要的样式不设置即可
+  - 未使用`bracketed_spans`语法的部分做为条目标题，不需要的样式不设置即可
+- 简历条目之后可以用列表描述此条目
+  - 并且列表支持多级，支持`Markdown`加粗和行内代码语法
+  
+# \faBook 出版物列表  
 
-# \faUsers 工作经验
+如果需要插入`bibtex`，请在`metadata`中设置 `nocite`变量为 
 
-### ZZ公司 [2026.7 - 2027.7]{.date}  [软件工程师]{.title}  [北京]{.tag}
+```yaml
+nocite: |
+  @*`
+```
+使用`fenced_div`语法引用`bibtex`
 
-- 描述经历可用Markdown列表语法
-  - 列表可以多级
-- 列表中支持Markdown加粗和行内代码语法
+```
+::: {#refs}
+# 已发表作品
+:::
+```
 
 ::: {#refs}
 # \faBook 发表作品
@@ -53,27 +68,22 @@ nocite: |
 
 # \faList 列表语法
 	  
-## 普通列表
-
-- 简单列表直接使用Markdown无序列表格式，不支持多级嵌套
-- 使用`bracketed_spans`语法生成复杂列表
-- 双栏列表语法：`[双栏列表]{.double} [第二栏]{.double}`
-- 双栏带类别语法：`[编程]{.cat}[Java]{.double} [排版]{.cat}[LaTeX]{.double}`
-- 有点郁闷，好像还不如原生的`\cvitem`命令简单
-- [一]{.double} [二]{.double} [三]{.double}
-- [cat1]{.cat}[一]{.double} [cat2]{.cat}[二]{.double} [cat3]{.cat}[三]{.double}
+- [简单列表]{.cat} 简单列表直接使用Markdown无序列表格式，不支持多级嵌套
+- [复杂列表]{.cat} 使用`bracketed_spans`语法生成复杂列表
+- [双栏列表]{.cat} `[第一栏]{.double} [第二栏]{.double}`
+- [双栏带类别]{.cat} `[编程]{.cat}[Java]{.double} [排版]{.cat}[LaTeX]{.double}`
+- [带评论列表]{.cat} `[类别]{.cat}描述[评论]{.comment}`
 
 ## 双栏列表
 
-- [双栏列表]{.double} [第二栏]{.double}
-- [仅一列的双栏样式]{.double}
+- [第一栏]{.double} [第二栏]{.double}
 
 ## 带类别列表
+
 - [语法]{.cat}`[类别]{.cat}`生成带类别的列表
 
 ## 带评论列表
 
-- `[类别]{.cat}描述[评论]{.comment}` [类别]{.cat}同时带类别和评论[评论]{.comment}
 - [英语]{.cat} 不会读不会写 [四级是啥]{.comment}
 
 ## 带类别的双栏列表
@@ -94,24 +104,23 @@ nocite: |
 :::
 ::::
 
-# \faEnvelope 求职信语法
+# \faEnvelope 求职信
 
-- 使用一级标题和二级标题定义求职信基础信息，第一个样式必须为`.letter`
-- 一级标题用于定义接收方（必选），必选属性 `company="公司"`，`addr="地址"`，`city="城市"`
-- 二级标题通过第二个样式定义不同的功能
-- [日期]{.cat}  `.date`，可选
-- [称呼]{.cat} `.opening` ，必选
-- [祝颂语]{.cat} `.closing` ，必选
-- [附件]{.cat} `.enclosure` ，可选
-- 二级标题样式为附件时，可用`enclosure`属性定义显示名称
-- 举例：`## 我的简历 {.letter .enclosure enclosure="附件"}`
-- 接下来开始写正文
+```
+# 韩荆州 {.letter company="公司" addr="地址" city="城市"}  // 接收方，全部必须
+## 开元22年 {.letter .date}                                // 日期， 可选
+## Dear Sir or Madam， {.letter .opening}                  // 称呼， 必须
+## Yours faithfully, {.letter .closing}                    // 祝颂语，必须
+## curriculum vit\ae {.letter .enclosure enclosure="附件"} // 附件， 可选
 
-# \faStarHalfO 其他语法
+正文
+```
 
-- 列表中使用 `\grade1` ~ `\grade5` 命令设置熟练程度（1-5分）
-- [\grade3 \LaTeX]{.double}  [\grade4 Markdown]{.double}
-- 一级标题带 `{.side}` 样式可用于支持边栏的模板（需要模板实现）
+# \faStarHalfO 技能打分
+
+- [语法]{.cat} `\grade1` ~ `\grade5` （1-5分）
+- [排版]{.cat} \LaTeX,Markdown         [\grade4]{.comment}
+- [已知问题]{.cat}`moderncv`双栏列表使用此功能会报错，请使用`fenced_divs`分栏语法代替
 
 # 韩荆州 {.letter company="大唐帝国" addr="荆州大都督府" city="襄阳"}
 ## 开元22年 {.letter .date}
