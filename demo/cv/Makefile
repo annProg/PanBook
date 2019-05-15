@@ -8,7 +8,7 @@ COLOR ?= blue
 ALL_STYLE=classic banking casual oldstyle fancy
 ALL_COLOR=blue orange green red purple grey black burgundy
 
-all: moderncv-all-style-color resume png online
+all: moderncv-all-style-color resume tmr png online
 
 
 moderncv-all-style:
@@ -27,6 +27,8 @@ moderncv:
 
 resume:
 	panbook cv --cv=resume
+tmr:
+	panbook cv --cv=tmr	
 all-tpl:
 	panbook cv --cv=A
 png:

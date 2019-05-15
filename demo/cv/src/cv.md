@@ -43,28 +43,25 @@ nocite: |
   - `[content]{.tag}` 表示标签（比如 城市，或项目用到的技术等）
   - `[content]{.desc}` 简短的描述
   - 未使用`bracketed_spans`语法的部分做为条目标题，不需要的样式不设置即可
-- 简历条目之后可以用列表描述此条目
-  - 并且列表支持多级，支持`Markdown`加粗和行内代码语法
+- 简历条目之后可以用列表描述此条目,支持多级，支持`Markdown`加粗和行内代码
   
+
+::: {#refs}
+# \faBook 发表作品
+:::
+
 # \faBook 出版物  
 
 ```yaml
 # 请在`metadata`中设置 `nocite`变量为 
 nocite: |
   @*`
-
 # 使用`fenced_div`语法引用`bibtex`
-
 ::: {#refs}
 # 已发表作品
 :::
-
 # 在 src/bibliography.bib 文件里填写出版物
 ```
-
-::: {#refs}
-# \faBook 发表作品
-:::
 
 # \faList 列表语法
 	  
