@@ -109,8 +109,8 @@ nocite: |
 
 # \faStarHalfO 其他语法
 
-- 列表中使用 `[3]{.grade}` 语法设置熟练程度（1-5分）
-- [5]{.grade}[\LaTeX]{.double}  [3]{.grade}[Markdown]{.double}
+- 列表中使用 `\grade1` ~ `\grade5` 命令设置熟练程度（1-5分）
+- [\grade3 \LaTeX]{.double}  [\grade4 Markdown]{.double}
 - 一级标题带 `{.side}` 样式可用于支持边栏的模板（需要模板实现）
 
 # 韩荆州 {.letter company="大唐帝国" addr="荆州大都督府" city="襄阳"}
