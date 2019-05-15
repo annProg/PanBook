@@ -33,12 +33,24 @@ function pdf()
 		fi
 	
 		PANDOCVARS="$PANDOCVARS -V documentclass=$t"
+		TEX_OUTPUT="$ofile-$TPL-$t-$device.tex"
+
+		info "PANDOCVARS: $PANDOCVARS"
+		info "addOptions: $addOptions"
+		info "LSTSET: $LSTSET"
+		info "division: $division"
+		info "copyright: $copyright"
+		info "licence: $licence"
+				
+		source $SCRIPTDIR/config.default		
+		[ -f $cwd/config ] && source $cwd/config
+		PDF_OPTIONS="$PDF_OPTIONS -B frontmatter.tex -A backmatter.tex --metadata-file=$METADATA"		
 
 		# 打补丁. 补丁放在templates/$TPLDIR/classname 文件夹下，命名规则 patch-$classname.sh
 		[ -f patch-$t.sh ] && source patch-$t.sh
+		[ -f $t.lua ] && CUSTOM_FILTER=" --lua-filter $t.lua" || CUSTOM_FILTER=""
 		
 		[ "$LSTSET"x != ""x ] && (cat $LSTSET;echo) >> $HEADERS
-		
 		# 版权页
 		copyrightPage
 		[ "$copyright"x == "true"x ] && (cat $COPYPAGE;echo) >> $HEADERS
@@ -46,24 +58,10 @@ function pdf()
 		[ "$columns"x == "true"x ] && addOptions="$addOptions $COLUMNS_SUPPORT"
 		addOptions="$addOptions $copyoption"
 		
-		info "PANDOCVARS: $PANDOCVARS"
-		info "addOptions: $addOptions"
-		info "LSTSET: $LSTSET"
-		info "division: $division"
-		info "copyright: $copyright"
-		info "licence: $licence"
-		
-		# 生成前言和后记		
-		pandoc -t latex $FRONTMATTER $division --listings -o frontmatter.tex
-		pandoc -t latex $BACKMATTER $division --listings -o backmatter.tex
-		
-		source $SCRIPTDIR/config.default		
-		[ -f $cwd/config ] && source $cwd/config
-
-		TEX_OUTPUT="$ofile-$TPL-$t-$device.tex"
-		PDF_OPTIONS="$PDF_OPTIONS -B frontmatter.tex -A backmatter.tex --metadata-file=$METADATA"
-		
 		trimHeader
+		# 生成前言和后记		
+		pandoc $FRONTMATTER -o frontmatter.tex --listings $division $CUSTOM_FILTER
+		pandoc $BACKMATTER -o backmatter.tex --listings $division $CUSTOM_FILTER
 		pandoc $PANDOC_REFERENCE_PARAM $BODY -o $TEX_OUTPUT $PDF_OPTIONS $division $addOptions $PANDOCVARS
 		
 		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
