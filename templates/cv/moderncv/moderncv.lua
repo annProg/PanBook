@@ -44,9 +44,8 @@ function citeproc(cite)
 	local newcite = pandoc.Div({}, cite.attr)
 	for k,v in pairs(cite.content) do
 		if v.t == "Div" then
-			table.insert(newcite.content, pandoc.RawBlock("latex", "\\cvlistitem{"))
 			table.insert(newcite.content, v)
-			table.insert(newcite.content, pandoc.RawBlock("latex", "}"))
+			table.insert(newcite.content, pandoc.RawBlock("latex", "\\par %"))
 		elseif v.t == "Header" and v.level == 1 then
 			table.insert(newcite.content, pandoc.RawBlock("latex", "\\section{" .. getText(v.content) .. "}"))
 		else
