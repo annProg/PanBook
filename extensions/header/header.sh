@@ -1,0 +1,3 @@
+function addHeader() {
+	echo "hi"
+}

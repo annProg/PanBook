@@ -1,46 +1,67 @@
 #!/bin/bash
 
+# 超全局变量
 SCRIPTDIR=`cd $(dirname $0);pwd`
-cwd=`pwd`
-ofile=`echo $cwd |awk -F '/' '{print $NF}'`
+CWD=`pwd`
 
 source $SCRIPTDIR/libs/helper.sh
-source $SCRIPTDIR/libs/env.sh
 
-getVar SRC "src"
-WORKDIR="$cwd/$SRC"
-getVar IMGDIR "$WORKDIR/images"
-getVar CSL "$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl"
-getVar BIB "$WORKDIR/bibliography.bib"
-BIB_PARAM="--bibliography=$BIB"
-DEFAULT_CRS="$SCRIPTDIR/pandoc-crossref-settings.yaml"
-getVar CRS "$cwd/pandoc-crossref.yaml"
+# recon2 方案
+# 1. 使用全局数组存储 pandoc 选项，pandoc var(-V)， pandoc meta(-M)，pandoc filter（--lua-filter）以及panbook需要的变量
+#    1.1 通过--option=value形式传入的panbook不能识别的参数存储到 pandoc var数组中，扔给pandoc（需要处理repeat for multiple options的情况）
+# 2. panbook选项及每个模块的patch可以修改，新增或删除这些全局数组的元素
+# 3. 新增函数用于拼接参数，执行pandoc时调用
+# 4. 设计扩展机制：style patch控制开关，执行每个扩展目录下的脚本
+# 5. 重定义名词及目录
+#    5.1: templates 专指pandoc模板（--templates选项），和 样式集 区分
+#    5.2: extensions 用于扩展功能，扩展
+#    5.3: styles 风格，设计样式，用于定制某种模板，可以通过patch调用extension，修改全局变量，改变模板，增加lua filter等。（参数名 --style）
+#         5.3.1: styles和templates要做区分，比如默认的latex模板，moderncv，elegantbook都可以调用这个模板，但是又需要不同的lua filter,文档类等
 
-BUILD="$cwd/build"
-HEADERS="$BUILD/add-headers.tex"
-METADATA="$WORKDIR/metadata.yaml"
-COLUMNS_SUPPORT="--lua-filter $SCRIPTDIR/filters/fenced_divs_columns.lua"
-getVar columns "true"
+declare -A _G         # panbook全局选项
+declare -A _P         # pandoc选项
+declare -A _V         # pandoc var (-V)
+declare -A _M         # pandoc meta (-M)
+declare -A _F         # lua filter (--lua-filter)
 
+_G=(
+	[src]=src                                                         # 默认src目录名称（需要在获取参数后重置）
+	[workdir]=$CWD/src                                                # 默认markdown源码目录（需要在获取参数后重置）
+	[imgdir]=$CWD/src/images                                          # 默认image目录（需要在获取参数后重置）
+	[cls]=$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl              # 默认cls文件路径（需要在获取参数后重置）
+	[crs]=$SCRIPTDIR/crs/zh-CN.yaml                                   # 默认crs配置文件（需要在获取参数后重置）
+	[bib]=$CWD/src/bibliography.bib                                   # 默认bibliography路径（需要在获取参数后删除）
+	[ofile]=`echo $CWD |awk -F '/' '{print $NF}'`                     # 默认输出文件名
+	[build]=$CWD/build                                                # 默认编译目录
+	[header]=add-header.tex                                           # 默认header文件名
+	[extdir]=$SCRIPTDIR/extensions                                    # 扩展目录
+	[tpldir]=$SCRIPTDIR/templates                                     # pandoc模板目录
+	[styledir]=$SCRIPTDIR/styles                                      # styles目录
+	[scriptdir]=$SCRIPTDIR
+	[cwd]=$CWD
+	[debug]=false
+	[trace]=false
+	[metafile]=$CWD/src/metadata.yaml                                 #默认metadata.yaml（需要在获取参数后重置）
+)
+
+_P=()
+_V=()
+_M=()
+_F=()
+
+
+# 引入函数和模块
 source $SCRIPTDIR/libs/core.sh
-
-# 引入模块
-for module in `ls $SCRIPTDIR/libs/module-*`;do
-	item=`basename $module`
-	source $SCRIPTDIR/libs/$item
-done
-
+source $SCRIPTDIR/libs/modules/*.sh
+loadExtensions
 
 if [ $# -ge 1 ];then
 	[ "$1"x == "-help"x -o "$1"x == "-h"x -o "$1"x == "help"x ] && printhelp
-	func=$1
+	_G[function]=$1
 	shift
 else
 	printhelp
 fi
-
-# pandoc 通过 -V 传递给模板的变量
-ORIGPANDOCVARS=""
 
 for i in "$@"
 do
@@ -49,77 +70,40 @@ do
 	-h|--help)
 		FUNCHELP=true
 		shift;;
-	--tpl=*)
-		TPL=${key#*=}
-		shift;;
-	--class=*)
-		DOCUMENTCLASS=${key#*=}
-		shift;;
-	--theme=*)
-		THEME=${key#*=}
-		shift;;
-	--cv=*)
-		CV=${key#*=}
-		shift;;		
-	--css=*)
-		CSS=${key#*=}
-		shift;;
-	--csl=*)
-		CSL=${key#*=}
+	--style=*)
+		_G[style]=${key#*=}
 		shift;;
 	--crs=*)
-		CRS=${key#*=}
-		shift;;		
-	--bib=*)
-		bibtmp=${key#*=}
-		BIB_PARAM="$BIB_PARAM --bibliography=$bibtmp"
+		_G[crs]=${key#*=}
 		shift;;		
 	-d|--debug)
-		DEBUG=true
+		_G[debug]=true
 		shift;;
 	--src=*)
-		SRC=${key#*=}
+		_G[src]=${key#*=}
 		shift;;
 	--imgdir=*)
-		IMGDIR=${key#*=}
+		_G[imgdir]=${key#*=}
 		shift;;		
 	--trace)
-		TRACE=true
+		_G[trace]=true
 		shift;;
 	-V)
-		ORIGPANDOCVARS="$ORIGPANDOCVARS -V $2"
+		setV $2
 		shift 2;;
-	-E)
-		eval $2
+	-M)
+		setM $2
 		shift 2;;
-	*);;
+	*)
+		setP $key
+		shift;;
 	esac
 done
 
 note "Welcome to PanBook!"
-info "ScriptDir: $SCRIPTDIR"
-info "WorkDir: $WORKDIR"
-info "ImgDir: $IMGDIR"
-info "Function: $func"
-info "TPL: $TPL"
-info "DOCUMENTCLASS: $DOCUMENTCLASS"
-info "THEME: $THEME"
-info "CV: $CV"
-info "DEBUG: $DEBUG"
-info "ORIGPANDOCVARS: $ORIGPANDOCVARS"
-info "TRACE: $TRACE"
 
-CROSSREF_PARAM="-F pandoc-crossref"
-CITEPROC_PARAM="-F pandoc-citeproc $BIB_PARAM --csl=$CSL"
-# 由于pandoc-crossref需要使用metadata中的header-includes变量，命令行参数中不能包含 -H，需要使用lua filter将-H参数内容转换为metadata变量
-# 参见 https://github.com/annProg/PanBook/issues/8
-# -H 参数引入的tex文件，命名为 add-header-*.tex，pandoc执行前，cat add-header-*.tex > add-header.tex
-if [ "$func"x == "book"x -o "$func"x == "beamer"x ];then
-	CROSSREF_PARAM="$CROSSREF_PARAM --lua-filter $SCRIPTDIR/filters/add-header.lua"
-fi
-PANDOC_REFERENCE_PARAM="$CROSSREF_PARAM $CITEPROC_PARAM"
-
-info "PANDOC_REFERENCE_PARAM: $PANDOC_REFERENCE_PARAM"
+# 修正目录
+fixDir
 
 if [ "`type -t func_${func}`"x == "function"x ];then
 	[ "$TRACE"x == "true"x ] && set -x
@@ -127,3 +111,5 @@ if [ "`type -t func_${func}`"x == "function"x ];then
 else
 	error "Function: $func  not defined"
 fi
+
+printGlobal
