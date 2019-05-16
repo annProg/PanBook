@@ -15,7 +15,7 @@ test=(
 # 获取键
 #echo ${!test[@]}
 
-test[d]=D
+test[d-d]=D
 
 function printArray() {
 	arr=$1
@@ -28,3 +28,5 @@ function printArray() {
 }
 
 printArray test ${!test[@]}
+
+echo ${test[d-d]}

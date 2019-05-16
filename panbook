@@ -28,9 +28,7 @@ _G=(
 	[src]=src                                                         # 默认src目录名称（需要在获取参数后重置）
 	[workdir]=$CWD/src                                                # 默认markdown源码目录（需要在获取参数后重置）
 	[imgdir]=$CWD/src/images                                          # 默认image目录（需要在获取参数后重置）
-	[cls]=$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl              # 默认cls文件路径（需要在获取参数后重置）
 	[crs]=$SCRIPTDIR/crs/zh-CN.yaml                                   # 默认crs配置文件（需要在获取参数后重置）
-	[bib]=$CWD/src/bibliography.bib                                   # 默认bibliography路径（需要在获取参数后删除）
 	[ofile]=`echo $CWD |awk -F '/' '{print $NF}'`                     # 默认输出文件名
 	[build]=$CWD/build                                                # 默认编译目录
 	[header]=add-header.tex                                           # 默认header文件名
@@ -41,10 +39,15 @@ _G=(
 	[cwd]=$CWD
 	[debug]=false
 	[trace]=false
-	[metafile]=$CWD/src/metadata.yaml                                 #默认metadata.yaml（需要在获取参数后重置）
 )
 
-_P=()
+_P=(
+	[toc]=true
+	[listings]=true
+	[cls]=$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl              # 默认cls文件路径（需要在获取参数后重置）
+	[bibliography]=$CWD/src/bibliography.bib                          # 默认bibliography路径（需要在获取参数后删除）
+	[metadata-file]=$CWD/src/metadata.yaml                                 #默认metadata.yaml（需要在获取参数后重置）	
+)
 _V=()
 _M=()
 _F=()

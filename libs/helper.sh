@@ -61,8 +61,10 @@ function loadExtensions() {
 function fixDir() {
 	if [ "$_G[src]"x != "src" ]; then
 		_G[workdir]=$CWD/${_G[src]}
-		_G[bib]=${_G[workdir]}/bibliography.bib
-		_G[metafile]=${_G[workdir]}/metadata.yaml
+		_P[bibliography]=${_G[workdir]}/bibliography.bib
+		if [ "${_P[metadata-file]}"x == "$CWD/src/metadata.yaml"x ]; then
+			_P[metadata-file]=${_G[workdir]}/metadata.yaml
+		fi
 		if [ "${_G[imgdir]}"x == "$CWD/src/images"x ]; then
 			_G[imgdir]=${_G[workdir]}/images
 		fi
