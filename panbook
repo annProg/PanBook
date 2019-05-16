@@ -11,9 +11,9 @@ source $SCRIPTDIR/libs/helper.sh
 #    1.1 通过--option=value形式传入的panbook不能识别的参数存储到 pandoc var数组中，扔给pandoc（需要处理repeat for multiple options的情况）
 # 2. panbook选项及每个模块的patch可以修改，新增或删除这些全局数组的元素
 # 3. 新增函数用于拼接参数，执行pandoc时调用
-# 4. 设计扩展机制：style patch控制开关，执行每个扩展目录下的脚本
+# 4. 设计扩展机制：style patch修改参数，执行每个扩展目录下的脚本
 # 5. 重定义名词及目录
-#    5.1: templates 专指pandoc模板（--templates选项），和 样式集 区分
+#    5.1: templates 专指pandoc模板（--templates选项），和 风格（styles） 区分
 #    5.2: extensions 用于扩展功能，扩展
 #    5.3: styles 风格，设计样式，用于定制某种模板，可以通过patch调用extension，修改全局变量，改变模板，增加lua filter等。（参数名 --style）
 #         5.3.1: styles和templates要做区分，比如默认的latex模板，moderncv，elegantbook都可以调用这个模板，但是又需要不同的lua filter,文档类等
@@ -31,10 +31,15 @@ _G=(
 	[crs]=$SCRIPTDIR/crs/zh-CN.yaml                                   # 默认crs配置文件（需要在获取参数后重置）
 	[ofile]=`echo $CWD |awk -F '/' '{print $NF}'`                     # 默认输出文件名
 	[build]=$CWD/build                                                # 默认编译目录
-	[header]=add-header.tex                                           # 默认header文件名
-	[extdir]=$SCRIPTDIR/extensions                                    # 扩展目录
-	[tpldir]=$SCRIPTDIR/templates                                     # pandoc模板目录
-	[styledir]=$SCRIPTDIR/styles                                      # styles目录
+	[fontdir]=fonts
+	[header]=$CWD/build/add-header.tex                                # 默认header文件名
+	[extdir]=extensions                                               # 扩展目录
+	[tpldir]=templates                                                # pandoc模板目录
+	[styledir]=styles                                                 # styles目录
+	[stylecv]=styles/cv
+	[stylebeamer]=styles/beamer
+	[stylebook]=styles/book
+	[stylethesis]=styles/thesis
 	[scriptdir]=$SCRIPTDIR
 	[cwd]=$CWD
 	[debug]=false
@@ -107,12 +112,13 @@ note "Welcome to PanBook!"
 
 # 修正目录
 fixDir
+mkDir
 
-if [ "`type -t func_${func}`"x == "function"x ];then
+if [ "`type -t func_${_G[function]}`"x == "function"x ];then
 	[ "$TRACE"x == "true"x ] && set -x
-	func_${func}
+	func_${_G[function]}
 else
-	error "Function: $func  not defined"
+	error "Function: func_${_G[function]}  not defined"
 fi
 
 printGlobal

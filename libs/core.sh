@@ -32,22 +32,6 @@ function setPandocVar() {
 	echo "$PANDOCVARS" |grep -w "$1" &>/dev/null || PANDOCVARS="$PANDOCVARS -V $1=$2"
 }
 
-function clean() {
-	cd $BUILD
-	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
-	release="/tmp/release-$rand"
-	mkdir $release
-	mv *.pdf *.tex *.epub *.html *.bib $release 2>/dev/null
-	rm -fr *
-	mv $release/* .
-	rm -fr $release
-}
-
-function cleanall()
-{
-	cd $BUILD
-	rm -fr *
-}
 
 # 保存网络图片至本地
 function saveimg() 
@@ -95,13 +79,6 @@ function pdf2jpg()
 	done
 }
 
-function templateError() {
-	# TPL变量为空时不做判断
-	[ "$TPL"x == ""x ] && return
-	# 指定template不存在时用默认模板编译
-	TEMPLATE="--template=$cwd/build/$TPL.tpl"
-	[ ! -f $cwd/build/$TPL.tpl ] && error "Template $TPL not found." && exit 1 #TEMPLATE="-V CJKmainfont=$CJK -V documentclass=ctexbook"	
-}
 
 function compileStatus() {
 	status=$?
@@ -116,17 +93,16 @@ function compileStatus() {
 # 兼容不规范源码
 function compatible()
 {	
-	# IMGDIR 相对路径
-	IMGDIRFULL=`cd $IMGDIR && pwd`
-	echo $IMGDIRFULL |grep -w $WORKDIR &>/dev/null && r=0 || r=1
-	info "IMGDIR=$IMGDIRFULL"
+	# imgdir相对路径转绝对路径
+	_G[imgdir]=`cd ${_G[imgdir]} && pwd`
+	echo ${_G[imgdir]} |grep -w ${_G[workdir]} &>/dev/null && r=0 || r=1
 	if [ $r -eq 0 ];then
-		IMGDIRRELATIVE=`echo $IMGDIRFULL|sed "s#$WORKDIR#.#g"`
+		_G[imgdirrelative]=`echo ${_G[imgdir]}|sed "s#${_G[workdir]}#.#g"`
 	else
-		IMGDIRRELATIVE=`echo $IMGDIRFULL|sed "s#$cwd#..#g"`
+		_G[imgdirrelative]=`echo ${_G[imgdir]}|sed "s#$CWD#..#g"`
 	fi
 
-	cd $BUILD
+	cd ${_G[build]}
 	COMPATIBLE="compatible.conf"
 	PREFIX="PanBook-compatible-"
 	if [ -f $COMPATIBLE ];then
@@ -142,29 +118,18 @@ function compatible()
 				fi
 				
 				# 被删除及写入frontmatter和backmatter的源码，需要从BODY中排除
-				BODY=`echo $BODY |sed -r "s/($item | $item)//g"`
-				[ $stype == "frontmatter" ] && FRONTMATTER=$newName
-				[ $stype == "backmatter" ] && BACKMATTER=$newName
-				[ $stype == "body" ] && BODY=$newName				
+				_G[body]=`echo ${_G[body]} |sed -r "s/($item | $item)//g"`
+				[ $stype == "frontmatter" ] && _G[frontmatter]=$newName
+				[ $stype == "backmatter" ] && _G[backmatter]=$newName
+				[ $stype == "body" ] && _G[body]=$newName
 			done
 		done
 	fi
 }
 
-function gitignore() {
-	[ ! -f $cwd/.gitignore ] && cp $SCRIPTDIR/.gitignore $cwd
-}
 
 function init()
 {
-	[ ! -d $BUILD ] && mkdir $BUILD
-	[ ! -d $WORKDIR ] && mkdir $WORKDIR
-	[ ! -d $IMGDIR ] && mkdir $IMGDIR
-	[ ! -d $cwd/templates ] && mkdir $cwd/templates
-	[ ! -d $cwd/fonts ] && mkdir $cwd/fonts
-	[ -f $CRS ] && cp $CRS $BUILD/pandoc-crossref.yaml || cp $DEFAULT_CRS $BUILD/pandoc-crossref.yaml
-
-	gitignore
 	cd $WORKDIR
 
 	# 模板, 支持用户自定义模板
@@ -214,58 +179,19 @@ function init()
 	compatible
 }
 
-function setBase() {
-	Type=$1
-	Select=$2
-	shift 2
-	List=($@)
+function setStyle() {
+	List=($@)	
+	SELECTED=(${_G[style]})
 	
-	info "List: ${List[@]}"
-	
-	SELECTED=($Select)
-	
-	if [ "$Select"x == "R"x ];then
+	if [ "${_G[style]}"x == "R"x ];then
 		len=`echo ${#List[@]}`
 		index=$(($RANDOM%$len))	
 		SELECTED=(${List[$index]})
 	fi
 		
-	if [ "$Select"x == "A"x ];then
+	if [ "${_G[style]}"x == "A"x ];then
 		SELECTED=`echo ${List[@]}`
 	fi
 	
-	info "SELECTED $Type: $SELECTED"
-	if [ "$TPL"x != ""x ];then
-		origAddOptions="--template=$TPL.tpl"
-	else
-		origAddOptions=""
-	fi
-	
-	getVar LSTSET "$SCRIPTDIR/templates/latex/listings-set.tex"
-}
-function setTheme() {
-	setBase BeamerTheme $THEME $@
-}
-
-function setClass() {
-	setBase PdfClass $DOCUMENTCLASS $@
-}
-
-function setCV() {
-	setBase CVTPL $CV $@
-}
-
-function copyrightPage() {
-	getVar copyright "true"
-	getVar licence "ccncnd"
-	getVar COPYPAGE "$SCRIPTDIR/templates/latex/add-copyright-page.tex"
-	if [ "$copyright"x == "true"x ];then
-		copyoption="-V copyright=true -V licence=$licence"	
-	fi
-}
-
-function trimHeader() {
-	# 删除$HEADERS空行，注释行
-	sed -i -r 's/%.*$//g' $HEADERS
-	sed -i -r '/^[\s\t ]*$|^%/d' $HEADERS
+	_G[selected-style]="${SELECTED[@]}"
 }

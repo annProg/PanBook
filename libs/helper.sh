@@ -44,17 +44,17 @@ function printGlobal() {
 }
 
 function _loadExt() {
-	ext=`basename $1`
-	source $SCRIPTDIR/extensions/$ext/$ext.sh
+	ext=`basename $2`
+	source $1/${_G[extdir]}/$ext/$ext.sh
 }
 
 function loadExtensions() {
-	for item in `ls $SCRIPTDIR/extensions/`;do
-		_loadExt $item
+	for item in `ls $SCRIPTDIR/${_G[extdir]}/`;do
+		_loadExt $SCRIPTDIR $item
 	done
 	
-	for item in `ls $CWD/extensions/ 2>/dev/null`;do
-		_loadExt $item
+	for item in `ls $CWD/${_G[extdir]}/ 2>/dev/null`;do
+		_loadExt $CWD $item
 	done
 }
 
@@ -69,6 +69,52 @@ function fixDir() {
 			_G[imgdir]=${_G[workdir]}/images
 		fi
 	fi
+}
+
+function _gitignore() {
+	[ ! -f $CWD/.gitignore ] && cp $SCRIPTDIR/.gitignore $CWD
+}
+
+function _mkdir() {
+	[ ! -d $1 ] && mkdir -p $1
+}
+
+function mkDir() {
+	_gitignore
+	_mkdir ${_G[workdir]}
+	_mkdir ${_G[build]}
+	_mkdir ${_G[imgdir]}
+	_mkdir $CWD/${_G[extdir]}
+	_mkdir $CWD/${_G[tpldir]}
+	_mkdir $CWD/${_G[stylecv]}
+	_mkdir $CWD/${_G[stylebeamer]}
+	_mkdir $CWD/${_G[stylebook]}
+	_mkdir $CWD/${_G[stylethesis]}
+	_mkdir $CWD/${_G[fontdir]}
+}
+
+function trimHeader() {
+	# 删除$HEADERS空行，注释行
+	sed -i -r 's/%.*$//g' ${_G[header]}
+	sed -i -r '/^[\s\t ]*$|^%/d' ${_G[header]}
+}
+
+function checkTemplate() {
+	# 未指定template时不做判断
+	[ "${_P[template]}"x == ""x ] && return
+	[ ! -f $CWD/build/${_P[template]}.tpl ] && error "Template ${_P[template]} not found." && printGlobal && exit 1
+}
+
+function clean() {
+	cd ${_G[build]}
+	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
+	release="/tmp/release-$rand"
+	mkdir $release
+	mv *.pdf *.epub *.html $release 2>/dev/null
+	[ ${_G[debug]} == "true" ] && mv *.tex *.bib $release 2>/dev/null
+	rm -fr *
+	mv $release/* .
+	rm -fr $release
 }
 
 function printhelp() {
