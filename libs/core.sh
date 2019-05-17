@@ -224,11 +224,13 @@ function getF() {
 }
 
 function getPandocParam() {
+	if [ "${_G[crossref]}"x != ""x ];then
+		_M[crossrefYaml]=${_G[crs]}
+	fi
 	getV
 	getM
 	getP
 	getF
-	_G[crossref]="${_G[crossref]} -M 'crossrefYaml=${_G[crs]}'"
 	_G[pandoc-param]="${_G[crossref]} ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
