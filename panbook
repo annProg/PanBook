@@ -24,6 +24,10 @@ declare -A _V         # pandoc var (-V)
 declare -A _M         # pandoc meta (-M)
 declare -A _F         # lua filter (--lua-filter)
 
+# ${_G[header]} 变量说明：
+# 由于pandoc-crossref需要使用metadata中的header-includes变量，命令行参数中不能包含 -H，需要使用lua filter将-H参数内容转换为metadata变量
+# 参见 https://github.com/annProg/PanBook/issues/8
+# -H 参数引入的tex文件，命名为 add-header-*.tex，pandoc执行前，cat add-header-*.tex > add-header.tex
 _G=(
 	[src]=src                                                         # 默认src目录名称（需要在获取参数后重置）
 	[workdir]=$CWD/src                                                # 默认markdown源码目录（需要在获取参数后重置）
@@ -49,12 +53,20 @@ _G=(
 	[frontmatter]=frontmatter.md                                      # 前言部分单独放到一个文件中是考虑到前言应在目录前，通过 -B 参数引入，才能实现
 	[backmatter]=backmatter.md
 	[defaultbody]=100-body.md
+	[v]=""
+	[m]=""
+	[p]=""
+	[f]=""
+	[crossref]="-F pandoc-crossref"
+	[citeproc]="-F citeproc"
+	[pandoc-param]=""
+	[t]=tex
 )
 
 _P=(
 	[toc]=true
 	[listings]=true
-	[cls]=$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl              # 默认cls文件路径（需要在获取参数后重置）
+	[csl]=$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl              # 默认cls文件路径（需要在获取参数后重置）
 	[bibliography]=$CWD/src/bibliography.bib                          # 默认bibliography路径（需要在获取参数后删除）
 	[metadata-file]=$CWD/src/metadata.yaml                            #默认metadata.yaml（需要在获取参数后重置）	
 )

@@ -164,30 +164,62 @@ function setStyle() {
 	_G[selected-style]="${SELECTED[@]}"
 }
 
-function setV() {
+# 随机数，加随机数是处理repeat for multiple options的情况
+function _random() {
+	echo $(($RANDOM$RANDOM$RANDOM%1000000))
+}
 
+function setV() {
+	vKey="`echo $1 |sed 's/^--//g'|awk -F':' '{print $1}'`__`_random`"
+	_V[$vKey]=`echo $1|awk -F':' '{print $2}'`
 }
 
 function setM() {
-
+	mKey="`echo $1 |sed 's/^--//g'|awk -F':' '{print $1}'`__`_random`"
+	_M[$mKey]=`echo $1|awk -F':' '{print $2}'`
 }
 
-function setF() {
-
-}
-
-function getM() {
-
+function setP() {
+	pKey="`echo $1|sed 's/^--//g'|awk -F'=' '{print $1}'`__`_random`"
+	pVal=`echo $1|awk -F'=' '{print $2}'`
+	[ "$pVal"x == ""x ] && pVal=true
+	_P[$pKey]=$pVal
 }
 
 function getV() {
+	for k in `${!_V[@]}`;do
+		_G[v]="${_G[v]} -V `echo $k |sed 's/__.*//g'`:${_V[$k]}"
+	done
+}
 
+function getM() {
+	for k in `${!_M[@]}`;do
+		_G[m]="${_G[m]} -M `echo $k |sed 's/__.*//g'`:${_M[$k]}"
+	done
+}
+
+function getP() {
+	for k in `${!_P[@]}`;do
+		newkey=`echo $k |sed 's/__.*//g'`
+		if [ "$newkey" == "bibliography"x ];then
+			_G[citeproc]="${_G[citeproc} --$newkey=${_P[$k]}"
+		else
+			_G[p]="${_G[p]} --$newkey=${_P[$k]}"
+		fi
+	done	
 }
 
 function getF() {
-
+	# lua filter
+	for item in `${_F[@]}`;do
+		_G[f]="${_G[f]} $item"
+	done
 }
 
 function getPandocParam() {
-
+	getV
+	getM
+	getP
+	getF
+	_G[pandoc-param]="${_G[crossref]} ${_G[citeproc]} ${_P[bibliography]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} -o ${_G[ofile]}.${_G[t]}"
 }

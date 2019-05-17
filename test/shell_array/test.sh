@@ -30,4 +30,5 @@ function printArray() {
 printArray test ${!test[@]}
 
 e=a
-echo ${test[$e]}
+test[a__1122]=A_B
+echo ${test[a__1122]}
