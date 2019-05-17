@@ -109,7 +109,7 @@ function initBib() {
 	fi	
 }
 
-function inibBody() {
+function initBody() {
 	cd ${_G[workdir]}
 	_G[body]=`ls *.md 2>/dev/null |grep -vE "$FRONTMATTER|$BACKMATTER"`
 	# 兼容性处理
@@ -117,8 +117,14 @@ function inibBody() {
 	
 	bodyfile=$1
 	[ "$bodyfile"x == ""x ] && bodyfile=${_G[defaultbody]}
-	if [ "${_G[body]"x == ""x ];then
+	if [ "${_G[body]}"x == ""x ];then
 		cp ${_G[exampledir]}/${_G[function]}/src/$bodyfile ${_G[workdir]}
+	fi
+}
+
+function initMakefile() {
+	if [ ! -f $CWD/Makefile ];then
+		cp ${_G[exampledir]}/${_G[function]}/Makefile $CWD
 	fi
 }
 
@@ -127,7 +133,7 @@ function userDefined() {
 	if [ "${_P[template]}"x != ""x ];then
 		cp -rfu $SCRIPTDIR/${_G[tpldir]}/${_P[template]}/* ${_G[build']} 2>/dev/null
 		cp -rfu $CWD/${_G[tpldir]}/${_P[template]}/* ${_G[build']} 2>/dev/null
-		[ ! -f $CWD/build/${_P[template]}.tpl ] && error "Template ${_P[template]} not found." && printGlobal && exit 1
+		[ ! -f $CWD/build/${_P[template]}.tpl ] && _error "Template ${_P[template]} not found."
 	fi
 	
 	cp -rfu $SCRIPTDIR/${_G[fontdir]}/* ${_G[build]}/${_G[fontdir]} 2>/dev/null
@@ -170,13 +176,20 @@ function _random() {
 }
 
 function setV() {
-	vKey="`echo $1 |sed 's/^--//g'|awk -F':' '{print $1}'`__`_random`"
+	vKey="`echo $1 |awk -F':' '{print $1}'`__`_random`"
 	_V[$vKey]=`echo $1|awk -F':' '{print $2}'`
 }
 
 function setM() {
-	mKey="`echo $1 |sed 's/^--//g'|awk -F':' '{print $1}'`__`_random`"
+	mKey="`echo $1 |awk -F':' '{print $1}'`__`_random`"
 	_M[$mKey]=`echo $1|awk -F':' '{print $2}'`
+}
+
+# 只允许重置 ext_ 开头的全局变量
+function setG() {
+	mKey="`echo $1 |awk -F':' '{print $1}'`"
+	echo $mKey |grep "^ext_" &>/dev/null && r=0 || r=1
+	[ $r -eq 0 ] && _G[$mKey]=`echo $1|awk -F':' '{print $2}'`
 }
 
 function setP() {
@@ -222,4 +235,8 @@ function getPandocParam() {
 	getP
 	getF
 	_G[pandoc-param]="${_G[crossref]} ${_G[citeproc]} ${_P[bibliography]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} -o ${_G[ofile]}.${_G[t]}"
+}
+
+function getXeLaTeXParam() {
+	_G[xelatex]="${_G[interaction]}"
 }

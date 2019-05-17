@@ -6,6 +6,16 @@ function getVar() {
 	[ "$val"x == ""x ] && eval $1=$2
 }
 
+function getArrayVal() {
+	[ $# -lt 3 ] && _error "getArrayVal error, param is $@"
+	cmd="echo \${$1[$2]}"
+	val=`eval $cmd`
+	if [ "$val"x == ""x ];then
+		setvalue="$1[$2]=$3"
+		eval $setvalue
+	fi
+}
+
 function note() {
 	echo -e "\033[43;34m[NOTE] $1\033[0m"
 }
@@ -19,6 +29,7 @@ function _warn() {
 }
 
 function _error() {
+	printGlobal
 	echo -e "\033[31m[ERRO] $1\033[0m"
 	exit 1
 }
@@ -27,7 +38,7 @@ function _error() {
 function printArray() {
 	arr=$1
 	shift
-	_info "Array $arr:"
+	_warn "Array $arr:"
 	for key in $@;do
 		val="value=\${$arr[$key]}"
 		eval $val
@@ -41,6 +52,13 @@ function printGlobal() {
 	printArray _V ${!_V[@]}
 	printArray _M ${!_M[@]}
 	printArray _F ${!_F[@]}
+}
+
+function loadModules() {
+	for item in `ls ${_G[moduledir]}`;do
+		ext=`basename $item`
+		source ${_G[moduledir]}/$item
+	done
 }
 
 function _loadExt() {
@@ -102,12 +120,12 @@ function trimHeader() {
 function clean() {
 	cd ${_G[build]}
 	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
-	release="/tmp/release-$rand"
+	release="/tmp/release-${_G[function]}-$rand"
 	mkdir $release
 	mv *.pdf *.epub *.html $release 2>/dev/null
 	[ ${_G[debug]} == "true" ] && mv *.tex *.bib $release 2>/dev/null
 	rm -fr *
-	mv $release/* .
+	mv $release/* . 2>/dev/null
 	rm -fr $release
 }
 
@@ -115,10 +133,25 @@ function compileStatus() {
 	status=$?
 	info "$1 Compile status: $status"
 	if [ $status -ne 0 ];then
-		error "$1 Compile status is not 0. Please Check. you may add -d or --trace to see more output"
+		_error "$1 Compile status is not 0. Please Check. you may add -d or --trace to see more output"
 	else
 		note "$1 Compile SUCCESSFUL"
 	fi
+}
+
+function func_ext() {
+	if [ "$1"x == "help"x ];then
+		if [ "$2"x != ""x ];then
+			${2}Help
+		fi
+	fi
+	
+	if [ "$1"x == "list"x ];then
+		for item in `ls $SCRIPTDIR/${_G[extdir]}`;do
+			echo $item
+		done
+	fi
+	exit 0	
 }
 
 function printhelp() {
@@ -139,6 +172,7 @@ function printhelp() {
 	echo -e "\t--imgdir    specify image dir name(default src/images)"
 	echo -e "\t-V key:val  same with pandoc -V option"
 	echo -e "\t-M key:val  same with pandoc -M option"
+	echo -e "\t-G key:val  change panbook global variable"
 	echo -e "\t--key=val   use original pandoc long option like this"
 	echo -e "\t--key       use original pandoc long boolean option like this"
 	echo -e "\t-d --debug  debug mode"

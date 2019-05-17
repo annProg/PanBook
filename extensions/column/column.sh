@@ -1,8 +1,13 @@
-_G[ext_column]="$SCRIPTDIR/extensions/column"
-_G[ext_column_filter]="${_G[ext_column]}/fenced_divs_columns.lua"
+_G[ext-column]="addColumns"
+getVar _G[ext-column-on] true
 
 function addColumns() {
-	if [ "$_V[column]"x == "true"x ];then
-		_F[column]="--lua-filter ${_G[ext_column_filter]}"
+	if [ "${_G[ext-column-on]}"x == "true"x ];then
+		_F[column]="--lua-filter ${_G[extdir]}/column/fenced_divs_columns.lua"
 	fi
+}
+
+function columnHelp() {
+	echo -e "\t-G ext-column-on:<true|false>    enable column(default true)"
+	exit 0
 }
