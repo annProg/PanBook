@@ -6,6 +6,7 @@ function addgrade() {
 	# 依赖add header功能
 	if [ "${_G[ext-grade-on]}"x == "true"x -a "${_G[ext-header-on]}"x == "true"x ];then
 		writeHeader ${_G[ext-grade-tex]}
+		_F[grade]="--lua-filter $SCRIPTDIR/${_G[extdir]}/grade/grade.lua"
 	fi
 }
 
