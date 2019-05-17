@@ -111,7 +111,7 @@ function initBib() {
 
 function initBody() {
 	cd ${_G[workdir]}
-	_G[body]=`ls *.md 2>/dev/null |grep -vE "$FRONTMATTER|$BACKMATTER"`
+	_G[body]=`ls *.md 2>/dev/null |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"`
 	# 兼容性处理
 	compatible
 	
@@ -119,6 +119,7 @@ function initBody() {
 	[ "$bodyfile"x == ""x ] && bodyfile=${_G[defaultbody]}
 	if [ "${_G[body]}"x == ""x ];then
 		cp ${_G[exampledir]}/${_G[function]}/src/$bodyfile ${_G[workdir]}
+		_G[body]=`ls *.md 2>/dev/null |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"`
 	fi
 }
 
@@ -160,45 +161,48 @@ function _random() {
 
 function setV() {
 	vKey="`echo $1 |awk -F':' '{print $1}'`__`_random`"
-	_V[$vKey]=`echo $1|awk -F':' '{print $2}'`
+	_V[$vKey]="`echo $1|awk -F':' '{print $2}'`"
 }
 
 function setM() {
 	mKey="`echo $1 |awk -F':' '{print $1}'`__`_random`"
-	_M[$mKey]=`echo $1|awk -F':' '{print $2}'`
+	_M[$mKey]="`echo $1|awk -F':' '{print $2}'`"
 }
 
 # 只允许重置 ext_ 开头的全局变量
 function setG() {
 	mKey="`echo $1 |awk -F':' '{print $1}'`"
 	echo $mKey |grep "^ext_" &>/dev/null && r=0 || r=1
-	[ $r -eq 0 ] && _G[$mKey]=`echo $1|awk -F':' '{print $2}'`
+	[ $r -eq 0 ] && _G[$mKey]="`echo $1|awk -F':' '{print $2}'`"
 }
 
 function setP() {
+	[ "$1"x == ""x ] && return
 	pKey="`echo $1|sed 's/^--//g'|awk -F'=' '{print $1}'`__`_random`"
 	pVal=`echo $1|awk -F'=' '{print $2}'`
-	[ "$pVal"x == ""x ] && pVal=true
+	[ "$pVal"x == ""x ] && pVal=""
 	_P[$pKey]=$pVal
 }
 
 function getV() {
-	for k in `${!_V[@]}`;do
+	for k in ${!_V[@]};do
 		_G[v]="${_G[v]} -V `echo $k |sed 's/__.*//g'`:${_V[$k]}"
 	done
 }
 
 function getM() {
-	for k in `${!_M[@]}`;do
+	for k in ${!_M[@]};do
 		_G[m]="${_G[m]} -M `echo $k |sed 's/__.*//g'`:${_M[$k]}"
 	done
 }
 
 function getP() {
-	for k in `${!_P[@]}`;do
+	for k in ${!_P[@]};do
 		newkey=`echo $k |sed 's/__.*//g'`
 		if [ "$newkey" == "bibliography"x ];then
 			_G[citeproc]="${_G[citeproc} --$newkey=${_P[$k]}"
+		elif [ "${_P[$k]}"x == ""x ];then
+			_G[p]="${_G[p]} --$newkey"
 		else
 			_G[p]="${_G[p]} --$newkey=${_P[$k]}"
 		fi
@@ -207,7 +211,7 @@ function getP() {
 
 function getF() {
 	# lua filter
-	for item in `${_F[@]}`;do
+	for item in ${_F[@]};do
 		_G[f]="${_G[f]} $item"
 	done
 }
@@ -217,7 +221,8 @@ function getPandocParam() {
 	getM
 	getP
 	getF
-	_G[pandoc-param]="${_G[crossref]} ${_G[citeproc]} ${_P[bibliography]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} -o ${_G[ofile]}.${_G[t]}"
+	_G[crossref]="${_G[crossref]} -M 'crossrefYaml=${_G[crs]}'"
+	_G[pandoc-param]="${_G[crossref]} ${_G[citeproc]} ${_P[bibliography]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
 function getXeLaTeXParam() {

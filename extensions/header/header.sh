@@ -3,7 +3,7 @@ getArrayVal _G "ext-header-on" true
 
 function addHeader() {
 	if [ "${_G[ext-header-on]}"x == "true"x ];then
-		_F[add-header]="--lua-filter ${_G[extdir]}/header/add-header.lua"
+		_F[add-header]="--lua-filter $SCRIPTDIR/${_G[extdir]}/header/add-header.lua"
 	fi
 }
 

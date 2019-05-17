@@ -131,7 +131,7 @@ function clean() {
 
 function compileStatus() {
 	status=$?
-	info "$1 Compile status: $status"
+	_info "$1 Compile status: $status"
 	if [ $status -ne 0 ];then
 		_error "$1 Compile status is not 0. Please Check. you may add -d or --trace to see more output"
 	else

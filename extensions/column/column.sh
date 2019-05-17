@@ -3,7 +3,7 @@ getArrayVal _G "ext-column-on" true
 
 function addColumns() {
 	if [ "${_G[ext-column-on]}"x == "true"x ];then
-		_F[column]="--lua-filter ${_G[extdir]}/column/fenced_divs_columns.lua"
+		_F[column]="--lua-filter $SCRIPTDIR/${_G[extdir]}/column/fenced_divs_columns.lua"
 	fi
 }
 

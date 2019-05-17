@@ -1,12 +1,12 @@
 _G[ext-listings]="addListings"
 getArrayVal _G "ext-listings-on" true
-getArrayVal _G "ext-listings-lstset" "${_G[extdir]}/listings/listings-set.tex"
+getArrayVal _G "ext-listings-lstset" "$SCRIPTDIR/${_G[extdir]}/listings/listings-set.tex"
 
 function addListings() {
 	# 依赖add header功能
-	if [ "${_G[ext-listings-on]}"x == "true"x && "${_G[ext-header-on]}"x == "true"x ];then
+	if [ "${_G[ext-listings-on]}"x == "true"x -a "${_G[ext-header-on]}"x == "true"x ];then
 		cat ${_G[ext-listings-lstset]} >> ${_G[header]}
-		_P[listings]=true
+		_P[listings]=""
 	fi
 }
 

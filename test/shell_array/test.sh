@@ -31,4 +31,6 @@ printArray test ${!test[@]}
 
 e=a
 test[a__1122]=A_B
-echo ${test[a__1122]}
+
+unset test[a__1122]
+echo ${!test[@]}
