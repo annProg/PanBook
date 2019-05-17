@@ -1,42 +1,9 @@
 #!/bin/bash
 
-function meta() {
-	cat $SCRIPTDIR/src/metadata.yaml
-}
-
-function parse_yaml {
-   # from: https://stackoverflow.com/questions/5014632/how-can-i-parse-a-yaml-file-from-a-linux-shell-script
-   local prefix=$2
-   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
-   sed -r 's/\s+#.*$//g' $1 |sed 's/- /item: /g'|sed -ne "s|^\($s\):|\1|" \
-        -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
-        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p" |
-   awk -F$fs '{
-      indent = length($1)/2;
-      vname[indent] = $2;
-      for (i in vname) {if (i > indent) {delete vname[i]}}
-      if (length($3) > 0) {
-         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
-      }
-   }'
-}
-
-function parseMeta() {
-	# 仅支持key全为字母
-	source <(parse_yaml $METADATA)
-	source <(parse_yaml $METADATA |grep "_item=" |sed 's/_item//' |tr -d '"' |awk -F'=' '{print $1"=\""$2"`[ \"$"$1"\"x != \"\"x ] && echo \", $"$1"\"`\""}')
-}
-
-function setPandocVar() {
-	echo "$PANDOCVARS" |grep -w "$1" &>/dev/null || PANDOCVARS="$PANDOCVARS -V $1=$2"
-}
-
-
 # 保存网络图片至本地
 function saveimg() 
 {
-	cd $IMGDIR
+	cd ${_G[imgdir]}
 	for item in `ls $WORKDIR/*.md`;do
 		for url in `grep -E "^\!\[.*?\]\(http(s)?://.*\)" $item |awk -F"(" '{print $2}' |tr -d ')'`;do
 			wget -m -np $url
@@ -44,7 +11,7 @@ function saveimg()
 			echo $localpath |grep -E "\.gif$" && r=0 || r=1
 			if [ $r -eq 0 ];then
 				new=`echo $localpath |sed -r "s/\.gif$//g"`
-				$CMD_CONVERT $localpath $new.eps
+				${_G[convert]} $localpath $new.eps
 				mv $new-0.eps $new.eps 2>/dev/null
 				rm -f $new-*.eps
 			fi
@@ -55,10 +22,10 @@ function saveimg()
 
 function toeps()
 {
-	cd $IMGDIR
+	cd ${_G[imgdir]}
 	for item in `ls *.$1`;do
 		new=`echo $item |sed -r "s/.$1$//g"`
-		$CMD_CONVERT $item $new.eps
+		${_G[convert]} $item $new.eps
 		mv $new-0.eps $new.eps 2>/dev/null
 		rm -f $new-*.eps
 	done
@@ -73,21 +40,10 @@ function eps()
 
 function pdf2jpg()
 {
-	cd $BUILD
+	cd ${_G[build]}
 	for id in $BODY $FRONTMATTER $BACKMATTER;do
 		sed -i -r 's/(!\[.*?\]\(.*?)(\.pdf\))/\1.jpg)/g' $id
 	done
-}
-
-
-function compileStatus() {
-	status=$?
-	info "$1 Compile status: $status"
-	if [ $status -ne 0 ];then
-		error "$1 Compile status is not 0. Please Check. you may add -d or --trace to see more output"
-	else
-		note "$1 Compile SUCCESSFUL"
-	fi
 }
 
 # 兼容不规范源码
@@ -127,56 +83,67 @@ function compatible()
 	fi
 }
 
+function initMetadataFile() {
+	if [ ! -f ${_P[metadata-file]} ];then
+		if [ "$1"x == "true"x ];then
+			cp ${_G[exampledir]}/${_G[function]}/src/metadata.yaml ${_P[metadata-file]}
+		fi
+	fi
+}
+
+# 初始化 frontmatter 和 backmatter
+function initMatter() {
+	$# -lt 1 && return 0
+	if [ ! -f ${_G[workdir]}/${_G[$1]} ];then
+		if [ "$2"x == "true"x ];then
+			cp ${_G[exampledir]}/${_G[function]}/src/${_G[$1]} ${_G[workdir]}/${_G[$1]}
+		fi
+	fi
+}
+
+function initBib() {
+	if [ ! -f ${_P[bibliography]} ];then
+		if [ "$1"x == "true"x ];then
+			cp ${_G[exampledir]}/${_G[function]}/src/bibliography.bib ${_P[bibliography]}
+		fi
+	fi	
+}
+
+function inibBody() {
+	_G[body]=`ls *.md 2>/dev/null |grep -vE "$FRONTMATTER|$BACKMATTER"`
+	# 兼容性处理
+	compatible
+	
+	bodyfile=$1
+	[ "$bodyfile"x == ""x ] && bodyfile=${_G[defaultbody]}
+	if [ "${_G[body]"x == ""x ];then
+		cp ${_G[exampledir]}/${_G[function]}/src/$bodyfile ${_G[workdir]}
+	fi
+}
+
+# 用户定义的模板、字体复制到 build 目录
+function userDefined() {
+	if [ "${_P[template]}"x != ""x ];then
+		cp -rfu $SCRIPTDIR/${_G[tpldir]}/${_P[template]}/* ${_G[build']} 2>/dev/null
+		cp -rfu $CWD/${_G[tpldir]}/${_P[template]}/* ${_G[build']} 2>/dev/null
+		[ ! -f $CWD/build/${_P[template]}.tpl ] && error "Template ${_P[template]} not found." && printGlobal && exit 1
+	fi
+	
+	cp -rfu $SCRIPTDIR/${_G[fontdir]}/* ${_G[build]}/${_G[fontdir]} 2>/dev/null
+	cp -rfu $CWD/${_G[fontdir]}/* ${_G[build]}/${_G[fontdir]} 2>/dev/null
+
+	# 此时还未复制书籍源码，build目录中的 template或者font中包含的 .md 文件应该被删除
+	rm -f ${_G[build]}/*.md
+}
 
 function init()
 {
-	cd $WORKDIR
-
-	# 模板, 支持用户自定义模板
-	[ "$TPL"x != ""x ] && [ -d $SCRIPTDIR/templates/$TPL ] && cp -rfu $SCRIPTDIR/templates/$TPL/* $BUILD
-	[ "$TPL"x != ""x ] && [ -d $cwd/templates/$TPL ] && cp -rfu $cwd/templates/$TPL/* $BUILD 2>/dev/null
-	
-	# 字体
-	cp -rfu $SCRIPTDIR/fonts $BUILD
-	[ -d $cwd/fonts ] && cp -rfu $cwd/fonts/* $BUILD/fonts/ 2>/dev/null
-	
-	# 此时还未复制书籍源码，build目录中的 template或者font中包含的 .md 文件应该被删除
-	rm -f $BUILD/*.md
-	
-	# 文件名规范
-	FRONTMATTER="frontmatter.md"
-	BACKMATTER="backmatter.md"
-	chapters=`ls *.md 2>/dev/null |grep -vE "$FRONTMATTER|$BACKMATTER"`
-	BODY="$chapters"
-	
-	# 前言和后记部分
-	[ ! -f $FRONTMATTER ] && touch $FRONTMATTER
-	[ ! -f $BACKMATTER ] && touch $BACKMATTER
-	[ ! -f $BIB ] && touch $BIB
-	
-	# 支持不生成默认metadata.yaml
-	if [ "$1"x != "nometa"x ];then
-		[ ! -f metadata.yaml ] && meta > metadata.yaml
-	fi
-	
-	if [ "$BODY"x == ""x ];then
-		error "No markdown source file"
-	fi
-	
-	[ "$DEBUG"x = "true"x ] && highlightStyle=(tango)
-	
 	# 复制$SRC目录下资源文件到build目录
-	cp -rf $WORKDIR/* $BUILD
-	cd $BUILD
+	cp -rf ${_G[workdir]}/* ${_G[build]}
+	cd ${_G[build]}
 	
 	# 清空$HEADERS 以后都是追加
-	echo > $HEADERS
-	
-	info "Template is: $TPL"
-	templateError
-	
-	# 兼容性处理
-	compatible
+	echo > ${_G[header]}	
 }
 
 function setStyle() {
@@ -194,4 +161,32 @@ function setStyle() {
 	fi
 	
 	_G[selected-style]="${SELECTED[@]}"
+}
+
+function setV() {
+
+}
+
+function setM() {
+
+}
+
+function setF() {
+
+}
+
+function getM() {
+
+}
+
+function getV() {
+
+}
+
+function getF() {
+
+}
+
+function getPandocParam() {
+
 }

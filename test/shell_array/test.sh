@@ -29,4 +29,5 @@ function printArray() {
 
 printArray test ${!test[@]}
 
-echo ${test[d-d]}
+e=a
+echo ${test[$e]}

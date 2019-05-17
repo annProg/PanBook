@@ -99,12 +99,6 @@ function trimHeader() {
 	sed -i -r '/^[\s\t ]*$|^%/d' ${_G[header]}
 }
 
-function checkTemplate() {
-	# 未指定template时不做判断
-	[ "${_P[template]}"x == ""x ] && return
-	[ ! -f $CWD/build/${_P[template]}.tpl ] && error "Template ${_P[template]} not found." && printGlobal && exit 1
-}
-
 function clean() {
 	cd ${_G[build]}
 	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
@@ -115,6 +109,16 @@ function clean() {
 	rm -fr *
 	mv $release/* .
 	rm -fr $release
+}
+
+function compileStatus() {
+	status=$?
+	info "$1 Compile status: $status"
+	if [ $status -ne 0 ];then
+		error "$1 Compile status is not 0. Please Check. you may add -d or --trace to see more output"
+	else
+		note "$1 Compile SUCCESSFUL"
+	fi
 }
 
 function printhelp() {

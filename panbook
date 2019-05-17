@@ -31,6 +31,7 @@ _G=(
 	[crs]=$SCRIPTDIR/crs/zh-CN.yaml                                   # 默认crs配置文件（需要在获取参数后重置）
 	[ofile]=`echo $CWD |awk -F '/' '{print $NF}'`                     # 默认输出文件名
 	[build]=$CWD/build                                                # 默认编译目录
+	[exampledir]=$SCRIPTDIR/libs/examples
 	[fontdir]=fonts
 	[header]=$CWD/build/add-header.tex                                # 默认header文件名
 	[extdir]=extensions                                               # 扩展目录
@@ -42,8 +43,12 @@ _G=(
 	[stylethesis]=styles/thesis
 	[scriptdir]=$SCRIPTDIR
 	[cwd]=$CWD
+	[convert]=convert
 	[debug]=false
 	[trace]=false
+	[frontmatter]=frontmatter.md                                      # 前言部分单独放到一个文件中是考虑到前言应在目录前，通过 -B 参数引入，才能实现
+	[backmatter]=backmatter.md
+	[defaultbody]=100-body.md
 )
 
 _P=(
@@ -51,7 +56,7 @@ _P=(
 	[listings]=true
 	[cls]=$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl              # 默认cls文件路径（需要在获取参数后重置）
 	[bibliography]=$CWD/src/bibliography.bib                          # 默认bibliography路径（需要在获取参数后删除）
-	[metadata-file]=$CWD/src/metadata.yaml                                 #默认metadata.yaml（需要在获取参数后重置）	
+	[metadata-file]=$CWD/src/metadata.yaml                            #默认metadata.yaml（需要在获取参数后重置）	
 )
 _V=()
 _M=()
@@ -115,7 +120,7 @@ fixDir
 mkDir
 
 if [ "`type -t func_${_G[function]}`"x == "function"x ];then
-	[ "$TRACE"x == "true"x ] && set -x
+	[ "${_G[trace]}"x == "true"x ] && set -x
 	func_${_G[function]}
 else
 	error "Function: func_${_G[function]}  not defined"
