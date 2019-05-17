@@ -119,7 +119,7 @@ function initBody() {
 	[ "$bodyfile"x == ""x ] && bodyfile=${_G[defaultbody]}
 	if [ "${_G[body]}"x == ""x ];then
 		cp ${_G[exampledir]}/${_G[function]}/src/$bodyfile ${_G[workdir]}
-		_G[body]=`ls *.md 2>/dev/null |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"`
+		_G[body]=$bodyfile
 	fi
 }
 

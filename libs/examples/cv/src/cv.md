@@ -24,13 +24,13 @@ nocite: |
 
 # \faGraduationCap 教育经历
 
-### 大学 {date="2019.5 - 2023.5" title="计算机科学与技术" city="北京" score="成绩不好"}
+### 大学 [2019.5 - 2023.5]{.date}  [计算机科学与技术]{.title}  [北京]{.tag}  [成绩不好]{.desc}
 
 - 一些说明
 
 # \faUsers 工作经验
 
-### 公司 {date="2026.7 - 2027.7" title="软件工程师" city="北京"}
+### 公司 [2026.7 - 2027.7]{.date}  [软件工程师]{.title}  [北京]{.tag}
 
 - 一些说明
 
@@ -64,12 +64,12 @@ nocite: |
 
 :::: {.cvcolumns}
 ::: {.cvcolumn cat="数据库"}
-- MySQL
-- InfluxDB
+\grade5 MySQL \
+\grade3 InfluxDB \
 :::
 ::: {.cvcolumn cat="编程"}
-- Shell
-- Haskell
+\grade4 Shell \
+\grade3 Haskell \
 :::
 ::::
 
