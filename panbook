@@ -73,6 +73,7 @@ _P=(
 	[bibliography]=$CWD/src/bibliography.bib                          # 默认bibliography路径（需要在获取参数后删除）
 	[metadata-file]=$CWD/src/metadata.yaml                            #默认metadata.yaml（需要在获取参数后重置）	
 	[pdf-engine]=xelatex
+	[number-sections]=true
 )
 _V=()
 _M=()

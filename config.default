@@ -1,3 +1,0 @@
-PDF_OPTIONS="-t latex+smart --toc --number-sections --pdf-engine=xelatex --listings"
-HTML_OPTIONS="-t html+smart --toc --highlight-style=$theme"
-EPUB_OPTIONS="-t epub3+smart --number-sections --highlight-style=$theme"
