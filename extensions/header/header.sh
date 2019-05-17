@@ -1,5 +1,5 @@
 _G[ext-header]="addHeader"
-getVar _G[ext-header-on] true
+getArrayVal _G "ext-header-on" true
 
 function addHeader() {
 	if [ "${_G[ext-header-on]}"x == "true"x ];then

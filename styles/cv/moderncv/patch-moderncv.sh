@@ -1,32 +1,34 @@
 #!/bin/bash
 
-note "use -E style=(classic|casual|oldstyle|banking|fancy) default classic"
-note "use -E color=(blue|orange|green|red|purple|grey|black|burgundy) default blue"
-note "use -E fontsize=(10pt|11pt|12pt) default 11pt"
-note "use -E size=(a4paper|letterpaper|a5paper|legalpaper|executivepaper|landscape) default a4paper"
-note "use -E fontfamily=(roman|sans) default sans"
+note "use -M style=(classic|casual|oldstyle|banking|fancy) default classic"
+note "use -M color=(blue|orange|green|red|purple|grey|black|burgundy) default blue"
+note "use -M fontsize=(10pt|11pt|12pt) default 11pt"
+note "use -M size=(a4paper|letterpaper|a5paper|legalpaper|executivepaper|landscape) default a4paper"
+note "use -M fontfamily=(roman|sans) default sans"
 
-setPandocVar CJKmainfont "SimSun"
-setPandocVar CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
+getArrayVal _V CJKmainfont "SimSun"
+getArrayVal _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
 
-getVar style "classic"
-getVar color "blue"
-getVar fontsize "11pt"
-getVar size "a4paper"
-getVar fontfamily "sans"
+getArrayVal _M style "classic"
+getArrayVal _M color "blue"
+getArrayVal _M fontsize "11pt"
+getArrayVal _M size "a4paper"
+getArrayVal _M fontfamily "sans"
 
-# 设置 -M style=$style 用于在Lua filter中判断选择的style
-addOptions="$addOptions -V style=$style -V color=$color -V fontsize=$fontsize -V size=$size -V fontfamily=$fontfamily -M style=$style"
+# 自定义filter
+_F[style-${_G[function]}-${_G[style]}]="--lua-filter ${_G[style]}.lua"
 
 # casual样式个人信息在底部，和foot有冲突，加vspace处理
-if [ "$style"x == "casual"x ];then
-	addOptions="$addOptions -V vspace=0.7cm -V geometry=top=2cm,bottom=2cm,left=2cm,right=2cm,includefoot"
+if [ "${_M[style]}"x == "casual"x ];then
+	_V[vspace]="0.7cm"
+	_V[geometry]="top=2cm,bottom=2cm,left=2cm,right=2cm,includefoot"
 fi
 
-OUTPUT="$BUILD/$ofile-cv-$t-$style-$color.tex"
+# 修改文件名，区分cv style和 color
+_G[ofile]=${_G[ofile]}-${_M[style]}-${_M[color]}
 
-note "cv style is $style"
-note "cv color is $color"
+note "cv style is ${_M[style]}"
+note "cv color is ${_M[color]}"
 
 note "This Template support the following variables, they can set via metadata or -V option\n
 \tname                 Your name

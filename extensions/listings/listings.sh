@@ -1,6 +1,6 @@
 _G[ext-listings]="addListings"
-getVar _G[ext-listings-on] true
-getVar _G[ext-listings-lstset] "${_G[extdir]}/listings/listings-set.tex"
+getArrayVal _G "ext-listings-on" true
+getArrayVal _G "ext-listings-lstset" "${_G[extdir]}/listings/listings-set.tex"
 
 function addListings() {
 	# 依赖add header功能

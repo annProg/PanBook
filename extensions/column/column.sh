@@ -1,5 +1,5 @@
 _G[ext-column]="addColumns"
-getVar _G[ext-column-on] true
+getArrayVal _G "ext-column-on" true
 
 function addColumns() {
 	if [ "${_G[ext-column-on]}"x == "true"x ];then

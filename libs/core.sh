@@ -153,23 +153,6 @@ function init()
 	echo > ${_G[header]}	
 }
 
-function setStyle() {
-	List=($@)	
-	SELECTED=(${_G[style]})
-	
-	if [ "${_G[style]}"x == "R"x ];then
-		len=`echo ${#List[@]}`
-		index=$(($RANDOM%$len))	
-		SELECTED=(${List[$index]})
-	fi
-		
-	if [ "${_G[style]}"x == "A"x ];then
-		SELECTED=`echo ${List[@]}`
-	fi
-	
-	_G[selected-style]="${SELECTED[@]}"
-}
-
 # 随机数，加随机数是处理repeat for multiple options的情况
 function _random() {
 	echo $(($RANDOM$RANDOM$RANDOM%1000000))
