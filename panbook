@@ -9,6 +9,7 @@ source $SCRIPTDIR/libs/helper.sh
 # recon2 方案
 # 1. 使用全局数组存储 pandoc 选项，pandoc var(-V)， pandoc meta(-M)，pandoc filter（--lua-filter）以及panbook需要的变量
 #    1.1 通过--option=value形式传入的panbook不能识别的参数存储到 pandoc var数组中，扔给pandoc（需要处理repeat for multiple options的情况）
+#    1.2 repeat处理方式为：传参时结尾加 __ , 如 --bibliography__=abc.bib 表示这是一个repeat参数
 # 2. panbook选项及每个模块的patch可以修改，新增或删除这些全局数组的元素
 # 3. 新增函数用于拼接参数，执行pandoc时调用
 # 4. 设计扩展机制：style patch修改参数，执行每个扩展目录下的脚本
@@ -78,7 +79,6 @@ _P=(
 _V=()
 _M=()
 _F=()
-
 
 # 引入函数和模块
 source $SCRIPTDIR/libs/core.sh

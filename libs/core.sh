@@ -159,26 +159,33 @@ function _random() {
 	echo $(($RANDOM$RANDOM$RANDOM%1000000))
 }
 
+function _checkKey() {
+	echo $1 |grep "__$" &>/dev/null && echo "$1`_random`" || echo $1
+}
+
 function setV() {
-	vKey="`echo $1 |awk -F':' '{print $1}'`__`_random`"
+	vKey="`echo $1 |awk -F':' '{print $1}'`"
+	vKey=`_checkKey $vKey`
 	_V[$vKey]="`echo $1|awk -F':' '{print $2}'`"
 }
 
 function setM() {
-	mKey="`echo $1 |awk -F':' '{print $1}'`__`_random`"
+	mKey="`echo $1 |awk -F':' '{print $1}'`"
+	mKey=`_checkKey $mKey`
 	_M[$mKey]="`echo $1|awk -F':' '{print $2}'`"
 }
 
 # 只允许重置 ext_ 开头的全局变量
 function setG() {
-	mKey="`echo $1 |awk -F':' '{print $1}'`"
-	echo $mKey |grep "^ext_" &>/dev/null && r=0 || r=1
-	[ $r -eq 0 ] && _G[$mKey]="`echo $1|awk -F':' '{print $2}'`"
+	gKey="`echo $1 |awk -F':' '{print $1}'`"
+	echo $gKey |grep "^ext_" &>/dev/null && r=0 || r=1
+	[ $r -eq 0 ] && _G[$gKey]="`echo $1|awk -F':' '{print $2}'`"
 }
 
 function setP() {
 	[ "$1"x == ""x ] && return
-	pKey="`echo $1|sed 's/^--//g'|awk -F'=' '{print $1}'`__`_random`"
+	pKey="`echo $1|sed 's/^--//g'|awk -F'=' '{print $1}'`"
+	pKey=`_checkKey $pKey`
 	pVal=`echo $1|awk -F'=' '{print $2}'`
 	[ "$pVal"x == ""x ] && pVal=""
 	_P[$pKey]=$pVal
@@ -222,7 +229,7 @@ function getPandocParam() {
 	getP
 	getF
 	_G[crossref]="${_G[crossref]} -M 'crossrefYaml=${_G[crs]}'"
-	_G[pandoc-param]="${_G[crossref]} ${_G[citeproc]} ${_P[bibliography]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
+	_G[pandoc-param]="${_G[crossref]} ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
 function getXeLaTeXParam() {
