@@ -17,7 +17,7 @@ function saveimg()
 			fi
 		done
 	done
-	cd $cwd
+	cd $CWD
 }
 
 function toeps()
@@ -29,7 +29,7 @@ function toeps()
 		mv $new-0.eps $new.eps 2>/dev/null
 		rm -f $new-*.eps
 	done
-	cd $cwd
+	cd $CWD
 }
 
 # 转换为eps格式
@@ -41,7 +41,7 @@ function eps()
 function pdf2jpg()
 {
 	cd ${_G[build]}
-	for id in $BODY $FRONTMATTER $BACKMATTER;do
+	for id in ${_G[body]} ${_G[frontmatter]} ${_G[backmatter]};do
 		sed -i -r 's/(!\[.*?\]\(.*?)(\.pdf\))/\1.jpg)/g' $id
 	done
 }
@@ -110,6 +110,7 @@ function initBib() {
 }
 
 function inibBody() {
+	cd ${_G[workdir]}
 	_G[body]=`ls *.md 2>/dev/null |grep -vE "$FRONTMATTER|$BACKMATTER"`
 	# 兼容性处理
 	compatible
