@@ -170,34 +170,6 @@ $endif$
 % Toggle how many values in footer
 \fullfooter
 
-\makeatletter
-\newcommand{\grade}[1]{%
-	\ifthenelse{\equal{#1}{1}}{{\small{\color{black}\faStar\faStarO\faStarO\faStarO\faStarO}}}{}
-	\ifthenelse{\equal{#1}{2}}{{\small{\color{black}\faStar\faStar\faStarO\faStarO\faStarO}}}{}
-	\ifthenelse{\equal{#1}{3}}{{\small{\color{black}\faStar\faStar\faStar\faStarO\faStarO}}}{}
-	\ifthenelse{\equal{#1}{4}}{{\small{\color{black}\faStar\faStar\faStar\faStar\faStarO}}}{}
-	\ifthenelse{\equal{#1}{5}}{{\small{\color{black}\faStar\faStar\faStar\faStar\faStar}}}{}
-}
-
-\usepackage{tikz}
-\definecolor{backColor}{RGB}{200,200,200}% grey
-\renewcommand{\grade}[1]{%
-    \begin{tikzpicture}
-    \clip (1em-.4em,-.35em) rectangle (5em +.5em ,0.7em);
-    \foreach \x in {1,2,...,5}{
-        \path[{fill=backColor}] (\x em,0) circle (.35em);
-    }
-    \begin{scope}
-    \clip (1em-.4em,-.35em) rectangle (#1em +.5em ,0.7em);
-    \foreach \x in {1,2,...,5}{
-        \path[{fill=black}] (\x em,0) circle (.35em);
-    }
-    \end{scope}
-
-    \end{tikzpicture}%
-}
-\makeatother
-
 \begin{document}
 %\begin{coverletter}
 %coverletter here

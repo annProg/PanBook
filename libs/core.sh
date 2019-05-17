@@ -175,10 +175,10 @@ function setM() {
 	_M[$mKey]="`echo $1|awk -F':' '{print $2}'`"
 }
 
-# 只允许重置 ext_ 开头的全局变量
+# 只允许重置 ext- 开头的全局变量
 function setG() {
 	gKey="`echo $1 |awk -F':' '{print $1}'`"
-	echo $gKey |grep "^ext_" &>/dev/null && r=0 || r=1
+	echo $gKey |grep "^ext\-" &>/dev/null && r=0 || r=1
 	[ $r -eq 0 ] && _G[$gKey]="`echo $1|awk -F':' '{print $2}'`"
 }
 

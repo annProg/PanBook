@@ -117,6 +117,11 @@ function trimHeader() {
 	sed -i -r '/^[\s\t ]*$|^%/d' ${_G[header]}
 }
 
+function writeHeader() {
+	echo "" >> ${_G[header]}
+	cat $1 >> ${_G[header]}
+}
+
 function clean() {
 	cd ${_G[build]}
 	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`

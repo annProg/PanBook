@@ -5,7 +5,7 @@ getArrayVal _G "ext-listings-lstset" "$SCRIPTDIR/${_G[extdir]}/listings/listings
 function addListings() {
 	# 依赖add header功能
 	if [ "${_G[ext-listings-on]}"x == "true"x -a "${_G[ext-header-on]}"x == "true"x ];then
-		cat ${_G[ext-listings-lstset]} >> ${_G[header]}
+		writeHeader ${_G[ext-listings-lstset]}
 		_P[listings]=""
 	fi
 }

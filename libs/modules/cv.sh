@@ -43,8 +43,9 @@ function func_cv() {
 	${_G[ext-header]}
 	${_G[ext-listings]}
 	${_G[ext-column]}
-			
-	trimHeader		
+	${_G[ext-grade]}
+
+	trimHeader
 	getPandocParam
 	getXeLaTeXParam
 	pandoc ${_G[pandoc-param]}

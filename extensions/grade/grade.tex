@@ -1,0 +1,22 @@
+\makeatletter
+\@ifpackageloaded{tikz}{}{\usepackage{tikz}}
+\@ifpackageloaded{xcolor}{}{\usepackage{xcolor}}
+\@ifundefinedcolor{color1}{\definecolor{color1}{rgb}{0.22,0.45,0.70}}
+
+\definecolor{backColor}{RGB}{200,200,200}% grey
+\newcommand{\grade}[1]{%
+    \begin{tikzpicture}
+    \clip (1em-.4em,-.35em) rectangle (5em +.5em ,0.7em);
+    \foreach \x in {1,2,...,5}{
+        \path[{fill=backColor}] (\x em,0) circle (.35em);
+    }
+    \begin{scope}
+    \clip (1em-.4em,-.35em) rectangle (#1em +.5em ,0.7em);
+    \foreach \x in {1,2,...,5}{
+        \path[{fill=color1}] (\x em,0) circle (.35em);
+    }
+    \end{scope}
+
+    \end{tikzpicture}%
+}
+\makeatother
