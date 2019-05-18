@@ -1,10 +1,10 @@
 ---
 name: 姓\ 名        # use backslash to escape space
-title: 简历制作工程师
+title: 简历排版工程师
 homepage: baidu.com
 showdate: true
 address: 本星系群银河系太阳系地球 - 中国北京
-quote: 提供付费简历制作服务，费用 ￥10/份。支持常用社交账号图标显示，支持`GB/T 7714-2005`格式出版物列表，支持`Cover Letter`。欢迎微信（二维码）咨询
+quote: 提供付费简历排版服务，费用 ￥10/份。支持常用社交账号图标显示，支持`GB/T 7714-2005`格式出版物列表，支持`Cover Letter`。欢迎微信（二维码）咨询
 photo: images/photo.png
 extrainfo: 不需要的项目删除即可
 mobile: 13000001111
