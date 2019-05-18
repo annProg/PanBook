@@ -127,11 +127,13 @@ function clean() {
 	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
 	release="/tmp/release-${_G[function]}-$rand"
 	mkdir $release
-	mv *.pdf *.epub *.html $release 2>/dev/null
+	# 有文件不存在时会返回 1，导致Makefile有报错，这里用true忽略错误
+	mv *.pdf *.epub *.html $release 2>/dev/null;true
 	[ ${_G[debug]} == "true" ] && mv *.tex *.bib $release 2>/dev/null
 	rm -fr *
 	mv $release/* . 2>/dev/null
 	rm -fr $release
+	return 0
 }
 
 function compileStatus() {
