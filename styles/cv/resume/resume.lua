@@ -62,6 +62,8 @@ function cvlist(list)
 		for i,val in pairs(v[1].content) do
 			if val.t == "Span" and val.attr.classes[1] == "cat" then
 				table.insert(item.content, pandoc.RawInline("latex", "\\textbf{" .. getText(val.content) .. ": }"))
+			elseif val.t == "Span" and val.attr.classes[1] == "comment" then
+				table.insert(item.content, pandoc.RawInline("latex", "\\hfill{" .. getText(val.content) .. "}"))
 			else
 				table.insert(item.content, val)
 			end
@@ -194,6 +196,7 @@ function cventry(el)
 		pandoc.RawInline("latex", "\n")
 	})
 end
+
 
 function Pandoc(doc)
 	local nblocks = {}
