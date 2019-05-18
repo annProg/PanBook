@@ -15,7 +15,7 @@ moderncv-styles:
 moderncv-all:
 	for style in `echo $(ALL_STYLE)`;do \
 		for color in `echo $(ALL_COLOR)`;do \
-			panbook cv -M style:$$style -M color:$$color $(CJK); \
+			panbook cv -M style:$$style -M color:$$color -V onlinecv: -V showdate: $(CJK); \
 		done \
 	done
 resume:
