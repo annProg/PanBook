@@ -4,7 +4,7 @@ title: 简历制作工程师
 homepage: baidu.com
 showdate: true
 address: 本星系群银河系太阳系地球 - 中国北京
-quote: 提供付费简历制作服务，费用 ￥10/份。支持常用社交账号图标显示，支持GB/T 7714-2005格式出版物列表，支持Cover Letter。欢迎微信（二维码）咨询
+quote: 提供付费简历制作服务，费用 ￥10/份。支持常用社交账号图标显示，支持`GB/T 7714-2005`格式出版物列表，支持`Cover Letter`。欢迎微信（二维码）咨询
 photo: images/photo.png
 extrainfo: 不需要的项目删除即可
 mobile: 13000001111
@@ -43,8 +43,8 @@ nocite: |
 
 # \faCogs 技能
 	  
-- [英语]{.cat} 四级，六级，专八，笔译，口译，TOEFL120，IELTS8 [\grade5]{.comment}
-- [编程]{.cat} Java，C，Lisp，Haskell，PHP，Javascript，Golang [\grade1]{.comment}
+- [英语]{.cat} 四级，六级，专八，笔译，口译，`TOEFL`120，`IELTS`8 [\grade5]{.comment}
+- [编程]{.cat} `Java`，`C`，`Lisp`，`Haskell`，`PHP`，`Javascript`，`Golang` [\grade1]{.comment}
 
 # \faStarHalfO 技能
 
