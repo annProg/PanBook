@@ -124,7 +124,7 @@ function writeHeader() {
 	cat $1 >> ${_G[header]}
 }
 
-function clean() {
+function func_clean() {
 	cd ${_G[build]}
 	rand=`echo $RANDOM$RANDOM$RANDOM$RANDOM`
 	release="/tmp/release-${_G[function]}-$rand"
@@ -173,6 +173,7 @@ function printhelp() {
 	echo -e "\thelp        print help info"
 	echo -e "\tsaveimg     save image url to local"
 	echo -e "\teps         convert gif to eps"
+	echo -e "\tclean       clean build dir"
 	echo -e "  Available OPTIONS:"
 	echo -e "\t--style     specify a style"
 	echo -e "\t--crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)"

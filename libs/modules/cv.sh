@@ -60,7 +60,5 @@ function func_cv() {
 	sed -i '/^$/d' ${_G[ofile]}.${_G[t]}
 	
 	xelatex ${_G[xelatex]} -output-directory=${_G[build]} ${_G[ofile]}.${_G[t]}
-	compileStatus ${_G[function]}
-	
-	clean
+	compileStatus ${_G[function]}	
 }
