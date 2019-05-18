@@ -8,7 +8,7 @@ COLOR ?= blue
 ALL_STYLE=classic banking casual oldstyle fancy
 ALL_COLOR=blue orange green red purple grey black burgundy
 
-all: moderncv-all-style-color resume tmr png online
+all: moderncv-all-style resume tmr png online clean
 
 
 moderncv-all-style:
@@ -48,3 +48,6 @@ online:
 	scp -P $(PORT) build/cv-cv-moderncv-*-blue.pdf $(USER)@$(SERVER):$(DIR)
 	scp -P $(PORT) build/cv-cv-resume.pdf $(USER)@$(SERVER):$(DIR)
 	scp -P $(PORT) build/cv-cv-tmr.pdf $(USER)@$(SERVER):$(DIR)
+	
+clean:
+	panbook clean	

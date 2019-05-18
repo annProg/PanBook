@@ -5,7 +5,7 @@ ALL_COLOR=blue orange green red purple grey black burgundy
 CJKMAIN=CJKmainfont:思源宋体
 CJKOPT=CJKoptions:BoldFont=思源黑体,ItalicFont=KaiTi,SmallCapsFont=微软雅黑
 CJK=-V $(CJKMAIN) -V $(CJKOPT)
-all: moderncv-styles resume tmr
+all: moderncv-all resume tmr clean
 moderncv:
 	panbook cv -M style:$(STYLE) -M color:$(COLOR) $(CJK)
 moderncv-styles:
@@ -28,3 +28,6 @@ png:
 	cd build;for pdf in `ls cvdemo-cv-*.pdf`; do \
 		pdftocairo -png $$pdf; \
 	done	
+	
+clean:
+	panbook clean
