@@ -2,7 +2,7 @@ STYLE ?= classic
 COLOR ?= burgundy
 ALL_STYLE=classic banking casual oldstyle fancy
 ALL_COLOR=blue orange green red purple grey black burgundy
-all: moderncv-styles resume
+all: moderncv-styles resume tmr
 moderncv:
 	panbook cv -M style:$(STYLE) -M color:$(COLOR)
 moderncv-styles:
@@ -17,3 +17,5 @@ moderncv-all:
 	done
 resume:
 	panbook cv --style=resume
+tmr:
+	panbook cv --style=tmr	
