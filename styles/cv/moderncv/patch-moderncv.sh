@@ -24,8 +24,6 @@ fi
 # 修改文件名，区分cv style和 color
 _G[ofile]=${_G[ofile]}-${_M[style]}-${_M[color]}
 
-_P[template]="moderncv.tpl"
-
 note "cv style is ${_M[style]}"
 note "cv color is ${_M[color]}"
 

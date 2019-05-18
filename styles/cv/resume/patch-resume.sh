@@ -6,8 +6,6 @@ getArrayVal _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=
 # 启用coverletter
 ${_G[ext-coverletter]}
 
-_P[template]="resume.tpl"
-
 note "This Template support the following variables, they can set via metadata or -V option\n
 \tname                 Your name
 \ttitle                Your title

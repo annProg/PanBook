@@ -40,7 +40,9 @@ function func_cv() {
 	[ -f patch-${_G[style]}.sh ] && source patch-${_G[style]}.sh
 	
 	# 自动扫描风格目录下的lua filter
-	[ -f ${_G[style]}.lua ] && _F[style-${_G[function]}-${_G[style]}]="--lua-filter ${_G[style]}.lua"	
+	[ -f ${_G[style]}.lua ] && _F[style-${_G[function]}-${_G[style]}]="--lua-filter ${_G[style]}.lua"
+	# 如有tpl，自动加载
+	[ -f ${_G[style]}.tpl ] && _P[template]="${_G[style]}.tpl"
 	
 	# 启用扩展
 	${_G[ext-header]}

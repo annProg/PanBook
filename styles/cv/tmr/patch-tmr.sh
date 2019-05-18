@@ -1,8 +1,7 @@
 #!/bin/bash
 
-setPandocVar CJKmainfont "SimSun"
-setPandocVar CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
-
+getArrayVal _V CJKmainfont "SimSun"
+getArrayVal _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
 
 note "This Template support the following variables, they can set via metadata or -V option\n
 \tname                 Your name
