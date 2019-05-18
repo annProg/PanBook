@@ -147,7 +147,7 @@ function letterHeader(meta)
 	-- 姓\ 名 空格转义 生成的空格可用string.byte 打印出来,是  194 160
 	-- k1,k2,k3,k4,k5,k6,k7,k8,k9 = string.byte(getText(meta.name), 1,9)
 	-- print(k1,k2,k3,k4,k5,k6,k7,k8,k9)
-	header = "\\name{" .. getValue(string.gsub(getText(meta.name),'\194\160',"~"), "Your Name") .. "}{" .. getValue(getText(meta.title), " ") .. "}\n\\basicInfo{"
+	header = "\\name{" .. getValue(string.gsub(getText(meta.name),'\194\160',"~"), "Your Name").. "}\n\\basicInfo{"
 		.. "\\email{" .. getValue(getText(meta.email), "you@qq.com") .. "} \\textperiodcentered\\ \n"
 		.. "\\phone{" .. getValue(getText(meta.mobile), "13000000000") .. "}}\n\\vspace{1cm}\n"
 		

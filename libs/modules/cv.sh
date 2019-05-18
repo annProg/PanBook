@@ -39,6 +39,9 @@ function func_cv() {
 	# 某些cv需要打补丁. 补丁放在cv文件夹下，命名规则 patch-$cvname.sh
 	[ -f patch-${_G[style]}.sh ] && source patch-${_G[style]}.sh
 	
+	# 自动扫描风格目录下的lua filter
+	[ -f ${_G[style]}.lua ] && _F[style-${_G[function]}-${_G[style]}]="--lua-filter ${_G[style]}.lua"	
+	
 	# 启用扩展
 	${_G[ext-header]}
 	${_G[ext-listings]}

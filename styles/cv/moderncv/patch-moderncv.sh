@@ -15,9 +15,6 @@ getArrayVal _M fontsize "11pt"
 getArrayVal _M size "a4paper"
 getArrayVal _M fontfamily "sans"
 
-# 自定义filter
-_F[style-${_G[function]}-${_G[style]}]="--lua-filter ${_G[style]}.lua"
-
 # casual样式个人信息在底部，和foot有冲突，加vspace处理
 if [ "${_M[style]}"x == "casual"x ];then
 	_V[vspace]="0.7cm"

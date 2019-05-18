@@ -6,7 +6,25 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \usepackage{xcolor}
-\usepackage{coverletter}
+
+\makeatletter
+% renewcommand for coverletter use
+\newcommand{\mytitle}[1]{\def\@mytitle{#1}}
+\renewcommand{\name}[1]{
+  \def\@name{#1}
+  \centerline{\Huge\scshape{#1} \ifdefined\@mytitle{~\textbar~\huge\textnormal{\@mytitle}}\fi}
+  \vspace{1.25ex}
+}
+%\renewcommand{\email}[1]{
+%	\def\@email{#1}
+%	\faEnvelope\ \href{mailto:#1}{#1}
+%}
+%\renewcommand{\phone}[1]{
+%	\def\@phone{#1}
+%	\faPhone\ {#1}
+%}
+\makeatother
+
 $if(listings)$
 \usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
@@ -26,14 +44,17 @@ $endfor$
 \begin{document}
 \pagenumbering{gobble} % suppress displaying page number
 
-$if(name)$
+% \name中要用到title，要放前面
 $if(title)$
-\name{$name$}{$title$}
-$else$
-\name{$name$}{}
+\mytitle{$title$}
 $endif$
+
+$if(name)$
+\name{$name$}
+\myname{$name$}
 $else$
-\name{姓名}{}
+\name{姓名}
+\myname{姓名}
 $endif$
 
 \basicInfo{
