@@ -2,8 +2,9 @@
 \@ifpackageloaded{tikz}{}{\usepackage{tikz}}
 \@ifpackageloaded{xcolor}{}{\usepackage{xcolor}}
 \@ifundefinedcolor{color1}{\definecolor{color1}{rgb}{0.22,0.45,0.70}}
-
+\makeatother
 \definecolor{backColor}{RGB}{200,200,200}% grey
+\makeatletter
 \newcommand{\grade}[1]{%
     \begin{tikzpicture}
     \clip (1em-.4em,-.35em) rectangle (5em +.5em ,0.7em);
