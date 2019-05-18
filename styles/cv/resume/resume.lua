@@ -197,9 +197,21 @@ function cventry(el)
 	})
 end
 
+function quote(blocks, el)
+	if el ~= nil then
+		table.insert(blocks, pandoc.RawBlock("latex", "\\section{\\faUser 简介}"))
+		qt = pandoc.Para({})
+		for i,v in pairs(el) do
+			table.insert(qt.content, v)
+		end
+		table.insert(blocks, qt)
+	end
+end
 
 function Pandoc(doc)
 	local nblocks = {}
+	-- 处理 quote
+	quote(nblocks, doc.meta.quote)
 	local inletter = nil
 	local letterContent = pandoc.Div({})
 	table.insert(letterContent.content, pandoc.RawBlock("latex", letterHeader(doc.meta) .. "\\makelettertitle\n\\setlength{\\parindent}{2em}"))
