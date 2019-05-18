@@ -1,5 +1,5 @@
 ---
-author: 姓\ 名        # use backslash to escape space
+name: 姓\ 名        # use backslash to escape space
 title: 简历制作工程师
 homepage: baidu.com
 showdate: true
@@ -73,7 +73,7 @@ nocite: |
 ::::
 
 
-# 韩荆州 {.letter company="大唐帝国" addr="荆州大都督府]{} [襄阳"}
+# 韩荆州 {.letter company="大唐帝国" addr="荆州大都督府" city="襄阳"}
 ## 开元22年 {.letter .date}
 ## Dear Sir or Madam， {.letter .opening}
 ## Yours faithfully, {.letter .closing}
