@@ -56,29 +56,31 @@ function printGlobal() {
 	true
 }
 
-# loadModules需要支持用户自定义module，类似loadExtensions
-function loadModules() {
-	for item in `ls ${_G[moduledir]}`;do
-		ext=`basename $item`
-		source ${_G[moduledir]}/$item
-	done
+function _load() {
+	item=`basename $3`
+	source $1/${_G[$2]}/$item/$item.sh
 }
 
-function _loadExt() {
-	ext=`basename $2`
-	source $1/${_G[extdir]}/$ext/$ext.sh
-}
-
-function loadExtensions() {
-	for item in `ls $SCRIPTDIR/${_G[extdir]}/`;do
-		_loadExt $SCRIPTDIR $item
+function _loadRun() {
+	loadtype=$1
+	for item in `ls $SCRIPTDIR/${_G[$loadtype]}/`;do
+		_load $SCRIPTDIR $loadtype $item
 	done
 	
 	if [ "$CWD"x != "$SCRIPTDIR"x ];then
-		for item in `ls $CWD/${_G[extdir]}/ 2>/dev/null`;do
-			_loadExt $CWD $item
+		for item in `ls $CWD/${_G[$loadtype]}/ 2>/dev/null`;do
+			_loadExt $CWD $loadtype $item
 		done
-	fi
+	fi	
+}
+
+# loadModules需要支持用户自定义module，类似loadExtensions
+function loadModules() {
+	_loadRun moduledir
+}
+
+function loadExtensions() {
+	_loadRun extdir
 }
 
 function fixDir() {
@@ -108,6 +110,7 @@ function mkDir() {
 	_mkdir ${_G[build]}
 	_mkdir ${_G[imgdir]}
 	_mkdir $CWD/${_G[extdir]}
+	_mkdir $CWD/${_G[moduledir]}
 	_mkdir $CWD/${_G[tpldir]}
 	_mkdir $CWD/${_G[stylecv]}
 	_mkdir $CWD/${_G[stylebeamer]}
