@@ -58,7 +58,6 @@ function pdf()
 		[ "$columns"x == "true"x ] && addOptions="$addOptions $COLUMNS_SUPPORT"
 		addOptions="$addOptions $copyoption"
 		
-		trimHeader
 		# 生成前言和后记		
 		pandoc $FRONTMATTER -o frontmatter.tex --listings $division $CUSTOM_FILTER
 		pandoc $BACKMATTER -o backmatter.tex --listings $division $CUSTOM_FILTER

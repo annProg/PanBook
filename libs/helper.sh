@@ -113,12 +113,6 @@ function mkDir() {
 	_mkdir $CWD/${_G[fontdir]}
 }
 
-function trimHeader() {
-	# 删除$HEADERS空行，注释行
-	sed -i -r 's/%.*$//g' ${_G[header]}
-	sed -i -r '/^[\s\t ]*$|^%/d' ${_G[header]}
-}
-
 function writeHeader() {
 	echo "" >> ${_G[header]}
 	cat $1 >> ${_G[header]}

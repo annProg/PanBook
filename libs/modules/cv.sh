@@ -50,7 +50,6 @@ function func_cv() {
 	${_G[ext-column]}
 	${_G[ext-grade]}
 
-	trimHeader
 	getPandocParam
 	getXeLaTeXParam
 	pandoc ${_G[pandoc-param]}

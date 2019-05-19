@@ -39,7 +39,6 @@ function func_beamer() {
 		info "LSTSET: $LSTSET"
 		
 		OUTPUT="$BUILD/$ofile-beamer-$t.pdf"
-		trimHeader
 		# output tex for debug
 		[ "$DEBUG"x == "true"x ] && \
 		pandoc $PANDOC_REFERENCE_PARAM --listings -t beamer $BODY -o $OUTPUT.tex --pdf-engine=xelatex $PANDOCVARS --metadata-file=$METADATA $addOptions
