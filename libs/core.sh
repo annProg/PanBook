@@ -225,14 +225,15 @@ function getF() {
 }
 
 function getPandocParam() {
+	crossrefYaml=""
 	if [ "${_G[crossref]}"x != ""x ];then
-		_M[crossrefYaml]=${_G[crs]}
+		crossrefYaml="-M crossrefYaml=${_G[crs]}"
 	fi
 	getV
 	getM
 	getP
 	getF
-	_G[pandoc-param]="${_G[crossref]} ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
+	_G[pandoc-param]="${_G[crossref]} $crossrefYaml ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
 function getXeLaTeXParam() {
