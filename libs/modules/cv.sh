@@ -12,7 +12,7 @@ function cvMeta() {
 }
 
 function func_cv() {
-	getArrayVal _G style "moderncv"
+	getArrayVar _G style "moderncv"
 	STYLECV=$SCRIPTDIR/${_G[stylecv]}
 	USERSTYLECV=$CWD/${_G[stylecv]}
 	cvList=(`ls $STYLECV` `ls $USERSTYLECV`)

@@ -6,8 +6,8 @@ function getVar() {
 	[ "$val"x == ""x ] && eval $1=$2
 }
 
-function getArrayVal() {
-	[ $# -lt 3 ] && _error "getArrayVal error, param is $@"
+function getArrayVar() {
+	[ $# -lt 3 ] && _error "getArrayVar error, param is $@"
 	cmd="echo \${$1[$2]}"
 	val=`eval $cmd`
 	if [ "$val"x == ""x ];then
@@ -56,6 +56,7 @@ function printGlobal() {
 	true
 }
 
+# loadModules需要支持用户自定义module，类似loadExtensions
 function loadModules() {
 	for item in `ls ${_G[moduledir]}`;do
 		ext=`basename $item`
@@ -73,9 +74,11 @@ function loadExtensions() {
 		_loadExt $SCRIPTDIR $item
 	done
 	
-	for item in `ls $CWD/${_G[extdir]}/ 2>/dev/null`;do
-		_loadExt $CWD $item
-	done
+	if [ "$CWD"x != "$SCRIPTDIR"x ];then
+		for item in `ls $CWD/${_G[extdir]}/ 2>/dev/null`;do
+			_loadExt $CWD $item
+		done
+	fi
 }
 
 function fixDir() {
@@ -141,6 +144,10 @@ function compileStatus() {
 	fi
 }
 
+function func_ext() {
+	_help ext
+}
+
 function _call() {
 	if [ "`type -t $1`"x == "function"x ];then
 		$1
@@ -152,7 +159,7 @@ function _call() {
 # 帮助函数名称规范: ext_column_help ，func_cv_help
 function _help() {
 	if [ "$1"x == "ext"x ];then
-		if [ "$2"x == ""x ];then
+		if [ $# == 1 ];then
 			echo -e "\tUsage: panbook ext <-h|--help> <ext_name>"
 			exit 0
 		else
@@ -170,7 +177,7 @@ function _list() {
 	if [ "$1"x == "ext"x ];then
 		callList=${_G[function]}_list
 	else
-		if [ "$2"x == ""x ];then
+		if [ $# == 1 ];then
 			echo -e "Usage: panbook <module> <-l|--list> <item>"
 			echo -e "Available module:"
 			module_list
@@ -191,6 +198,16 @@ function ext_list() {
 function module_list() {
 	# 直接输出全局变量内容，要求扩展自己注册到 _G[modules]
 	echo ${_G[modules]} |tr ' ' '\n'	
+}
+
+# 注册扩展
+function regext() {
+	_G[extensions]="${_G[extensions]} $1"
+}
+
+# 注册模块
+function regmod() {
+	_G[modules]="${_G[modules]} $1"
 }
 
 function printhelp() {

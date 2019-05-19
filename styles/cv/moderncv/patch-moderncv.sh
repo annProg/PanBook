@@ -6,14 +6,14 @@ note "use -M fontsize=(10pt|11pt|12pt) default 11pt"
 note "use -M size=(a4paper|letterpaper|a5paper|legalpaper|executivepaper|landscape) default a4paper"
 note "use -M fontfamily=(roman|sans) default sans"
 
-getArrayVal _V CJKmainfont "SimSun"
-getArrayVal _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
+getArrayVar _V CJKmainfont "SimSun"
+getArrayVar _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
 
-getArrayVal _M style "classic"
-getArrayVal _M color "blue"
-getArrayVal _M fontsize "11pt"
-getArrayVal _M size "a4paper"
-getArrayVal _M fontfamily "sans"
+getArrayVar _M style "classic"
+getArrayVar _M color "blue"
+getArrayVar _M fontsize "11pt"
+getArrayVar _M size "a4paper"
+getArrayVar _M fontfamily "sans"
 
 # casual样式个人信息在底部，和foot有冲突，加vspace处理
 if [ "${_M[style]}"x == "casual"x ];then

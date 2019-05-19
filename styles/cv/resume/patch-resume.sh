@@ -1,7 +1,7 @@
 #!/bin/bash
 
-getArrayVal _V CJKmainfont "SimSun"
-getArrayVal _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
+getArrayVar _V CJKmainfont "SimSun"
+getArrayVar _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
 
 # 启用coverletter
 ${_G[ext-coverletter]}

@@ -30,7 +30,7 @@ declare -A _F         # lua filter (--lua-filter)
 # 参见 https://github.com/annProg/PanBook/issues/8
 # -H 参数引入的tex文件，命名为 add-header-*.tex，pandoc执行前，cat add-header-*.tex > add-header.tex
 _G=(
-	[func-pre]=func_                                                  # 可被命令行调用的function前缀
+	[func-pre]=func                                                   # 可被命令行调用的function前缀
 	[src]=src                                                         # 默认src目录名称（需要在获取参数后重置）
 	[workdir]=$CWD/src                                                # 默认markdown源码目录（需要在获取参数后重置）
 	[imgdir]=$CWD/src/images                                          # 默认image目录（需要在获取参数后重置）
