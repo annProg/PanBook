@@ -213,18 +213,30 @@ function regmod() {
 	_G[modules]="${_G[modules]} $1"
 }
 
+function _formatHelp() {
+	helptype=$1
+	shift
+	for k in $@;do
+		val="val=\${$helptype[$k]}"
+		eval $val
+		printf "\t%-12s%-100s\r" $k "$val"
+	done
+}
+# 获取 functions帮助
+function getH() {
+	_formatHelp _H ${!_H[@]}
+}
+
 function printhelp() {
+	_H[help]="print help info"
+	_H[saveimg]="save image url to local"
+	_H[eps]="convert gif to eps"
+	_H[clean]="clean build dir"
+
 	echo -e "  eBook maker base pandoc\n"
 	echo -e "\tUsage: panbook <functions> [OPTIONS]\n"
 	echo -e "  Available functions:"
-	echo -e "\tbook        make ebook"
-	echo -e "\tthesis      make thesis"
-	echo -e "\tbeamer      make beamer"
-	echo -e "\tcv          make cv"
-	echo -e "\thelp        print help info"
-	echo -e "\tsaveimg     save image url to local"
-	echo -e "\teps         convert gif to eps"
-	echo -e "\tclean       clean build dir"
+	getH
 	echo -e "  Available OPTIONS:"
 	echo -e "\t--style     specify a style"
 	echo -e "\t--crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)"

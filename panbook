@@ -81,10 +81,8 @@ _M=()
 _F=()
 
 # 存储帮助信息
+declare -A _H
 _H=()
-
-# 存储帮助选项
-_HO=()
 
 # 引入函数和模块
 source $SCRIPTDIR/libs/core.sh
