@@ -151,6 +151,10 @@ function func_ext() {
 	_help ext
 }
 
+function func_mod() {
+	_help mod
+}
+
 function _call() {
 	if [ "`type -t $1`"x == "function"x ];then
 		$1
@@ -161,9 +165,9 @@ function _call() {
 
 # 帮助函数名称规范: ext_column_help ，func_cv_help
 function _help() {
-	if [ "$1"x == "ext"x ];then
+	if [ "$1"x == "ext"x -o "$1"x == "mod"x ];then
 		if [ $# == 1 ];then
-			echo -e "\tUsage: panbook ext <-h|--help> <ext_name>"
+			echo -e "\tUsage: panbook $1 <-h|--help|-l|--list> <$1_name>"
 			exit 0
 		else
 			callHelp=${_G[function]}"_"$2"_help"
@@ -177,13 +181,11 @@ function _help() {
 
 # 列出函数名称规范: ext_list， func_cv_list
 function _list() {
-	if [ "$1"x == "ext"x ];then
+	if [ "$1"x == "ext"x -o "$1"x == "mod"x ];then
 		callList=${_G[function]}_list
 	else
 		if [ $# == 1 ];then
-			echo -e "Usage: panbook <module> <-l|--list> <item>"
-			echo -e "Available module:"
-			module_list
+			style_list $1
 			exit 0
 		else
 			callList=${_G[func-pre]}_${_G[function]}"_list_"$2
@@ -193,12 +195,19 @@ function _list() {
 	_call $callList
 }
 
+function style_list() {
+	ls $SCRIPTDIR/${_G[style$1]} |tr ' ' '\n'
+	if [ "$CWD"x != "$SCRIPTDIR"x ];then
+		ls $CWD/${_G[style$1]} |tr ' ' '\n'
+	fi
+}
+
 function ext_list() {
 	# 直接输出全局变量内容，要求扩展自己注册到 _G[extensions]
 	echo ${_G[extensions]} |tr ' ' '\n'
 }
 
-function module_list() {
+function mod_list() {
 	# 直接输出全局变量内容，要求扩展自己注册到 _G[modules]
 	echo ${_G[modules]} |tr ' ' '\n'	
 }
@@ -232,6 +241,8 @@ function printhelp() {
 	_H[saveimg]="save image url to local"
 	_H[eps]="convert gif to eps"
 	_H[clean]="clean build dir"
+	_H[ext]="extensions help"
+	_H[mod]="modules help"
 
 	echo -e "  eBook maker base pandoc\n"
 	echo -e "\tUsage: panbook <functions> [OPTIONS]\n"
@@ -249,5 +260,6 @@ function printhelp() {
 	echo -e "\t--key       use original pandoc long boolean option like this"
 	echo -e "\t-d --debug  debug mode"
 	echo -e "\t-h --help   function help(if exists)"
+	echo -e "\t-l --list   function list(if exists)"
 	exit 0
 }
