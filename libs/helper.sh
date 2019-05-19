@@ -240,7 +240,7 @@ function _formatHelp() {
 	for k in $@;do
 		val="val=\${$helptype[$k]}"
 		eval $val
-		printf "\t%-12s%-100s\r" $k "$val"
+		printf "\t%-12s%-30s\n" $k "$val"
 	done
 }
 # 获取 functions帮助
