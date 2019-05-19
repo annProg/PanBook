@@ -8,7 +8,7 @@ function cvMeta() {
 	initMakefile
 	photoFile=${_G[imgdir]}/photo.png
 	makeFile=$cwd/Makefile
-	[ ! -f $photoFile ] && cp ${_G[exampledir]}/${_G[function]}/src/images/photo.png $photoFile	
+	[ ! -f $photoFile ] && cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/images/photo.png $photoFile	
 	
 	# cv不需要单独的metadata file
 	unset _P[metadata-file]

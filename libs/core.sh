@@ -86,7 +86,7 @@ function compatible()
 function initMetadataFile() {
 	if [ ! -f ${_P[metadata-file]} ];then
 		if [ "$1"x == "true"x ];then
-			cp ${_G[exampledir]}/${_G[function]}/src/metadata.yaml ${_P[metadata-file]}
+			cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/metadata.yaml ${_P[metadata-file]}
 		fi
 	fi
 }
@@ -96,7 +96,7 @@ function initMatter() {
 	$# -lt 1 && return 0
 	if [ ! -f ${_G[workdir]}/${_G[$1]} ];then
 		if [ "$2"x == "true"x ];then
-			cp ${_G[exampledir]}/${_G[function]}/src/${_G[$1]} ${_G[workdir]}/${_G[$1]}
+			cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/${_G[$1]} ${_G[workdir]}/${_G[$1]}
 		fi
 	fi
 }
@@ -104,7 +104,7 @@ function initMatter() {
 function initBib() {
 	if [ ! -f ${_P[bibliography]} ];then
 		if [ "$1"x == "true"x ];then
-			cp ${_G[exampledir]}/${_G[function]}/src/bibliography.bib ${_P[bibliography]}
+			cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/bibliography.bib ${_P[bibliography]}
 		fi
 	fi	
 }
@@ -118,14 +118,14 @@ function initBody() {
 	bodyfile=$1
 	[ "$bodyfile"x == ""x ] && bodyfile=${_G[defaultbody]}
 	if [ "${_G[body]}"x == ""x ];then
-		cp ${_G[exampledir]}/${_G[function]}/src/$bodyfile ${_G[workdir]}
+		cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/$bodyfile ${_G[workdir]}
 		_G[body]=$bodyfile
 	fi
 }
 
 function initMakefile() {
 	if [ ! -f $CWD/Makefile ];then
-		cp ${_G[exampledir]}/${_G[function]}/Makefile $CWD
+		cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/Makefile $CWD
 	fi
 }
 
