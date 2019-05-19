@@ -178,7 +178,12 @@ function _help() {
 			callHelp=${_G[function]}"_"$2"_help"
 		fi
 	else
-		[ $# == 2 ] && n="_$2" && loadStyle ${_G[function]} $2  || n=""
+		if [ $# == 2 ];then
+			n="_$2"
+			loadStyle ${_G[function]} $2
+		else
+			n=""
+		fi
 		callHelp=${_G[func-pre]}_${_G[function]}$n"_help"
 	fi
 
