@@ -141,19 +141,56 @@ function compileStatus() {
 	fi
 }
 
-function func_ext() {
-	if [ "$1"x == "help"x ];then
-		if [ "$2"x != ""x ];then
-			${2}Help
+function _call() {
+	if [ "`type -t $1`"x == "function"x ];then
+		$1
+	else
+		_error "Function: $1 not defined"
+	fi
+}
+
+# 帮助函数名称规范: ext_column_help ，func_cv_help
+function _help() {
+	if [ "$1"x == "ext"x ];then
+		if [ "$2"x == ""x ];then
+			echo -e "\tUsage: panbook ext <-h|--help> <ext_name>"
+			exit 0
+		else
+			callHelp=${_G[function]}"_"$2"_help"
+		fi
+	else
+		callHelp=${_G[func-pre]}_${_G[function]}_help
+	fi
+
+	_call $callHelp
+}
+
+# 列出函数名称规范: ext_list， func_cv_list
+function _list() {
+	if [ "$1"x == "ext"x ];then
+		callList=${_G[function]}_list
+	else
+		if [ "$2"x == ""x ];then
+			echo -e "Usage: panbook <module> <-l|--list> <item>"
+			echo -e "Available module:"
+			module_list
+			exit 0
+		else
+			callList=${_G[func-pre]}_${_G[function]}"_list_"$2
 		fi
 	fi
-	
-	if [ "$1"x == "list"x ];then
-		for item in `ls $SCRIPTDIR/${_G[extdir]}`;do
-			echo $item
-		done
-	fi
-	exit 0	
+
+	_call $callList
+}
+
+function ext_list() {
+	# 直接输出全局变量内容，要求扩展自己注册到 _G[extensions]
+	echo ${_G[extensions]} |tr ' ' '\n'
+}
+
+function module_list() {
+	# 直接输出全局变量内容，要求扩展自己注册到 _G[modules]
+	echo ${_G[modules]} |tr ' ' '\n'	
 }
 
 function printhelp() {

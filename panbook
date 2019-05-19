@@ -30,6 +30,7 @@ declare -A _F         # lua filter (--lua-filter)
 # 参见 https://github.com/annProg/PanBook/issues/8
 # -H 参数引入的tex文件，命名为 add-header-*.tex，pandoc执行前，cat add-header-*.tex > add-header.tex
 _G=(
+	[func-pre]=func_                                                  # 可被命令行调用的function前缀
 	[src]=src                                                         # 默认src目录名称（需要在获取参数后重置）
 	[workdir]=$CWD/src                                                # 默认markdown源码目录（需要在获取参数后重置）
 	[imgdir]=$CWD/src/images                                          # 默认image目录（需要在获取参数后重置）
@@ -80,6 +81,12 @@ _V=()
 _M=()
 _F=()
 
+# 存储帮助信息
+_H=()
+
+# 存储帮助选项
+_HO=()
+
 # 引入函数和模块
 source $SCRIPTDIR/libs/core.sh
 loadModules
@@ -98,11 +105,11 @@ do
 	key=$1
 	case $key in
 	-h|--help)
-		func_${_G[function]} help $2
-		shift 2;;
+		_help ${_G[function]} $2
+		exit 0;;
 	-l|--list)
-		func_${_G[function]} list
-		shift;;
+		_list ${_G[function]} $2
+		exit 0;;
 	--style=*)
 		_G[style]=${key#*=}
 		shift;;
@@ -144,10 +151,5 @@ note "Welcome to PanBook!"
 fixDir
 mkDir
 
-if [ "`type -t func_${_G[function]}`"x == "function"x ];then
-	func_${_G[function]}
-else
-	_error "Function: func_${_G[function]}  not defined"
-fi
-
+_call ${_G[func-pre]}_${_G[function]}
 printGlobal
