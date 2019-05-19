@@ -69,7 +69,7 @@ function _loadRun() {
 	
 	if [ "$CWD"x != "$SCRIPTDIR"x ];then
 		for item in `ls $CWD/${_G[$loadtype]}/ 2>/dev/null`;do
-			_loadExt $CWD $loadtype $item
+			_load $CWD $loadtype $item
 		done
 	fi	
 }
@@ -81,6 +81,11 @@ function loadModules() {
 
 function loadExtensions() {
 	_loadRun extdir
+}
+
+function loadStyle() {
+	[ -d $SCRIPTDIR/${_G[style$1]}/$2 ] && _load $SCRIPTDIR style$1 $2
+	[ -d $CWD/${_G[style$1]}/$2 ] && _load $CWD style$1 $2
 }
 
 function fixDir() {
@@ -113,7 +118,7 @@ function mkDir() {
 	_mkdir $CWD/${_G[moduledir]}
 	_mkdir $CWD/${_G[tpldir]}
 	_mkdir $CWD/${_G[stylecv]}
-	_mkdir $CWD/${_G[stylebeamer]}
+	_mkdir $CWD/${_G[styleslide]}
 	_mkdir $CWD/${_G[stylebook]}
 	_mkdir $CWD/${_G[stylethesis]}
 	_mkdir $CWD/${_G[fontdir]}
@@ -173,10 +178,11 @@ function _help() {
 			callHelp=${_G[function]}"_"$2"_help"
 		fi
 	else
-		callHelp=${_G[func-pre]}_${_G[function]}_help
+		[ $# == 2 ] && n="_$2" && loadStyle ${_G[function]} $2  || n=""
+		callHelp=${_G[func-pre]}_${_G[function]}$n"_help"
 	fi
 
-	_call $callHelp
+	_call $callHelp 
 }
 
 # 列出函数名称规范: ext_list， func_cv_list
@@ -188,7 +194,8 @@ function _list() {
 			style_list $1
 			exit 0
 		else
-			callList=${_G[func-pre]}_${_G[function]}"_list_"$2
+			loadStyle ${_G[function]} $2
+			callList=${_G[func-pre]}_${_G[function]}"_"$2"_list"
 		fi
 	fi
 

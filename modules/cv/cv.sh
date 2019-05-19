@@ -1,3 +1,7 @@
+# 注册模块及帮助信息
+regmod cv
+_H[cv]="make curriculum vitae"
+
 function cvMeta() {
 	initBody cv.md
 	initBib true
@@ -45,10 +49,10 @@ function func_cv() {
 	[ -f ${_G[style]}.tpl ] && _P[template]="${_G[style]}.tpl"
 	
 	# 启用扩展
-	${_G[ext-header]}
-	${_G[ext-listings]}
-	${_G[ext-column]}
-	${_G[ext-grade]}
+	ext_header
+	ext_listings
+	ext_column
+	ext_grade
 
 	getPandocParam
 	getXeLaTeXParam
@@ -60,4 +64,9 @@ function func_cv() {
 	
 	xelatex ${_G[xelatex]} -output-directory=${_G[build]} ${_G[ofile]}.${_G[t]}
 	compileStatus ${_G[function]}	
+}
+
+function func_cv_help() {
+	echo -e "  Usage:\n\tpanbook cv -h <style>"
+	exit 0
 }
