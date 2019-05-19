@@ -1,6 +1,6 @@
 # 盘书 - Pandoc Template
 <p align="center">
-  <img height="120" src="medias/panbook.png">
+  <img height="120" src="src/images/panbook.png">
 </p>
 
 ## 简介
@@ -61,16 +61,14 @@ $ panbook -h
 
   Available functions:
         book        make ebook
-		thesis      make thesis
-        html        make html ebook
-        epub        make epub ebook
-        beamer      make beamer
+        thesis      make thesis
+        slide       make slide
         cv          make cv
         help        print help info
         saveimg     save image url to local
         eps         convert gif to eps
   Available OPTIONS:
-        --tpl       specify template for pandoc
+        --style       specify template for pandoc
         --class     specify documentclass for latex
         --theme     specify beamer theme
         --cv        specify cv template
@@ -111,4 +109,4 @@ $ panbook -h
 ## QQ群
 欢迎加入QQ群交流
 
-![](medias/qq.png)
+![](src/images/qq.png)
