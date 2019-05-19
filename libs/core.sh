@@ -151,7 +151,8 @@ function init()
 	cd ${_G[build]}
 	
 	# 清空$HEADERS 以后都是追加
-	echo > ${_G[header]}	
+	echo > ${_G[header]}
+	[ "${_G[trace]}"x == "true"x ] && _G[interaction]=""
 }
 
 # 随机数，加随机数是处理repeat for multiple options的情况

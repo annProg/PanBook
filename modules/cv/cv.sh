@@ -7,7 +7,6 @@ function cvMeta() {
 	initBib true
 	initMakefile
 	photoFile=${_G[imgdir]}/photo.png
-	makeFile=$cwd/Makefile
 	[ ! -f $photoFile ] && cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/images/photo.png $photoFile	
 	
 	# cv不需要单独的metadata file
@@ -19,9 +18,6 @@ function func_cv() {
 	getArrayVar _G style "moderncv"
 	STYLECV=$SCRIPTDIR/${_G[stylecv]}
 	USERSTYLECV=$CWD/${_G[stylecv]}
-	cvList=(`ls $STYLECV` `ls $USERSTYLECV`)
-	_G[cvlist]=${cvList[@]}
-	[ "${_G[trace]}"x == "true"x ] && _G[interaction]=""
 
 	cvMeta
 
