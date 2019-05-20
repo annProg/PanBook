@@ -1,12 +1,13 @@
 function _copystyle() {
+	cd ${_G[build]}
 	# copy style
 	func=${_G[function]}
 	STYLEDIR=$SCRIPTDIR/${_G[style$func]}/${_G[style]}
 	USERSTYLEDIR=$CWD/${_G[style$func]}/${_G[style]}
 
-	if [ -d $STYLEDIR/${_G[style]} -o -d $USERSTYLEDIR/${_G[style]} ];then
-		cp -rfu $STYLEDIR/${_G[style]} ${_G[build]} 2>/dev/null
-		cp -rfu $USERSTYLEDIR/${_G[style]} ${_G[build]} 2>/dev/null
+	if [ -d $STYLEDIR -o -d $USERSTYLEDIR ];then
+		cp -rfu $STYLEDIR ${_G[build]} 2>/dev/null
+		cp -rfu $USERSTYLEDIR ${_G[build]} 2>/dev/null
 		# 需要删除.md文件
 		rm -f ${_G[style]}/*.md
 		rm -f ${_G[style]}/*.pdf
@@ -15,6 +16,7 @@ function _copystyle() {
 }
 
 function _patch() {
+	cd ${_G[build]}
 	# 某些cv需要打补丁. 补丁放在cv文件夹下，命名规则 patch-$cvname.sh
 	[ -f patch-${_G[style]}.sh ] && source patch-${_G[style]}.sh
 	
