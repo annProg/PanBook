@@ -41,7 +41,7 @@ function func_cv() {
 	
 	# 自动扫描风格目录下的lua filter
 	[ -f ${_G[style]}.lua ] && _F[style-${_G[function]}-${_G[style]}]="--lua-filter ${_G[style]}.lua"
-	# 如有tpl，自动加载
+	# 如有tpl，自动加载（需考虑用户通过--template指定tpl的情况）
 	[ -f ${_G[style]}.tpl ] && _P[template]="${_G[style]}.tpl"
 	
 	# 启用扩展
