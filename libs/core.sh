@@ -153,6 +153,8 @@ function init()
 	# 清空$HEADERS 以后都是追加
 	echo > ${_G[header]}
 	[ "${_G[trace]}"x == "true"x ] && _G[interaction]=""
+	cd ${_G[build]}
+	_G[ofile]=${_G[build]}/${_G[ofile]}-${_G[function]}-${_G[style]}	
 }
 
 # 随机数，加随机数是处理repeat for multiple options的情况

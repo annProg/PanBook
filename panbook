@@ -86,6 +86,7 @@ _H=()
 
 # 引入函数和模块
 source $SCRIPTDIR/libs/core.sh
+source $SCRIPTDIR/libs/functions.sh
 loadModules
 loadExtensions
 
