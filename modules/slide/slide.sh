@@ -3,7 +3,7 @@ regmod slide
 _H[slide]="make slide"
 
 function func_slide() {
-	initBody cv.md
+	initBody
 	initBib true
 	initMakefile
 
