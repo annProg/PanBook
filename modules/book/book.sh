@@ -1,13 +1,9 @@
+# 注册模块及帮助信息
+regmod book
+_H[slide]="make slide"
+
 function pdf()
 {
-	interaction="-interaction=batchmode"
-	[ "$TRACE"x == "true"x ] && interaction=""
-	TPLDIR=$1
-	shift
-	classList=($@)
-
-	# 支持随机选取theme
-	setClass "${classList[*]}"
 	
 	for t in ${SELECTED[@]};do
 		init
