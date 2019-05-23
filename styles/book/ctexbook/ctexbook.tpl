@@ -69,30 +69,9 @@ $else$
 \devicepc
 $endif$
 
-\newfontfamily\code{Courier New}
-
 $if(listings)$
 \usepackage{listings}
-\definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
-\definecolor{lightgray}{rgb}{0.97,0.97,1}
 \newcommand{\passthrough}[1]{\colorbox{lightgray}{#1}}
-
-\lstset{
-	%numbers=left,
-	%numberstyle=\tiny,
-	basicstyle=\small\linespread{1}\code,
-	keywordstyle=\color[rgb]{0.13,0.29,0.53}\textbf,
-	commentstyle=\color{gray},
-	identifierstyle=\color[rgb]{0.00,0.00,0.00},
-	stringstyle=\color[rgb]{0.31,0.60,0.02},
-	frame=shadowbox,
-	rulesepcolor=\color{red!20!green!20!blue!20},
-	backgroundcolor=\color[rgb]{0.97,0.97,0.97},
-	tabsize=4,
-	breaklines=tr,
-	showstringspaces=false,
-}
-\renewcommand{\lstlistingname}{代码}
 $endif$
 
 $if(lhs)$

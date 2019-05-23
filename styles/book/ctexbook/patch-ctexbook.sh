@@ -2,29 +2,25 @@
 
 # use this path to set custom addOptions, PANDOCVARS and LSTSET, COPYPAGE
 
-note "use -E device=(pc|mobile|kindle) to produce different size of pdf"
-note "use -E cover=(1-60|R|N) to select cover page background. R means random. N means don't add cover image"
-note "use -E coverimg=path to use custom titlepage"
-note "use -E privatetpl=(true|false) to use custom template define by this class"
-note "use -E pagestyle=style to set pagestyle"
+note "use -V device=(pc|mobile|kindle) to produce different size of pdf"
+note "use -V cover=(1-60|R|N) to select cover page background. R means random. N means don't add cover image"
+note "use -V coverimg=path to use custom titlepage"
+note "use -V pagestyle=style to set pagestyle"
 
 FIX="header-ctexbook.tex"
 TITLEPAGE="titlepage-ctexbook.tex"
 
-setPandocVar "classoption" "fancyhdr,bookmark"
-getVar "pagestyle" "fancy"
-division="--top-level-division=chapter"
-getVar privatetpl "true"
+getArrayVar _V "classoption" "fancyhdr,bookmark"
+getArrayVar _V "pagestyle" "fancy"
 
 # ctex模板随机选用封面背景
-getVar cover "29"
+getArrayVar _G cover "29"
+cover=${_G[cover]}
 if [ "$cover"x == "R"x ];then
 	background="images/$(($RANDOM%60)).png"
 else
 	background="images/$cover.png"
 fi
-
-parseMeta
 
 cat > $FIX <<EOF
 \usepackage{wallpaper}
@@ -113,11 +109,3 @@ cat >> $TITLEPAGE <<EOF
 }
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 EOF
-
-if [ "$privatetpl"x == "true"x ];then
-	addOptions="--template=ctexbook.tpl -V background=$background -V device=$device"
-	LSTSET="" # 清空LSTSET，因为模板中已经有lstset了
-else
-	(cat $FIX;echo) >> $HEADERS
-	(cat $TITLEPAGE;echo) >> $HEADERS
-fi
