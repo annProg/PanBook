@@ -146,11 +146,12 @@ function userDefined() {
 
 function init()
 {
+	# userDefined函数会删除md文件，应先于cp执行
+	userDefined
 	# 复制$SRC目录下资源文件到build目录
 	cp -rf ${_G[workdir]}/* ${_G[build]}
 	cd ${_G[build]}
-	
-	userDefined
+
 	# 清空$HEADERS 以后都是追加
 	echo > ${_G[header]}
 	[ "${_G[trace]}"x == "true"x ] && _G[interaction]=""
