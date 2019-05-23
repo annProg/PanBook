@@ -248,18 +248,26 @@ function getH() {
 	_formatHelp _H ${!_H[@]}
 }
 
+function getHF() {
+	_formatHelp _HF ${!_HF[@]}
+}
+
 function printhelp() {
-	_H[help]="print help info"
-	_H[saveimg]="save image url to local"
-	_H[eps]="convert gif to eps"
-	_H[clean]="clean build dir"
-	_H[ext]="extensions help"
-	_H[mod]="modules help"
+	# 定义辅助函数帮助
+	declare -A _HF
+	_HF[help]="print help info"
+	_HF[saveimg]="save image url to local"
+	_HF[eps]="convert gif to eps"
+	_HF[clean]="clean build dir"
+	_HF[ext]="extensions help"
+	_HF[mod]="modules help"
 
 	echo -e "  eBook maker base pandoc\n"
-	echo -e "\tUsage: panbook <functions> [OPTIONS]\n"
-	echo -e "  Available functions:"
+	echo -e "\tUsage: panbook <command> [OPTIONS]\n"
+	echo -e "  Available module command:"
 	getH
+	echo -e "  Available command:"
+	getHF
 	echo -e "  Available OPTIONS:"
 	echo -e "\t--style     specify a style"
 	echo -e "\t--crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)"
