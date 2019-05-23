@@ -93,7 +93,7 @@ function initMetadataFile() {
 
 # 初始化 frontmatter 和 backmatter
 function initMatter() {
-	$# -lt 1 && return 0
+	[ $# -lt 1 ] && return
 	if [ ! -f ${_G[workdir]}/${_G[$1]} ];then
 		if [ "$2"x == "true"x ];then
 			cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/${_G[$1]} ${_G[workdir]}/${_G[$1]}
