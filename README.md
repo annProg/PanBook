@@ -4,7 +4,7 @@
 </p>
 
 ## 简介
-此项目定义了一种`Markdown`源码组织规范，提供一个脚本`panbook`及数个`LaTeX`及`epub`模板，用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`及`epub`格式电子书。
+此项目基于`Pandoc`和`LaTeX`，提供了一些开箱即用的书籍，论文，幻灯片及简历模板，以及一些`lua filter`扩展。用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`或`epub`格式。
 
 查看电子书效果：
 
@@ -57,31 +57,33 @@ $ cd /d/dev/mybook
 $ panbook -h
   eBook maker base pandoc
 
-        Usage: panbook <functions> [OPTIONS]
+        Usage: panbook <command> [OPTIONS]
 
-  Available functions:
+  Available module command:
         book        make ebook
         thesis      make thesis
         slide       make slide
-        cv          make cv
+        cv          make curriculum vitae
+  Available command:
+        mod         modules help
         help        print help info
+        clean       clean build dir
         saveimg     save image url to local
         eps         convert gif to eps
+        ext         extensions help
   Available OPTIONS:
-        --style       specify template for pandoc
-        --class     specify documentclass for latex
-        --theme     specify beamer theme
-        --cv        specify cv template
-        --css       specify epub css
-        ---bib      specify bibliography file(default src/bibliography.bib)
-        --csl       specify csl file for pandoc-citeproc(default chinese-gb7714-2005-numeric.csl)
+        --style     specify a style
         --crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)
         --src       specify src dir name(default src)
         --imgdir    specify image dir name(default src/images)
-        -V key=val  same with pandoc -V option
-        -E key=val  set variable for template or beamer theme
+        -V key:val  same with pandoc -V option
+        -M key:val  same with pandoc -M option
+        -G key:val  change panbook global variable
+        --key=val   use original pandoc long option like this
+        --key       use original pandoc long boolean option like this
         -d --debug  debug mode
         -h --help   function help(if exists)
+        -l --list   function list(if exists)
 ```
 
 
