@@ -2,10 +2,13 @@
 
 # use this path to set custom addOptions, PANDOCVARS and LSTSET, COPYPAGE
 
-note "use -V device=(pc|mobile|kindle) to produce different size of pdf"
-note "use -V cover=(1-60|R|N) to select cover page background. R means random. N means don't add cover image"
-note "use -V coverimg=path to use custom titlepage"
-note "use -V pagestyle=style to set pagestyle"
+note "use -V device:(pc|mobile|kindle) to produce different size of pdf"
+note "use -V cover:(1-60|R|N) to select cover page background. R means random. N means don't add cover image"
+note "use -V coverimg:path to use custom titlepage"
+note "use -V pagestyle:style to set pagestyle"
+
+# 使用device扩展
+ext_device
 
 FIX="header-ctexbook.tex"
 TITLEPAGE="titlepage-ctexbook.tex"
