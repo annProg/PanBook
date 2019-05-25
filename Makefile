@@ -6,25 +6,26 @@ DIR ?= /PanBook
 OWNER ?= annProg
 REPO ?= PanBook
 TAG ?= $(shell git rev-parse --short HEAD)
+DIVISION = --top-level-division=part
 
 all: ctex ctex6in ctexart elegantbook elegantnote elegantpaper epub online
-pdf: ctex ctex6in elegantbook
+book: ctex ctex6in elegantbook
 
 ctex: 
-	panbook pdf -E cover=R
+	panbook book -V cover=R $(DIVISION)
 ctex6in: 
-	panbook pdf -E cover=R -E device=mobile
+	panbook book -V cover=R -V device=mobile $(DIVISION)
 ctexart:
-	panbook pdf --class=ctexart
+	panbook book --style=ctexart $(DIVISION)
 elegantbook: 
-	panbook pdf --class=elegantbook
+	panbook book --style=elegantbook $(DIVISION)
 elegantnote: 
-	panbook pdf --class=elegantnote
+	panbook book --style=elegantnote $(DIVISION)
 elegantpaper: 
-	panbook pdf --class=elegantpaper	
+	panbook book --style=elegantpaper $(DIVISION)
 epub:
 	rm -f build/*.epub
-	panbook epub -d
+	panbook epub -d $(DIVISION)
 	mv build/$(REPO)-*.epub build/$(REPO).epub
 	
 up: release upload
