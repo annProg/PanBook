@@ -1,3 +1,2 @@
 #!/bin/bash
-setPandocVar "themeoptions=colors" "dark"
-addOptions="--template=classyslides.tpl"
+getArrayVar _V themeoptions "colors=dark"
