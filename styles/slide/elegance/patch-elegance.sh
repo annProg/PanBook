@@ -1,9 +1,8 @@
 #!/bin/bash
-note "use -E background=(simple|plasma-56-kver|circles) to change background style"
-getVar background "plasma-56-kver"
-STYLEIMAGE="$cwd/build/style/images"
-info "StyleImage: $STYLEIMAGE-$background"
+note "use -V background=(simple|plasma-56-kver|circles) to change background style"
+getArrayVar _V background "plasma-56-kver"
+STYLEIMAGE="${_G[build]}/style/images"
 [ ! -d $STYLEIMAGE ] && mkdir -p $STYLEIMAGE
-cp -rf $cwd/build/style/images-$background/* $STYLEIMAGE
+cp -rf ${_G[build]}/style/images-${_V[background]}/* $STYLEIMAGE
 
-(cat fix-elegance.tex;echo) >> $HEADERS
+(cat fix-elegance.tex;echo) >> ${_G[header]}
