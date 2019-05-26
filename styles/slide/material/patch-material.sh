@@ -1,17 +1,14 @@
 #!/bin/bash
-note "use -E colortheme=(Dark|Light) to change colortheme"
-note "use -E primary=colorname"
-note "use -E accent=colorname"
+note "use -V color:(Dark|Light) to change colortheme"
+note "use -V primary:colorname"
+note "use -V accent:colorname"
 note "availableColor: Red|Pink|Purple|Deep Purple|Indigo|Blue|Light Blue|Cyan|Teal|Green|Light Green|Lime|Yellow|Amber|Orange|Deep Orange|Brown|Grey|Blue Grey"
-getVar colortheme "Dark"
-getVar primary "Red"
-getVar accent "Green"
-echo "\use${colortheme}Theme" > material-theme.tex
-echo "\usePrimary$primary" >> material-theme.tex
-echo "\useAccent$accent" >> material-theme.tex
+getArrayVar _V color "Dark"
+getArrayVar _V primary "Red"
+getArrayVar _V accent "Green"
+echo "\use${_V[color]}Theme" > material-theme.tex
+echo "\usePrimary${_V[primary]}" >> material-theme.tex
+echo "\useAccent${_V[accent]}" >> material-theme.tex
 
-info "colortheme: $colortheme"
-info "primary: $primary"
-info "accent: $accent"
 
-(cat material-theme.tex;echo) >> $HEADERS
+(cat material-theme.tex;echo) >> ${_G[header]}
