@@ -268,7 +268,7 @@ function printhelp() {
 	getH
 	echo -e "  Available command:"
 	getHF
-	echo -e "  Available OPTIONS:"
+	echo -e "  Available OPTIONS(you can also use pandoc long option):"
 	echo -e "\t--style     specify a style"
 	echo -e "\t--crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)"
 	echo -e "\t--src       specify src dir name(default src)"
