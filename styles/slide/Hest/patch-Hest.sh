@@ -1,3 +1,3 @@
 #!/bin/bash
 
-addOptions="-V classoption=xcolor={dvipsnames}"
+_V[classoption__]="xcolor={dvipsnames}"
