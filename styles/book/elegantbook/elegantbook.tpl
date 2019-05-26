@@ -20,48 +20,6 @@ $if(CJKmainfont)$
   \fi
 $endif$
 
-% 设备类型
-\newcommand{\devicemobile}{
-	\geometry{
-		paperwidth=9.0cm,
-		paperheight=16cm,
-		margin=0.5cm,
-		left=0.1cm,
-		right=0.1cm,
-		top=0.1cm,
-		bottom=0.2cm
-	}
-}
-
-\newcommand{\devicekindle}{
-	\geometry{
-		paperwidth=9.0cm,
-		paperheight=11.7cm,
-		margin=0.5cm,
-		left=0.1cm,
-		right=0.1cm,
-		top=0.1cm,
-		bottom=0.2cm
-	}
-}
-
-\newcommand{\devicepc}{
-	\geometry{
-		top=1in,
-		inner=1in,
-		outer=1in,
-		bottom=1in,
-		headheight=3ex,
-		headsep=2ex
-	}
-}
-
-$if(device)$
-\device$device$
-$else$
-\devicepc
-$endif$
-
 $if(listings)$
 \definecolor{lightgray}{rgb}{0.97,0.97,1}
 \newcommand{\passthrough}[1]{\colorbox{lightgray}{#1}}
