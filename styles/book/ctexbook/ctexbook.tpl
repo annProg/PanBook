@@ -89,6 +89,7 @@ $endfor$
 \pagestyle{fancy}
 
 % 优化不同设备封面显示
+\usepackage{wallpaper}
 \newcommand{\titlepc}{\Huge}
 \newcommand{\subtitlepc}{\Large}
 \newcommand{\titlemobile}{\Large}
@@ -108,10 +109,9 @@ $endfor$
 \begin{titlepage}
   \thispagestyle{empty}
   \noindent\fboxsep=0pt
-$if(cover)$
-  \ThisTileWallPaper{\paperwidth}{\paperheight}{$cover$}
-$else$
-  \ThisTileWallPaper{\paperwidth}{\paperheight}{$if(background)$$background$$else$images/29.png$endif$}
+$if(background)$
+  \ThisTileWallPaper{\paperwidth}{\paperheight}{$background$}
+$endif$
 	\vspace{.18\textheight}
 	\begin{center}
 	$if(title)$
@@ -133,14 +133,13 @@ $else$
 	$if(author)$
 		$for(author)$$author$$sep$ \par $endfor$ % Author name
 	$endif$
-	\vfill\centering{使用 PanBook 编译 \par \today\par}
+	\vfill\centering{$if(publisher)$$publisher$$else$使用 PanBook 编译 \par \today$endif$\par}
 	$if(device)$
 		\vspace$device$
 	$else$
 		\vspace{.05\textheight}
 	$endif$
 	\end{center}
-$endif$
 \end{titlepage}
 
 $if(graphics)$
