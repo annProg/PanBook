@@ -1,7 +1,4 @@
 #!/bin/bash
-
-# use this path to set custom addOptions, PANDOCVARS and LSTSET, COPYPAGE
-
 note "use -V device:(pc|mobile|kindle) to produce different size of pdf"
 note "use -V cover:(1-60|R|N|filepath) select cover background.R=random,N=no cover,filepath=custom cover file"
 note "use -V pagestyle:style to set pagestyle"
