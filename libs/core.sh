@@ -132,9 +132,10 @@ function initMakefile() {
 # 用户定义的模板、字体复制到 build 目录
 function userDefined() {
 	if [ "${_P[template]}"x != ""x ];then
-		cp -rfu $SCRIPTDIR/${_G[tpldir]}/${_P[template]}/* ${_G[build']} 2>/dev/null
-		cp -rfu $CWD/${_G[tpldir]}/${_P[template]}/* ${_G[build']} 2>/dev/null
-		[ ! -f $CWD/build/${_P[template]}.tpl ] && _error "Template ${_P[template]} not found."
+		cp -rfu $SCRIPTDIR/${_G[tpldir]}/${_P[template]}/* ${_G[build]} 2>/dev/null
+		cp -rfu $CWD/${_G[tpldir]}/${_P[template]}/* ${_G[build]} 2>/dev/null
+		_P[template]=${_P[template]}.tpl
+		[ ! -f $CWD/build/${_P[template]} ] && _error "Template ${_P[template]} not found."
 	fi
 	
 	cp -rfu $SCRIPTDIR/${_G[fontdir]}/* ${_G[build]}/${_G[fontdir]} 2>/dev/null
