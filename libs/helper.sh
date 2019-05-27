@@ -210,7 +210,7 @@ function _list() {
 function style_list() {
 	ls $SCRIPTDIR/${_G[style$1]} |tr ' ' '\n'
 	if [ "$CWD"x != "$SCRIPTDIR"x ];then
-		ls $CWD/${_G[style$1]} |tr ' ' '\n'
+		ls $CWD/${_G[style$1]} 2>/dev/null |tr ' ' '\n'
 	fi
 }
 
