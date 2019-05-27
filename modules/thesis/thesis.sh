@@ -4,10 +4,10 @@ _H[thesis]="make thesis"
 
 function func_thesis() {
 	initBody
-	initBib true
+	initBib
 	initMetadataFile
-	initMatter ${_G[frontmatter]}
-	initMatter ${_G[backmatter]}
+	initMatter frontmatter
+	initMatter backmatter
 	initMakefile
 
 	getArrayVar _G style elegantpaper

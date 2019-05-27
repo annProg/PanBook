@@ -4,7 +4,7 @@ _H[slide]="make slide"
 
 function func_slide() {
 	initBody
-	initBib true
+	initBib
 	initMakefile
 
 	getArrayVar _G style metropolis

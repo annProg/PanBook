@@ -85,9 +85,7 @@ function compatible()
 
 function initMetadataFile() {
 	if [ ! -f ${_P[metadata-file]} ];then
-		if [ "$1"x == "true"x ];then
-			cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/metadata.yaml ${_P[metadata-file]}
-		fi
+		cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/metadata.yaml ${_P[metadata-file]}
 	fi
 }
 
@@ -95,17 +93,13 @@ function initMetadataFile() {
 function initMatter() {
 	[ $# -lt 1 ] && return
 	if [ ! -f ${_G[workdir]}/${_G[$1]} ];then
-		if [ "$2"x == "true"x ];then
-			cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/${_G[$1]} ${_G[workdir]}/${_G[$1]}
-		fi
+		cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/${_G[$1]} ${_G[workdir]}/${_G[$1]}
 	fi
 }
 
 function initBib() {
 	if [ ! -f ${_P[bibliography]} ];then
-		if [ "$1"x == "true"x ];then
-			cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/bibliography.bib ${_P[bibliography]}
-		fi
+		cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/bibliography.bib ${_P[bibliography]}
 	fi	
 }
 

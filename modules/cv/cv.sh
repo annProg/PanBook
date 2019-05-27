@@ -4,7 +4,7 @@ _H[cv]="make curriculum vitae"
 
 function cvMeta() {
 	initBody cv.md
-	initBib true
+	initBib
 	initMakefile
 	photoFile=${_G[imgdir]}/photo.png
 	[ ! -f $photoFile ] && cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/images/photo.png $photoFile	

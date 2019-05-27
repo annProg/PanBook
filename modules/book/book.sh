@@ -4,10 +4,10 @@ _H[book]="make ebook"
 
 function func_book() {
 	initBody
-	initBib true
+	initBib
 	initMetadataFile
-	initMatter ${_G[frontmatter]}
-	initMatter ${_G[backmatter]}
+	initMatter frontmatter
+	initMatter backmatter
 	initMakefile
 
 	getArrayVar _G style ctexbook
