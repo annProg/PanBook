@@ -52,14 +52,14 @@ end
 
 -- 将header拼成meta yaml格式 -- 改为直接创建rawblock
 -- header = '---\nheader-includes:\n  - |\n    ' .. string.gsub(header, '\n', '\n    ') .. '\n...'
-custom_header = pandoc.MetaBlocks({pandoc.RawBlock("latex", header)})
+custom_header = pandoc.RawBlock("latex", header)
 
 return {
 	{
 		Meta = function(meta)
-			k='header-includes'
+            k='header-includes'
 			if meta[k] == nil then
-				meta[k] = {custom_header}
+				meta[k] = pandoc.MetaBlocks({custom_header})
 			else
 				-- MetaBlock和MetaList处理方式不同
 				t = meta[k].tag
