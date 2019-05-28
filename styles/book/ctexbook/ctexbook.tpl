@@ -133,7 +133,7 @@ $endif$
 	$if(author)$
 		$for(author)$$author$$sep$ \par $endfor$ % Author name
 	$endif$
-	\vfill\centering{$if(publisher)$$publisher$$else$使用 PanBook 编译 \par \today$endif$\par}
+	\vfill\centering{$if(publisher)$$publisher$$else$使用 PanBook 编译 \par$endif$ \today\par}
 	$if(device)$
 		\vspace$device$
 	$else$
