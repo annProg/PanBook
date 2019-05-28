@@ -64,7 +64,7 @@ return {
 				-- MetaBlock和MetaList处理方式不同
 				t = meta[k].tag
 				if t == "MetaList" then
-					meta[k][#meta[k]+1] = custom_header
+					meta[k][#meta[k]+1] = pandoc.MetaBlocks({custom_header})
 				else
 					table.insert(meta[k], custom_header)
 				end
