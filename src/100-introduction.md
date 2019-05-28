@@ -31,9 +31,9 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 
 
 ### 开始使用
-假设目录为 `/d/dev/mybook`，使用方法见代码[@panbookhelp]。
+假设目录为 `/d/dev/mybook`，使用方法见[@lst:panbookhelp]。
 
-```{#panbookhelp .bash caption="Panbook Help"}
+```{#lst:panbookhelp .bash caption="Panbook Help"}
 $ cd /d/dev/mybook
 $ panbook -h
   eBook maker base pandoc
@@ -69,11 +69,11 @@ $ panbook -h
 
 以书籍为例，执行 `panbook book`，会自动生成书籍模板，接着编辑`src`目录下的`Markdown`源码即可。
 
-## 目录规范{#standarddir}
+## 目录规范{#sec:standarddir}
 
-标准目录结构如代码[@code:structure]所示。
+标准目录结构如[@lst:structure]所示。
 
-```{#code:structure .bash caption="目录规范"}
+```{#lst:structure .bash caption="目录规范"}
 .
 ├── templates                               # 自定义模板
 ├── styles                                  # 自定义风格
@@ -101,7 +101,7 @@ $ panbook -h
 
 ## 兼容性
 
-为了能编译不满足以上规范[@standarddir]的源码，提供以下方式。
+为了能编译不满足[@sec:standarddir]定义规范的源码，提供以下方式。
 
 - 通过参数`--src`自定义书籍源码目录（默认为`src`）
 - 通过参数`--imgdir`自定义书籍源码目录（默认为`src/images`）
@@ -121,7 +121,7 @@ introduction.md body
 how-to-use.md   body
 ```
 
-## 注意事项{#title:note}
+## 注意事项{#sec:note}
 
 - Markdown源码文件需要使用UTF-8编码。以Notepad++为例，依次选择**格式，以UTF-8无BOM格式编码**即可正确设置编码。
 - Pandoc扩展的Markdown语法要求在标题前留出一个空行，因此按章节拆分的多个Markdown文件，开头需要空一行，否则pandoc不能正确识别标题。

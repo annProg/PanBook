@@ -155,7 +155,7 @@ To make references into hyperlinks to referenced element, enable `linkReferences
 #### Custom prefix per-reference
 It’s possible to provide your own prefix per-reference, f.ex. `[Prefix @reference]` will replace default prefix (`fig./sec./`etc) with prefix verbatim, e.g. `[Prefix @fig:1]` will be rendered as Prefix 1 instead of fig. 1.
 
-In citation group, citations with the same prefix will be grouped. So, for example `[A @fig:1; A @fig:2; B @fig:3]` will turn into A 1, 2, B 3. It can be used to an advantage, although it’s a bit more cumbersome than it should be, e.g. `[Appendices @sec:A1; Appendices @sec:A2; Appendices @sec:A3]` will turn into Appendices @A1-@A3 (with @A1 and @A3 being relevant section numbers). Note that non-contiguous sequences of identical prefixes will not be grouped.
+In citation group, citations with the same prefix will be grouped. So, for example `[A @fig:1; A @fig:2; B @fig:3]` will turn into A 1, 2, B 3. It can be used to an advantage, although it’s a bit more cumbersome than it should be, e.g. `[Appendices @sec:A1; Appendices @sec:A2; Appendices @sec:A3]` will turn into Appendices `@A1-@A3` (with @A1 and `@A3` being relevant section numbers). Note that non-contiguous sequences of identical prefixes will not be grouped.
 
 **Not supported with cleveref LaTeX output.**
 

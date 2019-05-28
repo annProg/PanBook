@@ -4,5 +4,10 @@ listingTitle: "代码"
 lofTitle: "插图列表"
 lotTitle: "表格列表"
 lolTitle: "代码列表"
+lstPrefix: "代码"
+figPrefix: "图"
+eqnPrefix: "公式"
+tblPrefix: "表"
+secPrefix: "章节"
 linkReferences: true
 listings: true
