@@ -1,12 +1,11 @@
 regext copyright
 getArrayVar _G "ext-copyright" true
-_G[ext_copyright_filter]="$SCRIPTDIR/${_G[ext_copyright]}/fenced_divs_columns.lua"
-getArrayVar _G ext_copyright_tex "$SCRIPTDIR/${_G[ext_copyright]}/add-copyright-page.tex"
+getArrayVar _G ext-copyright-tex "$SCRIPTDIR/${_G[extdir]}/copyright/add-copyright-page.tex"
 
 function ext_copyright() {
 	getArrayVar _V licence "ccncnd"
-	if [ "${_G[ext-copyright]}"x == "true"x ];then
-		_F[copyright]="--lua-filter ${_G[ext_copyright_filter]}"
+	if [ "${_G[ext-copyright]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
+		writeHeader "${_G[ext-copyright-tex]}"
 	fi
 }
 

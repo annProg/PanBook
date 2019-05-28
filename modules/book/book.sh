@@ -20,8 +20,8 @@ function func_book() {
 
 
 	# 版权页(todo)
-	#copyrightPage
-	#[ "$copyright"x == "true"x ] && (cat $COPYPAGE;echo) >> $HEADERS
+	getArrayVar _V copyright true
+	getArrayVar _V licence ccnd
 
 	# 生成前言和后记
 	custom_filter=${_F[style-${_G[function]}-${_G[style]}]}
@@ -35,6 +35,7 @@ function func_book() {
 		ext_listings
 		ext_grade
 		ext_column
+		ext_copyright
 
 		pandoc ${_G[frontmatter]} -o frontmatter.tex --listings --top-level-division=${_P[top-level-division]} $custom_filter
 		pandoc ${_G[backmatter]} -o backmatter.tex --listings --top-level-division=${_P[top-level-division]} $custom_filter
