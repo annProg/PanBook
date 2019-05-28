@@ -6,7 +6,7 @@ DIR ?= /PanBook
 OWNER ?= annProg
 REPO ?= PanBook
 TAG ?= $(shell git rev-parse --short HEAD)
-DIVISION = --top-level-division=part
+DIVISION = --top-level-division=chapter
 
 all: ctex ctex6in ctexart elegantbook elegantnote elegantpaper epub online
 book: ctex ctex6in elegantbook
