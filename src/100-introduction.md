@@ -125,6 +125,7 @@ how-to-use.md   body
 
 - Markdown源码文件需要使用UTF-8编码。以Notepad++为例，依次选择**格式，以UTF-8无BOM格式编码**即可正确设置编码。
 - Pandoc扩展的Markdown语法要求在标题前留出一个空行，因此按章节拆分的多个Markdown文件，开头需要空一行，否则pandoc不能正确识别标题。
+- 请勿将正文文件命名为 `*frontmatter.md`或者`*backmatter.md`，这2个文件有特殊用途。
 
 ## 书籍元数据
 在`src/metadata.yaml`中使用[Yaml语言](http://www.ruanyifeng.com/blog/2016/07/yaml.html) 定义书籍的数据及可用的模板变量，如代码\ref{code:template-var}所示。
