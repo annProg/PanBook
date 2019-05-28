@@ -1,6 +1,6 @@
 
-# 使用说明
-此项目基于`Pandoc`和`LaTeX`，提供了一些开箱即用的书籍，论文，幻灯片及简历模板，以及一些`lua filter`扩展。用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`或`epub`格式。
+# PanBook手册
+`PanBook`是基于`Pandoc`和`LaTeX`开发的一个工具，提供了一些开箱即用的书籍，论文，幻灯片及简历模板，以及一些`lua filter`扩展。用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`或`epub`格式。
 
 ## 快速开始
 
@@ -12,7 +12,7 @@
 - 下载[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本并安装
 - 下载[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本并安装
 
-### 下载本项目
+### 下载PanBook
 
 打开`msys2`，假设工作目录为`/d/dev`
 
@@ -31,7 +31,7 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 
 
 ### 开始使用
-假设电子书目录为 `/d/dev/mybook`，使用方法见代码\ref{panbookhelp}。
+假设目录为 `/d/dev/mybook`，使用方法见代码[@panbookhelp]。
 
 ```{#panbookhelp .bash caption="Panbook Help"}
 $ cd /d/dev/mybook
@@ -67,23 +67,25 @@ $ panbook -h
         -l --list   function list(if exists)
 ```
 
+以书籍为例，执行 `panbook book`，会自动生成书籍模板，接着编辑`src`目录下的`Markdown`源码即可。
 
 ## 目录规范{#standarddir}
 
-标准目录结构如代码\ref{code:structure}所示。
+标准目录结构如代码[@code:structure]所示。
 
 ```{#code:structure .bash caption="目录规范"}
 .
-├── templates                               # 自定义模板（可选）
-├── fonts                                   # 自定义字体（可选）
+├── templates                               # 自定义模板
+├── styles                                  # 自定义风格
+├── extensions                              # 自定义扩展
+├── fonts                                   # 自定义字体
 ├── build                                   # 电子书构建目录
-├── config                                  # 自定义转换选项（可选）
 ├── src                                     # Markdown源码目录
 │   └── images                              # 源码涉及插图目录
-│   └── metadata.yaml                       # 书籍元数据文件（必须）
-│   └── frontmatter.md                      # 书籍元数据文件（内容可为空，必须存在）
-│   └── backmatter.md                       # 书籍元数据文件（内容可为空，必须存在）
-│   └── compatible.conf                     # 兼容性配置文件（可选）
+│   └── metadata.yaml                       # 书籍元数据文件
+│   └── frontmatter.md                      # 书籍元数据文件
+│   └── backmatter.md                       # 书籍元数据文件
+│   └── compatible.conf                     # 兼容性配置文件
 │   └── 1.0-chapter1.md                     # 正文，命名须保证能按正确章节顺序列出
 │   └── 1.1-chapter1-section2.md            
 │   └── 2.0-chapter2.md                     
@@ -99,11 +101,11 @@ $ panbook -h
 
 ## 兼容性
 
-为了能编译不满足以上规范\ref{standarddir}的源码，提供以下方式。
+为了能编译不满足以上规范[@standarddir]的源码，提供以下方式。
 
-- 通过环境变量`SRC`自定义书籍源码目录（默认为`src`）
-- 通过环境变量`IMGDIR`自定义书籍源码目录（默认为`src/images`）
-- 如果源码不满足正确章节顺序列出，或者前言后记不规范，可通过兼容性配置文件（`$SRC/compatible.conf`）配置各源码的用途
+- 通过参数`--src`自定义书籍源码目录（默认为`src`）
+- 通过参数`--imgdir`自定义书籍源码目录（默认为`src/images`）
+- 如果源码不满足正确章节顺序列出，或者前言后记不规范，可通过兼容性配置文件（`src/compatible.conf`）配置各源码的用途
 
 ### 兼容性配置文件示例
 
