@@ -7,7 +7,7 @@ HTML 是其主要输出对象；然而Pandoc 则是针对多种输出格式而�
 要文件元素。
 
 Pandoc Markdown语法介绍可以在[Pandoc主页](http://www.pandoc.org/MANUAL.html#pandocs-markdown) 
-找到。以下翻译大部分部分摘自[tzengyuxiao的翻译](http://pages.tzengyuxio.me/pandoc/)，
+找到。以下翻译大部分部分摘自tzengyuxiao的翻译[@tzengyuxio]，
 在此向译者表示感谢。
 
 ## 段落

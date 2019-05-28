@@ -1,10 +1,9 @@
 ---
-title: PanBook项目使用手册
+title: PanBook使用手册
 subtitle: 用Markdown和Pandoc写作
 #cover: images/cover.jpg          # 是否使用自定义封面，如果不使用，则自动生成封面（仅ctex模板有效）
 author:          # 作者（数组）
   - An He
-  - He An
 date: \today     # 日期
 lof: true        # 是否生成插图列表页
 lot: true        # 是否生成表格列表页
