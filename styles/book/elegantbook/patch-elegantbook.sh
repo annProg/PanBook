@@ -2,9 +2,9 @@
 
 # use this path to set custom addOptions, PANDOCVARS and LSTSET COPYPAGE
 
-note "use -V device=(pc|mobile|kindel) to produce different size of pdf"
-note "use -V cover=path to use custom cover image"
-note "use -V logo=path to use custom logo image"
+note "use -V device:(pc|mobile|kindel) to produce different size of pdf"
+note "use -V cover:path to use custom cover image"
+note "use -V logo:path to use custom logo image"
 
 # 启用扩展
 ext_device
