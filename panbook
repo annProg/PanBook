@@ -72,12 +72,14 @@ _P=(
 	[listings]=""
 	[csl]=$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl              # 默认cls文件路径（需要在获取参数后重置）
 	[bibliography]=$CWD/src/bibliography.bib                          # 默认bibliography路径（需要在获取参数后删除）
-	[metadata-file]=$CWD/src/metadata.yaml                            #默认metadata.yaml（需要在获取参数后重置）	
+	[metadata-file]=$CWD/src/metadata.yaml                            # 默认metadata.yaml（需要在获取参数后重置）	
 	[pdf-engine]=xelatex
 	[number-sections]=""
 )
 _V=()
-_M=()
+_M=(
+	[link-citations]=true                                             #  make your citations hyperlinks to the corresponding bibliography entries
+)
 _F=()
 
 # 存储帮助信息
