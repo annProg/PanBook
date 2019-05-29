@@ -11,7 +11,8 @@
 - 下载[msys2](https://www.msys2.org/) 并安装
 - 下载[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本并安装
 - 下载[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本并安装
-- 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，即`/c/Users/myname/AppData/Local/Pandoc`）
+- 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，\
+  即`/c/Users/myname/AppData/Local/Pandoc`）
 
 #### 下载PanBook
 
