@@ -73,10 +73,10 @@ $header-includes$
 $endfor$
 
 
-$if(equote)$
-\equote{$equote$}
+$if(extrainfo)$
+\extrainfo{$extrainfo$}
 $else$
-\equote{使用PanBook编译}
+\extrainfo{使用PanBook编译}
 $endif$
 
 $if(logo)$
