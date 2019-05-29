@@ -11,20 +11,21 @@
 - 下载[msys2](https://www.msys2.org/) 并安装
 - 下载[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本并安装
 - 下载[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本并安装
+- 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，即`/c/Users/myname/AppData/Local/Pandoc`）
 
-### 下载PanBook
+#### 下载PanBook
 
-打开`msys2`，假设工作目录为`/d/dev`
+打开`msys2`，假设工作目录为`/d/dev`，执行[@lst:gitclone]。
 
-```
+```{#lst:gitclone .bash caption="下载PanBook"}
 $ cd /d/dev
 $ git clone https://github.com/annProg/PanBook
 ```
 
-### 设置环境变量
-需要将本项目，`texlive`及`Pandoc`加入环境变量，编辑`~/.bashrc`，加入以下内容
+#### 设置环境变量
+需要将本项目，`texlive`及`Pandoc`加入环境变量，如[@lst:setpath]所示。
 
-```
+```{#lst:setpath .bash caption="设置环境变量"}
 $ tail -n 1 ~/.bashrc
 export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```
@@ -107,9 +108,9 @@ $ panbook -h
 - 通过参数`--imgdir`自定义书籍源码目录（默认为`src/images`）
 - 如果源码不满足正确章节顺序列出，或者前言后记不规范，可通过兼容性配置文件（`src/compatible.conf`）配置各源码的用途
 
-### 兼容性配置文件示例
+兼容性配置文件示例见[@lst:compatible]。
 
-```
+```{#lst:compatible caption="兼容性配置"}
 # 第一列源码文件名，第二列源码类型，类型包含 frontmatter(前言），backmatter（后记），exclude（排除的文件），
 # body（正文）。各类型中要求按正确顺序排列源码文件
 preface.md frontmatter
@@ -160,7 +161,7 @@ header-includes:
 # My chapter {epub:type=prologue .unnumbered}
 ```
 
-支持如下属性如表\ref{table:epub-type-attr}：
+支持如下属性见[@tbl:epub-type-attr]。
 
 --------------------------------------------------
 Attr                                    Type
@@ -173,4 +174,18 @@ preface,seriespage,titlepage
 afterword,appendix,colophon	           backmatter
 conclusion,epigraph
 ----------------------------------------------------
-: epub:type of first section	epub:type of body\label{table:epub-type-attr}
+: epub标题支持的属性 {#tbl:epub-type-attr}
+
+## 写作工具
+推荐使用[Visual Studio Code](https://code.visualstudio.com/)。
+
+推荐插件见[@tbl:vscodeplugin]。
+
+--------------------------------------------------------
+插件                               功能
+--------------------------      ------------------------
+Markdown Preview                  Markdown实时预览
+LaTeX language support            LaTeX语言高亮
+All Autocomplete                  自动补全（支持单词补全)
+---------------------------------------------------------
+: 推荐插件 {#tbl:vscodeplugin}
