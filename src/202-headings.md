@@ -26,7 +26,7 @@ I like several of their flavors of ice cream:
 #22, for example, and #5.
 ```
 
-这也是前一章所述注意事项[@sec:note]的原因。
+这也是[@sec:note]所述注意事项的原因。
 
 ### 标题标识符
 #### Extension: header_attributes
