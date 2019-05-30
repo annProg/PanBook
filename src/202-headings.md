@@ -3,8 +3,8 @@
 有两种不同形式的标题语法，Setext 以及Atx。Setext风格的标题是由一行文字底下接着一
 行=符号（用于一阶标题）或-符号（用于二阶标题）所构成；Atx风格的标题是由一到六个#符
 号以及一行文字所组成，你可以在文字后面加上任意数量的#符号。由行首起算的#符号数量决
-定了标题的阶层，如代码\ref{code:markdownTitle}所示。
-```{#code:markdownTitle .markdown caption="markdown标题"}
+定了标题的阶层，如代码[@lst:markdownTitle]所示。
+```{#lst:markdownTitle .markdown caption="Markdown标题"}
 Setext A level-one header
 ==================
 
@@ -20,13 +20,13 @@ Setext A level-two header
 
 #### Extension: blank_before_header
 原始markdown语法在标题之前并不需要预留空白行。Pandoc则需要（除非标题位于文件最开始的
-地方）。这是因为以#符号开头的情况在一般文字段落中相当常见，这会导致非预期的标题。例如：
-```
+地方）。这是因为以#符号开头的情况在一般文字段落中相当常见，这会导致非预期的标题。例如[@lst:blank_before_header]。
+```{#lst:blank_before_header caption="标题前置空行"}
 I like several of their flavors of ice cream:
 #22, for example, and #5.
 ```
 
-这也是前一章所述注意事项\ref{title:note}的原因。
+这也是前一章所述注意事项[@sec:note]的原因。
 
 ### 标题标识符
 #### Extension: header_attributes
