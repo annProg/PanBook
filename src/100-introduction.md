@@ -193,6 +193,23 @@ All Autocomplete                  自动补全（支持单词补全)
 ---------------------------------------------------------
 : 推荐插件 {#tbl:vscodeplugin}
 
+使用[@lst:vscodeMsys] 配置将终端改为`msys2`的`bash`。
+
+```{#lst:vscodeMsys .json caption="VS Code使用msys2"}
+{
+    "terminal.integrated.shell.windows": "D:\\msys64\\usr\\bin\\bash.exe",
+    "terminal.integrated.shellArgs.windows": ["-l"],
+    "terminal.integrated.env.windows": {
+        "CHERE_INVOKING": "1",
+        "MSYSTEM": "MINGW64",
+	},
+	"git.postCommitCommand": "push",
+    "git.path": "D:\\msys64\\git-vscode.bat",
+    "editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+}  
+```
+
 ::: {.note}
 通过配置 VS Code Tasks，使用`PanBook`部分编译参数`--part=md文件名`，可实现快捷键（`ctrl+shift+b`）编译当前Markdown源文件。
 :::
