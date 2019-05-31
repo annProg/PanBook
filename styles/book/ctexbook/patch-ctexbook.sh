@@ -10,6 +10,7 @@ getArrayVar _V "classoption" "fancyhdr,bookmark"
 getArrayVar _V "pagestyle" "fancy"
 getArrayVar _V "device" "pc"
 getArrayVar _V "cover" "29"
+getArrayVar _V "titlepage" "true"
 
 echo ${_V[cover]} |grep -q '[^0-9]'
 if [ $? -eq 1 ];then
@@ -22,4 +23,5 @@ elif [ ${_V[cover]} == "N" ];then
 	_V[background]=""
 else
 	_V[background]=${_V[cover]}
+	unset _V[titlepage]
 fi

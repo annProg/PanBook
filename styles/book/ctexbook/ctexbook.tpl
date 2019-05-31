@@ -112,6 +112,7 @@ $endfor$
 $if(background)$
   \ThisTileWallPaper{\paperwidth}{\paperheight}{$background$}
 $endif$
+$if(titlepage)$
 	\vspace{.18\textheight}
 	\begin{center}
 	$if(title)$
@@ -140,6 +141,7 @@ $endif$
 		\vspace{.05\textheight}
 	$endif$
 	\end{center}
+$endif$
 \end{titlepage}
 
 $if(graphics)$
