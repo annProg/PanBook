@@ -1,8 +1,9 @@
 regext note
 getArrayVar _G "ext-note" true
-getArrayVar _G "ext-note-tex" "$SCRIPTDIR/${_G[extdir]}/note/note.tex"
+getArrayVar _G "ext-note-style" "bclogo"
 
 function ext_note() {
+	getArrayVar _G "ext-note-tex" "$SCRIPTDIR/${_G[extdir]}/note/${_G[ext-note-style]}-note.tex"
 	# 依赖add header功能
 	if [ "${_G[ext-note]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		# 第一个参数为 tex 时才使用扩展种的note定义（有些文档类定义了note环境）
@@ -15,6 +16,7 @@ function ext_note() {
 
 function ext_note_help() {
 	echo -e "\t-G ext-note:<true|false>                        enable note(default true)"
-	echo -e "\t-G ext-note-tex:<custom note set file>         change note set file"
+	echo -e "\t-G ext-note-tex:<custom note set file>          change note set file"
+	echo -e "\t-G ext-note-style:<bclogo|tcolorbox>            select note style"
 	exit 0
 }
