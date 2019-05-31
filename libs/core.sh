@@ -248,4 +248,5 @@ function partCompile() {
 	_V[documentclass]=ctexart
 	unset _P[template]
 	_G[body]=${_G[part]}
+	_G[ofile]=${_G[build]}/part
 }
