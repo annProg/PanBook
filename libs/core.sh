@@ -125,7 +125,7 @@ function initMakefile() {
 
 function initVscodeTask() {
 	[ ! -d $CWD/.vscode ] && mkdir $CWD/.vscode
-	[ ! -f $CWD/.vscode/tasks.json ] && cp $SCRIPTDIR/.vscode/tasks.json
+	[ ! -f $CWD/.vscode/tasks.json ] && cp $SCRIPTDIR/.vscode/tasks.json $CWD/.vscode
 }
 
 # 用户定义的模板、字体复制到 build 目录
