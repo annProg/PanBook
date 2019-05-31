@@ -12,9 +12,9 @@ all: ctex ctex6in ctexart elegantbook elegantnote elegantpaper epub online
 book: ctex ctex6in elegantbook
 
 ctex: 
-	panbook book -V cover=R $(DIVISION)
+	panbook book -V cover:R $(DIVISION)
 ctex6in: 
-	panbook book -V cover=R -V device=mobile $(DIVISION)
+	panbook book -V cover:R -V device:mobile $(DIVISION)
 ctexart:
 	panbook book --style=ctexart $(DIVISION)
 elegantbook: 
