@@ -254,4 +254,5 @@ function partCompile() {
 	unset _P[template]
 	_G[body]=${_G[part]}
 	_G[ofile]=${_G[build]}/part
+	_P[top-level-division]=section
 }
