@@ -187,7 +187,7 @@ conclusion,epigraph
 --------------------------      ------------------------
 Markdown Preview                  Markdown实时预览
 
-LaTeX language support            LaTeX语言高亮
+\LaTeX language support            \LaTeX 语言高亮
 
 All Autocomplete                  自动补全（支持单词补全)
 ---------------------------------------------------------
