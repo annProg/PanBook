@@ -193,5 +193,6 @@ All Autocomplete                  自动补全（支持单词补全)
 ---------------------------------------------------------
 : 推荐插件 {#tbl:vscodeplugin}
 
-
+::: {.note}
 通过配置 VS Code Tasks，使用`PanBook`部分编译参数`--part=md文件名`，可实现快捷键（`ctrl+shift+b`）编译当前Markdown源文件。
+:::
