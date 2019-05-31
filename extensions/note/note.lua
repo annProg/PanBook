@@ -8,4 +8,5 @@ function Div(el)
 		table.insert(ret.content, pandoc.RawInline("latex", "\\end{note}"))
 		return ret
 	end
+	return el
 end
