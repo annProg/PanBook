@@ -53,7 +53,6 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 假设电子书目录为 `/d/dev/mybook`
 
 ```
-$ cd /d/dev/mybook
 $ panbook -h
   eBook maker base pandoc
 
@@ -71,11 +70,13 @@ $ panbook -h
         saveimg     save image url to local
         eps         convert gif to eps
         ext         extensions help
-  Available OPTIONS:
+  Available OPTIONS(you can also use pandoc long option):
         --style     specify a style
         --crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)
         --src       specify src dir name(default src)
         --imgdir    specify image dir name(default src/images)
+        --part      only compile specified markdown file
+        --trace     trace mode
         -V key:val  same with pandoc -V option
         -M key:val  same with pandoc -M option
         -G key:val  change panbook global variable

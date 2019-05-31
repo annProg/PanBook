@@ -273,6 +273,8 @@ function printhelp() {
 	echo -e "\t--crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)"
 	echo -e "\t--src       specify src dir name(default src)"
 	echo -e "\t--imgdir    specify image dir name(default src/images)"
+	echo -e "\t--part      only compile specified markdown file"
+	echo -e "\t--trace     trace mode"
 	echo -e "\t-V key:val  same with pandoc -V option"
 	echo -e "\t-M key:val  same with pandoc -M option"
 	echo -e "\t-G key:val  change panbook global variable"

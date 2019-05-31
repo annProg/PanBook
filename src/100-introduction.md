@@ -54,11 +54,13 @@ $ panbook -h
         saveimg     save image url to local
         eps         convert gif to eps
         ext         extensions help
-  Available OPTIONS:
+  Available OPTIONS(you can also use pandoc long option):
         --style     specify a style
         --crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)
         --src       specify src dir name(default src)
         --imgdir    specify image dir name(default src/images)
+        --part      only compile specified markdown file
+        --trace     trace mode
         -V key:val  same with pandoc -V option
         -M key:val  same with pandoc -M option
         -G key:val  change panbook global variable
