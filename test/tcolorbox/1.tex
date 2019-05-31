@@ -1,0 +1,25 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{fontawesome5}
+\tcbuselibrary{skins, breakable, theorems}
+
+\newtcbtheorem{note}{\faLightbulb\  注意}%
+  {enhanced, breakable,
+    colback = white, colframe = cyan, colbacktitle = cyan,
+    attach boxed title to top left = {yshift = -2mm, xshift = 5mm},
+    boxed title style = {sharp corners},
+    fonttitle = \sffamily\bfseries, separator sign = {).~}}{qst}
+
+\begin{document}
+\section{测试}
+
+\begin{note}{函数}{example}
+已知函数 $ f(x) = (x - 2)\mathrm{e}^{2} + a (x - 1)^{2} $ 有两个零点.
+\begin{enumerate}[label=(\arabic*)]
+  \item 求 $ a $ 的取值范围;
+  \item 设 $ x_{1} $, $ x_{2} $ 是 $ f(x) $ 的两个零点，证明 $ x_{1} + x_{2} < 2 $.
+\end{enumerate}
+\end{note}
+
+\end{document}
