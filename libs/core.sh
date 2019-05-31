@@ -123,6 +123,11 @@ function initMakefile() {
 	fi
 }
 
+function initVscodeTask() {
+	[ ! -d $CWD/.vscode ] && mkdir $CWD/.vscode
+	[ ! -f $CWD/.vscode/tasks.json ] && cp $SCRIPTDIR/.vscode/tasks.json
+}
+
 # 用户定义的模板、字体复制到 build 目录
 function userDefined() {
 	if [ "${_P[template]}"x != ""x ];then

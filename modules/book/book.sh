@@ -9,6 +9,7 @@ function func_book() {
 	initMatter frontmatter
 	initMatter backmatter
 	initMakefile
+	initVscodeTask
 
 	getArrayVar _G style ctexbook
 	getArrayVar _P "top-level-division" "chapter"

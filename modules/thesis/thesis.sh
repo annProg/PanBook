@@ -9,6 +9,7 @@ function func_thesis() {
 	initMatter frontmatter
 	initMatter backmatter
 	initMakefile
+	initVscodeTask
 
 	getArrayVar _G style elegantpaper
 	getArrayVar _P "top-level-division" "chapter"
