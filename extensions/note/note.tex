@@ -1,0 +1,14 @@
+\usepackage[most]{tcolorbox}
+\usepackage[fontawesome5]
+
+\newtcolorbox{note}[1][]{%
+  enhanced jigsaw, % better frame drawing
+  borderline west={2pt}{0pt}{red}, % straight vertical line at the left edge
+  sharp corners, % No rounded corners
+  boxrule=0pt, % no real frame,
+  fonttitle={\large\bfseries},
+  coltitle={black},  % Black colour for title
+  title={\faHandPointRight~ \ 注意：\ },  % Fixed title
+  attach title to upper, % Move the title into the box
+  #1
+}
