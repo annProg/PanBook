@@ -1,0 +1,15 @@
+\usepackage[most]{tcolorbox}
+\usepackage{fontawesome5}
+
+\newtcolorbox{warn}[1][]{%
+  enhanced jigsaw, % better frame drawing
+  borderline west={2pt}{0pt}{red}, % straight vertical line at the left edge
+  sharp corners, % No rounded corners
+  boxrule=0pt, % no real frame,
+  fonttitle={\large\bfseries},
+  coltitle={black},  % Black colour for title
+  colback=red!5!white,
+  title={\faExclamationTriangle[regular]\ },  % Fixed title
+  attach title to upper, % Move the title into the box
+  #1
+}

@@ -6,6 +6,7 @@ note "use -V pagestyle:style to set pagestyle"
 # 启用扩展
 ext_device
 ext_note tex
+ext_warn tex
 
 getArrayVar _V "classoption" "fancyhdr,bookmark"
 getArrayVar _V "pagestyle" "fancy"

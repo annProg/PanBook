@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ext_note
+ext_warn tex
 # 默认模板需要禁用mathspec. unicode-math和newtxmath不兼容
 # https://github.com/ElegantLaTeX/ElegantBook/issues/9
 getArrayVar _V mathspec "false"
