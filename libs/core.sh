@@ -250,7 +250,10 @@ function partCompile() {
 	echo > frontmatter.tex
 	echo > backmatter.tex
 	unset _P[toc]
-	_V[documentclass]=ctexart
+	unset _V[pagestyle]
+	_V[documentclass]=article
+	getArrayVar _V CJKmainfont SimSun
+	getArrayVar _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
 	unset _P[template]
 	_G[body]=${_G[part]}
 	_G[ofile]=${_G[build]}/part

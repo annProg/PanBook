@@ -180,9 +180,7 @@ conclusion,epigraph
 : epub标题支持的属性 {#tbl:epub-type-attr}
 
 ## 写作工具
-推荐使用[Visual Studio Code](https://code.visualstudio.com/)。
-
-推荐插件见[@tbl:vscodeplugin]。
+推荐使用 [Visual Studio Code](https://code.visualstudio.com/)。一些有用的插件见[@tbl:vscodeplugin]。
 
 --------------------------------------------------------
 插件                               功能
@@ -196,4 +194,4 @@ All Autocomplete                  自动补全（支持单词补全)
 : 推荐插件 {#tbl:vscodeplugin}
 
 
-通过配置`vscode` Tasks，使用`PanBook`部分编译参数`--part=md文件名`，可实现快捷键（`ctrl`+`shift`+`b`）编译当前Markdown源文件。
+通过配置 VS Code Tasks，使用`PanBook`部分编译参数`--part=md文件名`，可实现快捷键（`ctrl+shift+b`）编译当前Markdown源文件。
