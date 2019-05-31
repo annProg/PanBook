@@ -65,6 +65,8 @@ _G=(
 	[t]=tex
 	[interaction]="-interaction=batchmode"
 	[xelatex]=""
+	[part]=false                                                      # 部分编译
+	[xelatex-times]=2                                                 # xelatex编译次数
 )
 
 _P=(
@@ -125,6 +127,9 @@ do
 	--imgdir=*)
 		_G[imgdir]=${key#*=}
 		shift;;		
+	--part=*)
+		_G[part]=${key#*=}
+		shift;;
 	--trace)
 		_G[trace]=true
 		shift;;

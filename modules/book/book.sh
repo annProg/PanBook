@@ -44,6 +44,7 @@ function func_book() {
 		_P[include-after-body]=backmatter.tex
 	fi
 
+	partCompile
 	getPandocParam
 	getXeLaTeXParam
 	pandoc ${_G[pandoc-param]}
@@ -59,8 +60,9 @@ function func_book() {
 		# 网络图片需要替换为本地文件
 		sed -i -r "s#(\includegraphics\{)http(s)?://(.*)#\1${_G[imgdirrelative]}/\3#g" $TEX_OUTPUT
 
-		xelatex ${_G[xelatex]} -output-directory=${_G[build]} $TEX_OUTPUT #1&>/dev/null
-		xelatex ${_G[xelatex]} -output-directory=${_G[build]} $TEX_OUTPUT #1&>/dev/null
+		for i in `seq 1 ${_G[xelatex-times]}`;do
+			xelatex ${_G[xelatex]} -output-directory=${_G[build]} $TEX_OUTPUT #1&>/dev/null
+		done
 	fi
 	compileStatus ${_G[function]}
 }

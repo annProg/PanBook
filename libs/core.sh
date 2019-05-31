@@ -238,3 +238,14 @@ function getPandocParam() {
 function getXeLaTeXParam() {
 	_G[xelatex]="${_G[interaction]}"
 }
+
+# 局部编译
+function partCompile() {
+	[ ${_G[part]} == "false" ] && return 0
+	echo > frontmatter.tex
+	echo > backmatter.tex
+	unset _P[toc]
+	_V[documentclass]=ctexart
+	unset _P[template]
+	_G[body]=${_G[part]}
+}
