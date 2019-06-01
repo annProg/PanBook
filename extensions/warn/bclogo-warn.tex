@@ -1,5 +1,6 @@
 \usepackage[tikz]{bclogo}
-\definecolor{lightsalmon}{rgb}{1.0, 0.63, 0.48}
+\definecolor{warn}{rgb}{1.0, 0.63, 0.48} % color  lightsalmon
+\definecolor{warnBorder}{rgb}{1.0, 0, 0} % color  red
 \newenvironment{warn}
-{\begin{bclogo}[logo=\bcattention, couleurBarre=red, noborder=true, couleur=lightsalmon]{注意}}
+{\begin{bclogo}[logo=\bcattention, couleurBarre=warnBorder, noborder=true, couleur=warn]{~注意}}
 {\end{bclogo}}

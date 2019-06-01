@@ -1,14 +1,15 @@
 \usepackage[most]{tcolorbox}
 \usepackage{fontawesome5}
-
+\definecolor{warn}{rgb}{1.0, 0.63, 0.48} % color  lightsalmon
+\definecolor{warnBorder}{rgb}{1.0, 0, 0} % color  red
 \newtcolorbox{warn}[1][]{%
   enhanced jigsaw, % better frame drawing
-  borderline west={2pt}{0pt}{red}, % straight vertical line at the left edge
+  borderline west={2pt}{0pt}{warnBorder}, % straight vertical line at the left edge
   sharp corners, % No rounded corners
   boxrule=0pt, % no real frame,
   fonttitle={\large\bfseries},
   coltitle={black},  % Black colour for title
-  colback=red!5!white,
+  colback=warn,
   title={\faExclamationTriangle[regular]\ },  % Fixed title
   attach title to upper, % Move the title into the box
   #1
