@@ -1,4 +1,8 @@
 # 正文
+::: {.introduction caption="本章摘要"}
+#. test
+#. test
+:::
 
 ::: {.info}
 Info
@@ -18,6 +22,11 @@ Tips
 
 ::: {.help}
 Help
+:::
+
+::: {.problemset}
+#. test
+#. test
 :::
 
 # 后记 {-}
