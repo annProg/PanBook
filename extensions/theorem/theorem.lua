@@ -23,20 +23,32 @@ function table.keys( t )
     return keys
 end
 
+function toInlines(el, option)
+	local e = el.attr.classes[1]
+	local inlines = pandoc.utils.blocks_to_inlines({el})
+	local p = pandoc.Para({})
+	table.insert(p.content, pandoc.RawInline("latex", "\\begin{" .. e .. "}" .. option .. "\n"))
+	for k,v in pairs(inlines) do
+		table.insert(p.content, v)
+	end
+	table.insert(p.content, pandoc.RawInline("latex", "\n\\end{" .. e .. "}"))
+	return p
+end
+
 function Theorem(el, option)
 	local e = el.attr.classes[1]
 	local ret = pandoc.Div({})
-	table.insert(ret.content, pandoc.RawBlock("latex", "\\begin{" .. e .. "}" .. option .. "\n"))
+	table.insert(ret.content, pandoc.RawBlock("latex", "\\begin{" .. e .. "}" .. option))
 	for k,v in pairs(el.content) do
 		table.insert(ret.content, v)
 	end
-	table.insert(ret.content, pandoc.RawBlock("latex", "\n\\end{" .. e .. "}"))
+	table.insert(ret.content, pandoc.RawBlock("latex", "\\end{" .. e .. "}"))
 	return ret
 end
 
 function Div(el)
 	if inTable(mathClass, el.attr.classes[1]) then
-		return Theorem(el, "")
+		return toInlines(el, "")
 	end
 
 	if inTable(theoremClass, el.attr.classes[1]) then
