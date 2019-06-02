@@ -35,9 +35,9 @@ function Div(el)
 
 	if inTable(theoremClass, el.attr.classes[1]) then
 		if el.attr.identifier ~= "" then
-			label = el.attr.identifier
+			label = string.gsub(el.attr.identifier, '%a+:', '')
 		else
-			label = theoremPrefix[el.attr.classes[1]] .. ":" .. math.random(10000,99999)
+			label = "random" .. math.random(10000,99999)
 		end
 		if el.attr.attributes['caption'] ~= nil then
 			caption = el.attr.attributes['caption']
