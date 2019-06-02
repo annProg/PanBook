@@ -25,13 +25,12 @@ end
 
 function Theorem(el, option)
 	local e = el.attr.classes[1]
-	local ret = pandoc.Para({})
-	table.insert(ret.content, pandoc.RawInline("latex", "\\begin{" .. e .. "}" .. option .. "\n"))
-	local inlines = pandoc.utils.blocks_to_inlines({el})
-	for k,v in pairs(inlines) do
+	local ret = pandoc.Div({})
+	table.insert(ret.content, pandoc.RawBlock("latex", "\\begin{" .. e .. "}" .. option .. "\n"))
+	for k,v in pairs(el.content) do
 		table.insert(ret.content, v)
 	end
-	table.insert(ret.content, pandoc.RawInline("latex", "\n\\end{" .. e .. "}"))
+	table.insert(ret.content, pandoc.RawBlock("latex", "\n\\end{" .. e .. "}"))
 	return ret
 end
 
