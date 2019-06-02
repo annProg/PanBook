@@ -1,0 +1,20 @@
+\usepackage[tikz]{bclogo}
+\newenvironment{info}
+	{\begin{bclogo}[logo=\bcinfo, couleurBarre=infoBorder, noborder=true, couleur=info]{\infoTitle}}
+	{\end{bclogo}}
+
+\newenvironment{warn}
+	{\begin{bclogo}[logo=\bcattention, couleurBarre=warnBorder, noborder=true, couleur=warn]{\warnTitle}}
+	{\end{bclogo}}
+
+\newenvironment{alert}
+	{\begin{bclogo}[logo=\bcdanger, couleurBarre=alertBorder, noborder=true, couleur=alert]{\alertTitle}}
+	{\end{bclogo}}
+
+\newenvironment{tip}
+	{\begin{bclogo}[logo=\bclampe, couleurBarre=tipBorder, noborder=true, couleur=tip]{\tipTitle}}
+	{\end{bclogo}}
+
+\newenvironment{help}
+	{\begin{bclogo}[logo=\bcquestion, couleurBarre=helpBorder, noborder=true, couleur=help]{\helpTitle}}
+	{\end{bclogo}}
