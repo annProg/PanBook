@@ -237,7 +237,7 @@ function getPandocParam() {
 	getM
 	getP
 	getF
-	_G[pandoc-param]="${_G[crossref]} $crossrefYaml ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
+	_G[pandoc-param]="${_G[crossref]} $crossrefYaml ${_G[f]} ${_G[citeproc]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
 function getXeLaTeXParam() {
