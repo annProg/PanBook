@@ -24,13 +24,12 @@ function table.keys( t )
 end
 
 function Theorem(el, option)
-	e = el.attr.classes[1]
-	ret = pandoc.Para({})
+	local e = el.attr.classes[1]
+	local ret = pandoc.Para({})
 	table.insert(ret.content, pandoc.RawInline("latex", "\\begin{" .. e .. "}" .. option .. "\n"))
-	for k,v in pairs(el.content) do
-		for i,val in pairs(v.content) do
-			table.insert(ret.content, val)
-		end
+	local inlines = pandoc.utils.blocks_to_inlines({el})
+	for k,v in pairs(inlines) do
+		table.insert(ret.content, v)
 	end
 	table.insert(ret.content, pandoc.RawInline("latex", "\n\\end{" .. e .. "}"))
 	return ret
