@@ -30,15 +30,15 @@ I like several of their flavors of ice cream:
 
 ### 标题标识符
 #### Extension: header_attributes
-在标题文字所在行的行尾，可以使用以下语法为标题加上属性：
-```
+在标题文字所在行的行尾，可以使用[@lst:headerattributes0] 语法为标题加上属性。
+```{#lst:header_attributes0 caption="标题标识符"}
 {#identifier .class .class key=value key=value}
 ```
 虽然这个语法也包含加入类别(class)以及键／值形式的属性(attribute)，
 但目前只有标识符(identifier/ID)在输出时有实际作用（且只在部分格式
-的输出，包括：HTML, LaTeX, ConTeXt, Textile, AsciiDoc）。举例来说，
-下面是将标题加上foo标识符的几种方法：
-```markdown
+的输出，包括：HTML, \LaTeX, \ConTeXt, Textile, AsciiDoc）。举例来说，
+[@lst:header_attributes]是将标题加上foo标识符的几种方法。
+```{#lst:header_attributes .markdown caption="标题标识符"}
 # My header {#foo}
 
 ## My header ##    {#foo}
@@ -48,12 +48,9 @@ My other header   {#foo}
 ```
 （此语法与PHP Markdown Extra相容。）
 
-具有unnumbered类别的标题将不会被编号，即使--number-sections的选项是开启
-的。单一连字符号( -)等同于.unnumbered，且更适用于非英文文件中。因此，
-```markdown
+具有`unnumbered`类别的标题将不会被编号，即使`--number-sections`的选项是开启
+的。单一连字符号(`-`)等同于`.unnumbered`，且更适用于非英文文件中。因此[@lst:header_unnumbered]中两行是等价的。
+```{#lst:header_unnumbered .markdown caption="避免标题编号"}
 # My header {-}
-```
-与下面这行是等价的
-```markdown
 # My header {.unnumbered}
 ```
