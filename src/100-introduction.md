@@ -72,17 +72,7 @@ title: PanBook使用手册
 subtitle: 用Pandoc和Markdown写作
 author:          # 作者（数组）
   - An He
-date: \today     # 日期
-copyright: true  # 是否生成版权页
-lof: true        # 是否生成插图列表页
-lot: true        # 是否生成表格列表页
 homepage: https://github.com/annProg/PanBook
-identifier:                      # epub用
-  - scheme: DOI
-    text: doi:10.234234.234/33
-publisher: PanBook       # epub用
-rights: © 2017 An He, CC BY-NC   # epub用
-cover-image: images/cover.jpg    # epub用
 header-includes:
   - \usepackage{cleveref}
   - \usepackage{float}
