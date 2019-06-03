@@ -125,6 +125,9 @@ function mkDir() {
 }
 
 function writeHeader() {
+	# 考虑 $1 为空的情况（允许用户将参数清空来避免写入header）
+	[ "$1"x == ""x ] && return 0
+	[ ! -f $1 ] && _error "writeHeader error: $1 not found."
 	echo "" >> ${_G[header]}
 	cat $1 >> ${_G[header]}
 }
