@@ -1,7 +1,11 @@
 # 正文
 ::: {.introduction caption="本章摘要"}
-- test
-- test
+- line1 test
+  - test11
+  - test12
+- line2
+  1. test21
+  2. test22
 :::
 
 ::: {.info}

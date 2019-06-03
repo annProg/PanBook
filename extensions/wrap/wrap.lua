@@ -18,8 +18,26 @@ function wrap(el, option)
 	e = el.attr.classes[1]
 	ret = pandoc.Div({})
 	table.insert(ret.content, pandoc.RawBlock("latex", "\\begin{" .. e .. "}" .. option))
-	for k,v in pairs(el.content) do
-		table.insert(ret.content, v)
+	-- introduction 和 problemset中 需要以\item开头，因此需要将 BulletList 转换为rawtex
+	if e == 'introduction' or e == 'problemset' then
+		for k,v in pairs(el.content) do
+			if v.t == 'BulletList' then
+				for i,j in pairs(v.content) do
+					for l,m in pairs(j) do
+						if l == 1 then
+							table.insert(ret.content, pandoc.RawBlock("latex", "\\item "))
+						end
+						table.insert(ret.content, m)
+					end
+				end
+			else
+				table.insert(ret.content, v)
+			end
+		end
+	else
+		for k,v in pairs(el.content) do
+			table.insert(ret.content, v)
+		end
 	end
 	table.insert(ret.content, pandoc.RawBlock("latex", "\\end{" .. e .. "}"))
 	return ret
