@@ -1,7 +1,7 @@
 # 正文
 ::: {.introduction caption="本章摘要"}
-#. test
-#. test
+- test
+- test
 :::
 
 ::: {.info}
@@ -25,8 +25,8 @@ Help
 :::
 
 ::: {.problemset}
-#. test
-#. test
+- test
+- test
 :::
 
 # 后记 {-}
