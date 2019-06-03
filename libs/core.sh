@@ -249,13 +249,13 @@ function partCompile() {
 	[ ${_G[part]} == "false" ] && return 0
 	echo > frontmatter.tex
 	echo > backmatter.tex
-	unset _P[toc]
-	unset _V[pagestyle]
-	_V[documentclass]=article
 	getArrayVar _V CJKmainfont SimSun
 	getArrayVar _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
 	unset _P[template]
+	unset _P[toc]
+	_M[lot]=false
+	_M[lof]=false
+	_M[title]=false
 	_G[body]=${_G[part]}
 	_G[ofile]=${_G[build]}/part
-	_P[top-level-division]=section
 }
