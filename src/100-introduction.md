@@ -115,3 +115,46 @@ All Autocomplete                自动补全（支持单词补全)
 ::: {.help}
 通过配置 VS Code Tasks，使用`PanBook`部分编译参数`--part`，实现快捷键（`ctrl`+`shift`+`b`）编译当前Markdown源文件。
 :::
+
+使用用户代码片段，可以定义一些快捷输入，例如[@lst:vscode_snippet]定义了快速输入 columns 环境，代码块以及Div环境。`$`符号表示需要用户输入的内容，可使用TAB键跳转。
+
+```{#lst:vscode_snippet .json caption="VS Code 用户代码片段"}
+	"Columns": {
+		"prefix": "col",
+		"body": [
+			"::::: {.columns}",
+			"::: {.column}",
+			"$1",
+			":::",
+			"::: {.column}",
+			"$2",
+			":::",
+			":::::"
+		],
+		"description": "Columns"
+	},
+	"Code": {
+		"prefix": "cod",
+		"body": [
+			"```{#lst:$1 .$2 caption=\"$3\"}",
+			"$4",
+			"```"
+		],
+		"description": "Code"
+	},
+	"Environment": {
+		"prefix": "env",
+		"body": [
+			"::: {.$1}",
+			"$2",
+			":::"
+		],
+		"description": "fenced Div environment"
+	}
+```
+
+::: {.help}
+- 通过 文件 -> 首选项 -> 用户代码片段，选择 Markdown ，然后编辑 markdown.json 来定义代码片段
+- 控制代码片段是否与其他建议一起显示及其排列的位置 改为 top，可以优先显示代码片段
+- tabCompletion 设置为 on 使用 TAB 自动补全
+:::
