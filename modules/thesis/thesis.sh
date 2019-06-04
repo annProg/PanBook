@@ -41,9 +41,9 @@ function func_thesis() {
 	pandoc ${_G[pandoc-param]}
 
 	TEX_OUTPUT=${_G[ofile]}.${_G[t]}
-	# 以下2行是干嘛的？
-	sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
-	sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
+
+	floatListings $TEX_OUTPUT
+
 	# gif格式图片编译报错，需要引用eps格式，需转换后使用
 	sed -i -r "s#(\includegraphics\{.*?).(gif)(\})#\1.eps\3#g" $TEX_OUTPUT
 	# 网络图片需要替换为本地文件

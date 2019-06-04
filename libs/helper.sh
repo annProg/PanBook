@@ -56,6 +56,16 @@ function printGlobal() {
 	true
 }
 
+# listings float
+function floatListings() {
+	[ "$1"x == ""x ] && return 0
+	if [ "${_G[float-listings]}"x != "" ];then
+		# listings浮动体，避免代码块跨页
+		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=${_G[float-listings]}\]/" $1
+		sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=${_G[float-listings]}\]/" $1
+	fi
+}
+
 function _load() {
 	item=`basename $3`
 	source $1/${_G[$2]}/$item/$item.sh

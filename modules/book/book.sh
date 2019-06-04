@@ -59,9 +59,7 @@ function func_book() {
 		# 网络图片需要替换为本地文件
 		sed -i -r "s#(\includegraphics\{)http(s)?://(.*)#\1${_G[imgdirrelative]}/\3#g" $TEX_OUTPUT
 
-		# listings浮动体，避免代码块跨页
-		sed -i -E "/begin\{lstlisting.*label.*\]/ s/caption=(.*)?,\s*label=(.*)\]/caption=\1, label=\2, float=htbp\]/" $TEX_OUTPUT
-		sed -i -E "/begin\{lstlisting.*label.*\]/ s/\[label=(.*)?\]/\[label=\1, caption=\1, float=htbp\]/" $TEX_OUTPUT
+		floatListings $TEX_OUTPUT
 
 		for i in `seq 1 ${_G[xelatex-times]}`;do
 			xelatex ${_G[xelatex]} -output-directory=${_G[build]} $TEX_OUTPUT #1&>/dev/null
