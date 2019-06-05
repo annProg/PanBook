@@ -5,21 +5,15 @@
 ## 简介
 此项目基于`Pandoc`和`LaTeX`，提供了一些开箱即用的书籍，论文，幻灯片及简历模板，以及一些`lua filter`扩展。用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`或`epub`格式。
 
-查看电子书效果：
+预览
 
-- [ElegantBook模板-pc](https://api.annhe.net/PanBook/PanBook-latex-elegantbook-pc.pdf)
-- [ElegantNote模板](https://api.annhe.net/PanBook/PanBook-latex-elegantnote-pc.pdf)
-- [Ctex模板-pc](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-pc.pdf)
-- [Ctexart模板-pc](https://api.annhe.net/PanBook/PanBook-latex-ctexart-pc.pdf)
-- [Ctex模板-mobile](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-mobile.pdf)
-- [Epub模板](https://api.annhe.net/PanBook/PanBook.epub)
-
-### 简历/ 幻灯片/ 论文
-
-原本只是想盘书的，后来发现`beamer`，论文，简历都是一样的套路，于是就都盘一盘吧。
-- [幻灯片（beamer）](./demo/beamer/)
-- [论文（ElegantPaper）](https://api.annhe.net/PanBook/PanBook-latex-elegantpaper-pc.pdf)
-- [简历](./demo/cv/)
+| Book | Thesis | Slide | CV |
+| --- | --- | --- | --- |
+|[ElegantBook](https://api.annhe.net/PanBook/PanBook-latex-elegantbook-pc.pdf) |[ElegantPaper](https://api.annhe.net/PanBook/PanBook-latex-elegantpaper-pc.pdf) | [metropolis](https://api.annhe.net/PanBook/beamer-beamer-metropolis.pdf) |[moderncv]()
+|[ElegantNote](https://api.annhe.net/PanBook/PanBook-latex-elegantnote-pc.pdf) | |[solarized](https://api.annhe.net/PanBook/beamer-beamer-solarized.pdf)|[resume](https://api.annhe.net/PanBook/cv-cv-resume.pdf)|
+|[CTeXBook](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-pc.pdf) | | [material](https://api.annhe.net/PanBook/beamer-beamer-material.pdf)| [TMR](https://api.annhe.net/PanBook/cv-cv-tmr.pdf)|
+|[CTeXBook-mobile](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-mobile.pdf)| | [Execushares](https://api.annhe.net/PanBook/beamer-beamer-Execushares.pdf)| |
+|[Epub](https://api.annhe.net/PanBook/PanBook.epub)  | |[more](https://github.com/annProg/PanBook/tree/master/demo/beamer) |[more](https://github.com/annProg/PanBook/tree/master/demo/cv) |
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。
