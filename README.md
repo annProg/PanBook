@@ -21,10 +21,10 @@
 
 ### 安装软件
 
-- 下载[msys2](https://www.msys2.org/) 并安装
-- 下载[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本并安装
-- 下载[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本并安装
-- 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，即`/c/Users/myname/AppData/Local/Pandoc`）
+- 下载 [msys2](https://www.msys2.org/) 并安装
+- 下载 [texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018 或以上版本并安装
+- 下载 [Pandoc](https://pandoc.org/installing.html) 2.7.1 或以上版本并安装
+- 下载 [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，即`/c/Users/myname/AppData/Local/Pandoc`）
 
 ### 下载本项目
 
@@ -81,11 +81,10 @@ $ panbook -h
         -l --list   function list(if exists)
 ```
 
-
-之后在`src`目录进行写作, `src/images`目录存放图片
+之后在`src`目录进行写作，`src/images`目录存放图片
 
 ## 注意事项
-- 在Windows上使用`Pandoc`需要`Markdown`文件保存为`UTF-8`格式
+- 在 Windows 上使用`Pandoc`需要`Markdown`文件保存为`UTF-8`格式
 - 按章节拆分的多个`Markdown`文件，开头需要空一行，否则`Pandoc`可能不能正确识别标题
 
 ## 模板说明
@@ -100,10 +99,10 @@ $ panbook -h
 - [自学是门手艺 李笑来](https://github.com/pandoc-ebook/the-craft-of-selfteaching)
 - [人人都能用英语 李笑来](https://github.com/pandoc-ebook/everyone-can-use-english)
 - [把时间当作朋友 李笑来](https://github.com/pandoc-ebook/time-as-a-friend/releases)
-- [TOEFL iBT高分作文 李笑来](https://github.com/pandoc-ebook/twe185/releases)
+- [TOEFL iBT 高分作文 李笑来](https://github.com/pandoc-ebook/twe185/releases)
 - [翻译漫谈 余晟](https://github.com/pandoc-ebook/chitchat-on-translation/releases)
 
-## QQ群
-欢迎加入QQ群交流
+## QQ 群
+欢迎加入 QQ 群交流
 
 ![](src/images/qq.png)
