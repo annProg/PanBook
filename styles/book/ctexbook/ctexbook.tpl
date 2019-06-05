@@ -17,6 +17,10 @@ $if(CJKmainfont)$
   \fi
 $endif$
 
+$if(parskip)$
+\setlength{\parskip}{$parskip$}
+$endif$
+
 % pandoc版本大于1.15时需要\tightlist
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
