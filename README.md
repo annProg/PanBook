@@ -3,7 +3,8 @@
 </p>
 
 ## 简介
-此项目基于`Pandoc`和`LaTeX`，提供了一些开箱即用的书籍，论文，幻灯片及简历模板，以及一些`lua filter`扩展。用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`或`epub`格式。
+`PanBook`基于`Pandoc`的`lua filter`功能适配不同的格式需求，提供了一些开箱即用的书籍，论文，幻灯片及简历模板。
+目标是使用`Pandoc's Markdown`作为写作语言，实现**一次编写 多次生成**。
 
 预览
 
