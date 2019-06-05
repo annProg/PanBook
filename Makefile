@@ -7,16 +7,17 @@ OWNER ?= annProg
 REPO ?= PanBook
 TAG ?= $(shell git rev-parse --short HEAD)
 DIVISION = --top-level-division=chapter
+CJK = -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源黑体,ItalicFont=KaiTi,SmallCapsFont=微软雅黑
 
 all: ctex ctex6in elegantbook epub online
 book: ctex ctex6in elegantbook
 
 ctex: 
-	panbook book -V cover:R $(DIVISION)
+	panbook book -V cover:R $(DIVISION) $(CJK)
 ctex6in: 
-	panbook book -V cover:R -V device:mobile $(DIVISION)
+	panbook book -V cover:R -V device:mobile $(DIVISION) $(CJK)
 elegantbook: 
-	panbook book --style=elegantbook $(DIVISION)
+	panbook book --style=elegantbook $(DIVISION) $(CJK)
 epub:
 	rm -f build/*.epub
 	panbook book --style=epub
