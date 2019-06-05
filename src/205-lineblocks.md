@@ -3,9 +3,9 @@
 
 #### Extension: line_blocks
 
-行区块是一连串以竖线( |)加上一个空格所构成的连续行。行与行间的区隔在
+行区块是一连串以竖线 ( |) 加上一个空格所构成的连续行。行与行间的区隔在
 输出时将会以原样保留，行首的空白字元数目也一样会被保留；反之，这些行
-将会以markdown的格式处理。这个语法在输入诗句或地址时很有帮助。
+将会以 markdown 的格式处理。这个语法在输入诗句或地址时很有帮助。
 ```markdown
 | The limerick packs laughs anatomical
 | In space that is quite economical.
@@ -37,4 +37,4 @@
 | 200 Main St.
 | Berkeley, CA 94718
 
-这是从reStructuredText借来的语法。
+这是从 reStructuredText 借来的语法。

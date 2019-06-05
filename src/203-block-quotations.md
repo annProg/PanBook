@@ -1,6 +1,6 @@
 
 ## 引用
-Markdown使用email的习惯来建立引用区块（[@lst:quote]）。一个引用区块可以由一或多个段落
+Markdown 使用 email 的习惯来建立引用区块（[@lst:quote]）。一个引用区块可以由一或多个段落
 或其他的区块元素（如列表或标题）组成，并且其行首均是由一个>符号加上一
 个空白作为开头。（>符号不一定要位在该行最左边，但也不能缩进超过三个空白）。
 
@@ -50,7 +50,6 @@ paragraph has two lines.
 :::
 :::::
 
-
 由于区块引用可包含其他区块元素，而区块引用本身也是区块元素，所以，引用
 是可以嵌套入其他引用的（[@lst:quote_nested）。
 
@@ -71,12 +70,12 @@ paragraph has two lines.
 :::
 :::::
 
-#### Extension: blank_before_blockquote
-
-原始markdown语法在区块引用之前并不需要预留空白行。Pandoc则需要（除非区
-块引用位于文件最开始的地方）。这是因为以>符号开头的情况在一般文字段落中
+::: {.note}
+Extension blank_before_blockquote：原始 markdown 语法在区块引用之前并不需要预留空白行。Pandoc 则需要（除非区
+块引用位于文件最开始的地方）。这是因为以`>`符号开头的情况在一般文字段落中
 相当常见（也许由于断行所致），这会导致非预期的格式。因此，除非是指定为
-markdown_strict格式，不然以下的语法在pandoc中将不会产生出嵌套区块引用：
+markdown_strict 格式，不然 [@lst:blank_before_blockquote] 的语法在 pandoc 中将不会产生出嵌套区块引用。
+:::
 
 ::::: {.columns}
 ::: {.column}

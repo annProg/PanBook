@@ -6,7 +6,7 @@
 
 ## 快速开始
 
-以 Windows 10`为例，演示如何使用。首先需要安装依赖软件。
+以 Windows 10 为例，演示如何使用。首先需要安装依赖软件。
 
 - 安装 [msys2](https://www.msys2.org/) （ Linux 及 OS X 请忽略此步骤）
 - 安装 [texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018 或以上版本
