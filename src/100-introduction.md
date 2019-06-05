@@ -15,12 +15,12 @@
 
 以 Windows 10`为例，演示如何使用。首先需要安装依赖软件。
 
-- 安装[msys2](https://www.msys2.org/) （ Linux 及 OS X 请忽略此步骤）
-- 安装[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本
-- 安装[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本
-- 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本安装到 path 目录下（建议和 Pandoc 放同一目录）
+- 安装 [msys2](https://www.msys2.org/) （ Linux 及 OS X 请忽略此步骤）
+- 安装 [texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本
+- 安装 [Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本
+- 下载 [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本安装到 path 目录下（建议和 Pandoc 放同一目录）
 
-然后下载PanBook。打开终端（ msys2 ），假设工作目录为`/d/dev ，执行[@lst:gitclone]。
+然后下载 PanBook。打开终端（ msys2 ），假设工作目录为`/d/dev ，执行[@lst:gitclone]。
 
 ```{#lst:gitclone .bash caption="安装PanBook"}
 $ cd /d/dev
