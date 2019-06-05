@@ -1,6 +1,6 @@
 # 盘书 - Pandoc Template
 <p align="center">
-  <img height="120" src="src/images/logo.png">
+  <img height="220" src="src/images/logo.png">
 </p>
 
 ## 简介
