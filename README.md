@@ -1,4 +1,3 @@
-# 盘书 - Pandoc Template
 <p align="center">
   <img height="220" src="src/images/logo.png">
 </p>
