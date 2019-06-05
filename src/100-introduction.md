@@ -1,13 +1,6 @@
 
 # PanBook 手册
 
-::: {.introduction}
-- 安装软件
-- 使用帮助
-- Metadata
-- 写作工具
-:::
-
  PanBook 基于 Pandoc 的 lua filter 功能，适配各种书籍，论文，幻灯片及简历的 LaTeX 或 EPUB 模板。
 目标是使用 Pandoc's Markdown 作为写作语言，实现**一次编写，多次生成**。
 
@@ -85,6 +78,7 @@ header-includes:
 Markdown Preview                Markdown 实时预览
 \LaTeX\ language support        \LaTeX 语言高亮
 All Autocomplete                自动补全（支持单词补全）
+Pangu-Markdown                  中英文自动加空格
 
 : 推荐插件 {#tbl:vscodeplugin}
 
@@ -150,4 +144,5 @@ All Autocomplete                自动补全（支持单词补全）
 - 通过 文件 -> 首选项 -> 用户代码片段，选择 Markdown ，然后编辑 markdown.json 来定义代码片段
 - snippetSuggestions 设置为 top，可以优先显示代码片段
 - tabCompletion 设置为 on 使用 TAB 自动补全
+- pangu.auto_format_on_save 设置为 on 在保存时自动给中英文加空格
 :::
