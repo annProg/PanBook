@@ -2,8 +2,8 @@
 \newlength\Colsep
 \setlength\Colsep{10pt}
 \newenvironment{columns}[1][]
-	{\noindent\begin{minipage}{\textwidth}}
-	{\end{minipage}}
+	{\vspace{\fill}\noindent\begin{minipage}{\textwidth}}
+	{\end{minipage}\vspace{\fill}}
 \newenvironment{column}[1]
 	{\begin{minipage}[t]{#1}}
 	{\end{minipage}}

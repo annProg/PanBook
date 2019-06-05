@@ -27,6 +27,7 @@ code here
 :::
 ::: {.column}
 预览：
+
 ~~~~~
 ~~~~
 code here
@@ -43,8 +44,6 @@ Extension backtick_code_blocks：与 fenced_code_blocks 相同，只不过使用
 Extension fenced_code_attributes：可用 [@lst:code_attribute] 为围栏式代码块添加属性。
 :::
 
-::::: {.columns}
-::: {.column}
 ```{#lst:code_attribute .markdown caption="代码块属性"}
 ~~~~ {#code:mycode .haskell .numberLines startFrom="100" caption="围栏式代码块"}
 qsort []     = []
@@ -52,15 +51,6 @@ qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
                qsort (filter (>= x) xs)
 ~~~~~~
 ```
-:::
-::: {.column}
-~~~~ {#lst:mycode .haskell .numberLines startFrom="100" caption="围栏式代码块"}
-qsort []     = []
-qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
-               qsort (filter (>= x) xs)
-~~~~~~
-:::
-:::::
 
 [@lst:code_attribute] 中 lst:mycode 为 ID，haskell 与 numberLines 是类别，而 startsFrom 则是值为
 100 的属性。numberLines 和 startFrom 配合使用可以显示代码行号，如果没有
@@ -71,6 +61,7 @@ caption，则默认使用 ID 作为 caption。有些输出格式可以利用这�
 的方式呈现。
 
 仅指定高亮语言时，可以简写为 [@lst:code_short] 形式。
+
 ::::: {.columns}
 ::: {.column}
 ```{#lst:code_short .markdown caption="代码块简写形式"}
