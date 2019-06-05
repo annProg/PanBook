@@ -9,10 +9,10 @@
 
 | Book | Thesis | Slide | CV |
 | --- | --- | --- | --- |
-|[ElegantBook](https://api.annhe.net/PanBook/PanBook-latex-elegantbook-pc.pdf) |[ElegantPaper](https://api.annhe.net/PanBook/PanBook-latex-elegantpaper-pc.pdf) | [metropolis](https://api.annhe.net/PanBook/beamer-beamer-metropolis.pdf) |[moderncv]()
+|[ElegantBook](https://api.annhe.net/PanBook/PanBook-latex-elegantbook-pc.pdf) |[ElegantPaper](https://api.annhe.net/PanBook/PanBook-latex-elegantpaper-pc.pdf) | [metropolis](https://api.annhe.net/PanBook/beamer-beamer-metropolis.pdf) |[moderncv-classic](https://api.annhe.net/PanBook/cv-cv-moderncv-classic-blue.pdf)|
 |[ElegantNote](https://api.annhe.net/PanBook/PanBook-latex-elegantnote-pc.pdf) | |[solarized](https://api.annhe.net/PanBook/beamer-beamer-solarized.pdf)|[resume](https://api.annhe.net/PanBook/cv-cv-resume.pdf)|
 |[CTeXBook](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-pc.pdf) | | [material](https://api.annhe.net/PanBook/beamer-beamer-material.pdf)| [TMR](https://api.annhe.net/PanBook/cv-cv-tmr.pdf)|
-|[CTeXBook-mobile](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-mobile.pdf)| | [Execushares](https://api.annhe.net/PanBook/beamer-beamer-Execushares.pdf)| |
+|[CTeXBook-mobile](https://api.annhe.net/PanBook/PanBook-latex-ctexbook-mobile.pdf)| | [Execushares](https://api.annhe.net/PanBook/beamer-beamer-Execushares.pdf)|[moderncv-fancy](https://api.annhe.net/PanBook/cv-cv-moderncv-fancy-blue.pdf) |
 |[Epub](https://api.annhe.net/PanBook/PanBook.epub)  | |[more](https://github.com/annProg/PanBook/tree/master/demo/beamer) |[more](https://github.com/annProg/PanBook/tree/master/demo/cv) |
 
 ## 快速开始
