@@ -8,39 +8,32 @@
 - 写作工具
 :::
 
-`PanBook`是基于`Pandoc`和`LaTeX`开发的一个工具，提供了一些开箱即用的书籍，论文，幻灯片及简历模板，以及一些`lua filter`扩展。用来更方便的使用`Pandoc`将`Markdown`转换为`PDF`或`epub`格式。
+PanBook基于Pandoc的lua filter功能适配不同的格式需求，提供了一些开箱即用的书籍，论文，幻灯片及简历模板。 目标是使用Pandoc's Markdown作为写作语言，实现一次编写 多次生成。
 
 ## 快速开始
 
-以`Windows 10`为例，演示如何使用。
-
-### 安装依赖软件
+以`Windows 10`为例，演示如何使用。首先需要安装依赖软件。
 
 - 安装[msys2](https://www.msys2.org/) （`Linux`及`OS X`请忽略此步骤）
 - 安装[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本
 - 安装[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本
 - 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本安装到`path`目录下（建议和`Pandoc`放同一目录）
 
-#### 安装PanBook
-
-`PanBook`是一组`Shell`脚本，直接下载到任意目录即可。打开终端（`msys2`），假设工作目录为`/d/`，执行[@lst:gitclone]。
+然后下载PanBook。打开终端（`msys2`），假设工作目录为`/d/dev`，执行[@lst:gitclone]。
 
 ```{#lst:gitclone .bash caption="安装PanBook"}
-$ cd /d/
+$ cd /d/dev
 $ git clone https://github.com/annProg/PanBook
 ```
 
-#### 设置环境变量
-需要将本项目，`texlive`及`Pandoc`加入环境变量，如[@lst:setpath]所示。
+完成软件安装之后，需要设置环境变量，将 PanBook，TeXLive及 Pandoc加入环境变量，如[@lst:setpath]所示。
 
 ```{#lst:setpath .bash caption="设置环境变量"}
 $ tail -n 1 ~/.bashrc
 export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```
 
-
-### 开始使用
-在任意空目录下执行`panbook <command>`，会自动初始化写作环境，生成示例源码。然后在`src`目录下开始写作。`<command>`可以是`book`，`thesis`，`slide`，`cv`。详细帮助信息执行`panbook -h`查看。目录规范见[@lst:panbookdirs]。
+完成环境变量设置之后，在任意空目录下执行`panbook <command>`，会自动初始化写作环境，生成示例源码。然后在`src`目录下开始写作。`<command>`可以是`book`，`thesis`，`slide`，`cv`。详细帮助信息执行`panbook -h`查看。目录规范见[@lst:panbookdirs]。
 
 ```{#lst:panbookdirs .bash caption="目录规范"}
 .
