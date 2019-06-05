@@ -8,7 +8,8 @@
 - 写作工具
 :::
 
-PanBook基于Pandoc的lua filter功能适配不同的格式需求，提供了一些开箱即用的书籍，论文，幻灯片及简历模板。 目标是使用Pandoc's Markdown作为写作语言，实现一次编写 多次生成。
+`PanBook`基于`Pandoc`的`lua filter`功能，适配各种书籍，论文，幻灯片及简历的`LaTeX`或`EPUB`模板。
+目标是使用`Pandoc's Markdown`作为写作语言，实现**一次编写 多次生成**。
 
 ## 快速开始
 
