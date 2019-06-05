@@ -1,0 +1,43 @@
+{
+	"Columns": {
+		"prefix": "col",
+		"body": [
+			"::::: {.columns}",
+			"::: {.column}",
+			"$1",
+			":::",
+			"::: {.column}",
+			"$2",
+			":::",
+			":::::"
+		],
+		"description": "Columns"
+	},
+	"Code": {
+		"prefix": "cod",
+		"body": [
+			"```{#lst:$1 .$2 caption=\"$3\"}",
+			"$4",
+			"```"
+		],
+		"description": "Code"
+	},
+	"Environment": {
+		"prefix": "env",
+		"body": [
+			"::: {.$1}",
+			"$2",
+			":::"
+		],
+		"description": "fenced Div environment"
+	},
+	"Help": {
+		"prefix": "hel",
+		"body": [
+			"::: {.help}",
+			"$1",
+			":::"
+		],
+		"description": "fenced Div environment for help"
+	}
+}
