@@ -25,7 +25,7 @@ code here
 
 #### Extension: backtick_code_blocks
 
-与`fenced_code_blocks`相同，只不过使用反引号 \` 替换波浪线 \~ 而已
+与 fenced_code_blocks 相同，只不过使用反引号 \` 替换波浪线 \~ 而已
 
 
 #### Extension: fenced_code_attributes

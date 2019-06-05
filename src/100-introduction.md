@@ -8,19 +8,19 @@
 - 写作工具
 :::
 
-`PanBook`基于`Pandoc`的`lua filter`功能，适配各种书籍，论文，幻灯片及简历的`LaTeX`或`EPUB`模板。
-目标是使用`Pandoc's Markdown`作为写作语言，实现**一次编写 多次生成**。
+ PanBook 基于 Pandoc 的 lua filter 功能，适配各种书籍，论文，幻灯片及简历的 LaTeX 或 EPUB 模板。
+目标是使用 Pandoc's Markdown 作为写作语言，实现**一次编写，多次生成**。
 
 ## 快速开始
 
-以`Windows 10`为例，演示如何使用。首先需要安装依赖软件。
+以 Windows 10`为例，演示如何使用。首先需要安装依赖软件。
 
-- 安装[msys2](https://www.msys2.org/) （`Linux`及`OS X`请忽略此步骤）
+- 安装[msys2](https://www.msys2.org/) （ Linux 及 OS X 请忽略此步骤）
 - 安装[texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018或以上版本
 - 安装[Pandoc](https://pandoc.org/installing.html) 2.7.1或以上版本
-- 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本安装到`path`目录下（建议和`Pandoc`放同一目录）
+- 下载[pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本安装到 path 目录下（建议和 Pandoc 放同一目录）
 
-然后下载PanBook。打开终端（`msys2`），假设工作目录为`/d/dev`，执行[@lst:gitclone]。
+然后下载PanBook。打开终端（ msys2 ），假设工作目录为`/d/dev ，执行[@lst:gitclone]。
 
 ```{#lst:gitclone .bash caption="安装PanBook"}
 $ cd /d/dev
@@ -34,7 +34,7 @@ $ tail -n 1 ~/.bashrc
 export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```
 
-完成环境变量设置之后，在任意空目录下执行`panbook <command>`，会自动初始化写作环境，生成示例源码。然后在`src`目录下开始写作。`<command>`可以是`book`，`thesis`，`slide`，`cv`。详细帮助信息执行`panbook -h`查看。目录规范见[@lst:panbookdirs]。
+完成环境变量设置之后，在任意空目录下执行 panbook <command>`，会自动初始化写作环境，生成示例源码。然后在 src 目录下开始写作。`<command>`可以是 book ， thesis ， slide ， cv 。详细帮助信息执行 panbook -h 查看。目录规范见[@lst:panbookdirs]。
 
 ```{#lst:panbookdirs .bash caption="目录规范"}
 .
@@ -54,13 +54,13 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 
 #### 注意事项 {#sec:note}
 
-- Markdown源码文件需要使用`UTF-8`编码
+- Markdown源码文件需要使用 UTF-8 编码
 - Pandoc扩展的Markdown语法要求在标题前留出一个空行，因此按章节拆分的多个Markdown文件，开头需要空一行，否则pandoc不能正确识别标题
-- 请勿将正文文件命名为 `*frontmatter.md`或者`*backmatter.md`，这2个文件有特殊用途
+- 请勿将正文文件命名为 `*frontmatter.md 或者`*backmatter.md ，这2个文件有特殊用途
 
 
 ## 书籍元数据
-在`src/metadata.yaml`中使用[Yaml语言](http://www.ruanyifeng.com/blog/2016/07/yaml.html) 定义书籍的数据及可用的模板变量，示例见[@lst:metayaml]。
+在 src/metadata.yaml 中使用[Yaml语言](http://www.ruanyifeng.com/blog/2016/07/yaml.html) 定义书籍的数据及可用的模板变量，示例见[@lst:metayaml]。
 ```{#lst:metayaml .yaml caption="Metadata"}
 ---
 title: PanBook使用手册
@@ -89,7 +89,7 @@ All Autocomplete                自动补全（支持单词补全)
 
 : 推荐插件 {#tbl:vscodeplugin}
 
-使用[@lst:vscodeMsys] 配置将终端改为`msys2`的`bash`。
+使用[@lst:vscodeMsys] 配置将终端改为 msys2 的 bash 。
 
 ```{#lst:vscodeMsys .json caption="VS Code使用msys2"}
 {
@@ -107,7 +107,7 @@ All Autocomplete                自动补全（支持单词补全)
 ```
 
 ::: {.help}
-通过配置 VS Code Tasks，使用`PanBook`部分编译参数`--part`，实现快捷键（`ctrl`+`shift`+`b`）编译当前Markdown源文件。
+通过配置 VS Code Tasks，使用 PanBook 部分编译参数`--part ，实现快捷键（ ctrl + shift + b ）编译当前Markdown源文件。
 :::
 
 使用用户代码片段，可以定义一些快捷输入，例如[@lst:vscode_snippet]定义了快速输入 columns 环境，代码块以及Div环境。`$`符号表示需要用户输入的内容，可使用TAB键跳转。

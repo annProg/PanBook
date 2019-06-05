@@ -48,8 +48,8 @@ My other header   {#foo}
 ```
 （此语法与PHP Markdown Extra相容。）
 
-具有`unnumbered`类别的标题将不会被编号，即使`--number-sections`的选项是开启
-的。单一连字符号(`-`)等同于`.unnumbered`，且更适用于非英文文件中。因此[@lst:header_unnumbered]中两行是等价的。
+具有 .unnumbered 类别的标题将不会被编号，即使 --number-sections 的选项是开启
+的。单一连字符号(`-`)等同于 .unnumbered ，且更适用于非英文文件中。因此[@lst:header_unnumbered]中两行是等价的。
 ```{#lst:header_unnumbered .markdown caption="避免标题编号"}
 # My header {-}
 # My header {.unnumbered}
