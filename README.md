@@ -92,6 +92,9 @@ $ panbook -h
 
 - [ElegantBook](https://github.com/ElegantLaTeX/ElegantBook)
 
+## 贡献指南
+欢迎提交`Issue`和`Pull Request`。`extensions`, `styles`开发流程请参考 [PanBook 手册](https://api.annhe.net/PanBook/PanBook-book-elegantbook-pc.pdf) 第七章。
+
 ## 演示
 
 使用本项目编译的书籍
