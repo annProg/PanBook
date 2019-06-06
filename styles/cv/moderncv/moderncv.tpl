@@ -98,7 +98,7 @@ $if(twitter)$
 \social[twitter]{$twitter$}
 $endif$
 
-\usepackage{fontawesome}
+\usepackage{fontawesome5}
 \newcommand*\weibosocialsymbol{{\small\faWeibo~}}
 \newcommand*\wechatsocialsymbol{{\small\faWechat~}}
 \newcommand*\qqsocialsymbol{{\small\faQq~}}

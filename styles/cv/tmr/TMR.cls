@@ -21,7 +21,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{parskip}
 \RequirePackage{pdfpages}
-\RequirePackage{fontawesome}
+\RequirePackage{fontawesome5}
 \RequirePackage{import}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage{environ}
