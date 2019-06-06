@@ -97,13 +97,11 @@ $ panbook -h
 
 ## 演示
 
-使用本项目编译的书籍
+使用本项目编译的书籍（欢迎加入此列表）
 
+- [PanBook 手册](https://api.annhe.net/PanBook/PanBook-book-elegantbook-pc.pdf)
 - [自学是门手艺 李笑来](https://github.com/pandoc-ebook/the-craft-of-selfteaching)
-- [人人都能用英语 李笑来](https://github.com/pandoc-ebook/everyone-can-use-english)
-- [把时间当作朋友 李笑来](https://github.com/pandoc-ebook/time-as-a-friend/releases)
 - [TOEFL iBT 高分作文 李笑来](https://github.com/pandoc-ebook/twe185/releases)
-- [翻译漫谈 余晟](https://github.com/pandoc-ebook/chitchat-on-translation/releases)
 
 ## QQ 群
 欢迎加入 QQ 群交流
