@@ -22,7 +22,7 @@ nocite: |
 ...
 
 
-# \faGraduationCap 教育经历
+# \faGraduationCap~教育经历
 
 ### 计算机高等专科学校 [2019.5 - 2023.5]{.date} [计算机科学与技术]{.title} [长沙]{.tag} [学渣]{.desc}
 
@@ -30,7 +30,7 @@ nocite: |
 - 是非审之于己，毁誉听之于人，得失安之于数，陟岳麓峰头，朗月清风，太极悠然可会
 - 君亲恩何以酬，民物命何以立，圣贤道何以传，登赫曦台上，衡云湘水，斯文定有攸归
 
-# \faDatabase 工作经验
+# \faDatabase~工作经验
 
 ### ZHALANG Inc. [2026.7 - 2027.7]{.date} [系统工程师]{.title} [北京]{.tag} [没有故障]{.desc}
 
@@ -38,15 +38,15 @@ nocite: |
 - 黑白颠倒没商量，睡地铺，吃食堂。最怕灯火阑珊时，手机响，心里慌
 
 ::: {#refs}
-# \faBook 出版物
+# \faBook~出版物
 :::
 
-# \faCogs 技能
+# \faCogs~技能
 	  
 - [英语]{.cat} 四级，六级，专八，笔译，口译，`TOEFL`120，`IELTS`8 [\grade5]{.comment}
 - [编程]{.cat} `Java`，`C`，`Lisp`，`Haskell`，`PHP`，`Javascript`，`Golang` [\grade1]{.comment}
 
-# \faStarHalfO 技能
+# \faStarHalfO~技能
 
 :::: {.cvcolumns}
 ::: {.cvcolumn cat="编程"}

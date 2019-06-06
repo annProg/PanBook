@@ -22,23 +22,23 @@ nocite: |
 ...
 
 
-# \faGraduationCap~ 教育经历
+# \faGraduationCap~教育经历
 
 ### 大学 [2019.5 - 2023.5]{.date}  [计算机科学与技术]{.title}  [北京]{.tag}  [成绩不好]{.desc}
 
 - 一些说明
 
-# \faUsers~ 工作经验
+# \faUsers~工作经验
 
 ### 公司 [2026.7 - 2027.7]{.date}  [软件工程师]{.title}  [北京]{.tag}
 
 - 一些说明
 
 ::: {#refs}
-# \faBook~ 发表作品
+# \faBook~发表作品
 :::
 
-# \faList~ 列表语法
+# \faList~列表语法
 	  
 ## 普通列表
 
@@ -57,10 +57,10 @@ nocite: |
 
 ## 带类别的双栏列表
 
-- [Java,PHP,Lisp]{.double cat="编程"} [Markdown,LaTeX,Pandoc]{.double cat="排版"}
-- [MySQL,MongoDB,Redis]{.double cat="数据库"}
+- [编程]{.cat} [Java,PHP,Lisp]{.double} [排版]{.cat} [Markdown,\LaTeX,Pandoc]{.double}
+- [数据库]{.cat} [MySQL,MongoDB,Redis]{.double}
 
-# \faColumns~ 分栏语法
+# \faColumns~分栏语法
 
 :::: {.cvcolumns}
 ::: {.cvcolumn cat="数据库"}

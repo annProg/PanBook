@@ -22,11 +22,11 @@ nocite: |
 ...
 
 
-# \faUser~ 个人信息
+# \faUser~个人信息
 
 - 简历开头用`yaml`格式设置个人信息数据，不需要的变量不设置即可
 
-# \faDatabase~  标题
+# \faDatabase~标题
 
 ### 一级和二级标题 [2019.7 - 2019.8]{.date} [支持`fontawesome`]{.desc}
 
@@ -47,10 +47,10 @@ nocite: |
   
 
 ::: {#refs}
-# \faBook~ 发表作品
+# \faBook~发表作品
 :::
 
-# \faBook~ 出版物  
+# \faBook~出版物  
 
 ```yaml
 # 请在`metadata`中设置 `nocite`变量为 
@@ -63,7 +63,7 @@ nocite: |
 # 在 src/bibliography.bib 文件里填写出版物
 ```
 
-# \faList~ 列表语法
+# \faList~列表语法
 	  
 - [简单列表]{.cat} 简单列表直接使用Markdown无序列表格式，不支持多级嵌套
 - [复杂列表]{.cat} 使用`bracketed_spans`语法生成复杂列表
@@ -88,7 +88,7 @@ nocite: |
 - [编程]{.cat}[Java,PHP,Lisp,Haskell,Golang,C++]{.double} [排版]{.cat}[Markdown,LaTeX,Pandoc,PanBook]{.double}
 - [数据库]{.cat}[MySQL,MongoDB,Redis,InfluxDB]{.double}
 
-# \faColumns~ 分栏语法
+# \faColumns~分栏语法
 
 :::: {.cvcolumns}
 ::: {.cvcolumn cat="Test"}
@@ -101,7 +101,7 @@ nocite: |
 :::
 ::::
 
-# \faEnvelope~ 求职信
+# \faEnvelope~求职信
 
 ```
 # 韩荆州 {.letter company="公司" addr="地址" city="城市"}  // 接收方，全部必须
@@ -113,7 +113,7 @@ nocite: |
 正文
 ```
 
-# \faStarHalfO~ 技能打分
+# \faStarHalfO~技能打分
 
 - [语法]{.cat} `\grade1` ~ `\grade5` （1-5分）
 - [排版]{.cat} \LaTeX,Markdown         [\grade4]{.comment}
