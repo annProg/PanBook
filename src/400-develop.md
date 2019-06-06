@@ -7,7 +7,7 @@ PanBook 基于 Pandoc，首先要了解 Pandoc 的使用方法。PanBook 主体�
 module    modules/      模块，book,cv,slide,thesis 都是模块
 style     styles/       风格，--style 参数指定，可以定制某一种文档类或者文档格式（比如 Epub）
 extension extensions/   扩展，使用 lua filter 或者基于 header-includes 提供某些可被复用的扩展功能
-template  templates/    Pandoc 模板，基于格式的模板，比如 \LaTeX 模板，Epub 模板等等，对应 --template 参数
+template  templates/    Pandoc 模板，基于格式的模板，对应 Pandoc 的 --template 参数
 
 : PanBook 名词定义 {#tbl:panbookdir_specs}
 
