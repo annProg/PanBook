@@ -22,7 +22,7 @@
 	
 	% Address & phone number
 	\ifdefined\@address{
-	\textit{\faicon{map-marker}
+	\textit{\faIcon{map-marker}
 	\@address\\}}\fi
 	
 	% Social/online accounts

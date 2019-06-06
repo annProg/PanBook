@@ -9,6 +9,9 @@ getArrayVar _M fontsize "11pt"
 getArrayVar _M size "a4paper"
 getArrayVar _M fontfamily "sans"
 
+# 修复 fontawesome 和 fontawesome5 冲突问题
+ext_fontawesome5
+
 # casual样式个人信息在底部，和foot有冲突，加vspace处理
 if [ "${_M[style]}"x == "casual"x ];then
 	_V[vspace]="0.7cm"
