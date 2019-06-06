@@ -100,7 +100,7 @@ $endif$
 
 \usepackage{fontawesome5}
 \newcommand*\weibosocialsymbol{{\small\faWeibo~}}
-\newcommand*\wechatsocialsymbol{{\small\faWechat~}}
+\newcommand*\wechatsocialsymbol{{\small\faWeixin~}}
 \newcommand*\qqsocialsymbol{{\small\faQq~}}
 \newcommand*\skypesocialsymbol{{\small\faSkype~}}
 

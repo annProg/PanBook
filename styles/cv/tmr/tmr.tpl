@@ -35,7 +35,7 @@
 		\ifdefined\@twitter\mbox{\pipe\faTwitterSquare~\href{https://twitter.com/\@twitter}{\@twitter}}\fi
 		\ifdefined\@instagram\mbox{\pipe\faInstagram~\href{https://www.instagram.com/\@instagram}{\@twitter}}\fi
 		\ifdefined\@flickr\mbox{\pipe\faFlickr~\href{https://www.flickr.com/photos/\@flickr}{\@flickr}}\fi
-		\ifdefined\@wechat\mbox{\pipe\faWechat~\@wechat}\fi
+		\ifdefined\@wechat\mbox{\pipe\faWeixin~\@wechat}\fi
 	}	
 	\end{center}
 }
