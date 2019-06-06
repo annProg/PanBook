@@ -45,7 +45,7 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 # 新建项目目录
 $ mkdir /d/dev/mybook
 $ cd /d/dev/mybook
-# 生成示例 book 文档
+# 生成示例 book 文档，编译结果在 build 目录
 $ panbook book
 # 查看帮助
 $ panbook -h
