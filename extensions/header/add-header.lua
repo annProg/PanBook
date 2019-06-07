@@ -21,7 +21,7 @@ end
 
 -- 将header拼成meta yaml格式 -- 改为直接创建rawblock
 -- header = '---\nheader-includes:\n  - |\n    ' .. string.gsub(header, '\n', '\n    ') .. '\n...'
-custom_header = pandoc.RawBlock("latex", header)
+custom_header = pandoc.RawBlock("latex", string.gsub(header,'\r\n','\n'))
 
 return {
 	{
