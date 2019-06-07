@@ -39,8 +39,8 @@ $if(showdate)$
 \fancyfoot[R]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont 编译日期：\zhtoday}
 $endif$
 
-$if(CJKmainfont)$
 \usepackage{xeCJK}
+$if(CJKmainfont)$
 \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
 $endif$
 

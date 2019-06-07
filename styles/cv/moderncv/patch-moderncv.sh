@@ -1,8 +1,5 @@
 #!/bin/bash
 
-getArrayVar _V CJKmainfont "SimSun"
-getArrayVar _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
-
 getArrayVar _M style "classic"
 getArrayVar _M color "blue"
 getArrayVar _M fontsize "11pt"
