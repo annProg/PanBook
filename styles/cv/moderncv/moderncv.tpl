@@ -33,10 +33,10 @@ $if(tables)$
 $endif$
 
 $if(onlinecv)$
-\fancyfoot[L]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont 更新地址：$onlinecv$}
+\fancyfoot[L]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont $onlinecv$}
 $endif$
 $if(showdate)$                                                       
-\fancyfoot[R]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont 编译日期：\zhtoday}
+\fancyfoot[R]{$if(vspace)$\vspace{$vspace$}$endif$\fontsize{8}{10} \selectfont \zhtoday}
 $endif$
 
 \usepackage{xeCJK}
