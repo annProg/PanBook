@@ -15,7 +15,8 @@ function ext_theorem() {
 			writeHeader ${_G[ext-theorem-color]}
 			writeHeader ${_G[ext-theorem-tex]}
 		fi
-		_F[theorem]="--lua-filter $SCRIPTDIR/${_G[extdir]}/theorem/theorem.lua"
+		# 由于theorem引用格式和citeproc一致，需要在citeproc之前执行，因此放入 _F0 数组
+		_F0[theorem]="--lua-filter $SCRIPTDIR/${_G[extdir]}/theorem/theorem.lua"
 	fi
 }
 

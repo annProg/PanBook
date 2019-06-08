@@ -24,6 +24,7 @@ declare -A _P         # pandoc选项
 declare -A _V         # pandoc var (-V)
 declare -A _M         # pandoc meta (-M)
 declare -A _F         # lua filter (--lua-filter)
+declare -A _F0        # 需要在citeproc前执行的lua filter
 
 # ${_G[header]} 变量说明：
 # 由于pandoc-crossref需要使用metadata中的header-includes变量，命令行参数中不能包含 -H，需要使用lua filter将-H参数内容转换为metadata变量

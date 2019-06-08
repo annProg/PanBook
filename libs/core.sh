@@ -226,6 +226,9 @@ function getF() {
 	for item in ${_F[@]};do
 		_G[f]="${_G[f]} $item"
 	done
+	for item in ${_F0[@]};do
+		_G[f0]="${_G[f0]} $item"
+	done
 }
 
 function getPandocParam() {
@@ -237,7 +240,7 @@ function getPandocParam() {
 	getM
 	getP
 	getF
-	_G[pandoc-param]="${_G[crossref]} $crossrefYaml ${_G[f]} ${_G[citeproc]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
+	_G[pandoc-param]="${_G[crossref]} $crossrefYaml ${_G[f0]} ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
 function getXeLaTeXParam() {
