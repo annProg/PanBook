@@ -1,5 +1,5 @@
 OPT = -V CJKmainfont=NSimSun --pdf-engine=xelatex
-REF = -F pandocrossref-crossref
+REF = -F pandoc-crossref
 LST = --listings
 MINTED = --lua-filter minted.lua -s
 
@@ -16,7 +16,7 @@ minted:
 crossref-pandoc:
 	pandoc  $(REF) $(OPT) 1.md -o crossref-pandoc.pdf
 crossref-listings:
-	pandoc  $(REF) $(OPT) $(LST) 1.md -o crossref-listings.pdf
+	pandoc  $(REF) -Mlistings $(OPT) $(LST) 1.md -o crossref-listings.pdf
 crossref-minted:
 	pandoc  $(REF) $(OPT) $(MINTED) 1.md -o crossref-minted.tex
 	xelatex -shell-escape crossref-minted.tex

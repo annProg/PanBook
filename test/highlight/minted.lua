@@ -4,9 +4,14 @@ table.print = table_print.print_r
 --]]
 
 function Meta(meta)
-	header = pandoc.MetaBlocks({})
-	table.insert(header, pandoc.RawBlock("latex", "\\usepackage{minted}"))
-	meta['header-includes'] = header
+	k = 'header-includes'
+	header = pandoc.RawBlock("latex", "\\usepackage{minted}")
+
+	if meta[k] == nil then
+		meta['header-includes'] = pandoc.MetaBlocks({header})
+	else
+		table.insert(meta['header-includes'], header)
+	end
 	return meta
 end
 
