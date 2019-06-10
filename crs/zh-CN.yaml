@@ -10,4 +10,3 @@ eqnPrefix: "公式"
 tblPrefix: "表"
 secPrefix: "章节"
 linkReferences: true
-listings: true

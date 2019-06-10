@@ -72,7 +72,6 @@ _G=(
 
 _P=(
 	[toc]=""
-	[listings]=""
 	[csl]=$SCRIPTDIR/csl/chinese-gb7714-2005-numeric.csl              # 默认cls文件路径（需要在获取参数后重置）
 	[bibliography]=$CWD/src/bibliography.bib                          # 默认bibliography路径（需要在获取参数后删除）
 	[metadata-file]=$CWD/src/metadata.yaml                            # 默认metadata.yaml（需要在获取参数后重置）	
