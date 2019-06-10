@@ -20,7 +20,11 @@ function CodeBlock(block)
 	local language = block.attr.classes[1]
 	local option = {}
 	for i=2,#block.attr.classes do
-		table.insert(option, block.attr.classes[i])
+		if block.attr.classes[i] == 'numberLines' then
+			table.insert(option, "linenos")
+		else
+			table.insert(option, block.attr.classes[i])
+		end
 	end
 
 	local label = ""
@@ -28,8 +32,11 @@ function CodeBlock(block)
 		label = "\\hypertarget{" .. id .. "}{%\n\\label{" .. id .. "}}%\n"
 	end
 	for k,v in pairs(block.attr.attributes) do
-		if k ~= 'caption' then
+		if k == 'startFrom' then
+			table.insert(option, "firstnumber=" .. v)
+		elseif k ~= 'caption' then
 			table.insert(option, k .. "={" .. v .. "}")
+		else
 		end
 	end
 
