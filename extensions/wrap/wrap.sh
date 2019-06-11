@@ -1,14 +1,14 @@
 regext wrap
 getArrayVar _G "ext-wrap" true
 getArrayVar _G "ext-wrap-style" "bclogo"
-getArrayVar _V "lang" "zh"
+getArrayVar _G "ext-wrap-lang" "zh"
 getArrayVar _G "ext-wrap-color" $SCRIPTDIR/${_G[extdir]}/wrap/color.tex
 getArrayVar _G "ext-wrap-introduction" $SCRIPTDIR/${_G[extdir]}/wrap/introduction.tex
 getArrayVar _G "ext-wrap-problemset" $SCRIPTDIR/${_G[extdir]}/wrap/problemset.tex
 
 function ext_wrap() {
 	getArrayVar _G "ext-wrap-tex" "$SCRIPTDIR/${_G[extdir]}/wrap/${_G[ext-wrap-style]}-wrap.tex"
-	getArrayVar _G "ext-wrap-texlang" "$SCRIPTDIR/${_G[extdir]}/wrap/${_V[lang]}.tex"
+	getArrayVar _G "ext-wrap-texlang" "$SCRIPTDIR/${_G[extdir]}/wrap/${_G[ext-wrap-lang]}.tex"
 	# 依赖add header功能
 	if [ "${_G[ext-wrap]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		writeHeader ${_G[ext-wrap-texlang]}
@@ -38,6 +38,6 @@ function ext_wrap_help() {
 	echo -e "\t-G ext-wrap-introduction:<custom introduction>  use custom introduction"
 	echo -e "\t-G ext-wrap-problemset:<custom problemset>      use custom problemset"
 	echo -e "\t-G ext-wrap-noanswer:<true|false>               noanswer mode"
-	echo -e "\t-V lang:<zh|en>                                 select language"
+	echo -e "\t-G ext-wrap-lang:<zh|en>                        select language(default zh)"
 	exit 0
 }
