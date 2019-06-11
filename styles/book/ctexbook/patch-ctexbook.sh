@@ -8,7 +8,7 @@ ext_device
 ext_wrap tex
 ext_theorem tex
 
-if [ ${_P[template]} == ${_G[style]}.tpl ];then
+if [ "${_P[template]}"x == ""x ];then
 	getArrayVar _V "classoption" "fancyhdr,bookmark"
 	getArrayVar _V "pagestyle" "fancy"
 fi
