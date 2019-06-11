@@ -26,7 +26,7 @@ custom_header = pandoc.RawBlock("latex", string.gsub(header,'\r\n','\n'))
 return {
 	{
 		Meta = function(meta)
-            k='header-includes'
+			k='header-includes'
 			if meta[k] == nil then
 				meta[k] = pandoc.MetaBlocks({custom_header})
 			else

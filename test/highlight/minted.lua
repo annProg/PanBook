@@ -8,9 +8,15 @@ function Meta(meta)
 	header = pandoc.RawBlock("latex", "\\usepackage{minted}")
 
 	if meta[k] == nil then
-		meta['header-includes'] = pandoc.MetaBlocks({header})
+		meta[k] = pandoc.MetaBlocks({header})
 	else
-		table.insert(meta['header-includes'], header)
+		-- MetaBlock和MetaList处理方式不同
+		t = meta[k].tag
+		if t == "MetaList" then
+			meta[k][#meta[k]+1] = pandoc.MetaBlocks({header})
+		else
+			table.insert(meta[k], header)
+		end
 	end
 	return meta
 end
