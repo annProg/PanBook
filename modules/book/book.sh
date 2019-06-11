@@ -38,6 +38,7 @@ function func_book() {
 		ext_column
 		ext_copyright
 		ext_longtable
+		ext_zh_en
 
 		pandoc ${_G[frontmatter]} -o frontmatter.tex --listings --top-level-division=${_P[top-level-division]} $custom_filter
 		pandoc ${_G[backmatter]} -o backmatter.tex --listings --top-level-division=${_P[top-level-division]} $custom_filter
