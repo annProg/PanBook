@@ -1,6 +1,7 @@
 regext listings
 getArrayVar _G "ext-listings" true
 getArrayVar _G "ext-listings-lstset" "$SCRIPTDIR/${_G[extdir]}/listings/listings-set.tex"
+getArrayVar _G "ext-listings-highlight" "$SCRIPTDIR/${_G[extdir]}/listings/highlight.tex"
 
 function listings() {
 	for i in `echo ${!_P[@]}`;do
@@ -15,6 +16,8 @@ function ext_listings() {
 		writeHeader ${_G[ext-listings-lstset]}
 		_P[listings]=""
 		_M[listings]=true
+	else
+		writeHeader ${_G[ext-listings-highlight]}
 	fi
 }
 
