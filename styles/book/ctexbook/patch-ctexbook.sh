@@ -11,10 +11,10 @@ ext_theorem tex
 if [ ${_P[template]} == ${_G[style]}.tpl ];then
 	getArrayVar _V "classoption" "fancyhdr,bookmark"
 	getArrayVar _V "pagestyle" "fancy"
-	getArrayVar _V "device" "pc"
-	getArrayVar _V "cover" "29"
-	getArrayVar _V "titlepage" "true"
 fi
+getArrayVar _V "device" "pc"
+getArrayVar _V "cover" "29"
+getArrayVar _V "titlepage" "true"
 
 echo ${_V[cover]} |grep -q '[^0-9]'
 if [ $? -eq 1 ];then
