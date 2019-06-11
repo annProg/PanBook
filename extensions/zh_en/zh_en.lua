@@ -13,12 +13,25 @@ function inTable(t, val)
 	return false
 end
 
-function Div(el)
-	if inTable(zh_enClass, el.attr.classes[1]) then
-		return {
-			pandoc.RawBlock("latex", "\\begin{" .. el.attr.classes[1] .. "}"),
-			el,
-			pandoc.RawBlock("latex", "\\end{" .. el.attr.classes[1] .. "}")
-		}
+function Pandoc(doc)
+	local nblocks = {}
+	for k,el in pairs(doc.blocks) do
+		if el.t == "Div" and inTable(zh_enClass, el.attr.classes[1]) then
+			table.insert(nblocks, pandoc.RawBlock("latex", "\\begin{" .. el.attr.classes[1] .. "}"))
+			table.insert(nblocks, el)
+			table.insert(nblocks, pandoc.RawBlock("latex", "\\end{" .. el.attr.classes[1] .. "}"))
+		elseif el.t == "Header" and inTable(zh_enClass, el.attr.classes[1]) then
+			local c = el.attr.classes[1]
+			-- both时使用中文标题
+			if doc.meta['ext-zh-en'] == 'both' and c == 'zh' then
+				table.insert(nblocks, el)
+			elseif c  == doc.meta['ext-zh-en'] then
+				table.insert(nblocks, el)
+			else
+			end
+		else
+			table.insert(nblocks, el)
+		end
 	end
+	return pandoc.Pandoc(nblocks, doc.meta)
 end

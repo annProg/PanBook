@@ -9,6 +9,7 @@ function ext_zh_en() {
 	if [ "${_G[ext-zh_en]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		writeHeader ${_G[ext-zh_en-tex]}
 		writeHeader ${_G[ext-zh_en-texlang]}
+		_M[ext-zh-en]=${_G[ext-zh_en-lang]}
 		_F[zh_en]="--lua-filter $SCRIPTDIR/${_G[extdir]}/zh_en/zh_en.lua"
 	fi
 }
