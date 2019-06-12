@@ -72,6 +72,9 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
+$if(version)$
+\version{$version$}
+$endif$
 
 $if(extrainfo)$
 \extrainfo{$extrainfo$}
