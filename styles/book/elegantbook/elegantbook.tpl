@@ -62,6 +62,8 @@ $if(title)$
 $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
+$else$
+\subtitle{~}
 $endif$
 $if(author)$
 \author{$for(author)$$author$$sep$, $endfor$}
