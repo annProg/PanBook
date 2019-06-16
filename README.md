@@ -63,6 +63,15 @@ $ panbook -h
 - [自学是门手艺 李笑来](https://github.com/pandoc-ebook/the-craft-of-selfteaching)
 - [TOEFL iBT 高分作文 李笑来](https://github.com/pandoc-ebook/twe185/releases)
 
+## 致谢
+`PanBook`适配了一些开源`LaTeX`模板，列表如下：
+
+| Book | Thesis | Slide | CV |
+| -- | --- | --- | --- |
+| [ElegantBook](https://github.com/ElegantLaTeX/ElegantBook) | | | [moderncv](https://github.com/xdanaux/moderncv) |
+| | |[more](https://github.com/annProg/PanBook/tree/master/styles/slide) | [resume](https://github.com/billryan/resume) |
+| | | | [tmr](https://github.com/TheMartianLife/TheMartianResume) |
+
 ## QQ 群
 欢迎加入 QQ 群交流
 
