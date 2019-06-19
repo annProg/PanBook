@@ -8,8 +8,10 @@ steps:
   - name: docker_sock
     path: /var/run/docker.sock
   commands:
+  - apk add git
   - TAG=$(git describe --tags --exact-match 2> /dev/null || git rev-parse --short HEAD)
-  - docker build -t panbook:latest .
+  - docker build -t panbook:$(TAG) .
+  - docker tag panbook:$(TAG) panbook:latest
   
 volumes:
 - name: docker_sock
