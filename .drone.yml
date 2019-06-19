@@ -1,0 +1,13 @@
+kind: pipline
+name: panbook
+
+steps:
+  - name: build image
+    image: docker:latest
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
+    commands:
+      - TAG=$(git describe --tags --exact-match 2> /dev/null || git rev-parse --short HEAD)
+      - docker build -t panbook:$(TAG) .
+      - docker tag panbook:$(TAG) panbook:latest
