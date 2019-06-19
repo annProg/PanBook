@@ -7,7 +7,7 @@ workspace:
 
 steps:
 - name: build
-  image: docker:18.09
+  image: golang:1.11
   volumes:
   - name: docker_sock
     path: /var/run/docker.sock
