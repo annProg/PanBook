@@ -1,9 +1,9 @@
-kind: pipline
+kind: pipeline
 name: default
 
 workspace:
-  base: /
-  path: PanBook
+  base: /go
+  path: src/github.com/annProg/citest
 
 steps:
 - name: build
@@ -12,9 +12,9 @@ steps:
   - name: docker_sock
     path: /var/run/docker.sock
   commands:
-  - TAG=$(git describe --tags --exact-match 2> /dev/null || git rev-parse --short HEAD)
-  - docker build -t panbook:$(TAG) .
-  - docker tag panbook:$(TAG) panbook:latest
+  - go test
+  - go build
+  
 volumes:
 - name: docker_sock
   host:
