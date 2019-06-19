@@ -8,8 +8,7 @@ steps:
   - name: docker_sock
     path: /var/run/docker.sock
   commands:
-  - go test
-  - go build
+  - docker build -t panbook:latest .
   
 volumes:
 - name: docker_sock
