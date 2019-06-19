@@ -78,5 +78,3 @@ $ panbook -h
 欢迎加入 QQ 群交流
 
 ![](src/images/qq.png)
-
-test
