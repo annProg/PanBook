@@ -1,9 +1,10 @@
-kind: pipline
-name: panbook
+workspace:
+  base: /
+  path: PanBook
 
-steps:
-  - name: build image
-    image: docker:latest
+pipeline:
+  build:
+    image: docker:18.09
     volumes:
       - name: docker_sock
         path: /var/run/docker.sock
