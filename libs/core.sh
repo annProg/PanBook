@@ -154,7 +154,7 @@ function init()
 
 	# 清空$HEADERS 以后都是追加
 	echo > ${_G[header]}
-	[ "${_G[trace]}"x == "true"x ] && _G[interaction]=""
+	[ "${_G[trace]}"x == "true"x ] && _G[interaction]="-interaction=nonstopmode -halt-on-error"
 	cd ${_G[build]}
 	_G[ofile]=${_G[build]}/${_G[ofile]}-${_G[function]}-${_G[style]}	
 }

@@ -16,7 +16,7 @@ steps:
   image: panbook:latest
   pull: if-not-exists
   commands:
-  - CJK="" make book
+  - CJK="" DEBUG="-d --trace" make book
 
 volumes:
 - name: docker_sock

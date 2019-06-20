@@ -2,6 +2,7 @@ SERVER ?= api.annhe.net
 USER ?= root
 PORT ?= 22
 DIR ?= /PanBook
+DEBUG ?= 
 
 OWNER ?= annProg
 REPO ?= PanBook
@@ -13,14 +14,14 @@ all: ctex ctex6in elegantbook epub online
 book: ctex ctex6in elegantbook
 
 ctex: 
-	panbook book -V cover:R $(DIVISION) $(CJK)
+	panbook book -V cover:R $(DIVISION) $(CJK) $(DEBUG)
 ctex6in: 
-	panbook book -V cover:R -V device:mobile $(DIVISION) $(CJK)
+	panbook book -V cover:R -V device:mobile $(DIVISION) $(CJK) $(DEBUG)
 elegantbook: 
-	panbook book --style=elegantbook $(DIVISION) $(CJK)
+	panbook book --style=elegantbook $(DIVISION) $(CJK) $(DEBUG)
 epub:
 	rm -f build/*.epub
-	panbook book --style=epub
+	panbook book --style=epub $(DEBUG)
 	mv build/$(REPO)-*.epub build/$(REPO).epub
 	
 up: release upload
