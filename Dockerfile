@@ -8,5 +8,6 @@ COPY . /PanBook/
 RUN apk add --no-cache make
 ENV PATH /PanBook:$PATH
 RUN mkdir /data
+RUN chmod +x /PanBook/panbook
 WORKDIR /data
 ENTRYPOINT ["panbook"]
