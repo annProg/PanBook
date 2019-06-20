@@ -5,7 +5,7 @@ RUN cd /tmp/ && curl -s -L https://github.com/jgm/pandoc/releases/download/2.7.3
 RUN cd /tmp/ && curl -s -L https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.4.1/linux-pandoc_2_7_2.tar.gz -o crossref.tar.gz && tar -zxvf crossref.tar.gz && mv pandoc-crossref /usr/local/bin && rm -fr /tmp/*
 
 COPY . /PanBook/
-
+RUN apk add --no-cache make
 RUN export PATH=$PATH:/PanBook
 RUN mkdir /data
 WORKDIR /data
