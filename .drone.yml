@@ -16,6 +16,8 @@ steps:
   image: panbook:latest
   pull: if-not-exists
   commands:
+  - ip add
+  - env
   - CJK="" DEBUG="-d" make book
 
 volumes:
