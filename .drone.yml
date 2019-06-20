@@ -12,7 +12,12 @@ steps:
   - export TAG=`git describe --tags --exact-match 2> /dev/null || git rev-parse --short HEAD`
   - docker build -t panbook:$TAG .
   - docker tag panbook:$TAG panbook:latest
-  
+- name: panbook-doc
+  image: panbook:latest
+  pull: if-not-exists
+  commands:
+  - make book
+
 volumes:
 - name: docker_sock
   host:
