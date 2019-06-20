@@ -9,5 +9,7 @@ RUN apk add --no-cache make
 ENV PATH /PanBook:$PATH
 RUN mkdir /data
 RUN chmod +x /PanBook/panbook
+COPY tools/docker/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive-fonts.conf
+RUN fc-cache -sfv
 WORKDIR /data
 ENTRYPOINT ["panbook"]
