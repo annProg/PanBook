@@ -6,7 +6,7 @@ RUN cd /tmp/ && curl -s -L https://github.com/lierdakil/pandoc-crossref/releases
 
 COPY . /PanBook/
 RUN apk add --no-cache make
-RUN export PATH=$PATH:/PanBook
+ENV PATH /PanBook:$PATH
 RUN mkdir /data
 WORKDIR /data
 ENTRYPOINT ["panbook"]
