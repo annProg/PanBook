@@ -132,6 +132,9 @@ $else$
 $endif$
 \noindent \textit{最后编译日期, \today\ \currenttime } % Printing/edition date
 $endif$
+$for(include-before)$
+$include-before$
+$endfor$
 
 \tableofcontents
 
@@ -146,10 +149,6 @@ $endif$
 
 \clearpage
 \thispagestyle{empty}
-
-$for(include-before)$
-$include-before$
-$endfor$
 
 \mainmatter
 \hypersetup{pageanchor=true}
