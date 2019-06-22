@@ -1,6 +1,10 @@
 kind: pipeline
 name: default
 
+workspace:
+  base: /
+  path: /PanBook
+
 steps:
 - name: build
   image: docker:18.09-git

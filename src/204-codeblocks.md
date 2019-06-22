@@ -63,6 +63,7 @@ qsort [] = []
 ```
 
 预览
+
 ~~~haskell
 qsort [] = []
 ~~~
