@@ -62,9 +62,7 @@ function func_book() {
 
 		floatListings $TEX_OUTPUT
 
-		for i in `seq 1 ${_G[xelatex-times]}`;do
-			xelatex ${_G[xelatex]} -output-directory=${_G[build]} $TEX_OUTPUT #1&>/dev/null
-		done
+		latexmk -xelatex ${_G[xelatex]} -output-directory=${_G[build]} $TEX_OUTPUT #1&>/dev/null
 	fi
 	compileStatus ${_G[function]}
 }

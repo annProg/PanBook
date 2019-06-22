@@ -35,7 +35,7 @@ function func_cv() {
 	# 转求职信的时候用\par显式分段
 	sed -i '/^$/d' ${_G[ofile]}.${_G[t]}
 	
-	xelatex ${_G[xelatex]} -output-directory=${_G[build]} ${_G[ofile]}.${_G[t]}
+	latexmk -xelatex ${_G[xelatex]} -output-directory=${_G[build]} ${_G[ofile]}.${_G[t]}
 	compileStatus ${_G[function]}	
 }
 
