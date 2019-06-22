@@ -3,7 +3,7 @@ name: default
 
 workspace:
   base: /
-  path: /PanBook
+  path: PanBook
 
 steps:
 - name: build
