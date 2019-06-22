@@ -15,13 +15,21 @@ steps:
   - export TAG=`git describe --tags --exact-match 2> /dev/null || git rev-parse --short HEAD`
   - docker build -t panbook:$TAG .
   - docker tag panbook:$TAG panbook:latest
-- name: panbook-doc
+- name: panbook-doc-ctexbook
   image: panbook:latest
   pull: if-not-exists
   commands:
-  - ip add
-  - env
-  - CJK="" DEBUG="-d" make book
+  - CJK="" DEBUG="-d" make ctex
+- name: panbook-doc-ctexbook-6inch
+  image: panbook:latest
+  pull: if-not-exists
+  commands:
+  - CJK="" DEBUG="-d" make ctex6in
+- name: panbook-doc-elegantbook
+  image: panbook:latest
+  pull: if-not-exists
+  commands:
+  - CJK="" DEBUG="-d" make elegantbook
 
 volumes:
 - name: docker_sock
