@@ -196,7 +196,7 @@
 
 
 \newcommand{\base}[2]{%
-	\nointerlineskip \vspace{0.1\baselineskip}\hspace{\fill}
+	\vspace{0.1\baselineskip}\hspace{\fill}
 	{\color{#1}
 		\resizebox{0.3\linewidth}{1.5ex}
 		{{%
@@ -206,8 +206,9 @@
 					\path (C) to [ornament=#2] (D);
 					\end{tikzpicture}}}}}%
 	\hspace{\fill}
-	\par\nointerlineskip \vspace{0.1\baselineskip}
+	\par \vspace{0.1\baselineskip}
 }
+
 
 % ----- Title Style -----
 \ifdefstring{\ELEGANT@titlestyle}{hang}{\def\style{hang}}{\relax}
@@ -627,6 +628,8 @@
 	}
 }{\relax}
 
+\newsavebox\elegantfoot
+\savebox\elegantfoot{\base{structurecolor}{88}}
 
 %页眉页脚
 \RequirePackage{fancyhdr}
@@ -642,7 +645,7 @@
 \fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
 \fi
 
-\fancyfoot[c]{\base{structurecolor}{88}}
+\fancyfoot[c]{\usebox{\elegantfoot}}
 \renewcommand{\headrule}{\color{structurecolor}\hrule width\textwidth}
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
