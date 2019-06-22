@@ -67,7 +67,6 @@ _G=(
 	[interaction]="-interaction=batchmode"
 	[xelatex]=""
 	[part]=false                                                      # 部分编译
-	[xelatex-times]=2                                                 # xelatex编译次数
 )
 
 _P=(
