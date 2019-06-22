@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 workspace:
-  base: /
+  base: /book
   path: PanBook
 
 steps:
