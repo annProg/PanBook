@@ -3,12 +3,11 @@ name: default
 
 steps:
 - name: build
-  image: docker:18.09
+  image: docker:18.09-git
   volumes:
   - name: docker_sock
     path: /var/run/docker.sock
   commands:
-  - apk add git
   - export TAG=`git describe --tags --exact-match 2> /dev/null || git rev-parse --short HEAD`
   - docker build -t panbook:$TAG .
   - docker tag panbook:$TAG panbook:latest
