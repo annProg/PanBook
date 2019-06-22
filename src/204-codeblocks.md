@@ -15,8 +15,6 @@ Extension fenced_code_blocks：除了标准的缩进式代码块之外，Pandoc 
 使开始行和结束行中的 `~` 符号个数多于代码块中的即可，见 [@lst:fenced_code_blocks]。
 :::
 
-::::: {.columns}
-::: {.column}
 ```{#lst:fenced_code_blocks .markdown caption="围栏式代码块"}
 ~~~~~
 ~~~~
@@ -24,8 +22,6 @@ code here
 ~~~~
 ~~~~~~
 ```
-:::
-::: {.column}
 预览：
 
 ~~~~~
@@ -33,8 +29,6 @@ code here
 code here
 ~~~~
 ~~~~~~
-:::
-:::::
 
 ::: {.note}
 Extension backtick_code_blocks：与 fenced_code_blocks 相同，只不过使用反引号 \` 替换波浪线 `~` 而已
@@ -62,17 +56,13 @@ caption，则默认使用 ID 作为 caption。有些输出格式可以利用这�
 
 仅指定高亮语言时，可以简写为 [@lst:code_short] 形式。
 
-::::: {.columns}
-::: {.column}
 ```{#lst:code_short .markdown caption="代码块简写形式"}
 ~~~haskell
 qsort [] = []
 ~~~
 ```
-:::
-::: {.column}
+
+预览
 ~~~haskell
 qsort [] = []
 ~~~
-:::
-:::::
