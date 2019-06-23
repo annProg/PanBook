@@ -3,12 +3,14 @@ USER ?= root
 PORT ?= 22
 DIR ?= /PanBook
 
-THEME ?= R
+THEME ?= metropolis
 CONVERT ?= /mingw64/bin/convert
 
 run:
-	panbook beamer --theme=$(THEME)
-	
+	panbook slide --style=$(THEME)
+all-theme:
+	for id in `panbook slide -l`;do echo "Compile $$id ..";panbook slide --style=$$id;done
+	panbook slide --style=metropolis
 png:
 	cd build && mkdir all-beamer && mkdir all-beamer-title && \
 	for item in `ls *.pdf`;do \

@@ -30,6 +30,12 @@ steps:
   pull: if-not-exists
   commands:
   - CJK="" DEBUG="-d" make elegantbook
+- name: demo-slide
+  image: panbook:latest
+  pull: if-not-exists
+  commands:
+  - cd demo/beamer
+  - make all-theme
 
 volumes:
 - name: docker_sock
