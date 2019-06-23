@@ -9,7 +9,7 @@ CONVERT ?= /mingw64/bin/convert
 run:
 	panbook slide --style=$(THEME)
 all-theme:
-	for id in `panbook slide -l`;do echo "Compile $$id ..";panbook slide --style=$$id;done
+	for id in `panbook slide -l`;do echo "Compile $$id ..";panbook slide --style=$$id || exit 1;done
 	panbook slide --style=metropolis
 png:
 	cd build && mkdir all-beamer && mkdir all-beamer-title && \
