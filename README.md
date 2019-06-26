@@ -12,11 +12,11 @@
 
 | Book | Thesis | Slide | CV |
 | --- | --- | --- | --- |
-|[ElegantBook](https://api.annhe.net/PanBook/PanBook-book-elegantbook-pc.pdf) || [metropolis](https://api.annhe.net/PanBook/beamer-beamer-metropolis.pdf) |[moderncv-classic](https://api.annhe.net/PanBook/cv-cv-moderncv-classic-blue.pdf)|
-|| |[solarized](https://api.annhe.net/PanBook/beamer-beamer-solarized.pdf)|[resume](https://api.annhe.net/PanBook/cv-cv-resume.pdf)|
-|[CTeXBook](https://api.annhe.net/PanBook/PanBook-book-ctexbook-pc.pdf) | | [material](https://api.annhe.net/PanBook/beamer-beamer-material.pdf)| [TMR](https://api.annhe.net/PanBook/cv-cv-tmr.pdf)|
-|[CTeXBook-mobile](https://api.annhe.net/PanBook/PanBook-book-ctexbook-mobile.pdf)| | [Execushares](https://api.annhe.net/PanBook/beamer-beamer-Execushares.pdf)|[moderncv-fancy](https://api.annhe.net/PanBook/cv-cv-moderncv-fancy-blue.pdf) |
-|[Epub](https://api.annhe.net/PanBook/PanBook.epub)  | |[more](https://github.com/annProg/PanBook/tree/master/demo/beamer) |[more](https://github.com/annProg/PanBook/tree/master/demo/cv) |
+|[ElegantBook](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) || [metropolis](https://panbook.annhe.net/pub/beamer-beamer-metropolis.pdf) |[moderncv-classic](https://panbook.annhe.net/pub/cv-cv-moderncv-classic-blue.pdf)|
+|| |[solarized](https://panbook.annhe.net/pub/beamer-beamer-solarized.pdf)|[resume](https://panbook.annhe.net/pub/cv-cv-resume.pdf)|
+|[CTeXBook](https://panbook.annhe.net/pub/PanBook-book-ctexbook-pc.pdf) | | [material](https://panbook.annhe.net/pub/beamer-beamer-material.pdf)| [TMR](https://panbook.annhe.net/pub/cv-cv-tmr.pdf)|
+|[CTeXBook-mobile](https://panbook.annhe.net/pub/PanBook-book-ctexbook-mobile.pdf)| | [Execushares](https://panbook.annhe.net/pub/beamer-beamer-Execushares.pdf)|[moderncv-fancy](https://panbook.annhe.net/pub/cv-cv-moderncv-fancy-blue.pdf) |
+|[Epub](https://panbook.annhe.net/pub/PanBook.epub)  | |[more](https://github.com/annProg/PanBook/tree/master/demo/beamer) |[more](https://github.com/annProg/PanBook/tree/master/demo/cv) |
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。首先安装以下依赖软件
@@ -55,13 +55,13 @@ $ panbook -h
 然后编写 `src` 目录下的 `Markdown` 源文件。图片放在 `src/images` 下。
 
 ## 贡献指南
-欢迎提交`Issue`和`Pull Request`。`extensions`, `styles`开发流程请参考 [PanBook 手册](https://api.annhe.net/PanBook/PanBook-book-elegantbook-pc.pdf) 第七章。
+欢迎提交`Issue`和`Pull Request`。`extensions`, `styles`开发流程请参考 [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) 第七章。
 
 ## 演示
 
 使用本项目编译的书籍（欢迎加入此列表）
 
-- [PanBook 手册](https://api.annhe.net/PanBook/PanBook-book-elegantbook-pc.pdf)
+- [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf)
 - [自学是门手艺 李笑来](https://github.com/pandoc-ebook/the-craft-of-selfteaching)
 - [TOEFL iBT 高分作文 李笑来](https://github.com/pandoc-ebook/twe185/releases)
 

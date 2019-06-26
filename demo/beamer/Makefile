@@ -1,4 +1,4 @@
-SERVER ?= api.annhe.net
+SERVER ?= panbook.annhe.net
 USER ?= root
 PORT ?= 22
 DIR ?= /PanBook
@@ -21,7 +21,7 @@ png:
 		rm -f $$theme-*.png;\
 	done
 link:
-	for item in `grep "themeList=" ../../libs/module-beamer.sh |awk -F'=' '{print $$2}' |tr -d '()'`;do echo "- [$$item](https://$(SERVER)/PanBook/beamer-beamer-$$item.pdf)";done
+	for item in `grep "themeList=" ../../libs/module-beamer.sh |awk -F'=' '{print $$2}' |tr -d '()'`;do echo "- [$$item](https://$(SERVER)/pub/beamer-beamer-$$item.pdf)";done
 online:
 	scp -P $(PORT) build/beamer-*.pdf $(USER)@$(SERVER):$(DIR)
 	
