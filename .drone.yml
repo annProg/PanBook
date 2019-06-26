@@ -43,9 +43,16 @@ steps:
   pull: if-not-exists
   commands:
   - cd demo/beamer
-  - make all-theme
+  - make run
   depends_on:
   - build
+
+- name: publish
+  image: annprog/rsync:latest
+  pull: if-not-exists
+  settings:
+  - src: build/*.pdf
+  - dest: 172.17.0.1::panbook
 
 volumes:
 - name: docker_sock
