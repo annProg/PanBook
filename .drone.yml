@@ -15,27 +15,37 @@ steps:
   - export TAG=`git describe --tags --exact-match 2> /dev/null || git rev-parse --short HEAD`
   - docker build -t panbook:$TAG .
   - docker tag panbook:$TAG panbook:latest
-- name: panbook-doc-ctexbook
+
+- name: doc-ctexbook
   image: panbook:latest
   pull: if-not-exists
   commands:
   - CJK="" DEBUG="-d" make ctex
-- name: panbook-doc-ctexbook-6inch
+  depends_on:
+  - build  
+- name: doc-ctexbook-6inch
   image: panbook:latest
   pull: if-not-exists
   commands:
   - CJK="" DEBUG="-d" make ctex6in
-- name: panbook-doc-elegantbook
+  depends_on:
+  - build
+- name: doc-elegantbook
   image: panbook:latest
   pull: if-not-exists
   commands:
   - CJK="" DEBUG="-d" make elegantbook
+  depends_on:
+  - build
+
 - name: demo-slide
   image: panbook:latest
   pull: if-not-exists
   commands:
   - cd demo/beamer
   - make all-theme
+  depends_on:
+  - build
 
 volumes:
 - name: docker_sock
