@@ -43,7 +43,7 @@ steps:
   pull: if-not-exists
   commands:
   - cd demo/beamer
-  - make run
+  - make all-theme
   depends_on:
   - build
 

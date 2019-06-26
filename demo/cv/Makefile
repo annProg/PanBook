@@ -13,7 +13,7 @@ all: moderncv-all-style resume tmr
 
 moderncv-all-style:
 	for style in `echo $(ALL_STYLE)`;do \
-		panbook cv -E style=$$style -E color=$(COLOR) -V onlinecv="" -V showdate=""; \
+		panbook cv -E style=$$style -E color=$(COLOR) -V onlinecv="" -V showdate="" || exit 1; \
 	done
 moderncv-all-style-color:
 	for style in `echo $(ALL_STYLE)`;do \
