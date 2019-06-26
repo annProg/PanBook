@@ -40,7 +40,6 @@ _G=(
 	[build]=$CWD/build                                                # 默认编译目录
 	[moduledir]=modules
 	[fontdir]=fonts
-	[header]=$CWD/build/add-headers.tex                               # 默认header文件名
 	[extdir]=extensions                                               # 扩展目录
 	[tpldir]=templates                                                # pandoc模板目录
 	[styledir]=styles                                                 # styles目录
@@ -68,6 +67,8 @@ _G=(
 	[xelatex]=""
 	[part]=false                                                      # 部分编译
 )
+_G[build_id]=`echo $RANDOM$RANDOM$RANDOM`                             # 表示编译ID
+_G[header]=$CWD/build/add-headers-${_G[build_id]}.tex                 # 默认header文件名 build_id支持并行编译
 
 _P=(
 	[toc]=""

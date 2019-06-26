@@ -3,7 +3,7 @@ getArrayVar _G "ext-header" true
 
 function ext_header() {
 	if [ "${_G[ext-header]}"x == "true"x ];then
-		_F[add-header]="--lua-filter $SCRIPTDIR/${_G[extdir]}/header/add-header.lua"
+		_F[add-header]="-M build_id=${_G[build_id]} --lua-filter $SCRIPTDIR/${_G[extdir]}/header/add-header.lua"
 	fi
 }
 
