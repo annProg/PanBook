@@ -32,6 +32,10 @@ $if(listings)$
 \lstset{defaultdialect=[x86masm]Assembler}
 $endif$
 
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
 \usepackage{xeCJK}
 $if(CJKmainfont)$
 \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}

@@ -28,6 +28,10 @@ $if(listings)$
 \lstset{defaultdialect=[x86masm]Assembler}
 $endif$
 
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
 $if(tables)$
 \usepackage{longtable,booktabs}
 $endif$
