@@ -12,10 +12,10 @@
 
 | Book | Thesis | Slide | CV |
 | --- | --- | --- | --- |
-|[ElegantBook](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) || [metropolis](https://panbook.annhe.net/pub/beamer-beamer-metropolis.pdf) |[moderncv-classic](https://panbook.annhe.net/pub/cv-cv-moderncv-classic-blue.pdf)|
-|| |[solarized](https://panbook.annhe.net/pub/beamer-beamer-solarized.pdf)|[resume](https://panbook.annhe.net/pub/cv-cv-resume.pdf)|
-|[CTeXBook](https://panbook.annhe.net/pub/PanBook-book-ctexbook-pc.pdf) | | [material](https://panbook.annhe.net/pub/beamer-beamer-material.pdf)| [TMR](https://panbook.annhe.net/pub/cv-cv-tmr.pdf)|
-|[CTeXBook-mobile](https://panbook.annhe.net/pub/PanBook-book-ctexbook-mobile.pdf)| | [Execushares](https://panbook.annhe.net/pub/beamer-beamer-Execushares.pdf)|[moderncv-fancy](https://panbook.annhe.net/pub/cv-cv-moderncv-fancy-blue.pdf) |
+|[ElegantBook](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) || [metropolis](https://panbook.annhe.net/pub/beamer-slide-metropolis.pdf) |[moderncv-classic](https://panbook.annhe.net/pub/cv-cv-moderncv-classic-blue.pdf)|
+|| |[solarized](https://panbook.annhe.net/pub/beamer-slide-solarized.pdf)|[resume](https://panbook.annhe.net/pub/cv-cv-resume.pdf)|
+|[CTeXBook](https://panbook.annhe.net/pub/PanBook-book-ctexbook-pc.pdf) | | [material](https://panbook.annhe.net/pub/beamer-slide-material.pdf)| [TMR](https://panbook.annhe.net/pub/cv-cv-tmr.pdf)|
+|[CTeXBook-mobile](https://panbook.annhe.net/pub/PanBook-book-ctexbook-mobile.pdf)| | [Execushares](https://panbook.annhe.net/pub/beamer-slide-Execushares.pdf)|[moderncv-fancy](https://panbook.annhe.net/pub/cv-cv-moderncv-fancy-blue.pdf) |
 |[Epub](https://panbook.annhe.net/pub/PanBook.epub)  | |[more](https://github.com/annProg/PanBook/tree/master/demo/beamer) |[more](https://github.com/annProg/PanBook/tree/master/demo/cv) |
 
 ## 快速开始
