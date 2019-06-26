@@ -53,6 +53,11 @@ steps:
   settings:
     src: build/*.pdf
     dest: 172.17.0.1::panbook
+  depends_on:
+  - doc-ctexbook
+  - doc-ctexbook-6inch
+  - doc-elegantbook
+  - demo-slide
 
 volumes:
 - name: docker_sock
