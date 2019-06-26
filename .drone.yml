@@ -51,8 +51,8 @@ steps:
   image: annprog/rsync:latest
   pull: if-not-exists
   settings:
-  - src: build/*.pdf
-  - dest: 172.17.0.1::panbook
+    src: build/*.pdf
+    dest: 172.17.0.1::panbook
 
 volumes:
 - name: docker_sock
