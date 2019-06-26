@@ -1,2 +1,2 @@
 #!/bin/sh
-rsync -av ${PLUGIN_SRC} ${PLUGIN_DEST}
+rsync -v ${PLUGIN_SRC} ${PLUGIN_DEST}
