@@ -21,9 +21,9 @@ png:
 		rm -f $$theme-*.png;\
 	done
 link:
-	for item in `grep "themeList=" ../../libs/module-beamer.sh |awk -F'=' '{print $$2}' |tr -d '()'`;do echo "- [$$item](https://$(SERVER)/pub/beamer-beamer-$$item.pdf)";done
+	for item in metropolis `panbook slide -l`;do echo "- [$$item](https://$(SERVER)/pub/beamer-slide-$$item.pdf)";done
 online:
 	scp -P $(PORT) build/beamer-*.pdf $(USER)@$(SERVER):$(DIR)
 	
 single:
-	scp -P $(PORT) build/beamer-beamer-$(THEME).pdf $(USER)@$(SERVER):$(DIR)
+	scp -P $(PORT) build/beamer-slide-$(THEME).pdf $(USER)@$(SERVER):$(DIR)
