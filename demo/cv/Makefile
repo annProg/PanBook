@@ -13,24 +13,22 @@ all: moderncv-all-style resume tmr
 
 moderncv-all-style:
 	for style in `echo $(ALL_STYLE)`;do \
-		panbook cv -E style=$$style -E color=$(COLOR) -V onlinecv="" -V showdate="" || exit 1; \
+		panbook cv -M style=$$style -M color=$(COLOR) -V onlinecv="" -V showdate="" || exit 1; \
 	done
 moderncv-all-style-color:
 	for style in `echo $(ALL_STYLE)`;do \
 		for color in `echo $(ALL_COLOR)`;do \
-			panbook cv -E style=$$style -E color=$$color; \
+			panbook cv -M style=$$style -M color=$$color; \
 		done \
 	done
 	
 moderncv:
-	panbook cv -E style=$(STYLE) -E color=$(COLOR)
+	panbook cv -M style=$(STYLE) -M color=$(COLOR)
 
 resume:
-	panbook cv --cv=resume
+	panbook cv --style=resume
 tmr:
-	panbook cv --cv=tmr	
-all-tpl:
-	panbook cv --cv=A
+	panbook cv --style=tmr	
 png:
 	cd build;for pdf in `ls cv-cv-*.pdf`; do \
 		pdftocairo -png $$pdf; \
