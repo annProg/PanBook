@@ -22,7 +22,8 @@ steps:
   commands:
   - CJK="" DEBUG="-d" make ctex
   depends_on:
-  - build  
+  - build
+
 - name: doc-ctexbook-6inch
   image: panbook:latest
   pull: if-not-exists
@@ -30,6 +31,8 @@ steps:
   - CJK="" DEBUG="-d" make ctex6in
   depends_on:
   - build
+  - doc-ctexbook
+
 - name: doc-elegantbook
   image: panbook:latest
   pull: if-not-exists
@@ -37,6 +40,7 @@ steps:
   - CJK="" DEBUG="-d" make elegantbook
   depends_on:
   - build
+  - doc-ctexbook-6inch
 
 - name: demo-slide
   image: panbook:latest
@@ -55,7 +59,8 @@ steps:
   - make all
   depends_on:
   - build
- 
+  - demo-slide
+
 - name: publish-doc
   image: annprog/rsync:latest
   pull: if-not-exists
