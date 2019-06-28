@@ -159,6 +159,16 @@ function init()
 	_G[ofile]=${_G[build]}/${_G[ofile]}-${_G[function]}-${_G[style]}	
 }
 
+function useCI() {
+	ci=$1
+	_info "CI: $ci"
+	cidir=$SCRIPTDIR/tools/ci
+	case $ci in
+	drone) [ ! -f $CWD/.drone.yml ] && cat $cidir/.drone.yml|sed "s/__WORKSPACE__/${_G[ofile]}/g" |sed "s/__MODULE__/${_G[function]}/g" > $CWD/.drone.yml;;
+	*) note $ic;;
+	esac
+}
+
 # 随机数，加随机数是处理repeat for multiple options的情况
 function _random() {
 	echo $(($RANDOM$RANDOM$RANDOM%1000000))

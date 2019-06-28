@@ -130,6 +130,10 @@ do
 	--part=*)
 		_G[part]=${key#*=}
 		shift;;
+	--ci=*)
+		_G[ci]=${key#*=}
+		useCI ${_G[ci]}
+		shift;;
 	--trace)
 		_G[trace]=true
 		shift;;

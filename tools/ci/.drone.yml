@@ -1,0 +1,22 @@
+kind: pipeline
+name: default
+
+workspace:
+  base: /book
+  path: __WORKSPACE__
+
+steps:
+- name: build
+  image: panbook:latest
+  pull: if-not-exists
+  commands:
+  - panbook __MODULE__ -d
+ 
+- name: publish
+  image: annprog/rsync:latest
+  pull: if-not-exists
+  settings:
+    src: build/*.pdf
+    dest: 172.17.0.1::panbook
+  depends_on:
+  - build
