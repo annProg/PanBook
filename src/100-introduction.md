@@ -13,16 +13,16 @@
 - 安装 [Pandoc](https://pandoc.org/installing.html) 2.7.1 或以上版本
 - 下载 [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本安装到 path 目录下（建议和 Pandoc 放同一目录）
 
-然后下载 PanBook。打开终端（ msys2 ），假设工作目录为 /d/dev ，执行 [@lst:gitclone]。
+然后下载 PanBook。打开终端（ msys2 ），假设工作目录为 /d/dev ，执行：
 
-```{#lst:gitclone .bash caption="安装 PanBook"}
+```bash
 $ cd /d/dev
 $ git clone https://github.com/annProg/PanBook
 ```
 
-完成软件安装之后，需要设置环境变量，将 PanBook，TeXLive 及 Pandoc 加入环境变量，如 [@lst:setpath] 所示。
+完成软件安装之后，需要设置环境变量，将 PanBook，TeXLive 及 Pandoc 加入环境变量：
 
-```{#lst:setpath .bash caption="设置环境变量"}
+```bash
 $ tail -n 1 ~/.bashrc
 export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```

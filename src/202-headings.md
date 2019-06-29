@@ -30,18 +30,14 @@ I like several of their flavors of ice cream:
 这也是 [@sec:note] 所述注意事项的原因。
 
 ::: {.note}
-Extension header_attributes：在标题文字所在行的行尾，可以使用 [@lst:headerattributes0] 语法为标题加上属性。
+Extension header_attributes：在标题文字所在行的行尾，可以使用 `{#identifier .class .class key=value key=value}` 语法为标题加上属性：
 :::
 
-```{#lst:headerattributes0 caption="标题标识符"}
-{#identifier .class .class key=value key=value}
-```
 虽然这个语法也包含加入类别 (class) 以及键／值形式的属性 (attribute)，
 但目前只有标识符 (identifier/ID) 在输出时有实际作用（且只在部分格式
-的输出，包括：HTML, \LaTeX, ConTeXt, Textile, AsciiDoc）。举例来说，
-[@lst:header_attributes] 是将标题加上 foo 标识符的几种方法。
+的输出，包括：HTML, \LaTeX, ConTeXt, Textile, AsciiDoc）。举例来说，以下是将标题加上 foo 标识符的几种方法：
 
-```{#lst:header_attributes .markdown caption="标题标识符"}
+```markdown
 # My header {#foo}
 
 ## My header ##    {#foo}
@@ -49,11 +45,13 @@ Extension header_attributes：在标题文字所在行的行尾，可以使用 [
 My other header   {#foo}
 ---------------
 ```
-（此语法与 PHP Markdown Extra 相容。）
+
+此语法与 PHP Markdown Extra 相容。
 
 具有 .unnumbered 类别的标题将不会被编号，即使 --number-sections 的选项是开启
-的。单一连字符号 (`-`) 等同于 .unnumbered ，且更适用于非英文文件中。因此 [@lst:header_unnumbered] 中两行是等价的。
-```{#lst:header_unnumbered .markdown caption="避免标题编号"}
+的。单一连字符号 (`-`) 等同于 .unnumbered ，且更适用于非英文文件中。因此以下两行是等价的：
+
+```markdown
 # My header {-}
 # My header {.unnumbered}
 ```

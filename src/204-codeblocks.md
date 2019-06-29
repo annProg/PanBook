@@ -38,9 +38,9 @@ echo "fenced_code_attributes"
 
 [@lst:code_attribute] 中 lst:mycode 为 ID，`.bash` 与 `.numberLines` 是类别，而 startsFrom 则是值为 100 的属性。numberLines 和 startFrom 配合使用可以显示代码行号，如果没有指定 startFrom，则默认从 1 开始。caption 指定代码块标题，如果没有设置 caption，则默认使用 ID 作为 caption。有些输出格式可以利用这些信息来作语法高亮。目前使用到这些信息的输出格式仅有 HTML 与 \LaTeX。如果指定的输出格式及语言类别有语法高亮支持，那么上面那段代码区块将会以高亮并带有行号的方式呈现。
 
-仅指定高亮语言时，可以简写为 [@lst:code_short] 形式。
+仅指定高亮语言时，可以简写为以下形式：
 
-```{#lst:code_short .markdown caption="代码块简写形式"}
+```markdown
 ~~~bash
 #!/bin/bash
 echo "short code highlight"
