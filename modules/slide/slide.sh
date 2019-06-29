@@ -21,6 +21,7 @@ function func_slide() {
 	ext_header
 	ext_listings
 	ext_grade
+	ext_lineblock
 
 	if [ "${_G[debug]}"x != "true"x ];then
 		_G[t]=pdf
