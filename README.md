@@ -62,8 +62,7 @@ $ panbook -h
 使用本项目编译的书籍（欢迎加入此列表）
 
 - [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf)
-- [自学是门手艺 李笑来](https://github.com/pandoc-ebook/the-craft-of-selfteaching)
-- [TOEFL iBT 高分作文 李笑来](https://github.com/pandoc-ebook/twe185/releases)
+- [Go by example](https://github.com/pandoc-ebook/gobyexample-zh)
 
 ## 致谢
 `PanBook`适配了一些开源`LaTeX`模板，列表如下：
