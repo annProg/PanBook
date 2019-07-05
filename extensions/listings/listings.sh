@@ -16,6 +16,7 @@ function ext_listings() {
 		writeHeader ${_G[ext-listings-lstset]}
 		_P[listings]=""
 		_M[listings]=true
+		_G[highlight]="--listings"
 	else
 		writeHeader ${_G[ext-listings-highlight]}
 	fi

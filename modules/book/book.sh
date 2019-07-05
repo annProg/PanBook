@@ -41,8 +41,8 @@ function func_book() {
 		ext_zh_en
 		ext_lineblock
 
-		pandoc ${_G[frontmatter]} -o frontmatter.tex --listings --top-level-division=${_P[top-level-division]} $custom_filter
-		pandoc ${_G[backmatter]} -o backmatter.tex --listings --top-level-division=${_P[top-level-division]} $custom_filter
+		pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
+		pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
 		_G[ofile]=${_G[ofile]}-${_V[device]}
 		_P[include-before-body]=frontmatter.tex
 		_P[include-after-body]=backmatter.tex
