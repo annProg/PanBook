@@ -135,6 +135,10 @@ do
 		_G[ci]=${key#*=}
 		useCI ${_G[ci]}
 		shift;;
+	--memory=*)
+		_G[memory]=${key#*=}
+		shift;;
+		# 限制内存使用 see https://github.com/jgm/pandoc/issues/3169
 	--trace)
 		_G[trace]=true
 		shift;;

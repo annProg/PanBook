@@ -241,6 +241,14 @@ function getF() {
 	done
 }
 
+function heapSize() {
+	if [ "${_G[memory]}"x != ""x ];then
+		_G[heapsize]="+RTS -M${_G[memory]} -RTS"
+	else
+		_G[heapsize]=""
+	fi
+}
+
 function getPandocParam() {
 	crossrefYaml=""
 	if [ "${_G[crossref]}"x != ""x ];then
@@ -250,7 +258,8 @@ function getPandocParam() {
 	getM
 	getP
 	getF
-	_G[pandoc-param]="${_G[crossref]} $crossrefYaml ${_G[f0]} ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
+	heapSize
+	_G[pandoc-param]="${_G[heapsize]} ${_G[crossref]} $crossrefYaml ${_G[f0]} ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
 function getXeLaTeXParam() {

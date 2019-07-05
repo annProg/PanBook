@@ -288,6 +288,7 @@ function printhelp() {
 	echo -e "\t--imgdir    specify image dir name(default src/images)"
 	echo -e "\t--part      only compile specified markdown file"
 	echo -e "\t--ci        init with ci config(drone)"
+	echo -e "\t--memory    limit the maximum heap size(format 1000m)"
 	echo -e "\t--trace     trace mode"
 	echo -e "\t-V key:val  same with pandoc -V option"
 	echo -e "\t-M key:val  same with pandoc -M option"
