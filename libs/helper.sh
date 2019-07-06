@@ -282,14 +282,13 @@ function printhelp() {
 	echo -e "  Available command:"
 	getHF
 	echo -e "  Available OPTIONS(you can also use pandoc long option):"
-	echo -e "\t--style     specify a style"
-	echo -e "\t--crs       specify pandoc-crossref settings file(default pandoc-crossref-settings.yaml)"
-	echo -e "\t--src       specify src dir name(default src)"
-	echo -e "\t--imgdir    specify image dir name(default src/images)"
+	echo -e "\t--style     change style(list styles: panbook <module> -l)"
+	echo -e "\t--crs       change pandoc-crossref settings(default crs/zh-CN.yaml)"
+	echo -e "\t--src       change src directory name(default src)"
+	echo -e "\t--imgdir    change image directory name(default src/images)"
 	echo -e "\t--part      only compile specified markdown file"
-	echo -e "\t--ci        init with ci config(drone)"
-	echo -e "\t--memory    limit the maximum heap size(format 1000m)"
-	echo -e "\t--trace     trace mode"
+	echo -e "\t--ci        init with ci config(support: drone)"
+	echo -e "\t--memory    limit the maximum heap size(e.g. 1000m)"
 	echo -e "\t-V key:val  same with pandoc -V option"
 	echo -e "\t-M key:val  same with pandoc -M option"
 	echo -e "\t-G key:val  change panbook global variable"
@@ -298,5 +297,6 @@ function printhelp() {
 	echo -e "\t-d --debug  debug mode"
 	echo -e "\t-h --help   function help(if exists)"
 	echo -e "\t-l --list   function list(if exists)"
+	echo -e "\t--trace     trace mode"
 	exit 0
 }
