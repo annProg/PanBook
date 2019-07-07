@@ -1,10 +1,12 @@
 % 解决自动换行问题 https://github.com/annProg/PanBook/issues/26#issuecomment-500458739
 \definecolor{shaderulecolor}{rgb}{0.66,0.66,0.66}
-\floatstyle{plaintop}
-\captionsetup[plaintop]{skip=0pt}
 
 \makeatletter
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\floatstyle{plaintop}
 \@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\captionsetup[plaintop]{skip=0pt}
 \@ifundefinedcolor{shadecolor}{\definecolor{shadecolor}{rgb}{1.0,1.0,1.0}}
 \makeatother
 
