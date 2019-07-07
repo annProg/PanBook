@@ -1,6 +1,6 @@
 regext wrap
 getArrayVar _G "ext-wrap" true
-getArrayVar _G "ext-wrap-style" "bclogo"
+getArrayVar _G "ext-wrap-style" "tcolorbox"
 getArrayVar _V "lang" "zh"
 getArrayVar _G "ext-wrap-color" $SCRIPTDIR/${_G[extdir]}/wrap/color.tex
 getArrayVar _G "ext-wrap-introduction" $SCRIPTDIR/${_G[extdir]}/wrap/introduction.tex

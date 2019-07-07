@@ -101,7 +101,7 @@ nocite: |
 
 # \faEnvelope~求职信
 
-```
+```markdown
 # 韩荆州 {.letter company="公司" addr="地址" city="城市"}  // 接收方，全部必须
 ## 开元 22 年 {.letter .date}                                // 日期， 可选
 ## Dear Sir or Madam， {.letter .opening}                  // 称呼， 必须
@@ -111,7 +111,7 @@ nocite: |
 正文
 ```
 
-# \faStarHalf~技能打分
+# \faStar~技能打分
 
 - [语法]{.cat} `\grade1` ~ `\grade5` （1-5 分）
 - [排版]{.cat} \LaTeX,Markdown         [\grade4]{.comment}

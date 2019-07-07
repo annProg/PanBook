@@ -1,20 +1,21 @@
 \usepackage[tikz]{bclogo}
+\colorlet{colbackbclogo}{black!5!white}
 \newenvironment{info}[1][\infoTitle]
-	{\vspace{0.3cm}\begin{bclogo}[logo=\bcinfo, couleurBarre=infoBorder, noborder=true, couleur=info, arrondi=0.1]{~#1}}
+	{\vspace{0.3cm}\begin{bclogo}[logo=\bcinfo, couleurBarre=infoBorder, noborder=true, couleur=colbackbclogo, arrondi=0.1]{~#1}}
 	{\end{bclogo}}
 
 \newenvironment{warn}[1][\warnTitle]
-	{\vspace{0.3cm}\begin{bclogo}[logo=\bcattention, couleurBarre=warnBorder, noborder=true, couleur=warn, arrondi=0.1]{~#1}}
+	{\vspace{0.3cm}\begin{bclogo}[logo=\bcattention, couleurBarre=warnBorder, noborder=true, couleur=colbackbclogo, arrondi=0.1]{~#1}}
 	{\end{bclogo}}
 
 \newenvironment{alert}[1][\alertTitle]
-	{\vspace{0.3cm}\begin{bclogo}[logo=\bcdanger, couleurBarre=alertBorder, noborder=true, couleur=alert, arrondi=0.1]{~#1}}
+	{\vspace{0.3cm}\begin{bclogo}[logo=\bcdanger, couleurBarre=alertBorder, noborder=true, couleur=colbackbclogo, arrondi=0.1]{~#1}}
 	{\end{bclogo}}
 
 \newenvironment{tip}[1][\tipTitle]
-	{\vspace{0.3cm}\begin{bclogo}[logo=\bclampe, couleurBarre=tipBorder, noborder=true, couleur=tip, arrondi=0.1]{~#1}}
+	{\vspace{0.3cm}\begin{bclogo}[logo=\bclampe, couleurBarre=tipBorder, noborder=true, couleur=colbackbclogo, arrondi=0.1]{~#1}}
 	{\end{bclogo}}
 
 \newenvironment{help}[1][\helpTitle]
-	{\vspace{0.3cm}\begin{bclogo}[logo=\bcnote, couleurBarre=helpBorder, noborder=true, couleur=help, arrondi=0.1]{~#1}}
+	{\vspace{0.3cm}\begin{bclogo}[logo=\bcnote, couleurBarre=helpBorder, noborder=true, couleur=colbackbclogo, arrondi=0.1]{~#1}}
 	{\end{bclogo}}
