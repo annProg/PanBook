@@ -14,6 +14,21 @@ unset _G[ext-wrap-introduction]
 unset _G[ext-wrap-problemset]
 ext_wrap tex
 ext_theorem
-# 默认模板需要禁用mathspec. unicode-math和newtxmath不兼容
+
+if [ "${_P[template]}"x != "" ];then
+	_V[documentclass]="elegantbook"
+	getArrayVar _V classoption "cn"
+	getArrayVar _V cover "cover.jpg"
+	getArrayVar _V logo "logo.png"
+	getArrayVar _V extrainfo "使用~PanBook~编译"
+	getArrayVar _V hyperrefoptions "pageanchor=false"
+	FIX=${_G[build]}/fix-elegantpaper.tex
+	echo "\cover{${_V[cover]}}" > $FIX
+	echo "\logo{${_V[logo]}}" >> $FIX
+	echo "\extrainfo{${_V[extrainfo]}}" >> $FIX
+	writeHeader $FIX
+fi
+
+# 默认模板需要禁用unicode-math. unicode-math和newtxmath不兼容
 # https://github.com/ElegantLaTeX/ElegantBook/issues/9
-getArrayVar _V mathspec "false"
+_V[mathspec]="true"
