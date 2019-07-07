@@ -10,13 +10,13 @@
 
 预览
 
-| Book | Thesis | Slide | CV |
-| --- | --- | --- | --- |
-|[ElegantBook](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) || [metropolis](https://panbook.annhe.net/pub/beamer-slide-metropolis.pdf) |[moderncv-classic](https://panbook.annhe.net/pub/cv-cv-moderncv-classic-blue.pdf)|
-|| |[solarized](https://panbook.annhe.net/pub/beamer-slide-solarized.pdf)|[resume](https://panbook.annhe.net/pub/cv-cv-resume.pdf)|
-|[CTeXBook](https://panbook.annhe.net/pub/PanBook-book-ctexbook-pc.pdf) | | [material](https://panbook.annhe.net/pub/beamer-slide-material.pdf)| [TMR](https://panbook.annhe.net/pub/cv-cv-tmr.pdf)|
-|[CTeXBook-mobile](https://panbook.annhe.net/pub/PanBook-book-ctexbook-mobile.pdf)| | [Execushares](https://panbook.annhe.net/pub/beamer-slide-Execushares.pdf)|[moderncv-fancy](https://panbook.annhe.net/pub/cv-cv-moderncv-fancy-blue.pdf) |
-|[Epub](https://panbook.annhe.net/pub/PanBook.epub)  | |[more](https://github.com/annProg/PanBook/tree/master/demo/beamer) |[more](https://github.com/annProg/PanBook/tree/master/demo/cv) |
+| Book | Article | Thesis | Slide | CV |
+| --- | --- | --- | --- | --- |
+|[ElegantBook](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) | [ctexart](https://panbook.annhe.net/pub/article-art-ctexart.pdf)|| [metropolis](https://panbook.annhe.net/pub/beamer-slide-metropolis.pdf) |[moderncv-classic](https://panbook.annhe.net/pub/cv-cv-moderncv-classic-blue.pdf)|
+|| [elegantnote](https://panbook.annhe.net/pub/article-art-elegantnote.pdf) | |[solarized](https://panbook.annhe.net/pub/beamer-slide-solarized.pdf)|[resume](https://panbook.annhe.net/pub/cv-cv-resume.pdf)|
+|[CTeXBook](https://panbook.annhe.net/pub/PanBook-book-ctexbook-pc.pdf) | [elegantpaper](https://panbook.annhe.net/pub/article-art-elegantpaper.pdf) | | [material](https://panbook.annhe.net/pub/beamer-slide-material.pdf)| [TMR](https://panbook.annhe.net/pub/cv-cv-tmr.pdf)|
+|[CTeXBook-mobile](https://panbook.annhe.net/pub/PanBook-book-ctexbook-mobile.pdf)| | | [Execushares](https://panbook.annhe.net/pub/beamer-slide-Execushares.pdf)|[moderncv-fancy](https://panbook.annhe.net/pub/cv-cv-moderncv-fancy-blue.pdf) |
+|[Epub](https://panbook.annhe.net/pub/PanBook.epub)  | [more](https://github.com/annProg/PanBook/tree/master/demo/article)| [more](https://github.com/annProg/PanBook/tree/master/demo/thesis) |[more](https://github.com/annProg/PanBook/tree/master/demo/beamer) |[more](https://github.com/annProg/PanBook/tree/master/demo/cv) |
 
 ## 快速开始
 以`Windows 10`为例，演示如何使用。首先安装以下依赖软件
@@ -67,11 +67,11 @@ $ panbook -h
 ## 致谢
 `PanBook`适配了一些开源`LaTeX`模板，列表如下：
 
-| Book | Thesis | Slide | CV |
-| -- | --- | --- | --- |
-| [ElegantBook](https://github.com/ElegantLaTeX/ElegantBook) | | | [moderncv](https://github.com/xdanaux/moderncv) |
-| | |[more](https://github.com/annProg/PanBook/tree/master/styles/slide) | [resume](https://github.com/billryan/resume) |
-| | | | [tmr](https://github.com/TheMartianLife/TheMartianResume) |
+| Book | Article | Thesis | Slide | CV |
+| -- | --- | --- | --- | --- |
+| [ElegantBook](https://github.com/ElegantLaTeX/ElegantBook) | [ElegantNote](https://github.com/ElegantLaTeX/ElegantNote) | | | [moderncv](https://github.com/xdanaux/moderncv) |
+| | [ElegantPaper](https://github.com/ElegantLaTeX/ElegantPaper) | |[more](https://github.com/annProg/PanBook/tree/master/styles/slide) | [resume](https://github.com/billryan/resume) |
+| | | | | [tmr](https://github.com/TheMartianLife/TheMartianResume) |
 
 ## QQ 群
 欢迎加入 QQ 群交流
