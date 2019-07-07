@@ -2,8 +2,7 @@
 table_print = require('table_print')
 table.print = table_print.print_r
 --]]
-local wrapClass = {'info', 'tip', 'warn', 'alert', 'help'}
-local wrapOptClass = {'introduction', 'problemset'}
+local wrapClass = {'info', 'tip', 'warn', 'alert', 'help', 'introduction', 'problemset'}
 
 function inTable(t, val)
 	for _, v in pairs(t) do
@@ -45,15 +44,14 @@ end
 
 function Div(el)
 	if inTable(wrapClass, el.attr.classes[1]) then
-		return wrap(el, "")
-	end
-
-	if inTable(wrapOptClass, el.attr.classes[1]) then
 		if el.attr.attributes['caption'] ~= nil then
 			option = "[" .. el.attr.attributes['caption'] .. "]"
 		else
 			option = ""
 		end
+
+		-- 特殊符号转义
+		option = string.gsub(option, "_", "\\_{}")
 		return wrap(el, option)
 	end
 end
