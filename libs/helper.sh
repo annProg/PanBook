@@ -221,6 +221,7 @@ function _list() {
 }
 
 function style_list() {
+	[ "${_G[style$1]}"x == ""x ] && _error "no style for $1"
 	ls $SCRIPTDIR/${_G[style$1]} |tr ' ' '\n'
 	if [ "$CWD"x != "$SCRIPTDIR"x ];then
 		ls $CWD/${_G[style$1]} 2>/dev/null |tr ' ' '\n'
