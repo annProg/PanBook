@@ -47,6 +47,7 @@ _G=(
 	[styleslide]=styles/slide
 	[stylebook]=styles/book
 	[stylethesis]=styles/thesis
+	[styleart]=styles/article
 	[scriptdir]=$SCRIPTDIR
 	[cwd]=$CWD
 	[convert]=convert

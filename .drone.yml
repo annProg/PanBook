@@ -42,6 +42,15 @@ steps:
   - build
   - doc-ctexbook-6inch
 
+- name: demo-article
+  image: panbook:latest
+  pull: if-not-exists
+  commands:
+  - cd demo/article
+  - DEBUG=-d make build
+  depends_on:
+  - build
+  
 - name: demo-slide
   image: panbook:latest
   pull: if-not-exists
@@ -71,6 +80,15 @@ steps:
   - doc-ctexbook
   - doc-ctexbook-6inch
   - doc-elegantbook
+
+- name: publish-article
+  image: annprog/rsync:latest
+  pull: if-not-exists
+  settings:
+    src: demo/article/build/*.pdf
+    dest: 172.17.0.1::panbook
+  depends_on:
+  - demo-article
 
 - name: publish-slide
   image: annprog/rsync:latest

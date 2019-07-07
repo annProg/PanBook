@@ -12,7 +12,10 @@
 
 \usepackage{tcolorbox}
 \tcbuselibrary{most}
-\renewenvironment{Shaded}{\begin{tcolorbox}[shadow={0.8mm}{-0.8mm}{0mm}{red!20!green!20!blue!20},enhanced,boxrule=0.5pt,boxsep=-1pt,colback=shadecolor,colframe=shaderulecolor,arc=0.1mm]}{\end{tcolorbox}}
+\ifcsmacro{Shaded}{
+	\let\endShaded\undefined%
+	\renewenvironment{Shaded}{\begin{tcolorbox}[shadow={0.8mm}{-0.8mm}{0mm}{red!20!green!20!blue!20},enhanced,boxrule=0.5pt,boxsep=-1pt,colback=shadecolor,colframe=shaderulecolor,arc=0.1mm]}{\end{tcolorbox}}
+}{}
 
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,fontsize=\small,commandchars=\\\{\}}
