@@ -17,8 +17,8 @@ Setext A level-two header
 
 ### Atx  level-three
 ```
-::: {.note}
-Extension blank_before_header：原始 markdown 语法在标题之前并不需要预留空白行。Pandoc 则需要（除非标题位于文件最开始的
+::: {.info caption="Extension blank_before_header"}
+原始 markdown 语法在标题之前并不需要预留空白行。Pandoc 则需要（除非标题位于文件最开始的
 地方）。这是因为以`#`符号开头的情况在一般文字段落中相当常见，这会导致非预期的标题。例如 [@lst:blank_before_header]。
 :::
 
@@ -29,8 +29,8 @@ I like several of their flavors of ice cream:
 
 这也是 [@sec:note] 所述注意事项的原因。
 
-::: {.note}
-Extension header_attributes：在标题文字所在行的行尾，可以使用 `{#identifier .class .class key=value key=value}` 语法为标题加上属性：
+::: {.info caption="Extension header_attributes"}
+在标题文字所在行的行尾，可以使用 `{#identifier .class .class key=value key=value}` 语法为标题加上属性：
 :::
 
 虽然这个语法也包含加入类别 (class) 以及键／值形式的属性 (attribute)，

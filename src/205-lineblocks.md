@@ -12,8 +12,8 @@
 | 200 Main St.
 | Berkeley, CA 94718
 
-::: {.note}
-Extension: line_blocks：行区块是从 reStructuredText 借来的语法，以一连串以竖线 `|` 加上一个空格所构成的连续行。行与行间的区隔在输出时将会以原样保留，行首的空白字元数目也一样会被保留；反之，这些行将会以 markdown 的格式处理。这个语法在输入诗句或地址时很有帮助（[@lst:lineblocks]）。
+::: {.info caption="Extension: line_blocks"}
+行区块是从 reStructuredText 借来的语法，以一连串以竖线 `|` 加上一个空格所构成的连续行。行与行间的区隔在输出时将会以原样保留，行首的空白字元数目也一样会被保留；反之，这些行将会以 markdown 的格式处理。这个语法在输入诗句或地址时很有帮助（[@lst:lineblocks]）。
 :::
 
 ```{#lst:lineblocks .markdown caption="行区块"}

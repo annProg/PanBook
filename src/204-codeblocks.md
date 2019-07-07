@@ -9,8 +9,8 @@
     echo "Hello Markdown"
 	echo "Hello LaTeX"
 
-::: {.note}
-Extension fenced_code_blocks：除了标准的缩进式代码块之外，Pandoc 还支持围栏式代码块， 代码块以三个或三个以上的 `~` 符号行开始，以等于或多于开始行 `~` 个数符号行结束， 若是代码块中含有 `~`，只需使开始行和结束行中的 `~` 符号个数多于代码块中的即可，见 [@lst:fenced_code_blocks]。
+::: {.info caption="Extension fenced_code_blocks"}
+除了标准的缩进式代码块之外，Pandoc 还支持围栏式代码块， 代码块以三个或三个以上的 `~` 符号行开始，以等于或多于开始行 `~` 个数符号行结束， 若是代码块中含有 `~`，只需使开始行和结束行中的 `~` 符号个数多于代码块中的即可，见 [@lst:fenced_code_blocks]。
 :::
 
 ```{#lst:fenced_code_blocks .markdown caption="围栏式代码块"}
@@ -21,12 +21,12 @@ code here
 ~~~~~
 ```
 
-::: {.note}
-Extension backtick_code_blocks：与 fenced_code_blocks 相同，只不过使用反引号 `` ` `` 替换波浪线 `~` 而已
+::: {.info caption="Extension backtick_code_blocks"}
+与 fenced_code_blocks 相同，只不过使用反引号 `` ` `` 替换波浪线 `~` 而已
 :::
 
-::: {.note}
-Extension fenced_code_attributes：可用 [@lst:code_attribute] 为围栏式代码块添加属性。
+::: {.info caption="Extension fenced_code_attributes"}
+可用 [@lst:code_attribute] 为围栏式代码块添加属性。
 :::
 
 ```{#lst:code_attribute .markdown caption="代码块属性"}

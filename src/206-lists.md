@@ -51,8 +51,8 @@ list item.
         { code }
 ```
 
-::: {.note}
-列外情况：如果列表标记符后面紧跟着一个缩进的代码块，它必须在列表标记符之后开始 5 个空格，那么后续段落必须在列表标记符的最后一个字符之后开始两列：
+::: {.warn caption="列外情况"}
+如果列表标记符后面紧跟着一个缩进的代码块，它必须在列表标记符之后开始 5 个空格，那么后续段落必须在列表标记符的最后一个字符之后开始两列：
 :::
 
 ```markdown
@@ -106,8 +106,8 @@ list item.
 1.  three
 ```
 
-::: {.note}
-Extension: fancy_lists：与标准的 Markdown 不同，pandoc 除了阿拉伯数字外，还允许用大写字母、小写字母和罗马数字来标记有序列表项。列表标记可以用圆括号括起来，也可以用单右括号或句号括起来。它们必须与后面的文本至少分隔一个空格，如果列表标记是带句号的大写字母，则至少分隔两个空格。
+::: {.info caption="Extension: fancy_lists"}
+与标准的 Markdown 不同，pandoc 除了阿拉伯数字外，还允许用大写字母、小写字母和罗马数字来标记有序列表项。列表标记可以用圆括号括起来，也可以用单右括号或句号括起来。它们必须与后面的文本至少分隔一个空格，如果列表标记是带句号的大写字母，则至少分隔两个空格。
 :::
 
 fancy_lists 扩展还允许用 `#` 代替数字作为有序列表标记：
@@ -117,8 +117,8 @@ fancy_lists 扩展还允许用 `#` 代替数字作为有序列表标记：
 #. two
 ```
 
-::: {.note}
-Extension: startnum：除了列表标记外，Pandoc 也能判读列表的起始编号，这两项信息都会保留于输出格式中。举例来说，以下代码可以产生一个从编号 9 开始，以单括号为编号标记的列表，底下还跟着一个小写罗马数字的子列表。
+::: {.info caption="Extension: startnum"}
+除了列表标记外，Pandoc 也能判读列表的起始编号，这两项信息都会保留于输出格式中。举例来说，以下代码可以产生一个从编号 9 开始，以单括号为编号标记的列表，底下还跟着一个小写罗马数字的子列表。
 :::
 
 ```markdown
@@ -147,8 +147,8 @@ Extension: startnum：除了列表标记外，Pandoc 也能判读列表的起始
 #.  three
 ```
 
-::: {.note}
-Extension: task_lists：Pandoc 支持任务列表，使用 GitHub-Flavored Markdown 语法。
+::: {.info caption="Extension: task_lists"}
+Pandoc 支持任务列表，使用 GitHub-Flavored Markdown 语法。
 :::
 
 ```markdown
@@ -172,8 +172,8 @@ Term 2 with *inline markup*
 
     Third paragraph of definition 2.
 
-::: {.note}
-Extension: definition_lists：Pandoc 支持定义列表，使用带扩展的 PHP Markdown Extra 语法。
+::: {.info caption="Extension: definition_lists"}
+Pandoc 支持定义列表，使用带扩展的 PHP Markdown Extra 语法。
 :::
 
 ```markdown
@@ -227,8 +227,8 @@ Explanation of examples.
 
 (@)  My third example will be numbered (3).
 
-::: {.note}
-Extension: example_lists：这个特别的列表标记 `@` 可以用来产生连续编号的范例列表。列表中第一个以 `@` 标记的项目会被编号为 '1'，接着编号为 '2'，依此类推，直到文件结束。范例项目的编号不会局限于单一列表中，而是文件中所有以@为标记的项目均会次序递增其编号，直到最后一个。
+::: {.info caption="Extension: example_lists"}
+这个特别的列表标记 `@` 可以用来产生连续编号的范例列表。列表中第一个以 `@` 标记的项目会被编号为 '1'，接着编号为 '2'，依此类推，直到文件结束。范例项目的编号不会局限于单一列表中，而是文件中所有以@为标记的项目均会次序递增其编号，直到最后一个。
 :::
 
 ```markdown
@@ -250,7 +250,7 @@ As (@good) illustrates, ...
 
 标签可以是由任何英文字母、底线或是连字符号所组成的字串。
 
-::: {.note}
+::: {.tip}
 无论列表标记的长度如何，范例列表中的延续段落都必须缩进 4 个空格。也就是说，范例列表的行为总是像设置了 four_space_rule 扩展一样。这是因为示例标签往往很长，将内容缩进到标签之后的第一个非空格字符会很麻烦
 :::
 
@@ -269,7 +269,7 @@ As (@good) illustrates, ...
 
 Pandoc 会将以上列表转换为「紧凑列表」（在“First”, “Second”或“Third”之中没有、`<p>` 标签），而 markdown 则会在“Second”与“Third” （但不包含“First”）里面置入、`<p>` 标签，这是因为“Third”之前的空白行而造成的结果。Pandoc 依循着一个简单规则：如果文字后面跟着空白行，那么就会被视为段落。既然“Second”后面是跟着一个列表，而非空白行，那么就不会被视为段落了。至于子列表的后面是不是跟着空白行，那就无关紧要了。
 
-::: {.note}
+::: {.tip}
 即使是设定为 markdown_strict 格式，Pandoc 仍是依以上方式处理列表项目是否为段落的判定。这个处理方式与 markdown 官方语法规范里的描述一致，然而却与 Markdown.pl 的处理不同。
 :::
 

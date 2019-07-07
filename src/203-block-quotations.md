@@ -38,6 +38,6 @@ paragraph has two lines.
 >> A block quote within a block quote.
 ```
 
-::: {.note}
-Extension blank_before_blockquote：原始 markdown 语法在区块引用之前并不需要预留空白行。Pandoc 则需要（除非区块引用位于文件最开始的地方）。这是因为以`>`符号开头的情况在一般文字段落中相当常见（也许由于断行所致），这会导致非预期的格式。因此，除非是指定为 markdown_strict 格式，否则需要预留空白。
+::: {.info caption="Extension blank_before_blockquote"}
+原始 markdown 语法在区块引用之前并不需要预留空白行。Pandoc 则需要（除非区块引用位于文件最开始的地方）。这是因为以`>`符号开头的情况在一般文字段落中相当常见（也许由于断行所致），这会导致非预期的格式。因此，除非是指定为 markdown_strict 格式，否则需要预留空白。
 :::
