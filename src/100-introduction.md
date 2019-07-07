@@ -66,7 +66,7 @@ header-includes:
 ...
 ```
 
-::: {.help}
+::: {.help caption="模板变量"}
 查看模板文件，可以获取模板支持的所有变量（形如`$var$`)。也可以通过修改模板来添加自定义的变量。
 :::
 
@@ -99,7 +99,7 @@ Pangu-Markdown                  中英文自动加空格
 }  
 ```
 
-::: {.help}
+::: {.help caption="使用部分编译调试代码"}
 通过配置 VS Code Tasks，使用 PanBook 部分编译参数 `--part` ，实现快捷键（ ctrl + shift + b ）编译当前 Markdown 源文件。
 :::
 
@@ -140,7 +140,7 @@ Pangu-Markdown                  中英文自动加空格
 	}
 ```
 
-::: {.help}
+::: {.help caption="VS Code 使用技巧"}
 - 通过 文件 -> 首选项 -> 用户代码片段，选择 Markdown ，然后编辑 markdown.json 来定义代码片段
 - snippetSuggestions 设置为 top，可以优先显示代码片段
 - tabCompletion 设置为 on 使用 TAB 自动补全
