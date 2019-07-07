@@ -1,20 +1,20 @@
 \usepackage[tikz]{bclogo}
-\newenvironment{info}
-	{\begin{bclogo}[logo=\bcinfo, couleurBarre=infoBorder, noborder=true, couleur=info, arrondi=0.1]{\infoTitle}}
+\newenvironment{info}[1][\infoTitle]
+	{\begin{bclogo}[logo=\bcinfo, couleurBarre=infoBorder, noborder=true, couleur=info, arrondi=0.1]{#1}}
 	{\end{bclogo}}
 
-\newenvironment{warn}
-	{\begin{bclogo}[logo=\bcattention, couleurBarre=warnBorder, noborder=true, couleur=warn, arrondi=0.1]{\warnTitle}}
+\newenvironment{warn}[1][\warnTitle]
+	{\begin{bclogo}[logo=\bcattention, couleurBarre=warnBorder, noborder=true, couleur=warn, arrondi=0.1]{#1}}
 	{\end{bclogo}}
 
-\newenvironment{alert}
-	{\begin{bclogo}[logo=\bcdanger, couleurBarre=alertBorder, noborder=true, couleur=alert, arrondi=0.1]{\alertTitle}}
+\newenvironment{alert}[1][\alertTitle]
+	{\begin{bclogo}[logo=\bcdanger, couleurBarre=alertBorder, noborder=true, couleur=alert, arrondi=0.1]{#1}}
 	{\end{bclogo}}
 
-\newenvironment{tip}
-	{\begin{bclogo}[logo=\bclampe, couleurBarre=tipBorder, noborder=true, couleur=tip, arrondi=0.1]{\tipTitle}}
+\newenvironment{tip}[1][\tipTitle]
+	{\begin{bclogo}[logo=\bclampe, couleurBarre=tipBorder, noborder=true, couleur=tip, arrondi=0.1]{#1}}
 	{\end{bclogo}}
 
-\newenvironment{help}
-	{\begin{bclogo}[logo=\bcnote, couleurBarre=helpBorder, noborder=true, couleur=help, arrondi=0.1]{\helpTitle}}
+\newenvironment{help}[1][\helpTitle]
+	{\begin{bclogo}[logo=\bcnote, couleurBarre=helpBorder, noborder=true, couleur=help, arrondi=0.1]{#1}}
 	{\end{bclogo}}

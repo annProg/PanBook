@@ -1,71 +1,66 @@
 \usepackage[most]{tcolorbox}
 \usepackage{fontawesome5}
-\newtcolorbox{info}[1][]{%
+\newtcolorbox{info}[1][\infoTitle]{%
   enhanced jigsaw, % better frame drawing
   borderline west={2pt}{0pt}{infoBorder}, % straight vertical line at the left edge
   %sharp corners, % No rounded corners
   boxrule=0pt, % no real frame,
   fonttitle={\large\bfseries},
   coltitle={black},  % Black colour for title
-  colback=info,
+  colbacktitle=info,
   arc=4pt,
-  title={\infoTitleFa},  % Fixed title
-  attach title to upper, % Move the title into the box
-  #1
+  title={\infoTitleFa#1~~},  % Fixed title
+  attach title, % Move the title into the box
 }
 
-\newtcolorbox{warn}[1][]{%
+\newtcolorbox{warn}[1][\warnTitle]{%
   enhanced jigsaw, % better frame drawing
   borderline west={2pt}{0pt}{warnBorder}, % straight vertical line at the left edge
   %sharp corners, % No rounded corners
   boxrule=0pt, % no real frame,
   fonttitle={\large\bfseries},
   coltitle={black},  % Black colour for title
-  colback=warn,
+  colbacktitle=warn,
   arc=4pt,
-  title={\warnTitleFa},  % Fixed title
-  attach title to upper, % Move the title into the box
-  #1
+  title={\warnTitleFa#1~~},  % Fixed title
+  attach title, % Move the title into the box
 }
 
-\newtcolorbox{alert}[1][]{%
+\newtcolorbox{alert}[1][\alertTitle]{%
   enhanced jigsaw, % better frame drawing
   borderline west={2pt}{0pt}{alertBorder}, % straight vertical line at the left edge
   %sharp corners, % No rounded corners
   boxrule=0pt, % no real frame,
   fonttitle={\large\bfseries},
   coltitle={black},  % Black colour for title
-  colback=alert,
+  colbacktitle=alert,
   arc=4pt,
-  title={\alertTitleFa},  % Fixed title
-  attach title to upper, % Move the title into the box
-  #1
+  title={\alertTitleFa#1~~},  % Fixed title
+  attach title, % Move the title into the box
 }
 
-\newtcolorbox{tip}[1][]{%
+\newtcolorbox{tip}[1][\tipTitle]{%
   enhanced jigsaw, % better frame drawing
   borderline west={2pt}{0pt}{tipBorder}, % straight vertical line at the left edge
   %sharp corners, % No rounded corners
   boxrule=0pt, % no real frame,
   fonttitle={\large\bfseries},
   coltitle={black},  % Black colour for title
-  colback=tip,
+  colbacktitle=tip,
   arc=4pt,
-  title={\tipTitleFa},  % Fixed title
-  attach title to upper, % Move the title into the box
-  #1
+  title={\tipTitleFa#1~~},  % Fixed title
+  attach title, % Move the title into the box
 }
 
-\newtcolorbox{help}[1][]{%
+\newtcolorbox{help}[1][\helpTitle]{%
   enhanced jigsaw, % better frame drawing
   borderline west={2pt}{0pt}{helpBorder}, % straight vertical line at the left edge
   %sharp corners, % No rounded corners
   boxrule=0pt, % no real frame,
   fonttitle={\large\bfseries},
   coltitle={black},  % Black colour for title
-  colback=help,
+  colbacktitle=help,
   arc=4pt,
-  title={\helpTitleFa},  % Fixed title
-  attach title to upper, % Move the title into the box
-  #1
+  title={\helpTitleFa#1~~},  % Fixed title
+  attach title, % Move the title into the box
 }
