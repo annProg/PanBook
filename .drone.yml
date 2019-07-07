@@ -59,6 +59,7 @@ steps:
   - make all-theme
   depends_on:
   - build
+  - demo-article
 
 - name: demo-cv
   image: panbook:latest
