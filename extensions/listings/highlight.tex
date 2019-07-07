@@ -4,11 +4,9 @@
 \@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
 \captionsetup[plaintop]{skip=0pt}
 \@ifundefinedcolor{shadecolor}{\definecolor{shadecolor}{rgb}{1.0,1.0,1.0}}
-\makeatother
-\usepackage{fvextra}
-
 \@ifpackageloaded{tcolorbox}{}{\usepackage[most]{tcolorbox}}
 \definecolor{shaderulecolor}{rgb}{0.66,0.66,0.66}
+\usepackage{fvextra}
 \renewenvironment{Shaded}{\begin{tcolorbox}[shadow={0.8mm}{-0.8mm}{0mm}{red!20!green!20!blue!20},enhanced,boxrule=0.5pt,boxsep=-1pt,colback=shadecolor,colframe=shaderulecolor,arc=0.1mm]}{\end{tcolorbox}}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,fontsize=\small,commandchars=\\\{\}}
-
+\makeatother
