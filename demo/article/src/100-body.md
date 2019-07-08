@@ -1,3 +1,7 @@
+::: {.abstract keywords="\LaTeX{}，PanBook，Markdown，论文排版"}
+这里是摘要
+:::
+
 # 正文
 
 正文

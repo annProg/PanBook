@@ -28,6 +28,7 @@ function func_art() {
 		ext_longtable
 		ext_zh_en
 		ext_lineblock
+		ext_abstract
 	fi
 
 	partCompile
