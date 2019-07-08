@@ -202,8 +202,13 @@ function setP() {
 	pKey="`echo $1|sed 's/^--//g'|awk -F'=' '{print $1}'`"
 	pKey=`_checkKey $pKey`
 	pVal=`echo $1|awk -F'=' '{print $2}'`
-	[ "$pVal"x == ""x ] && pVal=""
-	_P[$pKey]=$pVal
+
+	# 支持 取消 布尔型设置(例如 --toc)
+	if [ "$pVal"x == "false"x ]; then
+		unset _P[$pKey]
+	else
+		_P[$pKey]=$pVal
+	fi
 }
 
 function getV() {

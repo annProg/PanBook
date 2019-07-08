@@ -294,7 +294,7 @@ function printhelp() {
 	echo -e "\t-M key:val  same with pandoc -M option"
 	echo -e "\t-G key:val  change panbook global variable"
 	echo -e "\t--key=val   use original pandoc long option like this"
-	echo -e "\t--key       use original pandoc long boolean option like this"
+	echo -e "\t--key       original pandoc boolean option(=false can unset option)"
 	echo -e "\t-d --debug  debug mode"
 	echo -e "\t-h --help   function help(if exists)"
 	echo -e "\t-l --list   function list(if exists)"
