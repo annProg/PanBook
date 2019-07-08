@@ -22,7 +22,7 @@ if [ $? -eq 1 ];then
 		_V[background]="images/${_V[cover]}.png"
 	fi
 elif [ ${_V[cover]} == "R" ];then
-	_V[background]="images/$(($RANDOM%60)).png"
+	_V[background]="images/$(($RANDOM%60+1)).png"
 elif [ ${_V[cover]} == "N" ];then
 	_V[background]=""
 else
