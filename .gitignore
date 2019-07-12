@@ -5,3 +5,6 @@
 *.out
 build
 *.pdf
+*.fdb_latexmk
+*.fls
+*.xdv
