@@ -6,13 +6,22 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \usepackage{hyperref}
+\usepackage{etoolbox}
 
-\title{
-{论文题目}\\
-{\large 计算机高等专科学校}\\
-{\includegraphics{logo.png}}
-}
+\makeatletter
+\newcommand{\subtitle}[1]{\def\@subtitle{#1}}
+\newcommand{\xuehao}[1]{\def\@xuehao{#1}}
+\newcommand{\supervisor}[1]{\def\@supervisor{#1}}
+\newcommand{\college}[1]{\def\@college{#1}}
+%\newcommand{\xuehao}[1]{\def\@xuehao{#1}}
+\makeatother
+
+\title{论文题目}
+\subtitle{论文副标题}
 \author{张\ 三}
+\xuehao{20190713021}
+\college{计算机学院}
+\supervisor{\LaTeX{}~~教授}
 \date{2019 年 7 月 12 日}
 
 %\fancyhead{}
@@ -22,6 +31,32 @@
 %\fancyfoot[LE,RO]{\thepage}
 %\fancyfoot[LO,CE]{Chapter \thechapter}
 %\fancyfoot[CO,RE]{\author}
+
+\makeatletter
+\renewcommand*{\maketitle}{
+\begin{titlepage}
+   \begin{center}
+       \vspace*{1cm}\par
+       {\Huge\bfseries \@title}\par
+       \vspace{0.5cm}
+       {\Large \@subtitle }\par
+       \includegraphics[width=0.4\textwidth]{logo}\par
+       \vspace{1.5cm}
+       \vspace{1cm}
+       {\Large \bfseries 本科毕业设计（论文）}\par
+       \vspace{0.8cm}
+	   \begin{tabular}[h]{rc}
+       \textbf{姓~~~~~名：} & \@author\\
+	   \textbf{学~~~~~号：} & \@xuehao\\
+	   \textbf{指导老师：} & \@supervisor\\
+	   \textbf{学~~~~~院：} & \@college
+	   \end{tabular}
+	   \vfill
+       \@date
+   \end{center}
+\end{titlepage}
+}
+\makeatother
 
 \begin{document}
 \maketitle
@@ -45,7 +80,7 @@
 \zhlipsum[1]
 
 \chapter{结论}
-用网页技术取代 \LaTeX{}{[}\protect\hyperlink{ref-weborlatex}{2}{]}
+用网页技术取代 \LaTeX{}\textsuperscript{{[}\protect\hyperlink{ref-weborlatex}{2}{]}}
 
 \chapter*{参考文献}
 \leavevmode\hypertarget{ref-weborlatex}{}%
