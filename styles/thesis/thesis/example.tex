@@ -5,6 +5,7 @@
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
+\usepackage{hyperref}
 
 \title{
 {论文题目}\\
@@ -13,6 +14,14 @@
 }
 \author{张\ 三}
 \date{2019 年 7 月 12 日}
+
+%\fancyhead{}
+%\fancyhead[RO,LE]{论文题目}
+%\fancyhead[RE,LO]{\chaptername}
+%\fancyfoot{}
+%\fancyfoot[LE,RO]{\thepage}
+%\fancyfoot[LO,CE]{Chapter \thechapter}
+%\fancyfoot[CO,RE]{\author}
 
 \begin{document}
 \maketitle
@@ -26,12 +35,21 @@
 \tableofcontents
 
 \chapter{引言}
-\zhlipsum
+\zhlipsum[1-2]
 
 \chapter{正文}
-\zhlipsum
+\zhlipsum[1-15]
 
 \appendix
 \chapter{Appendix Title}
 \zhlipsum[1]
+
+\chapter{结论}
+用网页技术取代 \LaTeX{}{[}\protect\hyperlink{ref-weborlatex}{2}{]}
+
+\chapter*{参考文献}
+\leavevmode\hypertarget{ref-weborlatex}{}%
+{[}2{]} 谢益辉. 用网页技术取代 LaTeX：前传{[}M{]}.
+https://yihui.name/cn/2018/05/relaxed/.
+
 \end{document}
