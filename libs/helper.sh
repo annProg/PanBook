@@ -1,5 +1,22 @@
 #!/bin/bash
 
+function parseMeta() {
+	# 仅支持key全为字母且值为string  赋值给 _MF 数组
+	source <(grep -E "^[a-zA-Z]+: " ${_P[metadata-file]} | sed -e 's/\s*#.*$//g;s/:[^:\/\/]/\]="/g;s/$/"/g;s/ *=/=/g' |grep "=" |awk '{print "_MF["$0}')
+}
+
+# -M 参数指定的优先级更高
+getMetaVar() {
+	key=$1
+	if [ "${_M[$key]}"x != ""x ]; then
+		echo ${_M[$key]}
+	elif [ "${_MF[$key]}"x != ""x ]; then
+		echo ${_MF[$key]}
+	else
+		echo ""
+	fi
+}
+
 function getVar() {
 	cmd="echo \$$1"
 	val=`eval $cmd`

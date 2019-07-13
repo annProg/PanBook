@@ -39,10 +39,7 @@ function func_book() {
 	ext_zh_en
 	ext_lineblock
 
-	partCompile
-	getPandocParam
-	getXeLaTeXParam
-
+	getFF
 	if [ ${_G[t]} == "tex" ];then
 		pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter ${_G[ff]}
 		pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
@@ -51,6 +48,9 @@ function func_book() {
 		_P[include-after-body]=backmatter.tex
 	fi
 
+	partCompile
+	getPandocParam
+	getXeLaTeXParam
 	pandoc ${_G[pandoc-param]}
 
 	# 非tex时不用xelatex编译

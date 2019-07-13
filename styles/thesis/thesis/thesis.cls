@@ -78,9 +78,9 @@
    \thispagestyle{empty}
    \begin{center}
        \vspace*{1cm}\par
-       {\Huge\bfseries \@title}\par
+       {\huge\bfseries \@title}\par
        \vspace{0.5cm}
-       {\LARGE \@subtitle }\par
+       {\Large \@subtitle }\par
        \includegraphics[width=0.4\textwidth]{logo}\par
        \vspace{1.5cm}
        \vspace{1cm}

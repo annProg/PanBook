@@ -33,14 +33,15 @@ function func_thesis() {
 	ext_lineblock
 	ext_abstract
 
-	getPandocParam
-	getXeLaTeXParam
-
+	getFF
+	
 	pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter ${_G[ff]}
 	pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
 	_P[include-before-body]=frontmatter.tex
 	_P[include-after-body]=backmatter.tex
 
+	getPandocParam
+	getXeLaTeXParam
 	pandoc ${_G[pandoc-param]}
 
 	TEX_OUTPUT=${_G[ofile]}.${_G[t]}
