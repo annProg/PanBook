@@ -26,7 +26,11 @@ function func_book() {
 
 	# 生成前言和后记
 	custom_filter=${_F[style-${_G[function]}-${_G[style]}]}
-	
+
+	partCompile
+	getPandocParam
+	getXeLaTeXParam
+
 	if [ ${_G[t]} == "tex" ];then
 		getArrayVar _V documentclass ctexbook
 		getArrayVar _V device pc
@@ -41,16 +45,13 @@ function func_book() {
 		ext_zh_en
 		ext_lineblock
 
-		pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
+		pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter ${_G[ff]}
 		pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
 		_G[ofile]=${_G[ofile]}-${_V[device]}
 		_P[include-before-body]=frontmatter.tex
 		_P[include-after-body]=backmatter.tex
 	fi
 
-	partCompile
-	getPandocParam
-	getXeLaTeXParam
 	pandoc ${_G[pandoc-param]}
 
 	# 非tex时不用xelatex编译

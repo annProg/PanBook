@@ -11,7 +11,7 @@ function func_thesis() {
 	initMakefile
 	initVscodeTask
 
-	getArrayVar _G style elegantpaper
+	getArrayVar _G style thesis
 	getArrayVar _P "top-level-division" "chapter"
 	init
 	_P[metadata-file]=${_P[metadata-file]}
@@ -22,7 +22,7 @@ function func_thesis() {
 	# 生成前言和后记
 	custom_filter=${_F[style-${_G[function]}-${_G[style]}]}
 	
-	getArrayVar _V documentclass elegantpaper
+	getArrayVar _V documentclass thesis
 
 	# 启用扩展
 	ext_header
@@ -31,14 +31,16 @@ function func_thesis() {
 	ext_column
 	ext_longtable
 	ext_lineblock
+	ext_abstract
 
-	pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
+	getPandocParam
+	getXeLaTeXParam
+
+	pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter ${_G[ff]}
 	pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
 	_P[include-before-body]=frontmatter.tex
 	_P[include-after-body]=backmatter.tex
 
-	getPandocParam
-	getXeLaTeXParam
 	pandoc ${_G[pandoc-param]}
 
 	TEX_OUTPUT=${_G[ofile]}.${_G[t]}

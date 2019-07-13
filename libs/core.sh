@@ -244,6 +244,9 @@ function getF() {
 	for item in ${_F0[@]};do
 		_G[f0]="${_G[f0]} $item"
 	done
+	for item in ${_FF[@]};do
+		_G[ff]="${_G[ff]} $item"
+	done
 }
 
 function heapSize() {
