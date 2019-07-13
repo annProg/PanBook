@@ -82,7 +82,9 @@ _P=(
 	[pdf-engine]=xelatex
 	[number-sections]=""
 )
-_V=()
+_V=(
+	[indent]=true                                                     # indent M默认打开
+)
 _M=(
 	[link-citations]=true                                             #  make your citations hyperlinks to the corresponding bibliography entries
 )
