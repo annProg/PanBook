@@ -12,7 +12,7 @@
 
 | Book | Article | Thesis | Slide | CV |
 | --- | --- | --- | --- | --- |
-|[ElegantBook](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) | [ctexart](https://panbook.annhe.net/pub/article-art-ctexart.pdf)|| [metropolis](https://panbook.annhe.net/pub/beamer-slide-metropolis.pdf) |[moderncv-classic](https://panbook.annhe.net/pub/cv-cv-moderncv-classic-blue.pdf)|
+|[ElegantBook](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) | [ctexart](https://panbook.annhe.net/pub/article-art-ctexart.pdf)| [thesis](https://panbook.annhe.net/pub/thesis-thesis-thesis.pdf) | [metropolis](https://panbook.annhe.net/pub/beamer-slide-metropolis.pdf) |[moderncv-classic](https://panbook.annhe.net/pub/cv-cv-moderncv-classic-blue.pdf)|
 || [elegantnote](https://panbook.annhe.net/pub/article-art-elegantnote.pdf) | |[solarized](https://panbook.annhe.net/pub/beamer-slide-solarized.pdf)|[resume](https://panbook.annhe.net/pub/cv-cv-resume.pdf)|
 |[CTeXBook](https://panbook.annhe.net/pub/PanBook-book-ctexbook-pc.pdf) | [elegantpaper](https://panbook.annhe.net/pub/article-art-elegantpaper.pdf) | | [material](https://panbook.annhe.net/pub/beamer-slide-material.pdf)| [TMR](https://panbook.annhe.net/pub/cv-cv-tmr.pdf)|
 |[CTeXBook-mobile](https://panbook.annhe.net/pub/PanBook-book-ctexbook-mobile.pdf)| | | [Execushares](https://panbook.annhe.net/pub/beamer-slide-Execushares.pdf)|[moderncv-fancy](https://panbook.annhe.net/pub/cv-cv-moderncv-fancy-blue.pdf) |

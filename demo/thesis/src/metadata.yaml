@@ -1,22 +1,18 @@
 ---
-title: 基于Markdown和Pandoc写作学术论文
-#cover: images/cover.jpg          # 是否使用自定义封面，如果不使用，则自动生成封面（仅ctex模板有效）
+title: 基于 Markdown 的论文写作方法
+etitle: A Thesis Writing Method Based On Markdown
 author:          # 作者（数组）
-  - An He
+  - 作者
+xuehao: 201907131122
+college: 计算机学院
+supervisor: \LaTeX  教授
 date: \today     # 日期
-lof: true        # 是否生成插图列表页
-lot: true        # 是否生成表格列表页
-homepage: https://github.com/annProg/PanBook
-identifier:                      # epub用
-  - scheme: DOI
-    text: doi:10.234234.234/33
-publisher: PanBook       # epub用
-rights: © 2017 An He, CC BY-NC   # epub用
-cover-image: images/cover.png    # epub用
+lof: false        # 是否生成插图列表页
+lot: false        # 是否生成表格列表页
+# 不引用，但是显示在参考文献列表里。通配符 @* 表示全部在列表里显示
 header-includes:
-  - \usepackage{cleveref}
-  - \usepackage{float}
-# 不引用，但是显示在参考文献列表里。通配符 @* 表示全部在列表里显示  
+  - \usepackage{zhlipsum}
+  - \usepackage{lipsum}
 nocite: |
   @pandocManual,@foz
 ...
