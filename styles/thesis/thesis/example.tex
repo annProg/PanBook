@@ -1,4 +1,4 @@
-\documentclass[12pt]{ctexrep}
+\documentclass{ctexbook}
 \usepackage{graphicx}
 \graphicspath{ {figure/} }
 \usepackage{zhlipsum}
@@ -30,8 +30,7 @@
 \date{2019 年 7 月 12 日}
 
 \makeatletter
-\renewenvironment{abstract}[1]{
-	\pagestyle{empty}
+\newenvironment{abstract}[1]{
 	%\parindent{2em}
     \def\invalue{#1}
     \def\english{e}
@@ -42,16 +41,16 @@
         	{\Large \bfseries \@etitle} \\
         	\vspace{1.5em}
             {\LARGE \bfseries Abstract} \\
+			\addcontentsline{toc}{chapter}{Abstract}
         \else
 		    {\Large \bfseries \@title} \\
         	\vspace{1.5em}
             {\LARGE \bfseries 摘~~~~要} \\
+			\addcontentsline{toc}{chapter}{摘要}
         \fi
         \vspace{0.5em}
     \end{center}
-}{
-	\cleardoublepage
-}
+}{\clearpage}
 \makeatother
 
 \newenvironment{keywords}[1]{
@@ -78,6 +77,8 @@
 \makeatletter
 \renewcommand{\maketitle}{
 \begin{titlepage}
+   \cleardoublepage
+   \thispagestyle{empty}
    \begin{center}
        \vspace*{1cm}\par
        {\Huge\bfseries \@title}\par
@@ -98,14 +99,13 @@
 	   \vfill
        \@date
    \end{center}
-   \cleardoublepage
-   \phantom{s}
-   \thispagestyle{empty}
 \end{titlepage}
+\addcontentsline{toc}{chapter}{封面}
 }
 \makeatother
 
 \begin{document}
+\frontmatter
 \maketitle
 
 \begin{abstract}{c}
@@ -123,10 +123,10 @@
 \end{keywords}
 \end{abstract}
  
-\chapter*{致谢}
-\zhlipsum[1]
  
 \tableofcontents
+
+\mainmatter
 
 \chapter{引言}
 \zhlipsum[1-2]
@@ -134,12 +134,17 @@
 \chapter{正文}
 \zhlipsum[1-15]
 
+\chapter{结论}
+用网页技术取代 \LaTeX{}\textsuperscript{{[}\protect\hyperlink{ref-weborlatex}{2}{]}}
+
+\backmatter
+
+\chapter*{致谢}
+\zhlipsum[1]
+
 \appendix
 \chapter{Appendix Title}
 \zhlipsum[1]
-
-\chapter{结论}
-用网页技术取代 \LaTeX{}\textsuperscript{{[}\protect\hyperlink{ref-weborlatex}{2}{]}}
 
 \chapter*{参考文献}
 \leavevmode\hypertarget{ref-weborlatex}{}%
