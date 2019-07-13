@@ -1,0 +1,61 @@
+\documentclass{thesis}
+\usepackage{zhlipsum}
+\usepackage{lipsum}
+\usepackage{hyperref}
+
+\title{论文题目}
+\etitle{Thesis Title}
+\subtitle{论文副标题}
+\esubtitle{Thesis Subtitle}
+\author{张\ 三}
+\xuehao{20190713021}
+\college{计算机学院}
+\supervisor{\LaTeX{}~~教授}
+\date{2019 年 7 月 12 日}
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\begin{abstract}{c}
+\zhlipsum[1]
+
+\begin{keywords}{c}
+\LaTeX{}，排版，论文
+\end{keywords}
+\end{abstract}
+
+\begin{abstract}{e}
+\lipsum[1]
+\begin{keywords}{e}
+\LaTeX{}, Typesetting, Thesis
+\end{keywords}
+\end{abstract}
+ 
+\tableofcontents
+
+\mainmatter
+
+\chapter{引言}
+\zhlipsum[1-2]
+
+\chapter{正文}
+\zhlipsum[1-15]
+
+\chapter{结论}
+用网页技术取代 \LaTeX{}\textsuperscript{{[}\hyperlink{ref-weborlatex}{2}{]}}
+
+\backmatter
+
+\chapter*{致谢}
+\zhlipsum[1]
+
+\appendix
+\chapter{Appendix Title}
+\zhlipsum[1]
+
+\chapter*{参考文献}
+\leavevmode\hypertarget{ref-weborlatex}{}%
+{[}2{]} 谢益辉. 用网页技术取代 LaTeX：前传{[}M{]}.
+https://yihui.name/cn/2018/05/relaxed/.
+\end{document}
