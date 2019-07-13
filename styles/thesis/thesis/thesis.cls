@@ -39,11 +39,11 @@
 
 
 % abstract
-\newenvironment*{abstract}[1]{
+\newenvironment*{abstract}[2]{
 	%\parindent{2em}
     \def\invalue{#1}
     \def\english{e}
-    %\def\keyword{#2}
+    \def\keywords{#2}
     % 论文题目
     \begin{center}
         \ifx\invalue\english
@@ -60,23 +60,17 @@
         \vspace{0.5em}
     \end{center}
 }{
-	\clearpage
-}
-
-% key words
-\newenvironment*{keywords}[1]{
 	\par
 	\vspace{1cm}
 	\noindent
-	\def\invalue{#1}
-	\def\english{e}
 	\ifx\invalue\english
 		{\bfseries Key Words: }
 	\else
 		{\bfseries 关键词： }
 	\fi
-}{}
-
+	\keywords
+	\cleardoublepage
+}
 
 \newcommand{\makecoverbachelor}{
 \begin{titlepage}
