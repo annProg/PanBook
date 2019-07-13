@@ -71,6 +71,16 @@ steps:
   - build
   - demo-slide
 
+- name: demo-thesis
+  image: panbook:latest
+  pull: if-not-exists
+  commands:
+  - cd demo/thesis
+  - make all
+  depends_on:
+  - build
+  - demo-cv
+
 - name: publish-doc
   image: annprog/rsync:latest
   pull: if-not-exists
@@ -108,6 +118,15 @@ steps:
     dest: 172.17.0.1::panbook
   depends_on:
   - demo-cv 
+
+- name: publish-thesis
+  image: annprog/rsync:latest
+  pull: if-not-exists
+  settings:
+    src: demo/thesis/build/*.pdf
+    dest: 172.17.0.1::panbook
+  depends_on:
+  - demo-thesis
 
 volumes:
 - name: docker_sock
