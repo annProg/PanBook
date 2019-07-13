@@ -1,7 +1,8 @@
-\documentclass[12pt,twoside]{ctexrep}
+\documentclass[12pt]{ctexrep}
 \usepackage{graphicx}
 \graphicspath{ {figure/} }
 \usepackage{zhlipsum}
+\usepackage{lipsum}
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -10,19 +11,61 @@
 
 \makeatletter
 \newcommand{\subtitle}[1]{\def\@subtitle{#1}}
+\newcommand{\esubtitle}[1]{\def\@esubtitle{#1}}
 \newcommand{\xuehao}[1]{\def\@xuehao{#1}}
 \newcommand{\supervisor}[1]{\def\@supervisor{#1}}
 \newcommand{\college}[1]{\def\@college{#1}}
+\newcommand{\etitle}[1]{\def\@etitle{#1}}
 %\newcommand{\xuehao}[1]{\def\@xuehao{#1}}
 \makeatother
 
 \title{论文题目}
+\etitle{Thesis Title}
 \subtitle{论文副标题}
+\esubtitle{Thesis Subtitle}
 \author{张\ 三}
 \xuehao{20190713021}
 \college{计算机学院}
 \supervisor{\LaTeX{}~~教授}
 \date{2019 年 7 月 12 日}
+
+\makeatletter
+\renewenvironment{abstract}[1]{
+	\pagestyle{empty}
+	%\parindent{2em}
+    \def\invalue{#1}
+    \def\english{e}
+    %\def\keyword{#2}
+    % 论文题目
+    \begin{center}
+        \ifx\invalue\english
+        	{\Large \bfseries \@etitle} \\
+        	\vspace{1.5em}
+            {\LARGE \bfseries Abstract} \\
+        \else
+		    {\Large \bfseries \@title} \\
+        	\vspace{1.5em}
+            {\LARGE \bfseries 摘~~~~要} \\
+        \fi
+        \vspace{0.5em}
+    \end{center}
+}{
+	\cleardoublepage
+}
+\makeatother
+
+\newenvironment{keywords}[1]{
+	\par
+	\vspace{1cm}
+	\noindent
+	\def\invalue{#1}
+	\def\english{e}
+	\ifx\invalue\english
+		{\bfseries Key Words: }
+	\else
+		{\bfseries 关键词： }
+	\fi
+}{}
 
 %\fancyhead{}
 %\fancyhead[RO,LE]{论文题目}
@@ -33,18 +76,19 @@
 %\fancyfoot[CO,RE]{\author}
 
 \makeatletter
-\renewcommand*{\maketitle}{
+\renewcommand{\maketitle}{
 \begin{titlepage}
    \begin{center}
        \vspace*{1cm}\par
        {\Huge\bfseries \@title}\par
        \vspace{0.5cm}
-       {\Large \@subtitle }\par
+       {\LARGE \@subtitle }\par
        \includegraphics[width=0.4\textwidth]{logo}\par
        \vspace{1.5cm}
        \vspace{1cm}
-       {\Large \bfseries 本科毕业设计（论文）}\par
+       {\LARGE \bfseries 本科毕业设计（论文）}\par
        \vspace{0.8cm}
+	   \large
 	   \begin{tabular}[h]{rc}
        \textbf{姓~~~~~名：} & \@author\\
 	   \textbf{学~~~~~号：} & \@xuehao\\
@@ -54,6 +98,9 @@
 	   \vfill
        \@date
    \end{center}
+   \cleardoublepage
+   \phantom{s}
+   \thispagestyle{empty}
 \end{titlepage}
 }
 \makeatother
@@ -61,8 +108,20 @@
 \begin{document}
 \maketitle
 
-\chapter*{摘要}
+\begin{abstract}{c}
 \zhlipsum[1]
+
+\begin{keywords}{c}
+\LaTeX{}，排版，论文
+\end{keywords}
+\end{abstract}
+
+\begin{abstract}{e}
+\lipsum[1]
+\begin{keywords}{e}
+\LaTeX{}, Typesetting, Thesis
+\end{keywords}
+\end{abstract}
  
 \chapter*{致谢}
 \zhlipsum[1]
