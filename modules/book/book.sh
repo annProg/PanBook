@@ -23,31 +23,30 @@ function func_book() {
 	# 版权页(todo)
 	getArrayVar _V copyright true
 	getArrayVar _V licence ccnd
-
+	getArrayVar _V documentclass ctexbook
+	getArrayVar _V device pc
+	_G[ofile]=${_G[ofile]}-${_V[device]}
 	# 生成前言和后记
 	custom_filter=${_F[style-${_G[function]}-${_G[style]}]}
+
+	# 启用扩展
+	ext_header
+	ext_listings
+	ext_grade
+	ext_column
+	ext_copyright
+	ext_longtable
+	ext_zh_en
+	ext_lineblock
 
 	partCompile
 	getPandocParam
 	getXeLaTeXParam
 
 	if [ ${_G[t]} == "tex" ];then
-		getArrayVar _V documentclass ctexbook
-		getArrayVar _V device pc
-
-		# 启用扩展
-		ext_header
-		ext_listings
-		ext_grade
-		ext_column
-		ext_copyright
-		ext_longtable
-		ext_zh_en
-		ext_lineblock
-
 		pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter ${_G[ff]}
 		pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
-		_G[ofile]=${_G[ofile]}-${_V[device]}
+
 		_P[include-before-body]=frontmatter.tex
 		_P[include-after-body]=backmatter.tex
 	fi
