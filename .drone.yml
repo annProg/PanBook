@@ -79,7 +79,7 @@ steps:
   - make all
   depends_on:
   - build
-  - demo-cv
+  - demo-slide
 
 - name: publish-doc
   image: annprog/rsync:latest
