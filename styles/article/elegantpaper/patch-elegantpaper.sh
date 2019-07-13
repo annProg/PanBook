@@ -18,6 +18,31 @@ cat > $FIX <<EOF
 \let\RequirePackage\original@RequirePackage
 \let\usepackage\RequirePackage
 \makeatother
+\renewenvironment*{abstract}[2]{
+    \def\invalue{#1}
+    \def\english{e}
+    \def\keywords{#2}
+    % 论文题目
+    \begin{center}
+        \ifx\invalue\english
+            {\small \bfseries Abstract} \\
+        \else
+            {\small \bfseries 摘~要} \\
+        \fi
+        \vspace{0.2em}
+    \end{center}
+	\itshape
+}{
+	\par
+	\noindent
+	\ifx\invalue\english
+		{\bfseries Key Words: }
+	\else
+		{\bfseries 关键词： }
+	\fi
+	\upshape
+	\keywords
+}
 EOF
 
 writeHeader $FIX
