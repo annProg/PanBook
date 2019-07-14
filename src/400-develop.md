@@ -3,7 +3,7 @@
 PanBook 基于 Pandoc，首先要了解 Pandoc 的使用方法。PanBook 主体使用 Shell 脚本开发，Pandoc Lua filter 使用 Lua 开发，定制 style 需要了解 \LaTeX 或者 CSS。[@tbl:panbookdir_specs] 给出了名词定义。
 
 名词 | 目录 | 功能
-:----|:----|:----
+:--|:--|:-----------
 module | modules/ | 模块，book,cv,slide,thesis 都是模块
 style | styles/ | 风格，--style 参数指定，可以定制某一种文档类或者文档格式（比如 Epub）
 extension | extensions/ | 扩展，使用 lua filter 或者基于 header-includes 提供某些可被复用的扩展功能

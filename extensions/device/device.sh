@@ -9,6 +9,12 @@ function device() {
 	else
 		echo "\devicepc" >> ${_G[header]}
 	fi
+
+	# pipe_tables 自动换行支持，默认columns为72，对手机设备来说太长
+	# see https://pandoc.org/MANUAL.html#option--columns
+	if [ "${_V[device]}"x != "pc"x ];then
+		_P[columns]=42
+	fi
 }
 
 function ext_device() {
