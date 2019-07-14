@@ -2,7 +2,7 @@
   <img height="220" src="src/images/logo.png">
 </p>
 
-[![Build Status](https://ci.annhe.net/api/badges/annProg/PanBook/status.svg)](https://ci.annhe.net/annProg/PanBook) &nbsp; <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=08913582c3e51432838495d9d8ede598032ea65605470e2b3119882166b4efe8"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="pandoc" title="pandoc"></a>
+[![Build Status](https://ci.annhe.net/api/badges/annProg/PanBook/status.svg)](https://ci.annhe.net/annProg/PanBook)
 
 ## 简介
 `PanBook`基于`Pandoc`的`lua filter`功能，适配各种书籍，论文，幻灯片及简历的`LaTeX`或`EPUB`模板。
@@ -77,8 +77,3 @@ $ panbook -h
 | [ElegantBook](https://github.com/ElegantLaTeX/ElegantBook) | [ElegantNote](https://github.com/ElegantLaTeX/ElegantNote) | | | [moderncv](https://github.com/xdanaux/moderncv) |
 | | [ElegantPaper](https://github.com/ElegantLaTeX/ElegantPaper) | |[more](https://github.com/annProg/PanBook/tree/master/styles/slide) | [resume](https://github.com/billryan/resume) |
 | | | | | [tmr](https://github.com/TheMartianLife/TheMartianResume) |
-
-## QQ 群
-欢迎加入 QQ 群交流
-
-![](src/images/qq.png)
