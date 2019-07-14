@@ -23,7 +23,7 @@
 
 - [msys2](https://www.msys2.org/)
 - [texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018 或以上版本
-- [Pandoc](https://pandoc.org/installing.html) 2.7.1 或以上版本
+- [Pandoc](https://pandoc.org/installing.html) 2.7.3 或以上版本
 - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，即`/c/Users/yourname/AppData/Local/Pandoc`）
 
 然后下载本项目，打开`msys2`，假设工作目录为`/d/dev`
