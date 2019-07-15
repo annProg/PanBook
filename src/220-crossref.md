@@ -1,39 +1,50 @@
 
 ## 交叉引用 {#sec:crossref}
 
+PanBook 使用 [pandoc-crossref](http://lierdakil.github.io/pandoc-crossref/) 处理交叉引用。
+
 ### 图片
 
 ```
 ![Caption](file.ext){#fig:label}
 ```
 
-o label an (implicit) figure, append `{#fig:label}` (with `label` being something unique to reference this figure by) immediately after image definition.
+要标记（隐式）图形，请在图像定义之后立即附加 `{#fig:label}`（其中 `label` 需要是一个独一无二的字符串标记）。
 
-This only works on implicit figures, i.e. an image occurring by itself in a paragraph (which will be rendered as a figure with caption by pandoc)
+这只适用于隐式图形，即在段落中单独出现的图像（将由 pandoc 呈现为带有标题的图形）
 
-Image block and label can not be separated by spaces.
+图像块和标签不能用空格分开。
 
 #### 子图
-结合`fenced_divs`语法，It’s possible to group figures as subfigures. Basic syntax is as follows:
+结合`fenced_divs`语法，可以将图片分组为子图片。基本语法如下（效果见 [@fig:figureRef]）：
 
-```
-<div id="fig:figureRef">
-![subfigure 1 caption](image1.png){#fig:figureRefA}
+```markdown
+::: {#fig:figureRef}
+![subfigure 1 caption](images/image1.png){#fig:figureRefA}
 
-![subfigure 2 caption](image2.png){#fig:figureRefB}
+![subfigure 2 caption](images/image2.png){#fig:figureRefB}
 
 Caption of figure
-</div>
+:::
 ```
-To sum up, subfigures are made with a div having a figure `id`. Contents of said div consist of several paragraphs. All but last paragraphs contain one subfigure each, with captions, images and (optionally) reference attributes. Last paragraph contains figure caption.
 
-If you put more than one figure in the paragraph, those will still be rendered, but Pandoc will omit subfigure caption in most outputs (but it will work as expected with LaTeX). You can use output-specific hacks to work around that, or use `subfigGrid` (see below).
+::: {#fig:figureRef}
+![subfigure 1 caption](images/image1.png){#fig:figureRefA width=40%}
 
-Output is customizable, with metadata fields. See Customization for more information.
+![subfigure 2 caption](images/image2.png){#fig:figureRefB width=40%}
 
-Default settings will produce the following equivalent Markdown from example above:
+Caption of figure
+:::
 
-```
+综上所述，子图由一个具有图片 id 的 div 构成。该 div 的内容由几个段落组成。除最后一段外，所有段落都包含一个子图，并带有标题、图像和（可选的）引用属性。最后一段包含图片标题。
+
+如果在段落中放置多个图片，那么仍然会呈现这些图形，但是 Pandoc 会在大多数输出中省略子图形标题（但是在 \LaTeX 中它会像预期的那样工作）。您可以使用特定于输出的技巧来解决这个问题，或者使用 `subfigGrid`（见下文）。
+
+输出是可定制的，使用元数据字段。有关更多信息，请参见 [Customization](http://lierdakil.github.io/pandoc-crossref/#customization)。
+
+默认设置将从上面的例子中产生以下等价的标记：
+
+```markdown
 <div id="fig:figureRef" class="subfigures">
 
 ![a](image1.png){#fig:figureRefA}
@@ -46,47 +57,55 @@ caption
 </div>
 ```
 
-References to subfigures will be rendered as figureNumber (subfigureNumber), e.g., in this particular example, `[@fig:figureRefA]` will produce fig. 1 (a).
+对子图的引用将呈现为 figureNumber (subfigureNumber)，例如，在这个特定的例子中，`[@fig:figureRefA]` 将生成 [@fig:figureRefA]。
 
-You can add nocaption class to an image to suppress subfigure caption altogether. Note that it will still be counted.
+可以将 `notitle` 样式添加到图片中，以完全抑制子图标题。注意，抑制的子图仍然会被计数。
 
-#### Subfigure grid
+#### 子图网格
 
-If you need to align subfigures in a grid, and using output format styles is not an option, you can use `subfigGrid` option. That will typeset subfigures inside a table.
+如果需要对网格中的子图进行对齐，并且不能使用输出格式样式，则可以使用 subfigGrid 选项。此选项将用表格中组织子图。
 
-Rows are formed by different paragraphs, with each image in a separate column.
+不同的段落作为表格的行，段落内的子图作为表格的列。
 
-Column widths will be taken from width attributes of corresponding images, e.g.
+列宽度将从相应图像的宽度属性中提取，例如（效果见 [@fig:coolFig]）：
 
-```
-<div id="fig:coolFig">
-![caption a](coolfiga.png){#fig:cfa width=30%}
-![caption b](coolfigb.png){#fig:cfb width=60%}
-![caption c](coolfigb.png){#fig:cfc width=10%}
+```markdown
+::: {#fig:coolFig}
+![caption a](images/image1.png){#fig:cfa width=40%}
+![caption b](images/image2.png){#fig:cfb width=40%}
 
-![caption d](coolfigd.png){#fig:cfd}
-![caption e](coolfige.png){#fig:cfe}
-![caption f](coolfigf.png){#fig:cff}
+![caption c](images/image3.png){#fig:cfb width=40%}
+![caption d](images/image4.png){#fig:cfb width=40%}
 
 Cool figure!
-</div>
+:::
 ```
 
-will produce a table with columns of `30%`, `60%` and `10%` respectively.
+::: {#fig:coolFig}
+![caption a](images/image1.png){#fig:cfa width=40%}
+![caption b](images/image2.png){#fig:cfb width=40%}
 
-Only first row of images is considered for table width computation, other rows are completely ignored.
+![caption c](images/image3.png){#fig:cfb width=40%}
+![caption d](images/image4.png){#fig:cfb width=40%}
 
-Anything except images is silently ignored. So any text, spaces, soft line breaks etc will silently disappear from output. That doesn’t apply to caption paragraph, obviously.
+Cool figure!
+:::
 
-All images will have width attribute automatically set to `100%` in order to fill whole column.
+将产生列宽度为 `40%` 和 `40%` 的子图网格。
 
-Specifying width in anything but `%` will throw an error.
+表格宽度计算只考虑图像的第一行，其他行完全忽略。
 
-If width for some images in first row is not specified, those will span equally in the remaining space.
+除了图像之外的任何元素都会被静默地忽略。因此，任何文本、空格、软换行符等都将静默地从输出中消失。当然，这不适用于图片标题段落。
 
-If width isn’t specified for any image in first row, those will span equally on `99%` of page width (due to Pandoc otherwise omitting width attribute for table).
+所有图像将自动设置宽度属性为 `100%`，以便填充整个列。
 
-This option is ignored with LaTeX output, but paragraph breaks should produce similar effect, so images should be typeset correctly. TL;DR you don’t need subfigGrid enabled for it to work with LaTeX, but you can still enable it.
+在除 `%` 之外的任何地方指定宽度都会引发错误。
+
+如果未指定第一行中某些图像的宽度，则这些图像将在剩余空间中均匀地展开。
+
+如果没有为第一行中的任何图像指定宽度，那么这些图像将平均占用页面宽度的 99%（因为 Pandoc 忽略了表的宽度属性）。
+
+在 LaTeX 输出中忽略这个选项，但是段落断行应该产生类似的效果，所以图像应该正确地排版。您不需要启用 subfigGrid 就可以使用 LaTeX，但是您仍然可以启用它。
 
 ### 公式
 
