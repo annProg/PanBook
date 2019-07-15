@@ -1,5 +1,5 @@
 
-## Raw HTML
+## Raw HTML {#sec:raw_html}
 
 ::: {.info caption="Extension: raw_html"}
 Markdown 允许你在文件中的任何地方插入原始 HTML（或 DocBook）指令（除了在代码块中，此时的 `<`, `>` 和 `&` 都会按其字面意义显示）。（技术上而言这不算扩充功能，因为原始 Markdown 本身就有提供此功能，但做成扩充形式便可以在有特殊需要的时候关闭此功能。）
