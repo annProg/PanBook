@@ -70,6 +70,8 @@ header-includes:
 查看模板文件，可以获取模板支持的所有变量（形如`$var$`)。也可以通过修改模板来添加自定义的变量。
 :::
 
+更多信息请参考 [@sec:yaml_metadata_block]。
+
 ## 写作工具
 推荐使用 [Visual Studio Code](https://code.visualstudio.com/)。一些有用的插件见 [@tbl:vscodeplugin]。
 
