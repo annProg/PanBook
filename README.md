@@ -69,6 +69,14 @@ $ panbook -h
 - [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf)
 - [Go by example](https://github.com/pandoc-ebook/gobyexample-zh)
 
+## 免责声明
+
+请仔细阅读本软件 [Licence](https://github.com/annProg/PanBook/blob/master/LICENCE)
+
+本软件不提供任何保证。在任何情况下，版权所有者或贡献者都不承担责任。
+
+因此，当用于正式场合（比如学位论文）时，请您自行评估风险。
+
 ## 致谢
 `PanBook`适配了一些开源`LaTeX`模板，列表如下：
 
