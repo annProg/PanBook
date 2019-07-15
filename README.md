@@ -26,7 +26,7 @@
 ## 快速开始
 以`Windows 10`为例，演示如何使用。首先安装以下依赖软件
 
-- [msys2](https://www.msys2.org/)
+- [msys2](https://www.msys2.org/)（ Linux 及 OS X 请忽略此步骤）
 - [texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018 或以上版本
 - [Pandoc](https://pandoc.org/installing.html) 2.7.3 或以上版本
 - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，即`/c/Users/yourname/AppData/Local/Pandoc`）
