@@ -29,7 +29,7 @@ a title](http://fsf.org "click here for a good time!").
 ### 参考链接
 一个明确的参考链接包含两个部分，链接本身以及链接定义，其中链接定义可以放在文件的任何地方（不论是放在链接所在处之前或之后）。
 
-链接本身是由两组方括号所组成，第一组方括号中为链接文字，第二组为链接标签。（在两个方括号间不能有空格。）链接定义则是以方括号框住的链接标签作开头，后面跟着一个冒号一个空白，再接着一个 URL，最后可以选择性地（在一个空白之后）加入由引号或是圆括号包住的链接标题。链接标签不能被解析为 `citation`（假设启用了 `citations` 扩展，参加 [@sec:citations]）: `citation` 的优先级高于链接标签。
+链接本身是由两组方括号所组成，第一组方括号中为链接文字，第二组为链接标签。（在两个方括号间不能有空格。）链接定义则是以方括号框住的链接标签作开头，后面跟着一个冒号一个空白，再接着一个 URL，最后可以选择性地（在一个空白之后）加入由引号或是圆括号包住的链接标题。链接标签不能被解析为 `citation`（假设启用了 `citations` 扩展，参见 [@sec:citations]）: `citation` 的优先级高于链接标签。
 
 以下是一些范例：
 ```markdown
@@ -96,5 +96,5 @@ See the [Introduction].
 内部链接目前支持的格式有 HTML（包括 HTML slide shows 与 EPUB）、\LaTeX 以及 ConTeXt。
 
 ::: {.info caption="pandoc-crossref"}
-也可以使用 pandoc-crossref 的方式来处理内部链接，参见 [@sec:pandoc-crossref]。
+也可以使用 pandoc-crossref 的方式来处理内部链接，参见 [@sec:crossref]。
 :::

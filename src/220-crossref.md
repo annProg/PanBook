@@ -1,5 +1,5 @@
 
-## 交叉引用
+## 交叉引用 {#sec:crossref}
 
 ### 图片
 
@@ -49,7 +49,6 @@ caption
 References to subfigures will be rendered as figureNumber (subfigureNumber), e.g., in this particular example, `[@fig:figureRefA]` will produce fig. 1 (a).
 
 You can add nocaption class to an image to suppress subfigure caption altogether. Note that it will still be counted.
-
 
 #### Subfigure grid
 
@@ -102,7 +101,6 @@ Math block and label can be separated by one or more spaces.
 You can also number all display equations with `autoEqnLabels` metadata setting (see below). Note, however, that you won’t be able to reference equations without explicit labels.
 
 Equations numbers will be typeset inside math with `\qquad` before them. If you want to use tables instead, use tableEqns option. Depending on output format, tables might work better or worse than `\qquad`.
-
 
 ### 表格
 
