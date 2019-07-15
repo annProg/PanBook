@@ -92,8 +92,7 @@ references:
 
 要使引用超链接到相应的参考文献条目，请在 YAML 元数据区块中设置 `link-citations: true`。
 
-引用资讯放在方括号中，以分号区隔。每一条引用都会有个 key，由@加上资料库中的引用 ID 组成，并
-且可以选择性地包含前缀、定位以及后缀。以下是一些范例：
+文献引用放在方括号中，以分号隔开。每一条引用都需要有一个 key，由 `@` 加上文献目录数据库中的文献 ID 组成，并且可以选择性地包含前缀、定位以及后缀。引用键必须以字母、数字或 `_` 开头，并且可以包含字母数字、`_` 和内部标点符号（`:.#$%&-+?<>~/`）。以下是一些范例：
 
 ```markdown
 Blah blah [see @doe99, pp. 33-35; also @smith04, ch. 1].
@@ -103,41 +102,72 @@ Blah blah [@doe99, pp. 33-35, 38-39 and *passim*].
 Blah blah [@smith04; @doe99].
 ```
 
-在@前面的减号 ( -) 将会避免作者名字在引用中出现。这可以用在已经提及作者的文章场合中：
+pandoc-citeproc 检测 [CSL 语言环境文件](https://github.com/citation-style-language/locales) 中的定位项。缩写形式和非缩写形式都可以。在 `en-US` 语言环境中，定位器术语可以用单数或复数形式编写，比如 `book, bk./bks.; chapter, chap./chaps.; column, col./cols.; figure, fig./figs.; folio, fol./fols.; number, no./nos.; line, l./ll.; note, n./nn.; opus, op./opp.; page, p./pp.; paragraph, para./paras.; part, pt./pts.; section, sec./secs.; sub verbo, s.v./s.vv.; verse, v./vv.; volume, vol./vols.; ¶/¶¶; §/§§.` 如果没有使用定位器术语，则默认为 `page`。
+
+pandoc-citeproc 将使用启发式来区分定位符和后缀。在复杂的情况下，定位器可以用大括号括起来（需要 pandoc-citeproc 0.15 或更高版本）:
+
+```markdown
+[@smith{ii, A, D-Z}, with a suffix]
+[@smith, {pp. iv, vi-xi, (xv)-(xvii)} with suffix here]
+```
+
+在 `@` 前面的减号（`-`）将会避免作者名字在引用中出现。这可以用在已经提及作者的文章场合中：
+
 ```markdown
 Smith says blah [-@smith04].
 ```
-你也可以在文字中直接插入引用资讯，方式如下：
+
+你也可以在文字中直接插入文献引用，方式如下：
+
 ```markdown
 @smith04 says blah.
 
 @smith04 [p. 33] says blah.
 ```
-如果引用格式档需要产生一份引用作品的清单，这份清单会被放在文件的最后面。一般而言，
-你需要以一个适当的标题结束你的文件：
+
+如果样式需要引用的文献列表，文献列表将被放置在一个带有 ID 为 `refs` 的 div 中，如果存在此 div：
+
+```markdown
+::: {#refs}
+:::
+```
+
+否则，文献列表将被放置在文档结尾。可以通过在 YAML 元数据中设置 `suppress-bibliography: true` 来抑制文献列表的生成。
+
+如果你希望文献列表有一个标题，你可以在元数据中设置 `reference-section-title`，或者在文档的末尾加上：
+
 ```markdown
 last paragraph...
 
 # References
 ```
-如此一来参考书目就会被放在这个标题后面了。
 
 另一种方式，可以使用`fenced_divs`语法，参考文献将显示在带 `{#refs}` 属性的`div`中第一个大标题下：
 
-```
+```markdown
 ::: {#refs}
-# 我的参考文献 {.unnumbered}
+# 我的参考文献
 :::
 ```
-注意这种语法需要指定标题的 `{.unnumbered}`属性，避免参考文献被当成章节编号。
 
-### 列出为引用的参考文献
+文献列表将插入本标题之后。注意，`.unnumbered` 样式将被添加到这个标题中，这样该部分就不会被编号。
 
-有时正文中没有引用也需要在参考文献列表显示，可以通过`meta yaml`定义`nocite`：
+有时正文中没有引用也需要在参考文献列表显示，可以通过 YAML 元数据区块定义`nocite`：
 
 ```yaml
 nocite: |
   @item1,@item2
 ```
 
-如果要全部列出，可以使用通配符 `@*`，这种情况在简历制作时会遇到。
+通过使用通配符，可以创建包含所有引用的文献列表，无论它们是否出现在文档中（这种情况在简历制作时会遇到）：
+
+```yaml
+---
+nocite: |
+  @*
+...
+```
+
+对于 LaTeX 输出，还可以使用 natbib 或 biblatex 来呈现参考书目。要做到这一点，请按照上面所述指定书目文件，并将 `--natbib` 或 `--biblatex` 参数添加到 pandoc 调用中。记住，书目文件必须是各自的格式（BibTeX 或 BibLaTeX）。
+
+更多信息请参考 [pandoc-citeproc man page](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md).
