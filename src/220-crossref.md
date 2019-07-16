@@ -9,7 +9,7 @@ PanBook 使用 [pandoc-crossref](http://lierdakil.github.io/pandoc-crossref/) �
 ![Caption](file.ext){#fig:label}
 ```
 
-要标记（隐式）图形，请在图像定义之后立即附加 `{#fig:label}`（其中 `label` 需要是一个独一无二的字符串标记）。
+要标记（隐式）图形，请在图像定义之后立即附加 `{#fig:label}`（其中 `label` 需要是一个独一无二的插图标签）。
 
 这只适用于隐式图形，即在段落中单独出现的图像（将由 pandoc 呈现为带有标题的图形）
 
@@ -109,21 +109,24 @@ Cool figure!
 
 ### 公式
 
+要标记一个跨行公式，请在 math 区块之后立即添加 `{#eq:label}`（其中 label 需要是一个独一无二的公式标签），源码如下（效果见 [@eq:label]）：
+```latex
+$$ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} $$ {#eq:label}
 ```
-$$ math $$ {#eq:label}
-```
 
-To label a display equation, append `{#eq:label}` (with label being something unique to reference this equation by) immediately after math block.
+$$ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} $$ {#eq:label}
 
-Math block and label can be separated by one or more spaces.
+数学块和标签可以用一个或多个空格分隔。
 
-You can also number all display equations with `autoEqnLabels` metadata setting (see below). Note, however, that you won’t be able to reference equations without explicit labels.
+还可以在元数据中设置 `autoEqnLabels: true` 来实现为所有跨行公式编号。但是，请注意，如果没有显式的标签，就无法引用公式。
 
-Equations numbers will be typeset inside math with `\qquad` before them. If you want to use tables instead, use tableEqns option. Depending on output format, tables might work better or worse than `\qquad`.
+公式编号将在数学内部排版，前面有 `\qquad`。如果您想使用表格，请在元数据中设置 `tableEqns: true` 选项。根据输出格式的不同，表可能比 `\qquad` 工作得更好，也可能更差。
 
 ### 表格
 
-```
+标记表格请在表格标题的末尾附加 `{#tbl:label}`（label 是引用这个表格的惟一标签）。标题和标签必须至少用一个空格隔开。
+
+```markdown
 a   b   c
 --- --- ---
 1   2   3
@@ -132,22 +135,19 @@ a   b   c
 : Caption {#tbl:label}
 ```
 
-To label a table, append `{#tbl:label}` at the end of `table` caption (with label being something unique to reference this table by). Caption and label must be separated by at least one space.
-
 ### 标题
 
-You can also reference sections of any level. Section labels use native pandoc syntax, but must start with “sec:”, e.g.
+您还可以标记任何级别的章节。章节标签使用原生 Pandoc 语法，但必须以 `sec:` 开头，例如。
 
-```
-Section {#sec:section}
+``` markdown
+## Section {#sec:section}
 ```
 
 ### 代码块
 
-There are a couple options to add code block labels. Those work only if code block id starts with lst:, e.g. `{#lst:label}`
+代码块 ID 应以 `lst:` 开头，例如 `{#lst:label}`
 
-#### caption attribute
-caption attribute will be treated as code block caption. If code block has both id and caption attributes, it will be treated as numbered code block.
+`caption` 属性将转换为代码块标题。如果代码块同时有 ID 和 `caption`，将会被编号。
 
 ~~~
 ```{#lst:code .haskell caption="Listing caption"}
@@ -158,52 +158,32 @@ main = putStrLn "Hello World!"
 
 ### 引用
 
+以下都是合法的引用方式：
+
+```markdown
+[@fig:label1;@fig:label2;...]
+[@eq:label1;@eq:label2;...]
+[@tbl:label1;@tbl:label2;...]
+@fig:label
+@eq:label
+@tbl:label
 ```
-[@fig:label1;@fig:label2;...] or [@eq:label1;@eq:label2;...] or [@tbl:label1;@tbl:label2;...] or @fig:label or @eq:label or @tbl:label
-```
+引用语法重度参考了参考文献引用（citation）语法。基本的引用是通过 `@` 创建的，然后是带有前缀的标签。也可以引用一组对象，方法是将它们放在括号中并且用 `;` 作为分隔符。相似的对象将按照它们出现在引文括号中的顺序进行分组，并将序号缩短，如 `1,2,3` 将缩短为  `1-3`。
 
-Reference syntax heavily relies on citation syntax. Basic reference is created by writing @, then basically desired label with prefix. It is also possible to reference a group of objects, by putting them into brackets with ; as separator. Similar objects will be grouped in order of them appearing in citation brackets, and sequential reference numbers will be shortened, e.g. 1,2,3 will be shortened to 1-3.
+您可以将第一个引用字符大写以获得大写前缀，例如 `[@Fig:label1]` 默认将生成 `Fig. ...` 。除非使用元数据设置覆盖，否则将每个单词的首字母大写的非大写前缀自动派生出大写前缀。有关更多信息参见 [Customization](https://lierdakil.github.io/pandoc-crossref/#customization)。
 
-You can capitalize first reference character to get capitalized prefix, e.g. `[@Fig:label1]` will produce Fig. ... by default. Capitalized prefixes are derived automatically by capitalizing first letter of every word in non-capitalized prefix, unless overridden with metadata settings. See Customization for more information.
+#### 链接到引用元素
 
-#### Linking references
-To make references into hyperlinks to referenced element, enable `linkReferences` metadata option. This has no effect on LaTeX output, since in this case, hyperlinking references is handled with `hyperref` LaTeX package.
+若要使引用带有指向引用元素的超链接，请在元数据中设置 `linkReferences: true`。这对 \LaTeX 输出没有影响，因为在 \LaTeX 中，这种引用是 `hyperref` 包处理的。
 
-#### Custom prefix per-reference
-It’s possible to provide your own prefix per-reference, f.ex. `[Prefix @reference]` will replace default prefix (`fig./sec./`etc) with prefix verbatim, e.g. `[Prefix @fig:1]` will be rendered as Prefix 1 instead of fig. 1.
+#### 单个引用自定义前缀
+可以为每个引用提供自己的前缀。`[Prefix @reference]` 将以前缀逐字替换默认前缀（`fig./sec./` 等），例如 `[Prefix @fig:1]` 将被渲染为 `Prefix 1` 而不是默认的 `fig .1`。
 
-In citation group, citations with the same prefix will be grouped. So, for example `[A @fig:1; A @fig:2; B @fig:3]` will turn into A 1, 2, B 3. It can be used to an advantage, although it’s a bit more cumbersome than it should be, e.g. `[Appendices @sec:A1; Appendices @sec:A2; Appendices @sec:A3]` will turn into Appendices `@A1-@A3` (with @A1 and `@A3` being relevant section numbers). Note that non-contiguous sequences of identical prefixes will not be grouped.
+#### 不生成前缀
 
-**Not supported with cleveref LaTeX output.**
+在 `@` 前添加 `-`，就像这样 [-@citation]，将禁用默认前缀，例如 [-@fig:1] 将只生成 `1`，而没有 `fig.` 前缀。
 
-#### Prefix suppression
-Prepending - before @, like so `[-@citation]`, will suppress default prefix, e.g. `[-@fig:1]`will produce just 1 (or whatever number it happens to be) without fig. prefix.
-
-In citation group, citations with and without prefixes will be in different groups. So `[-@fig:1; @fig:2; -@fig:3]` will be rendered as 1, fig. 2, 3, so be careful with this feature. Again, non-contiguous sequences are not grouped together.
-
-#### Lists
-It’s possible to use raw latex commands `\listoffigures`, `\listoftables` and `\listoflistings`, which will produce ordered list of figure/table/listings titles, in order of appearance in document.
-
-`\listoflistings` depends on other options, and is defined in preamble, so it will work reliably only with standalone/pdf output.
-
-NOTE: With Pandoc 2.0.6 and up, you’ll have to explicitly separate these commands if they are close together, at least when targeting something besides LaTeX. So this will not work:
-
-```
-\listoffigures
-
-\listoftables
-
-\listoflistings
-```
-
-but this will:
-```
-\listoffigures
-[]: hack to split raw blocks
-\listoftables
-[]: hack to split raw blocks
-\listoflistings
-```
+在分组的引用中，有或没有前缀的引文将在不同的组中。所以 `[-@fig: 1;@fig: 2;-@fig:3]` 将被渲染为 `1，fig. 2, 3`，所以要注意这个特性。同样，非连续序列不会分组在一起。
 
 ### 自定义交叉引用配置
 
