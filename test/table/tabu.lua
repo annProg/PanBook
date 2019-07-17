@@ -4,6 +4,8 @@ table.print = table_print.print_r
 --]]
 
 function Table(el)
+	table.print(el)
+	os.exit(1)
 	for k,v in pairs(el.caption) do
 		if v.t == "Str" and v.text == "{.long}" then
 			table.remove(el.caption, k)

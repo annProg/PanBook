@@ -1,6 +1,14 @@
-\documentclass[utf8]{ctexart}
+\documentclass{ctexart}
 \usepackage{booktabs}
+\usepackage{tabu}
+\usepackage{xcolor}
+
+\taburowcolors [1] 2{green!25 .. yellow!50}
+\taburulecolor |gray!50|{red} \arrayrulewidth=1pt
+
 \begin{document}
+
+\section{booktabs}
 \begin{tabular}{llr}
 \toprule
 \multicolumn{2}{c}{Name} \\
@@ -11,4 +19,16 @@ John\\abc & Doe & $7.5$ \\
 Richard & Miles & $2$\\
 \bottomrule
 \end{tabular}
+
+\section{tabu}
+
+\begin{table}[h]
+\caption{Tabu Test}
+\begin{tabu}{|X[1,l]|X[2,c]|X[3,c]|X[1,r]|}
+Text & Text & Text & Text \\ 
+Text & Text & Text & $a^2$ \\
+Text & Text & Text & $a^2$ \\
+Text & Text & Text & $a^2$
+\end{tabu} 
+\end{table}
 \end{document}

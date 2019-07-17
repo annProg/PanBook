@@ -8,3 +8,4 @@ build
 *.fdb_latexmk
 *.fls
 *.xdv
+*.dvi
