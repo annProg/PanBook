@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.10
 
 RUN apk add --no-cache texlive-full curl bash
 RUN cd /tmp/ && curl -s -L https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-linux.tar.gz -o pandoc.tar.gz && tar -zxvf pandoc.tar.gz  && mv pandoc-2.7.3/bin/* /usr/local/bin && rm -fr /tmp/*
