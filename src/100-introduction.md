@@ -105,9 +105,9 @@ Pangu-Markdown                  中英文自动加空格
 通过配置 VS Code Tasks，使用 PanBook 部分编译参数 `--part` ，实现快捷键（ ctrl + shift + b ）编译当前 Markdown 源文件。
 :::
 
-使用用户代码片段，可以定义一些快捷输入，例如 [@lst:vscode_snippet] 定义了快速输入 columns 环境，代码块以及 Div 环境。`$`符号表示需要用户输入的内容，可使用 TAB 键跳转。
+使用用户代码片段，可以定义一些快捷输入，例如以下代码定义了快速输入 columns 环境，代码块以及 Div 环境。`$`符号表示需要用户输入的内容，可使用 TAB 键跳转：
 
-```{#lst:vscode_snippet .json caption="VS Code 用户代码片段"}
+```.json
 	"Columns": {
 		"prefix": "col",
 		"body": [
