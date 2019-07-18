@@ -13,4 +13,4 @@ second    Secon
            line
 ------------------
 
-: Multi Line Table {#tbl:mutli .long}
+: Multi Line Table {#tbl:mutli}

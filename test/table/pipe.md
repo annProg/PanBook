@@ -7,4 +7,4 @@ a | b
 --:|--
 c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c | b
 
-: pipe Table {#tbl:pipe .long}
+: pipe Table {#tbl:pipe}

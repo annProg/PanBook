@@ -7,4 +7,4 @@ a  b
 -- --
  c d
 
-: {.long} Simple Table  {#tbl:Test}
+: Simple Table  {#tbl:Test}

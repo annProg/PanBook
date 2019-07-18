@@ -131,6 +131,7 @@ function renderTabu(el)
 	-- 新建一个 Div. 对于 tabu ，需要在将 Div 放入 table 和 center 环境
 	-- 对于 longtabu，则不需要新 Div
 	local newblock = pandoc.Div({})
+	local wrapBlock = pandoc.Div({})
 	if el.t == "Div" then
 		newblock.attr.identifier = el.attr.identifier
 	end
@@ -149,12 +150,15 @@ function renderTabu(el)
 	end
 
 	if longtable == 0 then
-		table.insert(newblock.content, pandoc.RawBlock("latex", "\\begin{table}\n\\begin{center}"))
+		table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\begin{table}\n\\begin{center}"))
 		table.insert(newblock.content, tabu(tbl, false, caption))
-		table.insert(newblock.content, pandoc.RawBlock("latex", "\\end{center}\n\\end{table}"))
+		table.insert(wrapBlock.content, newblock)
+		table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\end{center}\n\\end{table}"))
+		return wrapBlock
 	elseif longtable == 1 then
 		caption[2] = pandoc.Str("")
 		table.insert(newblock.content, tabu(tbl, true, caption))
+		return newblock
 	elseif longtable == 2 then
 		if el.t == "Div" then
 			el.content[1].caption[2] = pandoc.Str("")
@@ -163,9 +167,8 @@ function renderTabu(el)
 		end
 		return el
 	else
+		return el
 	end
-
-	return newblock
 end
 
 function Pandoc(doc)

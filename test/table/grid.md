@@ -9,4 +9,4 @@ header-includes:
 | c      |   c    |
 +--------+--------+
 
-: Gride Table {#tbl:grid .long}
+: Gride Table {#tbl:grid}
