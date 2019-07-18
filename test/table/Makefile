@@ -7,4 +7,6 @@ grid:
 pipe:
 	pandoc -F pandoc-crossref --lua-filter tabu.lua pipe.md -t latex
 multiline:
-	pandoc -F pandoc-crossref --lua-filter tabu.lua multiline.md -t latex			
+	pandoc -F pandoc-crossref --lua-filter tabu.lua multiline.md -t latex
+nohead:
+	pandoc -F pandoc-crossref --lua-filter tabu.lua nohead.md -t latex

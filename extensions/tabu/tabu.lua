@@ -10,12 +10,13 @@ end
 -- 以 `{.long} `（注意有空格）开头的caption 认为是 longtable
 -- 由于pandoc-crossref 会添加 \label，{.long}是第二个元素
 function checkLongtabu(caption)
-	if #caption >= 2 and caption[2] == "{.longtabu}" then
-		return true
-	elseif #caption >= 2 and caption[2] == "{.longtable}" then
-		os.exit(0)  -- 用 pandoc 原生表格
+	if #caption >= 2 and caption[2].text == "{.longtabu}" then
+		return 1
+	elseif #caption >= 2 and caption[2].text == "{.longtable}" then
+		print("with {.longtable} ... [SKIP]")
+		return 2  -- 用 pandoc 原生表格
 	else
-		return false
+		return 0
 	end
 end
 
@@ -48,7 +49,8 @@ function tabu(tbl, longtable, caption)
 		xcolumn = xcolumn .. "X[" .. width .. "," .. align .. "]"
 	end
 
-	tbltop = pandoc.RawBlock("latex", macro .. "{" .. xcolumn .. "}\n\\toprule\n")
+	tbltop = pandoc.RawBlock("latex", macro .. "{" .. xcolumn .. "}\n")
+	toprule = pandoc.RawBlock("latex", "\\toprule\n")
 
 	column = #tbl.headers
 	row = #tbl.rows
@@ -68,20 +70,30 @@ function tabu(tbl, longtable, caption)
 		newtbl = {tbltop}
 	end
 
+	table.insert(newtbl, toprule)
 	local cline = pandoc.RawBlock("latex", " & ")
 	local hline = pandoc.RawBlock("latex", " \\\\\n")
 
-	for k=1,column do
-		for i,val in pairs(tbl.headers[k]) do
-			table.insert(newtbl, val)
-		end
-		if k<column then
-			table.insert(newtbl, cline)
+	local nohead = true
+	for k,v in pairs(tbl.headers) do
+		if #v > 0 then
+			nohead = false
+			break
 		end
 	end
-	table.insert(newtbl, hline)
-	
-	table.insert(newtbl, pandoc.RawBlock("latex", " \\midrule\n"))
+
+	if not nohead then
+		for k=1,column do
+			for i,val in pairs(tbl.headers[k]) do
+				table.insert(newtbl, val)
+			end
+			if k<column then
+				table.insert(newtbl, cline)
+			end
+		end
+		table.insert(newtbl, hline)
+		table.insert(newtbl, pandoc.RawBlock("latex", " \\midrule\n"))
+	end
 
 	for k=1,row do
 		for j=1,column do
@@ -123,22 +135,34 @@ function renderTabu(el)
 		newblock.attr.identifier = el.attr.identifier
 	end
 
-	local longtable = false
-	local tbl = el
-	local caption = nil
+	local longtable, tbl, caption
 
 	if el.t == "Div" then
 		tbl = el.content[1]
 		caption = el.content[1].caption
 		longtable = checkLongtabu(caption)
+	elseif el.t == "Table" then
+		tbl = el
+		caption = tbl.caption
+		longtable = checkLongtabu(caption)
+	else
 	end
 
-	if not longtable then
+	if longtable == 0 then
 		table.insert(newblock.content, pandoc.RawBlock("latex", "\\begin{table}\n\\begin{center}"))
 		table.insert(newblock.content, tabu(tbl, false, caption))
 		table.insert(newblock.content, pandoc.RawBlock("latex", "\\end{center}\n\\end{table}"))
-	else
+	elseif longtable == 1 then
+		caption[2] = pandoc.Str("")
 		table.insert(newblock.content, tabu(tbl, true, caption))
+	elseif longtable == 2 then
+		if el.t == "Div" then
+			el.content[1].caption[2] = pandoc.Str("")
+		else
+			el.caption[2] = pandoc.Str("")
+		end
+		return el
+	else
 	end
 
 	return newblock
