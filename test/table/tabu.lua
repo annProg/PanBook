@@ -152,11 +152,8 @@ function renderTabu(el)
 	if longtable == 0 then
 		if #caption > 0 then
 			table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\begin{table}\n\\begin{center}"))
-			table.insert(newblock.content, tabu(tbl, false, caption))
-		else
-			-- 没有 caption 的表格用 longtabu，防止换页问题
-			table.insert(newblock.content, tabu(tbl, true, caption))
 		end
+		table.insert(newblock.content, tabu(tbl, false, caption))
 		table.insert(wrapBlock.content, newblock)
 		if #caption > 0 then
 			table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\end{center}\n\\end{table}"))
