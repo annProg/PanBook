@@ -151,7 +151,7 @@ function renderTabu(el)
 
 	if longtable == 0 then
 		if #caption > 0 then
-			table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\begin{table}\n\\begin{center}"))
+			table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\begin{table}[h]\n\\begin{center}"))
 		end
 		table.insert(newblock.content, tabu(tbl, false, caption))
 		table.insert(wrapBlock.content, newblock)
