@@ -7,14 +7,23 @@
 \floatstyle{plaintop}
 \@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
 \captionsetup[plaintop]{skip=0pt}
-\@ifundefinedcolor{shadecolor}{\definecolor{shadecolor}{rgb}{1.0,1.0,1.0}}
+\@ifundefinedcolor{shadecolor}{\definecolor{shadecolor}{RGB}{246,248,250}}
 \makeatother
 
-\usepackage{tcolorbox}
-\tcbuselibrary{most}
+%\usepackage{tcolorbox}
+%\tcbuselibrary{most}
+\usepackage[framemethod=tikz]{mdframed}
+\usetikzlibrary{shadows}
 \ifcsmacro{Shaded}{
 	\let\endShaded\undefined%
-	\renewenvironment{Shaded}{\begin{tcolorbox}[shadow={0.8mm}{-0.8mm}{0mm}{red!20!green!20!blue!20},enhanced,boxrule=0.5pt,boxsep=-1pt,breakable,colback=shadecolor,colframe=shaderulecolor,arc=0.1mm]}{\end{tcolorbox}}
+	%\renewenvironment{Shaded}{\begin{tcolorbox}[shadow={0.8mm}{-0.8mm}{0mm}{red!20!green!20!blue!20},enhanced,boxrule=0.5pt,boxsep=-1pt,breakable,colback=shadecolor,colframe=shaderulecolor,arc=0.1mm]}{\end{tcolorbox}}
+	\renewenvironment{Shaded}{\begin{mdframed}[
+		linecolor=shaderulecolor,
+		backgroundcolor=shadecolor,
+		roundcorner=2pt,
+		shadow=true,
+		shadowsize=4pt,
+	]}{\end{mdframed}}
 }{}
 
 \usepackage{fvextra}
