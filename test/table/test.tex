@@ -2,9 +2,10 @@
 \usepackage{booktabs}
 \usepackage{tabu}
 \usepackage{xcolor}
+\usepackage{hyperref}
 
 \taburowcolors [1] 2{green!25 .. yellow!50}
-\taburulecolor |gray!50|{red} \arrayrulewidth=1pt
+\taburulecolor |gray!50|{black} \arrayrulewidth=1mm
 
 \begin{document}
 
@@ -31,4 +32,22 @@ Text & Text & Text & $a^2$ \\
 Text & Text & Text & $a^2$
 \end{tabu} 
 \end{table}
+
+see \ref{tbl:Test}
+
+\begin{table}
+\begin{center}
+\caption{\label{tbl:Test}Test}
+\leavevmode\hypertarget{tbl:Test}{}%
+\begin{tabu}{X[1.93,c]X[1.29,l]}
+\toprule
+a & b \\
+ \midrule
+c & d \\
+\bottomrule
+\end{tabu}
+
+\end{center}
+\end{table}
+
 \end{document}

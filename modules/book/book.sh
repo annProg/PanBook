@@ -38,6 +38,7 @@ function func_book() {
 	ext_longtable
 	ext_zh_en
 	ext_lineblock
+	ext_tabu
 
 	getFF
 	if [ ${_G[t]} == "tex" ];then

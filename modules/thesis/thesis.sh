@@ -32,6 +32,7 @@ function func_thesis() {
 	ext_longtable
 	ext_lineblock
 	ext_abstract
+	ext_tabu
 
 	getFF
 	
