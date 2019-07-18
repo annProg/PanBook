@@ -56,7 +56,7 @@ function tabu(tbl, longtable, caption)
 	row = #tbl.rows
 
 	local newtbl = {}
-	if caption then
+	if #caption > 0 then
 		local cappre = pandoc.RawBlock("latex", "\\caption{")
 		local cap = pandoc.Para({})
 		cap.content = caption
@@ -150,10 +150,17 @@ function renderTabu(el)
 	end
 
 	if longtable == 0 then
-		table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\begin{table}\n\\begin{center}"))
-		table.insert(newblock.content, tabu(tbl, false, caption))
+		if #caption > 0 then
+			table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\begin{table}\n\\begin{center}"))
+			table.insert(newblock.content, tabu(tbl, false, caption))
+		else
+			-- 没有 caption 的表格用 longtabu，防止换页问题
+			table.insert(newblock.content, tabu(tbl, true, caption))
+		end
 		table.insert(wrapBlock.content, newblock)
-		table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\end{center}\n\\end{table}"))
+		if #caption > 0 then
+			table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\end{center}\n\\end{table}"))
+		end
 		return wrapBlock
 	elseif longtable == 1 then
 		caption[2] = pandoc.Str("")

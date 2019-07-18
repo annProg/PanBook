@@ -10,3 +10,5 @@ multiline:
 	pandoc -F pandoc-crossref --lua-filter tabu.lua multiline.md -t latex
 nohead:
 	pandoc -F pandoc-crossref --lua-filter tabu.lua nohead.md -t latex
+nocap:
+	pandoc -F pandoc-crossref --lua-filter tabu.lua nocaption.md -t latex	
