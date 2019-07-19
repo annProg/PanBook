@@ -159,6 +159,38 @@ function init()
 	_G[ofile]=${_G[build]}/${_G[ofile]}-${_G[function]}-${_G[style]}	
 }
 
+# 执行extension函数，由extension自行判断在moudles中是否启用
+function execExtensions() {
+	for id in `echo ${_G[extensions]}`;do
+		ext_${id}
+	done
+}
+
+function extStat() {
+	_info "ext $1 ... [$2]"
+}
+
+# book,article,thesis,slide,cv 五位，取1表示开启，取0表示关闭，返回 true 或者 false
+function enableExt() {
+	declare -A moduleMap
+	moduleMap=(
+		[book]=0
+		[art]=1
+		[thesis]=2
+		[slide]=3
+		[cv]=4
+	)
+
+	param=$1
+	func=${_G[function]}
+	stat=${param:${moduleMap[$func]}:1}
+	if [ $stat -eq 1 ];then
+		echo "true"
+	else
+		echo "false"
+	fi
+}
+
 function useCI() {
 	ci=$1
 	_info "CI: $ci"

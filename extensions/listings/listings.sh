@@ -1,4 +1,5 @@
 regext listings
+# 通用扩展
 getArrayVar _G "ext-listings" true
 getArrayVar _G "ext-listings-lstset" "$SCRIPTDIR/${_G[extdir]}/listings/listings-set.tex"
 getArrayVar _G "ext-listings-highlight" "$SCRIPTDIR/${_G[extdir]}/listings/highlight.tex"
@@ -17,8 +18,11 @@ function ext_listings() {
 		_P[listings]=""
 		_M[listings]=true
 		_G[highlight]="--listings"
+
+		extStat listings done
 	else
 		writeHeader ${_G[ext-listings-highlight]}
+		extStat listings skip
 	fi
 }
 

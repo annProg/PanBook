@@ -1,5 +1,5 @@
 regext grade
-getArrayVar _G "ext-grade" true
+getArrayVar _G "ext-grade" `enableExt 00001`
 getArrayVar _G "ext-grade-tex" "$SCRIPTDIR/${_G[extdir]}/grade/grade.tex"
 
 function ext_grade() {
@@ -7,6 +7,10 @@ function ext_grade() {
 	if [ "${_G[ext-grade]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		writeHeader ${_G[ext-grade-tex]}
 		_F[grade]="--lua-filter $SCRIPTDIR/${_G[extdir]}/grade/grade.lua"
+
+		extStat grade done
+	else
+		extStat grade skip
 	fi
 }
 

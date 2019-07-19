@@ -25,14 +25,7 @@ function func_thesis() {
 	getArrayVar _V documentclass thesis
 
 	# 启用扩展
-	ext_header
-	ext_listings
-	ext_grade
-	ext_column
-	ext_longtable
-	ext_lineblock
-	ext_abstract
-	ext_tabu
+	execExtensions
 
 	getFF
 	

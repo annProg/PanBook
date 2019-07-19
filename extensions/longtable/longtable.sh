@@ -1,10 +1,15 @@
 regext longtable
+# 通用扩展
 getArrayVar _G "ext-longtable" true
 getArrayVar _G "ext-longtable-sty" "$SCRIPTDIR/${_G[extdir]}/longtable/longtable.sty"
 
 function ext_longtable() {
 	if [ "${_G[ext-longtable]}"x == "true"x ];then
 		cp ${_G[ext-longtable-sty]} ${_G[build]}
+
+		extStat longtable done
+	else
+		extStat longtable skip
 	fi
 }
 

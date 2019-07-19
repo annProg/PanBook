@@ -18,10 +18,7 @@ function func_slide() {
 	_patch
 
 	# 启用扩展
-	ext_header
-	ext_listings
-	ext_grade
-	ext_lineblock
+	execExtensions
 
 	if [ "${_G[debug]}"x != "true"x ];then
 		_G[t]=pdf

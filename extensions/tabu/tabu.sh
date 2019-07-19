@@ -1,4 +1,5 @@
 regext tabu
+# 通用扩展
 getArrayVar _G "ext-tabu" true
 getArrayVar _G "ext-tabu-tex" "$SCRIPTDIR/${_G[extdir]}/tabu/tabu.tex"
 
@@ -7,6 +8,10 @@ function ext_tabu() {
 	if [ "${_G[ext-tabu]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		writeHeader ${_G[ext-tabu-tex]}
 		_F[tabu]="--lua-filter $SCRIPTDIR/${_G[extdir]}/tabu/tabu.lua"
+
+		extStat tabu done
+	else
+		extStat tabu skip
 	fi
 }
 

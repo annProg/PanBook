@@ -21,14 +21,7 @@ function func_art() {
 		getArrayVar _V documentclass ctexart
 
 		# 启用扩展
-		ext_header
-		ext_listings
-		ext_grade
-		ext_column
-		ext_longtable
-		ext_zh_en
-		ext_lineblock
-		ext_abstract
+		execExtensions
 	fi
 
 	partCompile

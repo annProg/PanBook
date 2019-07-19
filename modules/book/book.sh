@@ -30,15 +30,7 @@ function func_book() {
 	custom_filter=${_F[style-${_G[function]}-${_G[style]}]}
 
 	# 启用扩展
-	ext_header
-	ext_listings
-	ext_grade
-	ext_column
-	ext_copyright
-	ext_longtable
-	ext_zh_en
-	ext_lineblock
-	ext_tabu
+	execExtensions
 
 	getFF
 	if [ ${_G[t]} == "tex" ];then

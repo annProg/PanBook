@@ -1,5 +1,5 @@
 regext theorem
-getArrayVar _G "ext-theorem" true
+getArrayVar _G "ext-theorem" `enableExt 11110`
 getArrayVar _G "ext-theorem-style" "tcolorbox"
 getArrayVar _V "lang" "zh"
 getArrayVar _G "ext-theorem-color" $SCRIPTDIR/${_G[extdir]}/theorem/color.tex
@@ -17,6 +17,10 @@ function ext_theorem() {
 		fi
 		# 由于theorem引用格式和citeproc一致，需要在citeproc之前执行，因此放入 _F0 数组
 		_F0[theorem]="--lua-filter $SCRIPTDIR/${_G[extdir]}/theorem/theorem.lua"
+
+		extStat theorem done
+	else
+		extStat theorem skip
 	fi
 }
 

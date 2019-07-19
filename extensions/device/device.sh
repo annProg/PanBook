@@ -1,5 +1,5 @@
 regext device
-getArrayVar _G "ext-device" true
+getArrayVar _G "ext-device" `enableExt 10000`
 getArrayVar _G "ext-device-tex" "$SCRIPTDIR/${_G[extdir]}/device/device.tex"
 
 function device() {
@@ -22,6 +22,10 @@ function ext_device() {
 	if [ "${_G[ext-device]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		writeHeader ${_G[ext-device-tex]}
 		device
+
+		extStat device done
+	else
+		extStat device skip
 	fi
 }
 

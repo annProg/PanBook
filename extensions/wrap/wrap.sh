@@ -1,4 +1,5 @@
 regext wrap
+# 通用扩展
 getArrayVar _G "ext-wrap" true
 getArrayVar _G "ext-wrap-style" "tcolorbox"
 getArrayVar _V "lang" "zh"
@@ -26,6 +27,10 @@ function ext_wrap() {
 			writeHeader $SCRIPTDIR/${_G[extdir]}/wrap/noanswer.tex
 		fi
 		_F[wrap]="--lua-filter $SCRIPTDIR/${_G[extdir]}/wrap/wrap.lua"
+
+		extStat wrap done
+	else
+		extStat wrap skip
 	fi
 }
 

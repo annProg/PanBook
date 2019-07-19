@@ -1,4 +1,5 @@
 regext zh_en
+# 通用扩展
 getArrayVar _G "ext-zh_en" true
 getArrayVar _G "ext-zh_en-lang" "zh"
 getArrayVar _G "ext-zh_en-tex" "$SCRIPTDIR/${_G[extdir]}/zh_en/zh_en.tex"
@@ -11,6 +12,10 @@ function ext_zh_en() {
 		writeHeader ${_G[ext-zh_en-texlang]}
 		_M[ext-zh-en]=${_G[ext-zh_en-lang]}
 		_F[zh_en]="--lua-filter $SCRIPTDIR/${_G[extdir]}/zh_en/zh_en.lua"
+
+		extStat zh_en done
+	else
+		extStat zh_en skip
 	fi
 }
 

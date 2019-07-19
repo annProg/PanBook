@@ -1,5 +1,5 @@
 regext abstract
-getArrayVar _G "ext-abstract" true
+getArrayVar _G "ext-abstract" `enableExt 01100`
 getArrayVar _G "ext-abstract-tex" "$SCRIPTDIR/${_G[extdir]}/abstract/abstract.tex"
 
 function ext_abstract() {
@@ -8,6 +8,10 @@ function ext_abstract() {
 		writeHeader ${_G[ext-abstract-tex]}
 		_F[abstract]="--lua-filter $SCRIPTDIR/${_G[extdir]}/abstract/abstract.lua"
 		_FF[abstract]=${_F[abstract]}
+
+		extStat abstract done
+	else
+		extStat abstract skip
 	fi
 }
 

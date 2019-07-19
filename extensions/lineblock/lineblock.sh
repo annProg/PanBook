@@ -1,4 +1,5 @@
 regext lineblock
+# 通用扩展
 getArrayVar _G "ext-lineblock" true
 getArrayVar _G "ext-lineblock-tex" "$SCRIPTDIR/${_G[extdir]}/lineblock/lineblock.tex"
 
@@ -7,6 +8,10 @@ function ext_lineblock() {
 	if [ "${_G[ext-lineblock]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		writeHeader ${_G[ext-lineblock-tex]}
 		_F[lineblock]="--lua-filter $SCRIPTDIR/${_G[extdir]}/lineblock/lineblock.lua"
+
+		extStat lineblock done
+	else
+		extStat lineblock skip
 	fi
 }
 

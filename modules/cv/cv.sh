@@ -22,10 +22,7 @@ function func_cv() {
 	_patch
 	
 	# 启用扩展
-	ext_header
-	ext_listings
-	ext_column
-	ext_grade
+	execExtensions
 
 	getPandocParam
 	getXeLaTeXParam
