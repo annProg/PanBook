@@ -5,12 +5,13 @@ DIR ?= /PanBook
 
 THEME ?= metropolis
 CONVERT ?= /mingw64/bin/convert
+CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源黑体,ItalicFont=KaiTi,SmallCapsFont=思源黑体
 
 run:
-	panbook slide --style=$(THEME)
+	panbook slide --style=$(THEME) $(CJK)
 all-theme:
-	for id in `panbook slide -l`;do echo "Compile $$id ..";panbook slide --style=$$id || exit 1;done
-	panbook slide --style=metropolis
+	for id in `panbook slide -l`;do echo "Compile $$id ..";panbook slide --style=$$id $(CJK) || exit 1;done
+	panbook slide --style=metropolis $(CJK)
 png:
 	cd build && mkdir all-beamer && mkdir all-beamer-title && \
 	for item in `ls *.pdf`;do \

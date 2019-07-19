@@ -7,28 +7,29 @@ STYLE ?= classic
 COLOR ?= blue
 ALL_STYLE=classic banking casual oldstyle fancy
 ALL_COLOR=blue orange green red purple grey black burgundy
+CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源黑体,ItalicFont=KaiTi,SmallCapsFont=思源黑体
 
 all: moderncv-all-style resume tmr
 
 
 moderncv-all-style:
 	for style in `echo $(ALL_STYLE)`;do \
-		panbook cv -M style:$$style -M color:$(COLOR) -V onlinecv:"" -V showdate:"" || exit 1; \
+		panbook cv -M style:$$style -M color:$(COLOR) -V onlinecv:"" -V showdate:"" $(CJK) || exit 1; \
 	done
 moderncv-all-style-color:
 	for style in `echo $(ALL_STYLE)`;do \
 		for color in `echo $(ALL_COLOR)`;do \
-			panbook cv -M style:$$style -M color:$$color; \
+			panbook cv -M style:$$style -M color:$$color $(CJK); \
 		done \
 	done
 	
 moderncv:
-	panbook cv -M style:$(STYLE) -M color:$(COLOR)
+	panbook cv -M style:$(STYLE) -M color:$(COLOR) $(CJK)
 
 resume:
-	panbook cv --style=resume
+	panbook cv --style=resume $(CJK)
 tmr:
-	panbook cv --style=tmr	
+	panbook cv --style=tmr $(CJK)
 png:
 	cd build;for pdf in `ls cv-cv-*.pdf`; do \
 		pdftocairo -png $$pdf; \
