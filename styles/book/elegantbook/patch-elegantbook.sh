@@ -7,13 +7,12 @@ note "use -V cover:path to use custom cover image"
 note "use -V logo:path to use custom logo image"
 
 # 启用扩展
-ext_device
-
 # introduction和problemset文档类中已有定义，取消writeHeader
 unset _G[ext-wrap-introduction]
 unset _G[ext-wrap-problemset]
-ext_wrap tex
-ext_theorem
+
+# theorem 已有定义，不用扩展中的定义
+_G[ext-theorem-use-tex]=false
 
 if [ "${_P[template]}"x != "" ];then
 	_V[documentclass]="elegantbook"

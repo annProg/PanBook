@@ -48,5 +48,3 @@ EOF
 writeHeader $FIX
 
 # wrap 写入的header需要放到 $FIX 后面（修复amsmath and mathspec bug）
-ext_wrap tex
-#ext_theorem tex

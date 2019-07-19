@@ -4,6 +4,9 @@ getArrayVar _G "ext-theorem-style" "tcolorbox"
 getArrayVar _V "lang" "zh"
 getArrayVar _G "ext-theorem-color" $SCRIPTDIR/${_G[extdir]}/theorem/color.tex
 
+# 是否使用扩展中的theorem定义（有些文档类定义了theorem环境，允许在style patch中关闭）
+getArrayVar _G "ext-theorem-use-tex" true
+
 function ext_theorem() {
 	getArrayVar _G "ext-theorem-tex" "$SCRIPTDIR/${_G[extdir]}/theorem/${_G[ext-theorem-style]}-theorem.tex"
 	getArrayVar _G "ext-theorem-texlang" "$SCRIPTDIR/${_G[extdir]}/theorem/${_V[lang]}.tex"
@@ -11,7 +14,7 @@ function ext_theorem() {
 	if [ "${_G[ext-theorem]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		writeHeader ${_G[ext-theorem-texlang]}
 		# 第一个参数为 tex 时才使用扩展种的theorem定义（有些文档类定义了theorem环境）
-		if [ "$1"x == "tex"x ];then
+		if [ "${_G[ext-theorem-use-tex]}" == "true"x ];then
 			writeHeader ${_G[ext-theorem-color]}
 			writeHeader ${_G[ext-theorem-tex]}
 		fi

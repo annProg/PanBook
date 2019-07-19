@@ -1,4 +1,5 @@
 #!/bin/bash
 
-# 启用coverletter
-ext_coverletter
+_G[ext-fontawesome5]=false
+
+_info "this is RESUME cv template"

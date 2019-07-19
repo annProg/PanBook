@@ -3,11 +3,6 @@ note "use -V device:(pc|mobile|kindle) to produce different size of pdf"
 note "use -V cover:(1-60|R|N|filepath) select cover background.R=random,N=no cover,filepath=custom cover file"
 note "use -V pagestyle:style to set pagestyle"
 
-# 启用扩展
-ext_device
-ext_wrap tex
-ext_theorem tex
-
 if [ "${_P[template]}"x == ""x ];then
 	getArrayVar _V "classoption" "fancyhdr,bookmark"
 	getArrayVar _V "pagestyle" "fancy"
