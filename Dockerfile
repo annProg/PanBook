@@ -14,12 +14,13 @@ RUN apk add --no-cache make
 ENV PATH /PanBook:$PATH
 RUN mkdir /data
 
-COPY . /PanBook/
-RUN chmod +x /PanBook/panbook
-WORKDIR /data
-
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata git
 RUN cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
 RUN echo "${TIMEZONE}" > /etc/timezone
+
+COPY . /PanBook/
+RUN chmod +x /PanBook/panbook
+WORKDIR /data
+
 ENTRYPOINT ["panbook"]
