@@ -104,6 +104,11 @@ $endfor$
 \newcommand{\vspacemobile}{\vspace{.05\textheight}}
 \newcommand{\vspacekindle}{\vspace{.05\textheight}}
 
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
 \begin{document}
 \frontmatter
 

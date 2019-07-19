@@ -96,6 +96,10 @@ $else$
 \cover{cover.jpg}
 $endif$
 
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
 \begin{document}
 \frontmatter
