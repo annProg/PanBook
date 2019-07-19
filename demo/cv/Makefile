@@ -7,7 +7,7 @@ STYLE ?= classic
 COLOR ?= blue
 ALL_STYLE=classic banking casual oldstyle fancy
 ALL_COLOR=blue orange green red purple grey black burgundy
-CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源黑体,ItalicFont=KaiTi,SmallCapsFont=思源黑体
+CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源黑体,ItalicFont=FandolKai,SmallCapsFont=思源黑体
 
 all: moderncv-all-style resume tmr
 

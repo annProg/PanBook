@@ -5,7 +5,7 @@ DIR ?= /PanBook
 
 THEME ?= metropolis
 CONVERT ?= /mingw64/bin/convert
-CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源黑体,ItalicFont=KaiTi,SmallCapsFont=思源黑体
+CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源黑体,ItalicFont=FandolKai,SmallCapsFont=思源黑体
 
 run:
 	panbook slide --style=$(THEME) $(CJK)
