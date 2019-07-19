@@ -1,4 +1,6 @@
-\documentclass[$if(classoption)$$classoption$$else$cn$endif$]{elegantbook}
+\documentclass[$for(classoption)$
+  $classoption$$sep$,
+$endfor$]{elegantbook}
 
 % pandoc版本大于1.15时需要\tightlist
 \providecommand{\tightlist}{%

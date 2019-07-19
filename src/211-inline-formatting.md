@@ -84,7 +84,7 @@ This is a backslash followed by an asterisk: `\*`.
 
 ### 小型大写字母
 
-小型大写字母使用 [@sec:bracketed_spans] 语法，指定 `.smallcaps` 样式：
+小型大写字母使用 [@sec:fenced_divs] 语法，指定 `.smallcaps` 样式：
 
 ```markdown
 [Small caps]{.smallcaps}

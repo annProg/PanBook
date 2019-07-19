@@ -74,8 +74,8 @@ caption
 ![caption a](images/image1.png){#fig:cfa width=40%}
 ![caption b](images/image2.png){#fig:cfb width=40%}
 
-![caption c](images/image3.png){#fig:cfb width=40%}
-![caption d](images/image4.png){#fig:cfb width=40%}
+![caption c](images/image3.png){#fig:cfc width=40%}
+![caption d](images/image4.png){#fig:cfd width=40%}
 
 Cool figure!
 :::
@@ -85,8 +85,8 @@ Cool figure!
 ![caption a](images/image1.png){#fig:cfa width=40%}
 ![caption b](images/image2.png){#fig:cfb width=40%}
 
-![caption c](images/image3.png){#fig:cfb width=40%}
-![caption d](images/image4.png){#fig:cfb width=40%}
+![caption c](images/image3.png){#fig:cfc width=40%}
+![caption d](images/image4.png){#fig:cfd width=40%}
 
 Cool figure!
 :::
@@ -181,7 +181,7 @@ main = putStrLn "Hello World!"
 
 #### 不生成前缀
 
-在 `@` 前添加 `-`，就像这样 `[-@citation]`，将禁用默认前缀，例如 [-@fig:1] 将只生成 `1`，而没有 `fig.` 前缀。
+在 `@` 前添加 `-`，就像这样 `[-@citation]`，将禁用默认前缀，例如 `[-@fig:1]` 将只生成 `1`，而没有 `fig.` 前缀。
 
 在分组的引用中，有或没有前缀的引文将在不同的组中。所以 `[-@fig: 1;@fig: 2;-@fig:3]` 将被渲染为 `1，fig. 2, 3`，所以要注意这个特性。同样，非连续序列不会分组在一起。
 
