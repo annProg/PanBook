@@ -20,7 +20,7 @@ steps:
   image: panbook:latest
   pull: if-not-exists
   commands:
-  - CJK="" DEBUG="-d" make ctex
+  - DEBUG="-d" make ctex
   - grep -i warning build/*-ctexbook-pc.log
   depends_on:
   - build
@@ -29,7 +29,7 @@ steps:
   image: panbook:latest
   pull: if-not-exists
   commands:
-  - CJK="" DEBUG="-d" make ctex6in
+  - DEBUG="-d" make ctex6in
   - grep -i warning build/*-ctexbook-mobile.log
   depends_on:
   - build
@@ -39,7 +39,7 @@ steps:
   image: panbook:latest
   pull: if-not-exists
   commands:
-  - CJK="" DEBUG="-d" make elegantbook
+  - DEBUG="-d" make elegantbook
   - grep -i warning build/*-elegantbook-pc.log
   depends_on:
   - build
