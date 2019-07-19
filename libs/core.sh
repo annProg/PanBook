@@ -161,7 +161,7 @@ function init()
 
 # 执行extension函数，由extension自行判断在moudles中是否启用
 function execExtensions() {
-	for id in `echo ${_G[extensions]}`;do
+	for id in `echo ${_G[extensions]} |tr ' ' '\n' |sort -u |tr '\n' ' '`;do
 		ext_${id}
 	done
 }
