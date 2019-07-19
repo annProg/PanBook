@@ -1,4 +1,4 @@
-\documentclass[$if(classoption)$$classoption$$else$fancyhdr,bookmark$endif$]{ctexbook}
+\documentclass[$if(classoption)$$classoption$$else$bookmark$endif$]{ctexbook}
 \setmainfont{DejaVu Sans} 	% 設定英文字型
 \setromanfont{DejaVu Sans} 	% 字型
 \setmonofont{DejaVu Sans Mono}
