@@ -21,6 +21,7 @@ steps:
   pull: if-not-exists
   commands:
   - CJK="" DEBUG="-d" make ctex
+  - grep -i warning build/*-ctexbook-pc.log
   depends_on:
   - build
 
@@ -29,6 +30,7 @@ steps:
   pull: if-not-exists
   commands:
   - CJK="" DEBUG="-d" make ctex6in
+  - grep -i warning build/*-ctexbook-mobile.log
   depends_on:
   - build
   - doc-ctexbook
@@ -38,6 +40,7 @@ steps:
   pull: if-not-exists
   commands:
   - CJK="" DEBUG="-d" make elegantbook
+  - grep -i warning build/*-elegantbook-pc.log
   depends_on:
   - build
   - doc-ctexbook-6inch
@@ -48,6 +51,7 @@ steps:
   commands:
   - cd demo/article
   - DEBUG=-d make build
+  - grep -i warning build/*.log
   depends_on:
   - build
   
@@ -67,6 +71,7 @@ steps:
   commands:
   - cd demo/cv
   - make all
+  - grep -i warning build/*.log
   depends_on:
   - build
   - demo-slide
@@ -77,6 +82,7 @@ steps:
   commands:
   - cd demo/thesis
   - make all
+  - grep -i warning build/*.log
   depends_on:
   - build
   - demo-slide
