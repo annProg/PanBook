@@ -1,6 +1,6 @@
 regext wrap
-# 通用扩展
-getArrayVar _G "ext-wrap" true
+
+getArrayVar _G "ext-wrap" `enableExt 11101`
 getArrayVar _G "ext-wrap-style" "tcolorbox"
 getArrayVar _V "lang" "zh"
 getArrayVar _G "ext-wrap-color" $SCRIPTDIR/${_G[extdir]}/wrap/color.tex
