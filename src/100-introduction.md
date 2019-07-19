@@ -75,7 +75,7 @@ header-includes:
 ## 写作工具
 推荐使用 [Visual Studio Code](https://code.visualstudio.com/)。一些有用的插件见 [@tbl:vscodeplugin]。
 
-插件                               功能
+插件                            功能
 --------------------------      ------------------------
 Markdown Preview                Markdown 实时预览
 \LaTeX\ language support        \LaTeX 语言高亮
