@@ -23,14 +23,17 @@ function func_thesis() {
 
 	# 启用扩展
 	execExtensions
-	# 生成前言和后记
-	pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[f0]} ${_G[f]}
-	pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[f0]} ${_G[f]}
+
 	_P[include-before-body]=frontmatter.tex
 	_P[include-after-body]=backmatter.tex
 
 	getPandocParam
 	getXeLaTeXParam
+
+	# 生成前言和后记
+	pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[ff]}
+	pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[ff]}
+
 	pandoc ${_G[pandoc-param]}
 
 	TEX_OUTPUT=${_G[ofile]}.${_G[t]}

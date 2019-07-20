@@ -270,11 +270,14 @@ function getP() {
 
 function getF() {
 	# lua filter
-	for item in ${_F[@]};do
-		_G[f]="${_G[f]} $item"
+	# _G[ff] 用于 frontmatter 和 backmatter
+	for item in ${!_F[@]};do
+		_G[f]="${_G[f]} ${_F[$item]}"
+		[ "$item"x != "add-header"x ] && _G[ff]="${_G[ff]} ${_F[$item]}"
 	done
 	for item in ${_F0[@]};do
 		_G[f0]="${_G[f0]} $item"
+		_G[ff]="${_G[ff]} $item"
 	done
 }
 

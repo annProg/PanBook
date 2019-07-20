@@ -30,11 +30,7 @@ function func_book() {
 	# 启用扩展
 	execExtensions
 
-	# 生成前言和后记
 	if [ ${_G[t]} == "tex" ];then
-		pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[f0]} ${_G[f]}
-		pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[f0]} ${_G[f]}
-
 		_P[include-before-body]=frontmatter.tex
 		_P[include-after-body]=backmatter.tex
 	fi
@@ -42,6 +38,14 @@ function func_book() {
 	partCompile
 	getPandocParam
 	getXeLaTeXParam
+
+	# 生成前言和后记
+	if [ ${_G[t]} == "tex" ];then
+		pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[ff]}
+		pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[ff]}
+	fi
+
+	
 	pandoc ${_G[pandoc-param]}
 
 	# 非tex时不用xelatex编译
