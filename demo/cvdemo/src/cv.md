@@ -46,7 +46,7 @@ nocite: |
 - [英语]{.cat} 四级，六级，专八，笔译，口译，`TOEFL`120，`IELTS`8 [\grade5]{.comment}
 - [编程]{.cat} `Java`，`C`，`Lisp`，`Haskell`，`PHP`，`Javascript`，`Golang` [\grade1]{.comment}
 
-# \faStarHalfO~技能
+# \faStar~技能
 
 :::: {.cvcolumns}
 ::: {.cvcolumn cat="编程"}

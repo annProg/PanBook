@@ -78,16 +78,18 @@ function getWidth(width, count)
 	if width ~= nil then
 		width = string.match(width, "(%d+)%%$")
 	end
-	if width ~= nil then	
-		return width/100
+	if width ~= nil then
+		-- 考虑到column之间需要有空隙，分母取104		
+		return width/104
 	else
-		return 1/count
+		-- 考虑到column之间需要有空隙，分子取96
+		return 0.96/count
 	end
 end
 
 function cvcolumns(el)
 	local nblocks = pandoc.Div({})
-	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{columns}[T]"))
+	table.insert(nblocks.content, pandoc.RawBlock("latex", "\\begin{columns}[0.1em]"))
 	
 	-- column数量
 	local count = #el.content

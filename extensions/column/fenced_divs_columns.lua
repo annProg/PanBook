@@ -3,9 +3,10 @@ function getWidth(width)
 		width = string.match(width, "(%d+)%%$")
 	end
 	if width ~= nil then
-		return width/100
+		-- 考虑到多栏之间需要留间隙，分母取104
+		return width/104
 	else
-		return "0.5"
+		return "0.48"
 	end
 end
 
