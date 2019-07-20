@@ -1,4 +1,6 @@
 
+## column
+
 ## 分栏
 
 使用 `fenced_divs` 语法，参见 [@sec:fenced_divs]。

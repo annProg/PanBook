@@ -19,6 +19,9 @@ declare -A _P         # pandoc 选项
 declare -A _V         # pandoc var (-V)
 declare -A _M         # pandoc meta (-M)
 declare -A _F         # lua filter (--lua-filter)
+declare -A _F0        # 需要在 citeproc 前执行的 lua filter
+declare -A _MF        # parse metadata.yml
+declare -A _H         # 帮助信息
 ```
 
 ## 模块

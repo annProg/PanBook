@@ -45,7 +45,39 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 │   └── 200-chapter2.md            
 ```
 
-#### 注意事项 {#sec:note}
+### 指定风格（style）
+风格（style），也可以理解为模板（为了和 pandoc 模板区分），是预定义的文档样式。通过 `--style` 参数指定，缺省时，会使用默认风格，列表如 [@tbl:defautl_style]。
+
+book  | thesis | article | slide | cv
+------|--------|---------|-------|------
+ctexbook|thesis|ctexart  |metropolis|moderncv classic
+
+: 各模块默认风格 {#tbl:defautl_style}
+
+通过命令 `panbook <module> -l` 查看模块支持的风格列表，比如下面的命令查看 book 的风格列表：
+```bash
+$ panbook book -l
+ctexbook
+elegantbook
+epub
+html5
+```
+
+指定风格 elegantbook 来编译：
+```bash
+$ panbook book --style=elegantbook
+```
+
+### 调试模式
+加 `-d` 选项，会输出详细的 `latexmk` 编译过程
+
+```bash
+$ panbook book -d
+```
+
+加 `--trace` 选项，可以输出更多的调试信息。
+
+### 注意事项 {#sec:note}
 
 - Markdown 源码文件需要使用 UTF-8 编码
 - Pandoc 扩展的 Markdown 语法要求在标题前留出一个空行，因此按章节拆分的多个 Markdown 文件，开头需要空一行，否则 pandoc 不能正确识别标题
