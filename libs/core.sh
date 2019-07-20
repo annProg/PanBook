@@ -309,10 +309,11 @@ function getXeLaTeXParam() {
 # 局部编译
 function partCompile() {
 	[ ${_G[part]} == "false" ] && return 0
-	echo > frontmatter.tex
-	echo > backmatter.tex
+	unset _P[include-before-body]
+	unset _P[include-after-body]
 	getArrayVar _V CJKmainfont SimSun
 	getArrayVar _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
+	_P[standalone]=""
 	unset _P[template]
 	unset _P[toc]
 	_M[lot]=false

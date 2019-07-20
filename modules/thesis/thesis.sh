@@ -27,6 +27,7 @@ function func_thesis() {
 	_P[include-before-body]=frontmatter.tex
 	_P[include-after-body]=backmatter.tex
 
+	partCompile
 	getPandocParam
 	getXeLaTeXParam
 
