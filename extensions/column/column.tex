@@ -1,9 +1,6 @@
-\usepackage{keyval}
-\newlength\Colsep
-\setlength\Colsep{10pt}
 \newenvironment{columns}[1][]
-	{\noindent\begin{minipage}{\textwidth}}
-	{\end{minipage}}
+	{\noindent\begin{minipage}{\textwidth}\vspace{1.5em}}
+	{\vspace{1.5em}\end{minipage}}
 \newenvironment{column}[1]
 	{\begin{minipage}[t]{#1}}
-	{\end{minipage}}
+	{\end{minipage}\quad}

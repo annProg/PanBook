@@ -1,65 +1,32 @@
 \documentclass[]{article}
+\usepackage{lipsum}
 \usepackage{keyval}
 \newlength\Colsep
 \setlength\Colsep{10pt}
-
-\makeatletter
-\define@key{columns@col}{T}[true]{\vspace{.5cm}}
-\makeatother
-
 \newenvironment{columns}[1][]
-	{\setkeys{columns@col}{#1}
-	 \noindent\begin{minipage}{\textwidth}}
-	{\end{minipage}\vspace{.5cm}}
-
+	{\noindent\begin{minipage}{\textwidth}\vspace{1.5em}}
+	{\vspace{1.5em}\end{minipage}}
 \newenvironment{column}[1]
-	{\begin{minipage}[t]{#1}} %{\dimexpr#1 -0.5\Colsep\relax}}
-	{\end{minipage}}
+	{\begin{minipage}[t]{#1}}
+	{\end{minipage}\quad}
 
 
 \begin{document}
 
 \section{columns}
+\lipsum[1]
 
-\begin{columns}[T]
-\begin{column}{0.5\textwidth}
-\begin{itemize}
-\item
-  item1
-\item
-  item2
-\end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}
-\begin{itemize}
-\item
-  item1
-\item
-  item2
-\end{itemize}
+\noindent\begin{minipage}{\textwidth}
+\vspace{1.5em}
+\begin{minipage}[t]{0.48\textwidth}
+\lipsum[1]
+\end{minipage}
+\quad
+\begin{minipage}[t]{0.48\textwidth}
+\lipsum[1]
+\end{minipage}\quad
+\vspace{1.5em}
+\end{minipage}
 
-\end{column}
-\end{columns}
-
-\section{minipage}
-
-%\noindent\begin{minipage}{\textwidth}
-\begin{minipage}[t]{\dimexpr0.5\textwidth-0.5\Colsep\relax}
-\begin{itemize}
-\item
-  item1
-\item
-  item2
-\end{itemize}
-\end{minipage}\hfill
-\begin{minipage}[t]{\dimexpr0.5\textwidth-0.5\Colsep\relax}
-\begin{itemize}
-\item
-  item1
-\item
-  item2
-\end{itemize}
-\end{minipage}%
-%\end{minipage}
-
+\lipsum[1]
 \end{document}
