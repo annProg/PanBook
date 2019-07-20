@@ -18,19 +18,14 @@ function func_thesis() {
 
 	_copystyle
 	_patch
-
-	# 生成前言和后记
-	custom_filter=${_F[style-${_G[function]}-${_G[style]}]}
 	
 	getArrayVar _V documentclass thesis
 
 	# 启用扩展
 	execExtensions
-
-	getFF
-	
-	pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter ${_G[ff]}
-	pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} $custom_filter
+	# 生成前言和后记
+	pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[f0]} ${_G[f]}
+	pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[f0]} ${_G[f]}
 	_P[include-before-body]=frontmatter.tex
 	_P[include-after-body]=backmatter.tex
 

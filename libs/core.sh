@@ -278,12 +278,6 @@ function getF() {
 	done
 }
 
-function getFF() {
-	for item in ${_FF[@]};do
-		_G[ff]="${_G[ff]} $item"
-	done
-}
-
 function heapSize() {
 	if [ "${_G[memory]}"x != ""x ];then
 		_G[heapsize]="+RTS -M${_G[memory]} -RTS"

@@ -7,7 +7,6 @@ function ext_abstract() {
 	if [ "${_G[ext-abstract]}"x == "true"x -a "${_G[ext-header]}"x == "true"x ];then
 		writeHeader ${_G[ext-abstract-tex]}
 		_F[abstract]="--lua-filter $SCRIPTDIR/${_G[extdir]}/abstract/abstract.lua"
-		_FF[abstract]=${_F[abstract]}
 
 		extStat abstract done
 	else

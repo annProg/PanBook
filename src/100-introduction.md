@@ -27,7 +27,7 @@ $ tail -n 1 ~/.bashrc
 export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```
 
-完成环境变量设置之后，在任意空目录下执行 panbook `<command>`，会自动初始化写作环境，生成示例源码。然后在 src 目录下开始写作。`<command>`可以是 book ， thesis ， slide ， cv 。详细帮助信息执行 panbook -h 查看。目录规范见 [@lst:panbookdirs]。
+完成环境变量设置之后，在任意空目录下执行 panbook `<command>`，会自动初始化写作环境，生成示例源码。然后在 src 目录下开始写作。`<command>`可以是 book ， thesis ， slide ， cv 和 art（article）。详细帮助信息执行 panbook -h 查看。目录规范见 [@lst:panbookdirs]。
 
 ```{#lst:panbookdirs .bash caption="目录规范"}
 .
