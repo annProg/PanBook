@@ -80,3 +80,7 @@ introduction（章节内容提要） 和 problemset（习题） 环境必须使�
 ::: {.problemset}
 - Problemset
 :::
+
+::: {.info caption="更改 Wrap 风格"}
+可以通过命令行参数指定 Wrap 风格（`-G ext-wrap-style:<bclogo|tcolorbox>`），默认为 tcolorbox。也可以通过 `-G ext-wrap-tex:<custom wrap set file>` 自定义风格
+:::
