@@ -1,5 +1,5 @@
 regext theorem
-getArrayVar _G "ext-theorem" `enableExt 10110`
+getArrayVar _G "ext-theorem" `enableExt 10100`
 getArrayVar _G "ext-theorem-style" "tcolorbox"
 getArrayVar _V "lang" "zh"
 getArrayVar _G "ext-theorem-color" $SCRIPTDIR/${_G[extdir]}/theorem/color.tex
