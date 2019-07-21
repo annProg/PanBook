@@ -3,20 +3,18 @@
 
 ::: {.info caption="扩展信息"}
 使用场景
-  ~ 提供摘要环境
+  ~ 修复 moderncv 中 fontawesome5 和 fontawesome 冲突
 
 启用状态
-  ~ 默认在 art，thesis 中启用
+  ~ 只对 cv 的 moderncv 模板 有效
 
 格式支持  
   ~ \LaTeX 
 
 语法系列
-  ~ fenced_divs 参见 [@sec:fenced_divs]  
+  ~ 无
 :::
 
 #### 示例
 
-```markdown
-todo
-```
+无

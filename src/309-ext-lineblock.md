@@ -3,20 +3,18 @@
 
 ::: {.info caption="扩展信息"}
 使用场景
-  ~ 提供摘要环境
+  ~ 提供 lineblock 环境，用于修复 lineblock 缩进问题。lineblock 请看 [@sec:lineblock]
 
 启用状态
-  ~ 默认在 art，thesis 中启用
+  ~ 默认在所有模块中启用
 
 格式支持  
   ~ \LaTeX 
 
 语法系列
-  ~ fenced_divs 参见 [@sec:fenced_divs]  
+  ~ 原生 pandoc's Markdown
 :::
 
 #### 示例
 
-```markdown
-todo
-```
+无

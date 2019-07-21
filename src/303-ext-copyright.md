@@ -3,20 +3,22 @@
 
 ::: {.info caption="扩展信息"}
 使用场景
-  ~ 提供摘要环境
+  ~ 提供版权声明页
 
 启用状态
-  ~ 默认在 art，thesis 中启用
+  ~ 默认在 book 中启用
 
 格式支持  
   ~ \LaTeX 
 
 语法系列
-  ~ fenced_divs 参见 [@sec:fenced_divs]  
+  ~ 无。需要模板支持。
 :::
 
 #### 示例
 
-```markdown
-todo
+需要模板支持，具体请看模板帮助。
+
+```bash
+$ panbook book -V copyright:ccnd
 ```
