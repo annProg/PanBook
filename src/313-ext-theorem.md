@@ -6,7 +6,7 @@
   ~ 提供定理环境
 
 启用状态
-  ~ 默认在 book, art，thesis, slide 中启用
+  ~ 默认在 book, thesis, slide 中启用
 
 格式支持  
   ~ \LaTeX 
