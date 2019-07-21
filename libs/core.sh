@@ -316,6 +316,7 @@ function partCompile() {
 	_P[standalone]=""
 	unset _P[template]
 	unset _P[toc]
+	unset _P[bibliography]
 	_M[lot]=false
 	_M[lof]=false
 	_M[title]=false
