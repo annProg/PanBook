@@ -4,11 +4,11 @@
 PanBook 处理流程如 [@fig:panbook_flowchart]。
 
 ```{#fig:panbook_flowchart .plot:ditaa caption="PanBook 流程图"}
-+---------+    load     +-------------------------------------------+
-+ style   +<---------+  |                    if tex                 |
-+---------+          |  :                                           |
-                 +---+--++                                          v
-                 |       |               +-----------+      +-------+-----+
++---------+    load     +------------------------------------------+
++ style   +<---------+  |                    if tex                |
++---------+          |  :                                          |
+                 +---+--++                                         v
+                 |       |               +-----------+      +------+------+
                  |PanBook| pandoc param  | {io}      |      | {io}        |
                  |module +-------------->+ pandoc cmd|      | latexmk cmd |
                  |       | lua filter    |           |      |             |
