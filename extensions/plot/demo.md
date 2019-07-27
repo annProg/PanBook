@@ -1,3 +1,15 @@
+```
++--------+   +-------+    +-------+
+|        | --+ ditaa +--> |       |
+|  Text  |   +-------+    |diagram|
+|Document|   |!magic!|    |       |
+|     {d}|   |       |    |       |
++---+----+   +-------+    +-------+
+	:                         ^
+	|       Lots of work      |
+	+-------------------------+
+```		
+
 see [@fig:dot].
 
 ```{#fig:dot .plot:dot caption="Graphviz Dot Demo"}

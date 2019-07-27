@@ -95,6 +95,10 @@ if not os.execute("[ -d " .. renderDir .. " ]") then
 end
 
 function CodeBlock(block)
+	if block.attr.classes[1] == nil then
+		return block
+	end
+	
 	-- valid engine
 	local engine = string.gsub(block.attr.classes[1], 'plot:', '')
 	if not inTable(table.keys(validEngines), engine) then
