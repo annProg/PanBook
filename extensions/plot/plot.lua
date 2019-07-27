@@ -30,16 +30,26 @@ function which(command)
 	return os.execute("which " .. command .. ' >/dev/null 2>&1')
 end
 
--- The default format is SVG i.e. vector graphics:
-local filetype = "svg"
-local mimetype = "image/svg+xml"
+function getfiletype(engine)
+	-- The default format is SVG i.e. vector graphics:
+	local filetype = "svg"
+	local mimetype = "image/svg+xml"
 
--- Check for output formats that potentially cannot use SVG
--- vector graphics. In these cases, we use a different format
--- such as PNG:
-if inTable({'docx', 'pptx', 'rtf'}, FORMAT) then
-	filetype = "png"
-	mimetype = "image/png"
+	-- Check for output formats that potentially cannot use SVG
+	-- vector graphics. In these cases, we use a different format
+	-- such as PNG:
+	if inTable({'docx', 'pptx', 'rtf'}, FORMAT) then
+		filetype = "png"
+		mimetype = "image/png"
+	end
+
+	-- 有些engine不支持svg
+	if inTable({"ditaa"}, engine) then
+		filetype = "png"
+		mimetype = "image/png"	
+	end
+
+	return filetype,mimetype
 end
 
 function writefile(filename, text)
@@ -82,8 +92,9 @@ function ditaa(code, filetype, fname, cname)
 	return pandoc.pipe("ditaa", {cname,fname}, code)
 end
 
-function goseq(code, filetype, fname)
-	return pandoc.pipe("goseq", {"-o " .. fname}, code)
+function goseq(code, filetype, fname, cname)
+	writefile(cname, code)
+	return pandoc.pipe("goseq", {"-o", fname, cname}, code)
 end
 
 local validEngines = {
@@ -120,11 +131,7 @@ function CodeBlock(block)
 		return block
 	end
 
-	-- 有些engine不支持svg
-	if inTable({"ditaa"}, engine) then
-		filetype = "png"
-		mimetype = "image/png"	
-	end
+	local filetype,mimetype = getfiletype(engine)
 	
 	local sha1file = renderDir .. "/" .. pandoc.sha1(block.text) .. "_" ..engine
 	local fname = sha1file .. "." .. filetype
