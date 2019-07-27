@@ -31,25 +31,22 @@ function which(command)
 end
 
 function getfiletype(engine)
-	-- The default format is SVG i.e. vector graphics:
-	local filetype = "svg"
-	local mimetype = "image/svg+xml"
+	-- The default format is pdf
+	local filetype = "pdf"
 
 	-- Check for output formats that potentially cannot use SVG
 	-- vector graphics. In these cases, we use a different format
 	-- such as PNG:
 	if inTable({'docx', 'pptx', 'rtf'}, FORMAT) then
 		filetype = "png"
-		mimetype = "image/png"
 	end
 
 	-- 有些engine不支持svg
 	if inTable({"ditaa"}, engine) then
 		filetype = "png"
-		mimetype = "image/png"	
 	end
 
-	return filetype,mimetype
+	return filetype
 end
 
 function writefile(filename, text)
@@ -94,7 +91,11 @@ end
 
 function goseq(code, filetype, fname, cname)
 	writefile(cname, code)
-	return pandoc.pipe("goseq", {"-o", fname, cname}, code)
+	local nfname = string.gsub(fname, '.pdf', '.svg')
+	local success,img = pandoc.pipe("goseq", {"-o", nfname, cname}, code)
+	print(success)
+	os.execute('rsvg-convert -f pdf -o ' .. fname .. ' ' .. nfname)
+	return success,img
 end
 
 local validEngines = {
@@ -131,7 +132,7 @@ function CodeBlock(block)
 		return block
 	end
 
-	local filetype,mimetype = getfiletype(engine)
+	local filetype = getfiletype(engine)
 	
 	local sha1file = renderDir .. "/" .. pandoc.sha1(block.text) .. "_" ..engine
 	local fname = sha1file .. "." .. filetype

@@ -17,6 +17,7 @@ RUN mkdir /data
 # plot 相关组件
 RUN curl -s -L https://github.com/akavel/ditaa/releases/download/g1.0.0/ditaa-linux-amd64 -o /usr/local/bin/ditaa && chmod +x /usr/local/bin/ditaa
 RUN apk add --no-cache graphviz
+RUN curl -s -L https://github.com/pandoc-ebook/goseq/releases/download/v1.0/goseq-linux-amd64 -o /usr/local/bin/goseq && chmod +x /usr/local/bin/goseq
 
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata git
