@@ -26,6 +26,10 @@ function file_exists(filename)
 	return os.execute("[ -f " .. filename .. " ]")
 end
 
+function which(command)
+	return os.execute("which " .. command .. ' >/dev/null 2>&1')
+end
+
 -- The default format is SVG i.e. vector graphics:
 local filetype = "svg"
 local mimetype = "image/svg+xml"
@@ -78,6 +82,10 @@ function ditaa(code, filetype, fname, cname)
 	return pandoc.pipe("ditaa", {cname,fname}, code)
 end
 
+function goseq(code, filetype, fname)
+	return pandoc.pipe("goseq", {"-o " .. fname}, code)
+end
+
 local validEngines = {
 	dot = dot, 
 	fdp = fdp, 
@@ -86,7 +94,8 @@ local validEngines = {
 	neato = neato, 
 	circo = circo, 
 	ditaa = ditaa, 
-	gnuplot = gnuplot
+	gnuplot = gnuplot,
+	goseq = goseq
 }
 
 local renderDir = "_plot_render"
@@ -102,6 +111,12 @@ function CodeBlock(block)
 	-- valid engine
 	local engine = string.gsub(block.attr.classes[1], 'plot:', '')
 	if not inTable(table.keys(validEngines), engine) then
+		return block
+	end
+
+	if not which(engine) then
+		block.text = "! Note: " .. engine .. " not installed ! So I did not render this code\n\n" .. block.text
+		print("\27[31mPlot Warning: " .. engine .. " not installed!\27[m")
 		return block
 	end
 

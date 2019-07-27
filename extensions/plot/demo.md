@@ -31,3 +31,12 @@ see [@fig:ditaa].
 	|       Lots of work      |
 	+-------------------------+
 ```		
+
+see [@fig:goseq]
+
+```{#fig:goseq .plot:goseq caption="Goseq Demo"}
+Client->Server: Make request
+Server->Database: Make database\nrequest
+Database->Server: The result
+Server->Client: The response
+```
