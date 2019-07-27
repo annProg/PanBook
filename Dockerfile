@@ -14,6 +14,10 @@ RUN apk add --no-cache make
 ENV PATH /PanBook:$PATH
 RUN mkdir /data
 
+# plot 相关组件
+RUN curl -s -L https://github.com/akavel/ditaa/releases/download/g1.0.0/ditaa-linux-amd64 -o /usr/local/bin/ditaa && chmod +x /usr/local/bin/ditaa
+RUN apk add --no-cache graphviz
+
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata git
 RUN cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
