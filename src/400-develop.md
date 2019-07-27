@@ -18,17 +18,18 @@ PanBook 处理流程如 [@fig:panbook_flowchart]。
 +---------+                                    v                   v  
                                          +-----+--------+   +------+-------+
                                          |{d}Markdown   |   |{d} LaTeX     |
-                                         | Source files +:->+ Source files |
+                                         | Source files +=->+ Source files |
                                          |              |   |              |
-                                         +------+-------+   +-------+------+
-                                                |                   :
-                                                v                   |
-                                         +------+-------+           |
-                                         | {d}          +<----------+
-                                         | EPUB or PDF  |
+                                         +------+-------+   +------+-------+
+                                                |                  :
+                                                v                  |
+                                         +------+-------+          |
+                                         | {d}          |          |
+                                         | EPUB or PDF  +<---------+
+                                         |              |
                                          +--------------+
 ```
-										 
+                                         
 PanBook 基于 Pandoc，首先要了解 Pandoc 的使用方法。PanBook 主体使用 Shell 脚本开发，Pandoc Lua filter 使用 Lua 开发，定制 style 需要了解 \LaTeX 或者 CSS。[@tbl:panbookdir_specs] 给出了名词定义。
 
 名词 | 目录 | 功能
