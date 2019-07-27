@@ -3,6 +3,8 @@
 用于画图
 
 ## 安装
+需要安装 librsvg 用于 SVG 转 PDF。msys2 上使用 `pacman -S mingw64/mingw-w64-x86_64-librsvg` 安装。
+
 目前支持以下画图引擎，如需使用，请安装对应软件并加入 PATH 环境变量
 
 - dot,neato,fdp,sfdp,twopi,circo (from graphviz)
