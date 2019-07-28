@@ -21,7 +21,7 @@
 目前支持以下画图引擎，如需使用，请安装对应软件并加入 PATH 环境变量
 
 - dot,neato,fdp,sfdp,twopi,circo (from graphviz)
-- ditaa （建议使用 go 语言版本 https://github.com/akavel/ditaa/release）
+- ditaa （建议使用 go 语言版本 https://github.com/akavel/ditaa/releases）
 - goseq （https://github.com/pandoc-ebook/goseq/releases）
 
 #### 用法

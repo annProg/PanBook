@@ -24,7 +24,7 @@ declare -A _P         # pandoc选项
 declare -A _V         # pandoc var (-V)
 declare -A _M         # pandoc meta (-M)
 declare -A _F         # lua filter (--lua-filter)
-declare -A _F0        # 需要在citeproc前执行的lua filter
+declare -A _F0        # 需要在crossref及citeproc前执行的lua filter
 declare -A _MF        # parse metadata.yml
 
 # ${_G[header]} 变量说明：

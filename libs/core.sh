@@ -299,7 +299,7 @@ function getPandocParam() {
 	getP
 	getF
 	heapSize
-	_G[pandoc-param]="${_G[heapsize]} ${_G[crossref]} $crossrefYaml ${_G[f0]} ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
+	_G[pandoc-param]="${_G[heapsize]} ${_G[f0]} ${_G[crossref]} $crossrefYaml ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
 function getXeLaTeXParam() {

@@ -5,7 +5,7 @@ getArrayVar _G "ext-plot" true
 function ext_plot() {
 	# 依赖add header功能
 	if [ "${_G[ext-plot]}"x == "true"x ];then
-		_F[plot]="--lua-filter $SCRIPTDIR/${_G[extdir]}/plot/plot.lua"
+		_F0[plot]="--lua-filter $SCRIPTDIR/${_G[extdir]}/plot/plot.lua"
 
 		extStat plot done
 	else

@@ -69,6 +69,8 @@ function printGlobal() {
 	printArray _V ${!_V[@]}
 	printArray _M ${!_M[@]}
 	printArray _F ${!_F[@]}
+	printArray _F0 ${!_F0[@]}
+	printArray _MF ${!_MF[@]}
 	# 总是返回true，防止Makefile报错
 	true
 }

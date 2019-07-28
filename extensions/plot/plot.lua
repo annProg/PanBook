@@ -30,15 +30,24 @@ function which(command)
 	return os.execute("which " .. command .. ' >/dev/null 2>&1')
 end
 
+function rsvg(svg, output, format)
+	if not which('rsvg-convert') then
+		print("\27[31mPlot Warning: librsvg not installed!\27[m")
+		return false
+	end
+	return os.execute('rsvg-convert -f' .. format .. ' -o ' .. output .. ' ' .. svg)
+end
+
 function getfiletype(engine)
 	-- The default format is pdf
 	local filetype = "pdf"
 
-	-- Check for output formats that potentially cannot use SVG
-	-- vector graphics. In these cases, we use a different format
-	-- such as PNG:
 	if inTable({'docx', 'pptx', 'rtf'}, FORMAT) then
 		filetype = "png"
+	end
+
+	if inTable({'epub', 'epub2', 'epub3', 'html', 'html5'}, FORMAT) then
+		filetype = "svg"
 	end
 
 	-- 有些engine不支持svg
@@ -91,10 +100,12 @@ end
 
 function goseq(code, filetype, fname, cname)
 	writefile(cname, code)
-	local nfname = string.gsub(fname, '.pdf', '.svg')
+	local nfname = string.gsub(fname, '.' .. filetype, '.svg')
 	local success,img = pandoc.pipe("goseq", {"-o", nfname, cname}, code)
-	print(success)
-	os.execute('rsvg-convert -f pdf -o ' .. fname .. ' ' .. nfname)
+
+	if filetype ~= 'svg' then
+		rsvg(nfname, fname, filetype)
+	end
 	return success,img
 end
 
