@@ -118,7 +118,7 @@ Server->Client: The response
 asciitosvg 代码如下，图片见 [@fig:plot_a2s]。更多信息请参考 https://github.com/asciitosvg/asciitosvg。
 
 ~~~markdown
-```{#fig:asciitosvg .plot:a2s caption="A2s Demo"}
+```{#fig:plot_a2s .plot:a2s caption="A2s Demo"}
  .-------------------------.
  |                         |
  | .---.-. .-----. .-----. |
@@ -135,7 +135,7 @@ https://github.com/asciitosvg
 ```
 ~~~
 
-```{#fig:asciitosvg .plot:a2s caption="A2s Demo"}
+```{#fig:plot_a2s .plot:a2s caption="A2s Demo"}
  .-------------------------.
  |                         |
  | .---.-. .-----. .-----. |
