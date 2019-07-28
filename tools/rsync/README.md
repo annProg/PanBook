@@ -10,7 +10,7 @@ hosts allow = 172.17.0.0/255.255.0.0 172.18.0.0/255.255.0.0
 [ftp]
   path = /path
   read only = false
-  include = *.pdf
+  include = *.pdf *.epub
   exclude = *.*
   munge symlinks = yes
 ```
@@ -32,7 +32,7 @@ This directive appeared in version 1.1.15.
 ```
   disable_symlinks on;
 
-  location ~ ^/pub/.*.pdf {
+  location ~ ^/pub/.*.(pdf|epub) {
     root /somepath;
   }
   location / {
