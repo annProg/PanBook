@@ -97,7 +97,7 @@ ditaa 代码如下，图片见 [@fig:plot_ditaa]。
 	+-------------------------+
 ```	
 
-goseq 代码如下，图片见 [@fig:plot_goseq]。
+goseq 代码如下，图片见 [@fig:plot_goseq]。更多信息请参考：https://github.com/lmika/goseq。
 
 ~~~markdown
 ```{#fig:plot_goseq .plot:goseq caption="Goseq Demo"}
@@ -113,4 +113,40 @@ Client->Server: Make request
 Server->Database: Make database\nrequest
 Database->Server: The result
 Server->Client: The response
+```
+
+asciitosvg 代码如下，图片见 [@fig:plot_a2s]。更多信息请参考 https://github.com/asciitosvg/asciitosvg。
+
+~~~markdown
+```{#fig:asciitosvg .plot:a2s caption="A2s Demo"}
+ .-------------------------.
+ |                         |
+ | .---.-. .-----. .-----. |
+ | | .-. | +-->  | |  <--| |
+ | | '-' | |  <--| +-->  | |
+ | '---'-' '-----' '-----' |
+ |  ascii     2      svg   |
+ |                         |
+ '-------------------------'
+
+https://github.com/asciitosvg
+
+[1,0]: {"fill":"#88d","a2s:delref":1}
+```
+~~~
+
+```{#fig:asciitosvg .plot:a2s caption="A2s Demo"}
+ .-------------------------.
+ |                         |
+ | .---.-. .-----. .-----. |
+ | | .-. | +-->  | |  <--| |
+ | | '-' | |  <--| +-->  | |
+ | '---'-' '-----' '-----' |
+ |  ascii     2      svg   |
+ |                         |
+ '-------------------------'
+
+https://github.com/asciitosvg
+
+[1,0]: {"fill":"#88d","a2s:delref":1}
 ```

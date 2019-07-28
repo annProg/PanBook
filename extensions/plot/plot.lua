@@ -36,7 +36,12 @@ function rsvg(svg, output, format)
 		return false
 	end
 
-	return os.execute('rsvg-convert -f ' .. format .. ' -o ' .. output .. ' ' .. svg)
+	local r = os.execute('rsvg-convert -f ' .. format .. ' -o ' .. output .. ' ' .. svg)
+
+	if not r then
+		print("\n\27[31mPlot Warning: rsvg convert failed! -> " .. svg .. "\27[m")
+	end
+	return r
 end
 
 function getfiletype(engine)
@@ -105,9 +110,17 @@ function goseq(code, filetype, fname, cname)
 	local success,img = pandoc.pipe("goseq", {"-o", nfname, cname}, code)
 
 	if filetype ~= 'svg' then
-		if not rsvg(nfname, fname, filetype) then
-			print("\n\27[31mPlot Warning: goseq: rsvg convert failed!\27[m")
-		end
+		rsvg(nfname, fname, filetype)
+	end
+	return success,img
+end
+
+function a2s(code, filetype, fname, cname)
+	local nfname = string.gsub(fname, '.' .. filetype, '.svg')
+	local success,img = pandoc.pipe("a2s", {"-i", "-", "-o", nfname}, code)
+
+	if filetype ~= 'svg' then
+		rsvg(nfname, fname, filetype)
 	end
 	return success,img
 end
@@ -121,7 +134,8 @@ local validEngines = {
 	circo = circo, 
 	ditaa = ditaa, 
 	gnuplot = gnuplot,
-	goseq = goseq
+	goseq = goseq,
+	a2s = a2s
 }
 
 local renderDir = "_plot_render"
