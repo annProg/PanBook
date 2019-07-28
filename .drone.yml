@@ -16,6 +16,14 @@ steps:
   - docker build -t panbook:$TAG .
   - docker tag panbook:$TAG panbook:latest
 
+- name: doc-epub
+  image: panbook:latest
+  pull: if-not-exists
+  commands:
+  - DEBUG="-d" make epub
+  depends_on:
+  - build
+
 - name: doc-ctexbook
   image: panbook:latest
   pull: if-not-exists
@@ -86,6 +94,15 @@ steps:
   depends_on:
   - build
   - demo-slide
+
+- name: publish-epub
+  image: annprog/rsync:latest
+  pull: if-not-exists
+  settings:
+    src: build/*.epub
+    dest: 172.17.0.1::panbook
+  depends_on:
+  - doc-epub
 
 - name: publish-doc
   image: annprog/rsync:latest
