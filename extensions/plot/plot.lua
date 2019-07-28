@@ -35,7 +35,8 @@ function rsvg(svg, output, format)
 		print("\27[31mPlot Warning: librsvg not installed!\27[m")
 		return false
 	end
-	return os.execute('rsvg-convert -f' .. format .. ' -o ' .. output .. ' ' .. svg)
+
+	return os.execute('rsvg-convert -f ' .. format .. ' -o ' .. output .. ' ' .. svg)
 end
 
 function getfiletype(engine)
@@ -104,7 +105,9 @@ function goseq(code, filetype, fname, cname)
 	local success,img = pandoc.pipe("goseq", {"-o", nfname, cname}, code)
 
 	if filetype ~= 'svg' then
-		rsvg(nfname, fname, filetype)
+		if not rsvg(nfname, fname, filetype) then
+			print("\n\27[31mPlot Warning: goseq: rsvg convert failed!\27[m")
+		end
 	end
 	return success,img
 end
@@ -158,6 +161,7 @@ function CodeBlock(block)
 		-- Was ok?
 		if not success or not file_exists(fname) then
 			-- an error occured; img contains the error message
+			print("\n\27[31mPlot Error: " .. engine .. " error!\27[m")
 			io.stderr:write(tostring(img))
 			io.stderr:write('\n')
 			error 'Image conversion failed. Aborting.'
