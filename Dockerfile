@@ -20,6 +20,24 @@ RUN apk add --no-cache graphviz librsvg
 RUN curl -s -L https://github.com/pandoc-ebook/goseq/releases/download/v1.0/goseq-linux-amd64 -o /usr/local/bin/goseq && chmod +x /usr/local/bin/goseq
 RUN curl -s -L https://github.com/pandoc-ebook/asciitosvg/releases/download/v1.0/a2s-linux-amd64 -o /usr/local/bin/a2s && chmod +x /usr/local/bin/a2s
 RUN apk add --no-cache gnuplot
+# asymptote
+RUN apk add --no-cache gsl-dev freeglut-dev gc-dev fftw-dev \
+	ghostscript;true && \
+	rm -rf /var/cache/apk/*
+RUN apk add --no-cache --virtual .build-deps git build-base bison flex zlib-dev autoconf && \
+	cd /root && \
+	wget https://github.com/vectorgraphics/asymptote/archive/2.49.tar.gz && \
+	tar zxvf 2.44.tar.gz && \
+	cd asymptote-2.44 && \
+	./autogen.sh && \
+	./configure && \
+	make asy && \
+	make asy-keywords.el && \
+	make install-asy;true && \
+	cd ../ && rm -fr asymptote* *.tar.gz && \
+	ln -s /usr/local/bin/asy /bin/asy && \
+	rm -rf /var/cache/apk/* && \
+	apk del .build-deps
 
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata git
