@@ -6,3 +6,5 @@ epub:
 	pandoc --lua-filter plot.lua -F pandoc-crossref demo.md -o demo.epub
 tex:
 	pandoc --lua-filter plot.lua -F pandoc-crossref demo.md -t latex
+docx:
+	pandoc --lua-filter plot.lua -F pandoc-crossref demo.md -o demo.docx

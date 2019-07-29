@@ -125,6 +125,31 @@ function a2s(code, filetype, fname, cname)
 	return success,img
 end
 
+-- gnuplot font for png output.
+local gnuplotFont = "思源宋体"
+
+function Meta(meta)
+	gnuplotFont = meta.gnuplotFont or gnuplotFont
+end
+
+function gnuplot(code, filetype, fname, cname)
+	local ncode = string.gsub(code, '(set ter)', '#%1')
+	local ncode = string.gsub(ncode, '(se t)', "#%1")
+	local ncode = string.gsub(ncode, '(se o)', "#%1")
+	local ncode = string.gsub(ncode, '(set out)', "#%1")
+
+	writefile(cname, ncode)
+
+	local pngfont = ""
+	local term = filetype
+	if filetype == 'png' then
+		pngfont = "font '" .. gnuplotFont .. "'"
+		term = "pngcairo"
+	end
+	local success,img = pandoc.pipe("gnuplot", {"-e","set term " .. term .. " enhanced " .. pngfont .. ";set out '" .. fname .. "';", cname}, code)
+	return success,img
+end
+
 local validEngines = {
 	dot = dot, 
 	fdp = fdp, 
@@ -135,7 +160,8 @@ local validEngines = {
 	ditaa = ditaa, 
 	gnuplot = gnuplot,
 	goseq = goseq,
-	a2s = a2s
+	a2s = a2s,
+	gnuplot = gnuplot
 }
 
 local renderDir = "_plot_render"
@@ -215,3 +241,11 @@ function CodeBlock(block)
 		return pandoc.Para{ imgObj }
 	end	
 end
+
+-- Normally, pandoc will run the function in the built-in order Inlines ->
+-- Blocks -> Meta -> Pandoc. We instead want Meta -> Blocks. Thus, we must
+-- define our custom order:
+return {
+    {Meta = Meta},
+    {CodeBlock = CodeBlock},
+}

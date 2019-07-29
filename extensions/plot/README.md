@@ -23,3 +23,9 @@ digraph G {
 	Markdown -> LaTeX;
 }
 ```
+
+### 字体设置
+
+可以通过 metadata.yml 设置字体
+
+- gnuplotFont 默认 思源宋体
