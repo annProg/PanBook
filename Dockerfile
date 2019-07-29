@@ -27,8 +27,8 @@ RUN apk add --no-cache gsl-dev freeglut-dev gc-dev fftw-dev \
 RUN apk add --no-cache --virtual .build-deps git build-base bison flex zlib-dev autoconf && \
 	cd /root && \
 	wget https://github.com/vectorgraphics/asymptote/archive/2.49.tar.gz && \
-	tar zxvf 2.44.tar.gz && \
-	cd asymptote-2.44 && \
+	tar zxvf 2.49.tar.gz && \
+	cd asymptote-2.49 && \
 	./autogen.sh && \
 	./configure && \
 	make asy && \
