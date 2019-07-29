@@ -19,6 +19,7 @@ RUN curl -s -L https://github.com/akavel/ditaa/releases/download/g1.0.0/ditaa-li
 RUN apk add --no-cache graphviz librsvg
 RUN curl -s -L https://github.com/pandoc-ebook/goseq/releases/download/v1.0/goseq-linux-amd64 -o /usr/local/bin/goseq && chmod +x /usr/local/bin/goseq
 RUN curl -s -L https://github.com/pandoc-ebook/asciitosvg/releases/download/v1.0/a2s-linux-amd64 -o /usr/local/bin/a2s && chmod +x /usr/local/bin/a2s
+RUN apk add --no-cache gnuplot
 
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata git
