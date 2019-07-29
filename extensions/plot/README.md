@@ -9,6 +9,8 @@
 
 - dot,neato,fdp,sfdp,twopi,circo (from graphviz)
 - ditaa （建议使用 go 语言版本 https://github.com/akavel/ditaa/release）
+- goseq （https://github.com/pandoc-ebook/goseq/releases）
+- a2s （https://github.com/pandoc-ebook/asciitosvg/releases）
 - gnuplot
 
 ## 用法
@@ -24,8 +26,6 @@ digraph G {
 }
 ```
 
-### 字体设置
+### 中文支持
 
-可以通过 metadata.yml 设置字体
-
-- gnuplotFont 默认 思源宋体
+ditaa, a2s 不支持中文
