@@ -21,10 +21,9 @@ RUN curl -s -L https://github.com/pandoc-ebook/goseq/releases/download/v1.0/gose
 RUN curl -s -L https://github.com/pandoc-ebook/asciitosvg/releases/download/v1.0/a2s-linux-amd64 -o /usr/local/bin/a2s && chmod +x /usr/local/bin/a2s
 RUN apk add --no-cache gnuplot
 # asymptote
-RUN apk add --no-cache gsl-dev freeglut-dev gc-dev fftw-dev \
-	ghostscript;true && \
-	rm -rf /var/cache/apk/*
-RUN apk add --no-cache --virtual .build-deps git build-base bison flex zlib-dev autoconf && \
+RUN apk add --no-cache --virtual .build-deps \
+	build-base bison flex zlib-dev autoconf \
+	gsl-dev freeglut-dev gc-dev fftw-dev ghostscript && \
 	cd /root && \
 	wget https://github.com/vectorgraphics/asymptote/archive/2.49.tar.gz && \
 	tar zxvf 2.49.tar.gz && \
@@ -35,8 +34,16 @@ RUN apk add --no-cache --virtual .build-deps git build-base bison flex zlib-dev 
 	make asy-keywords.el && \
 	make install-asy;true && \
 	cd ../ && rm -fr asymptote* *.tar.gz && \
-	ln -s /usr/local/bin/asy /bin/asy && \
-	rm -rf /var/cache/apk/* && \
+	apk del .build-deps
+# dvisvgm need by asymptote
+RUN apk add --no-cache --virtual .build-deps \	
+	build-base autoconf automake libtool texlive-dev freetype-dev brotli-dev woff2-dev && \
+	cd /root && \
+	wget https://github.com/mgieseki/dvisvgm/archive/2.7.4.tar.gz && \
+	tar zxvf 2.7.4.tar.gz && \
+	cd dvisvgm-2.7.4 && \
+	./autogen.sh && ./configure && make && make install && \
+	cd ../ && rm -fr dvisvgm* *.tar.gz && \
 	apk del .build-deps
 
 ENV TIMEZONE Asia/Shanghai
