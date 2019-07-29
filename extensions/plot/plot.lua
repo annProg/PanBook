@@ -142,6 +142,11 @@ function gnuplot(code, filetype, fname, cname)
 	return success,img
 end
 
+function asy(code, filetype, fname, cname)
+	local success,img = pandoc.pipe("asy", {"-f", filetype, "-o", fname}, code)
+	return success,img
+end
+
 local validEngines = {
 	dot = dot, 
 	fdp = fdp, 
@@ -153,6 +158,7 @@ local validEngines = {
 	gnuplot = gnuplot,
 	goseq = goseq,
 	a2s = a2s,
+	asy = asy,
 	gnuplot = gnuplot
 }
 
