@@ -118,7 +118,7 @@ dot("$(2a,0)$",(2,0),NE);
 See[@fig:subfig].
 
 ::: {#fig:subfig}
-```{#fig:sub_asymptote .plot:asy caption="Asymptote Demo" width=40%}
+```{#fig:sub_asymptote .plot:asy caption="Asymptote Demo" width=40% subfig=1}
 import math;
 import graph;
 size(0,400);
@@ -148,7 +148,7 @@ draw("r",(0,0)--z,0.5*unit(z)*I,blue,Arrow,DotMargin);
 dot("$(a,0)$",(1,0),NE);
 dot("$(2a,0)$",(2,0),NE);
 ```
-```{#fig:sub1_asymptote .plot:asy caption="Asymptote Demo" width=40%}
+```{#fig:sub1_asymptote .plot:asy caption="Asymptote Demo" width=40% subfig=1}
 import math;
 import graph;
 size(0,400);
@@ -180,4 +180,8 @@ dot("$(2a,0)$",(2,0),NE);
 ```
 
 This Para is Caption
+:::
+
+::: {#test .help}
+Test
 :::

@@ -149,7 +149,7 @@ a   b   c
 
 `caption` 属性将转换为代码块标题。如果代码块同时有 ID 和 `caption`，将会被编号。
 
-~~~
+~~~markdown
 ```{#lst:code .haskell caption="Listing caption"}
 main :: IO ()
 main = putStrLn "Hello World!"

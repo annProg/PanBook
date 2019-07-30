@@ -167,11 +167,11 @@ if not os.execute("[ -d " .. renderDir .. " ]") then
 	os.execute("mkdir " .. renderDir)
 end
 
-function CodeBlock(block)
+function renderImg(block)
 	if block.attr.classes[1] == nil then
 		return block
 	end
-	
+
 	-- valid engine
 	local engine = string.gsub(block.attr.classes[1], 'plot:', '')
 	if not inTable(table.keys(validEngines), engine) then
@@ -242,6 +242,58 @@ function CodeBlock(block)
 		-- Finally, put the image inside an empty paragraph. By returning the
 		-- resulting paragraph object, the source code block gets replaced by
 		-- the image:
-		return pandoc.Para{ imgObj }
+		return imgObj
 	end	
+end
+
+function Div(block)
+	if not string.match(block.attr.identifier, '^fig:.*') then
+		return block
+	end
+
+	local nblock = pandoc.Div({})
+	nblock.attr.identifier = block.attr.identifier
+
+	local subfig = {}
+	local group = 1
+	for k,v in pairs(block.content) do
+		if v.t == "CodeBlock" and v.attributes["subfig"] ~= nil then
+			group = v.attributes["subfig"]
+			if subfig[group] == nil then
+				subfig[group] = {}
+			end
+			table.insert(subfig[group], renderImg(v))
+		else
+			table.insert(subfig[group], v)
+		end
+	end
+
+	for k,v in pairs(subfig) do
+		local imgGroup = pandoc.Para({})
+		local para = {}
+		for i,j in pairs(v) do
+			if j.t == "Image" then
+				table.insert(imgGroup.content, j)
+				table.insert(imgGroup.content, pandoc.SoftBreak())
+			else
+				table.insert(para, j)
+			end
+		end
+		table.insert(nblock.content, imgGroup)
+		for m,n in pairs(para) do
+			table.insert(nblock.content, n)
+		end
+	end
+	return nblock
+end
+
+function CodeBlock(block)
+	if block.attributes["subfig"] == nil then
+		local img = renderImg(block)
+		if img.t == "Image" then
+			return pandoc.Para{ img }
+		else
+			return img
+		end
+	end
 end

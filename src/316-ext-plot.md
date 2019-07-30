@@ -62,7 +62,7 @@ digraph {
 ```
 ~~~
 
-```{#fig:plot_dot .plot:dot caption="Dot 示例" width=70%}
+```{#fig:plot_dot .plot:dot caption="Dot 示例" width=30%}
 digraph {
   "A" [shape="circle"];
   "B" [shape="rectangle"];
@@ -91,7 +91,7 @@ ditaa 代码如下，图片见 [@fig:plot_ditaa]。
 ```		
 ~~~
 
-```{#fig:plot_ditaa .plot:ditaa caption="Ditaa 示例" width=70%}
+```{#fig:plot_ditaa .plot:ditaa caption="Ditaa 示例" width=50%}
 +--------+   +-------+    +-------+
 |        +=--+ ditaa +--> |       |
 |  Text  |   +-------+    |diagram|
@@ -143,7 +143,7 @@ https://github.com/asciitosvg
 ```
 ~~~
 
-```{#fig:plot_a2s .plot:a2s caption="A2s Demo" width=65%}
+```{#fig:plot_a2s .plot:a2s caption="A2s Demo" width=45%}
  .-------------------------.
  |                         |
  | .---.-. .-----. .-----. |
@@ -301,7 +301,7 @@ dot("$(2a,0)$",(2,0),NE);
 ### 子图
 代码如下，效果见 [@fig:plot_subfig]。
 
-~~~
+~~~markdown
 ::: {#fig:plot_subfig}
 ```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48%}
 set terminal pngcairo  background "#ffffff" enhanced font "arial,8" fontscale 1.0 size 540, 384 
