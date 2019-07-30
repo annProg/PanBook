@@ -303,7 +303,7 @@ dot("$(2a,0)$",(2,0),NE);
 
 ~~~markdown
 ::: {#fig:plot_subfig}
-```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48% subfig=1}
+```{#fig:sub_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48% subfig=1}
 set terminal pngcairo  background "#ffffff" enhanced font "arial,8" fontscale 1.0 size 540, 384 
 set output 'hidden2.1.png'
 set isosamples 25,25
@@ -321,7 +321,7 @@ f(x,y) = sin(-sqrt((x+5)**2+(y-7)**2)*0.5)
 set hidden3d front
 splot f(x,y) with pm3d, x*x-y*y with lines lc rgb "black"
 ```
-```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48% subfig=1}
+```{#fig:sub_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48% subfig=1}
 set datafile separator comma
 set title 'Browser popularity'
 set xlabel 'Year'
@@ -338,7 +338,7 @@ plot for [i=2:5] 'data/usage.csv' using i:xtic(1) title columnheader
 ~~~
 
 ::: {#fig:plot_subfig}
-```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48% subfig=1}
+```{#fig:sub_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48% subfig=1}
 set terminal pngcairo  background "#ffffff" enhanced font "arial,8" fontscale 1.0 size 540, 384 
 set output 'hidden2.1.png'
 set isosamples 25,25
@@ -356,7 +356,7 @@ f(x,y) = sin(-sqrt((x+5)**2+(y-7)**2)*0.5)
 set hidden3d front
 splot f(x,y) with pm3d, x*x-y*y with lines lc rgb "black"
 ```
-```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48% subfig=1}
+```{#fig:sub_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48% subfig=1}
 set datafile separator comma
 set title 'Browser popularity'
 set xlabel 'Year'
