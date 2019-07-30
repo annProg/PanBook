@@ -32,7 +32,7 @@
 
 - 为正常使用交叉引用，id 格式须符合 `fig:<label>`
 - 样式格式须为 `plot:<plot engine>`，比如 `plot:dot`
-- 其他样式需在 ·plot:<plot engine>` 之后
+- 其他样式需在 `plot:<plot engine>` 之后
 - 可像 图片语法（见 [@sec:image]） 一样设置 `key=val` 格式属性，比如 `width=50%`
 - 支持子图语法（见 [@sec:crossref]）
 
@@ -62,7 +62,7 @@ digraph {
 ```
 ~~~
 
-```{#fig:plot_dot .plot:dot caption="Dot 示例"}
+```{#fig:plot_dot .plot:dot caption="Dot 示例" width=70%}
 digraph {
   "A" [shape="circle"];
   "B" [shape="rectangle"];
@@ -91,7 +91,7 @@ ditaa 代码如下，图片见 [@fig:plot_ditaa]。
 ```		
 ~~~
 
-```{#fig:plot_ditaa .plot:ditaa caption="Ditaa 示例"}
+```{#fig:plot_ditaa .plot:ditaa caption="Ditaa 示例" width=70%}
 +--------+   +-------+    +-------+
 |        +=--+ ditaa +--> |       |
 |  Text  |   +-------+    |diagram|
@@ -107,7 +107,7 @@ ditaa 代码如下，图片见 [@fig:plot_ditaa]。
 goseq 代码如下，图片见 [@fig:plot_goseq]。更多信息请参考：https://github.com/lmika/goseq。
 
 ~~~markdown
-```{#fig:plot_goseq .plot:goseq caption="Goseq Demo" width=60%}
+```{#fig:plot_goseq .plot:goseq caption="Goseq Demo" width=50%}
 Client->Server: Make request
 Server->Database: Make database\nrequest
 Database->Server: The result
@@ -115,7 +115,7 @@ Server->Client: The response
 ```
 ~~~
 
-```{#fig:plot_goseq .plot:goseq caption="Goseq Demo" width=60%}
+```{#fig:plot_goseq .plot:goseq caption="Goseq Demo" width=50%}
 Client->Server: Make request
 Server->Database: Make database\nrequest
 Database->Server: The result
@@ -143,7 +143,7 @@ https://github.com/asciitosvg
 ```
 ~~~
 
-```{#fig:plot_a2s .plot:a2s caption="A2s Demo"}
+```{#fig:plot_a2s .plot:a2s caption="A2s Demo" width=65%}
  .-------------------------.
  |                         |
  | .---.-. .-----. .-----. |
@@ -183,7 +183,7 @@ splot f(x,y) with pm3d, x*x-y*y with lines lc rgb "black"
 ```
 ~~~
 
-```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例"}
+```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=70%}
 set terminal pngcairo  background "#ffffff" enhanced font "arial,8" fontscale 1.0 size 540, 384 
 set output 'hidden2.1.png'
 set isosamples 25,25
@@ -218,7 +218,7 @@ plot for [i=2:5] 'data/usage.csv' using i:xtic(1) title columnheader
 ```
 ~~~
 
-```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图"}
+```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=70%}
 set datafile separator comma
 set title 'Browser popularity'
 set xlabel 'Year'
@@ -303,7 +303,7 @@ dot("$(2a,0)$",(2,0),NE);
 
 ~~~
 ::: {#fig:plot_subfig}
-```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=40%}
+```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48%}
 set terminal pngcairo  background "#ffffff" enhanced font "arial,8" fontscale 1.0 size 540, 384 
 set output 'hidden2.1.png'
 set isosamples 25,25
@@ -321,7 +321,7 @@ f(x,y) = sin(-sqrt((x+5)**2+(y-7)**2)*0.5)
 set hidden3d front
 splot f(x,y) with pm3d, x*x-y*y with lines lc rgb "black"
 ```
-```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=40%}
+```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48%}
 set datafile separator comma
 set title 'Browser popularity'
 set xlabel 'Year'
@@ -338,7 +338,7 @@ plot for [i=2:5] 'data/usage.csv' using i:xtic(1) title columnheader
 ~~~
 
 ::: {#fig:plot_subfig}
-```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=40%}
+```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48%}
 set terminal pngcairo  background "#ffffff" enhanced font "arial,8" fontscale 1.0 size 540, 384 
 set output 'hidden2.1.png'
 set isosamples 25,25
@@ -356,7 +356,7 @@ f(x,y) = sin(-sqrt((x+5)**2+(y-7)**2)*0.5)
 set hidden3d front
 splot f(x,y) with pm3d, x*x-y*y with lines lc rgb "black"
 ```
-```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=40%}
+```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48%}
 set datafile separator comma
 set title 'Browser popularity'
 set xlabel 'Year'
