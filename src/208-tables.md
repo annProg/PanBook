@@ -232,7 +232,7 @@ orange|3.09
 如果管线表格包含了比 column 定义的宽度（参见 [--columns](https://pandoc.org/MANUAL.html#option--columns)）还要宽的行，表格宽度将会被设置为文本宽度，并且单元格会自动换行，并且各列的相对宽度由表头的连接线数量决定。（比如，`---|-` 将会生成第一列占文本宽度 `3/4`，第二列占文本宽度 `1/4` 的表格） 另一方面，如果没有比列宽更宽的行，那么单元格内容将不会被换行，并且单元格将根据其内容大小进行调整。自动换行效果见 [@tbl:table_wrap]。
 
 fruit| price
------|-----:
+-----|-:
 apple apple apple apple apple apple apple apple apple apple apple apple apple apple apple apple apple apple apple |2.05
 pear|1.37
 orange|3.09

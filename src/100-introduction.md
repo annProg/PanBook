@@ -49,7 +49,7 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 风格（style），也可以理解为模板（为了和 pandoc 模板区分），是预定义的文档样式。通过 `--style` 参数指定，缺省时，会使用默认风格，列表如 [@tbl:defautl_style]。
 
 book  | thesis | article | slide | cv
-------|--------|---------|-------|------
+--|--|--|--|----
 ctexbook|thesis|ctexart  |metropolis|moderncv classic
 
 : 各模块默认风格 {#tbl:defautl_style}
