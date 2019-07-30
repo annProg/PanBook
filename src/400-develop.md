@@ -54,10 +54,20 @@ declare -A _MF        # parse metadata.yml
 declare -A _H         # 帮助信息
 ```
 
-## 模块
+## Pandoc 开发基础
 
-## 风格
+可以有 [@tbl:pandoc_custom] 中所示几种方式来自定义 Pandoc 的行为。
+
+方式 | 用法 | 场景 
+:---|:-----|:-----
+模板|`--template`参数指定 | 自定义文档模板
+
+## 模块开发
+
+以 book 模块代码为例，讲解模块开发流程。
+
+## 风格开发
+以简历 moderncv 风格为例，讲解风格开发流程。
 
 ## 扩展
-
-## Pandoc 模板
+以 wrap 扩展为例，讲解扩展开发流程。
