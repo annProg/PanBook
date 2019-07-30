@@ -34,7 +34,7 @@
 - 样式格式须为 `plot:<plot engine>`，比如 `plot:dot`
 - 其他样式需在 `plot:<plot engine>` 之后
 - 可像 图片语法（见 [@sec:image]） 一样设置 `key=val` 格式属性，比如 `width=50%`
-- 支持子图语法（见 [@sec:crossref]）
+- 支持子图语法（见 [@sec:crossref]），区别是 图片代码块 必须有 `subfig` 属性，格式 `subfig=group number`，分组数字相同的将在同一行显示。
 
 ~~~markdown
 ```{#fig:<label> .plot:<engine> .class caption="<caption>" key=val}
@@ -303,7 +303,7 @@ dot("$(2a,0)$",(2,0),NE);
 
 ~~~markdown
 ::: {#fig:plot_subfig}
-```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48%}
+```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48% subfig=1}
 set terminal pngcairo  background "#ffffff" enhanced font "arial,8" fontscale 1.0 size 540, 384 
 set output 'hidden2.1.png'
 set isosamples 25,25
@@ -321,7 +321,7 @@ f(x,y) = sin(-sqrt((x+5)**2+(y-7)**2)*0.5)
 set hidden3d front
 splot f(x,y) with pm3d, x*x-y*y with lines lc rgb "black"
 ```
-```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48%}
+```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48% subfig=1}
 set datafile separator comma
 set title 'Browser popularity'
 set xlabel 'Year'
@@ -338,7 +338,7 @@ plot for [i=2:5] 'data/usage.csv' using i:xtic(1) title columnheader
 ~~~
 
 ::: {#fig:plot_subfig}
-```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48%}
+```{#fig:plot_gnuplot .plot:gnuplot caption="gnuplot 示例" width=48% subfig=1}
 set terminal pngcairo  background "#ffffff" enhanced font "arial,8" fontscale 1.0 size 540, 384 
 set output 'hidden2.1.png'
 set isosamples 25,25
@@ -356,7 +356,7 @@ f(x,y) = sin(-sqrt((x+5)**2+(y-7)**2)*0.5)
 set hidden3d front
 splot f(x,y) with pm3d, x*x-y*y with lines lc rgb "black"
 ```
-```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48%}
+```{#fig:plot_gnuplot2 .plot:gnuplot caption="gnuplot 绘制数据图" width=48% subfig=1}
 set datafile separator comma
 set title 'Browser popularity'
 set xlabel 'Year'
