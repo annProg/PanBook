@@ -256,6 +256,7 @@ function Div(block)
 
 	local subfig = {}
 	local group = 1
+	subfig[group] = {}
 	for k,v in pairs(block.content) do
 		if v.t == "CodeBlock" and v.attributes["subfig"] ~= nil then
 			group = v.attributes["subfig"]
