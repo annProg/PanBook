@@ -225,6 +225,12 @@ function CodeBlock(block)
 		-- figure i.e. attach a caption to the image.
 		local imgObj = pandoc.Image(caption, fname, enableCaption)
 		imgObj.attr.identifier = block.attr.identifier
+
+		-- 支持 class 和 key=val 属性
+		table.remove(block.attr.classes, 1)
+		imgObj.attr.classes = block.attr.classes
+		imgObj.attributes = block.attributes
+
 		-- Now, transfer the attribute "name" from the code block to the new
 		-- image block. It might gets used by the figure numbering lua filter.
 		-- If the figure numbering gets not used, this additional attribute
