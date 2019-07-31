@@ -34,7 +34,7 @@
 - 样式格式须为 `plot:<plot engine>`，比如 `plot:dot`
 - 其他样式需在 `plot:<plot engine>` 之后
 - 可像 图片语法（见 [@sec:image]） 一样设置 `key=val` 格式属性，比如 `width=50%`
-- 支持子图语法（见 [@sec:crossref]），区别是 图片代码块 必须有 `subfig` 属性，格式 `subfig=group number`，分组数字相同的将在同一行显示。
+- 可以使用 pandoc-crossref 的子图语法（见 [@sec:crossref]），区别是 图片代码块 必须有 `subfig` 属性来给子图分组，格式 `subfig=group number`，分组数字相同的将在同一行显示。
 
 ~~~markdown
 ```{#fig:<label> .plot:<engine> .class caption="<caption>" key=val}

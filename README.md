@@ -60,7 +60,7 @@ $ panbook -h
 然后编写 `src` 目录下的 `Markdown` 源文件。图片放在 `src/images` 下。
 
 ## 贡献指南
-欢迎提交`Issue`和`Pull Request`。`extensions`, `styles`开发流程请参考 [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) 第七章。
+欢迎提交`Issue`和`Pull Request`。`extensions`, `styles`开发流程请参考 [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) 第四章。
 
 ## 演示
 
