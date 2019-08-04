@@ -1,7 +1,7 @@
 all: pdf epub
 
 pdf:
-	pandoc --lua-filter plot.lua -F pandoc-crossref demo.md -o demo.pdf
+	pandoc --lua-filter plot.lua -F pandoc-crossref demo.md -o demo.pdf --pdf-engine=xelatex
 epub:
 	pandoc --lua-filter plot.lua -F pandoc-crossref demo.md -o demo.epub
 tex:

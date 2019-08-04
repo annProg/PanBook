@@ -125,6 +125,17 @@ function a2s(code, filetype, fname, cname)
 	return success,img
 end
 
+function abcm2ps(code, filetype, fname, cname)
+	local nfname = string.gsub(fname, '.' .. filetype, '')
+	local success,img = pandoc.pipe("abcm2ps", {"-", "-E", "-O", nfname}, code)
+	os.execute("epspdf " .. nfname .. "001.eps " ..  nfname .. ".pdf")
+	if filetype ~= 'pdf' then
+		os.execute("pdftocairo -" .. filetype .. " " .. nfname .. ".pdf " .. nfname .. "." .. filetype)
+	end
+
+	return success,img
+end
+
 function gnuplot(code, filetype, fname, cname)
 	local ncode = string.gsub(code, '(set ter)', '#%1')
 	local ncode = string.gsub(ncode, '(se t)', "#%1")
@@ -147,6 +158,15 @@ function asy(code, filetype, fname, cname)
 	return success,img
 end
 
+-- 处理特殊（简写）的engine
+function enginePath(engine)
+	if engine == "abc" then
+		return "abcm2ps"
+	else
+		return engine
+	end
+end
+
 local validEngines = {
 	dot = dot, 
 	fdp = fdp, 
@@ -159,6 +179,7 @@ local validEngines = {
 	goseq = goseq,
 	a2s = a2s,
 	asy = asy,
+	abc = abcm2ps,
 	gnuplot = gnuplot
 }
 
@@ -178,9 +199,9 @@ function renderImg(block)
 		return block
 	end
 
-	if not which(engine) then
-		block.text = "! Note: " .. engine .. " not installed ! So I did not render this code\n\n" .. block.text
-		print("\27[31mPlot Warning: " .. engine .. " not installed!\27[m")
+	if not which(enginePath(engine)) then
+		block.text = "! Note: " .. enginePath(engine) .. " not installed ! So I did not render this code\n\n" .. block.text
+		print("\27[31mPlot Warning: " .. enginePath(engine) .. " not installed!\27[m")
 		return block
 	end
 
