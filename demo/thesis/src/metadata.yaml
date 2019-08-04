@@ -10,9 +10,6 @@ date: \today     # 日期
 lof: false        # 是否生成插图列表页
 lot: false        # 是否生成表格列表页
 # 不引用，但是显示在参考文献列表里。通配符 @* 表示全部在列表里显示
-header-includes:
-  - \usepackage{zhlipsum}
-  - \usepackage{lipsum}
 nocite: |
   @pandocManual,@foz
 ...
