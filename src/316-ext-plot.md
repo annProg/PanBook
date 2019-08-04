@@ -298,6 +298,35 @@ dot("$(a,0)$",(1,0),NE);
 dot("$(2a,0)$",(2,0),NE);
 ```
 
+### 乐谱（abc notation）
+示例如下，效果见 [@fig:plot_abc]。
+
+~~~markdown
+```{#fig:plot_abc .plot:abc caption="ABC notation"}
+X:1
+T:Speed the Plough
+M:4/4
+C:Trad.
+K:G
+|:GABc dedB|dedB dedB|c2ec B2dB|c2A2 A2BA|
+  GABc dedB|dedB dedB|c2ec B2dB|A2F2 G4:|
+|:g2gf gdBd|g2f2 e2d2|c2ec B2dB|c2A2 A2df|
+  g2gf g2Bd|g2f2 e2d2|c2ec B2dB|A2F2 G4:|
+```
+~~~
+
+```{#fig:plot_abc .plot:abc caption="ABC notation"}
+X:1
+T:Speed the Plough
+M:4/4
+C:Trad.
+K:G
+|:GABc dedB|dedB dedB|c2ec B2dB|c2A2 A2BA|
+  GABc dedB|dedB dedB|c2ec B2dB|A2F2 G4:|
+|:g2gf gdBd|g2f2 e2d2|c2ec B2dB|c2A2 A2df|
+  g2gf g2Bd|g2f2 e2d2|c2ec B2dB|A2F2 G4:|
+```
+
 ### 子图
 代码如下，效果见 [@fig:plot_subfig]。
 

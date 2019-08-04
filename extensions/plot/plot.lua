@@ -127,7 +127,7 @@ end
 
 function abcm2ps(code, filetype, fname, cname)
 	local nfname = string.gsub(fname, '.' .. filetype, '')
-	local success,img = pandoc.pipe("abcm2ps", {"-", "-E", "-O", nfname}, code)
+	local success,img = pandoc.pipe("abcm2ps", {"-", "-c", "-S", "-E", "-O", nfname}, code)
 	os.execute("epspdf " .. nfname .. "001.eps " ..  nfname .. ".pdf")
 	if filetype ~= 'pdf' then
 		os.execute("pdftocairo -" .. filetype .. " " .. nfname .. ".pdf " .. nfname .. "." .. filetype)
