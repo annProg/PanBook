@@ -25,6 +25,7 @@
 - goseq （https://github.com/pandoc-ebook/goseq/releases）
 - a2s （https://github.com/pandoc-ebook/asciitosvg/releases）
 - gnuplot
+- abc （安装 abcm2ps，可以在 http://abcplus.sourceforge.net/ 下载 windows 和 linux 的二进制文件）
 
 ### 用法
 
