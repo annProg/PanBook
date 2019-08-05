@@ -194,6 +194,9 @@ function renderImg(block)
 	end
 
 	-- valid engine
+	if not string.match(block.attr.classes[1], '^plot:.*') then
+		return block
+	end
 	local engine = string.gsub(block.attr.classes[1], 'plot:', '')
 	if not inTable(table.keys(validEngines), engine) then
 		return block
