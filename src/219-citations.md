@@ -88,7 +88,7 @@ references:
 
 （`pandoc-citeproc --bib2yaml` 可以从支持的格式之一的参考文献文件中生成 `references` 字段格式。）
 
-可以使用 [Zotero 样式库](https://www.zotero.org/styles) 中列出的 [引文样式语言](http://citationstyles.org/) 支持的任何样式对引用和引用进行格式化。这些文件是使用 `--csl` 选项或 `csl` 元数据字段指定的。默认情况下，pandoc-citeproc 将使用样式为 author-date 格式的 [Chicago Manual of Style](http://chicagomanualofstyle.org/)。CSL 项目提供了关于 [查找和编辑样式](https://citationstyles.org/authors/) 的进一步信息。
+可以使用 [Zotero 样式库](https://www.zotero.org/styles) 中列出的 [引文样式语言](http://citationstyles.org/) 支持的任何样式对引文和引用进行格式化。这些文件是使用 `--csl` 选项或 `csl` 元数据字段指定的。默认情况下，pandoc-citeproc 将使用样式为 author-date 格式的 [Chicago Manual of Style](http://chicagomanualofstyle.org/)。CSL 项目提供了关于 [查找和编辑样式](https://citationstyles.org/authors/) 的进一步信息。
 
 要使引用超链接到相应的参考文献条目，请在 YAML 元数据区块中设置 `link-citations: true`。
 
