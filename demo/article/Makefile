@@ -1,6 +1,6 @@
 DEBUG ?= 
 SERVER ?= panbook.annhe.net
-CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源黑体,ItalicFont=FandolKai,SmallCapsFont=思源黑体
+CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=思源宋体,ItalicFont=FandolKai,SmallCapsFont=思源黑体
 
 all: build clean
 build: ctexart elegantnote elegantpaper
