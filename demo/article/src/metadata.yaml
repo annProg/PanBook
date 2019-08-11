@@ -1,10 +1,12 @@
 ---
-title: 文章标题
+title: 基于 Markdown 的论文写作方法
 author:          # 作者（数组）
   - 作者
+  - 作者2
 date: \today     # 日期
 lof: false        # 是否生成插图列表页
 lot: false        # 是否生成表格列表页
+toc: false
 homepage: https://github.com/annProg/PanBook
 nocite: |
   @pandocManual,@foz

@@ -230,10 +230,6 @@ Blah blah [@smith04; @doe99].
 
 更多信息请参考 PanBook 使用手册 [@panbook]。
 
-# 后记 {-}
-
-参考文献不要放到`backmatter.md`中。用`{-}`表示标题不编号。
-
 ::: {#refs}
 # 参考文献 {-}
 :::
