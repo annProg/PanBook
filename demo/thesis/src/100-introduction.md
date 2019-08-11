@@ -10,16 +10,12 @@
 - 安装 [Pandoc](https://pandoc.org/installing.html) 2.7.3 或以上版本
 - 下载 [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本安装到 path 目录下（建议和 Pandoc 放同一目录）
 
-然后下载 PanBook。打开终端（ msys2 ），假设工作目录为 /d/dev ，执行：
+然后下载 PanBook。打开终端（ msys2 ），假设工作目录为 /d/dev ，克隆代码并设置环境变量：
 
 ```bash
 $ cd /d/dev
 $ git clone https://github.com/annProg/PanBook
-```
-
-完成软件安装之后，需要设置环境变量，将 PanBook，TeXLive 及 Pandoc 加入环境变量：
-
-```bash
+# 将 PanBook，TeXLive 及 Pandoc 加入环境变量：
 $ tail -n 1 ~/.bashrc
 export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```
@@ -28,18 +24,18 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 
 ```{#lst:panbookdirs .bash caption="PanBook 目录规范"}
 .
-├── templates                               # 自定义模板
-├── styles                                  # 自定义风格
-├── extensions                              # 自定义扩展
-├── fonts                                   # 自定义字体
-├── build                                   # 构建目录
-├── src                                     # Markdown 源码目录
-    └── images                              # 源码涉及插图目录
-    └── metadata.yaml                       # 书籍元数据文件
-    └── frontmatter.md                      # 前言文件
-    └── backmatter.md                       # 后记文件
-    └── 100-chapter1.md                     # 正文，命名须保证能按正确章节顺序列出
-    └── 200-chapter2.md            
+|-- extensions              # 自定义扩展
+|-- fonts                   # 自定义字体
+|-- src                     # Markdown 源码目录
+|   |-- images              # 插图目录
+|   |-- metadata.yaml       # 书籍元数据文件
+|   |-- frontmatter.md      # 前言文件
+|   |-- backmatter.md       # 后记文件
+|   |-- 100-chapter1.md     # 正文，命名须保证能按正确章节顺序列出
+|   `-- 200-chapter2.md
+|-- styles                   # 自定义风格
+|-- templates                # 自定义模板 
+`-- build                    # 电子书构建目录
 ```
 
 ## 指定风格（style）
@@ -67,13 +63,7 @@ demo|thesis|完成
 : 支持的论文模板 {#tbl:thesis_styles}
 
 ## 调试模式
-加 `-d` 选项，会输出详细的 `latexmk` 编译过程
-
-```bash
-$ panbook book -d
-```
-
-加 `--trace` 选项，可以输出更多的调试信息。
+加 `-d` 选项，会输出详细的 `latexmk` 编译过程，加 `--trace` 选项，可以输出更多的调试信息。
 
 ## 注意事项 {#sec:note}
 
