@@ -15,7 +15,7 @@
 ```bash
 $ cd /d/dev
 $ git clone https://github.com/annProg/PanBook
-# 将 PanBook，TeXLive 及 Pandoc 加入环境变量：
+# 将 PanBook，TeXLive 及 Pandoc 加入环境变量
 $ tail -n 1 ~/.bashrc
 export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```

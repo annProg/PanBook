@@ -18,7 +18,7 @@
 ```bash
 $ cd /d/dev
 $ git clone https://github.com/annProg/PanBook
-# 将 PanBook，TeXLive 及 Pandoc 加入环境变量：
+# 将 PanBook，TeXLive 及 Pandoc 加入环境变量
 $ tail -n 1 ~/.bashrc
 export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppData/Local/Pandoc
 ```
@@ -57,12 +57,13 @@ ctexbook
 elegantbook
 epub
 html5
-# 指定风格 elegantbook 来编译：
+# 指定风格 elegantbook 来编译
 $ panbook book --style=elegantbook
 ```
 
 ### 调试模式
-加 `-d` 选项，会输出详细的 `latexmk` 编译过程，加 `--trace` 选项，可以输出更多的调试信息。
+加 `-d` 选项，会输出详细的 `latexmk` 编译过程，加 `--trace` 选项，可以输出更多的调试信息。加 `--part=源文件名` 只编译某个 Markdown 源文件，方便调试。
+通过配置 VS Code Tasks，使用 `--part` 选项，可实现使用快捷键（ ctrl + shift + b ）编译。
 
 ### 注意事项 {#sec:note}
 
@@ -120,10 +121,6 @@ Pangu-Markdown                  中英文自动加空格
 }  
 ```
 
-::: {.help caption="使用部分编译调试代码"}
-通过配置 VS Code Tasks，使用 PanBook 部分编译参数 `--part` ，实现快捷键（ ctrl + shift + b ）编译当前 Markdown 源文件。
-:::
-
 使用用户代码片段，可以定义一些快捷输入，例如以下代码定义了快速输入 columns 环境，代码块以及 Div 环境。`$`符号表示需要用户输入的内容，可使用 TAB 键跳转：
 
 ```.json
@@ -161,9 +158,9 @@ Pangu-Markdown                  中英文自动加空格
 	}
 ```
 
-::: {.help caption="VS Code 使用技巧"}
+VS Code 使用技巧：
+
 - 通过 文件 -> 首选项 -> 用户代码片段，选择 Markdown ，然后编辑 markdown.json 来定义代码片段
 - snippetSuggestions 设置为 top，可以优先显示代码片段
 - tabCompletion 设置为 on 使用 TAB 自动补全
 - pangu.auto_format_on_save 设置为 on 在保存时自动给中英文加空格
-:::
