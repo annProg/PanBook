@@ -9,7 +9,7 @@ OWNER ?= annProg
 REPO ?= PanBook
 TAG ?= $(shell git rev-parse --short HEAD)
 DIVISION = --top-level-division=chapter
-CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=Source Han Serif SC Heavy,ItalicFont=FandolKai,SmallCapsFont=思源黑体
+CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=Source\ Han\ Serif\ SC\ Heavy,ItalicFont=FandolKai,SmallCapsFont=思源黑体
 
 all: ctex ctex6in elegantbook epub online
 book: ctex ctex6in elegantbook
