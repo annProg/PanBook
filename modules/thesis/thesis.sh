@@ -35,7 +35,7 @@ function func_thesis() {
 	pandoc ${_G[frontmatter]} -o frontmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[ff]}
 	pandoc ${_G[backmatter]} -o backmatter.tex ${_G[highlight]} --top-level-division=${_P[top-level-division]} ${_G[ff]}
 
-	pandoc ${_G[pandoc-param]}
+	eval ${_G[pandoc-param]}
 
 	TEX_OUTPUT=${_G[ofile]}.${_G[t]}
 

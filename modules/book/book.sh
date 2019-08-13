@@ -46,7 +46,7 @@ function func_book() {
 	fi
 
 	
-	pandoc ${_G[pandoc-param]}
+	eval ${_G[pandoc-param]}
 
 	# 非tex时不用xelatex编译
 	if [ ${_G[t]} == "tex" ];then

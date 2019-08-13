@@ -147,10 +147,10 @@ do
 		_G[trace]=true
 		shift;;
 	-V)
-		setV $2
+		setV "$2"
 		shift 2;;
 	-M)
-		setM $2
+		setM "$2"
 		shift 2;;
 	-G)
 		setG $2

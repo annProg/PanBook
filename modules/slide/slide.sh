@@ -28,6 +28,6 @@ function func_slide() {
 
 	_P[to]=beamer
 	getPandocParam
-	pandoc ${_G[pandoc-param]}
+	eval ${_G[pandoc-param]}
 	compileStatus ${_G[function]}
 }

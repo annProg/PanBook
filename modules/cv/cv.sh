@@ -26,7 +26,7 @@ function func_cv() {
 
 	getPandocParam
 	getXeLaTeXParam
-	pandoc ${_G[pandoc-param]}
+	eval ${_G[pandoc-param]}
 	
 	# 删除空行，空行会被认为是分段，处理很麻烦。干脆全删掉。一般简历中需要用分段的场景是求职信，
 	# 转求职信的时候用\par显式分段

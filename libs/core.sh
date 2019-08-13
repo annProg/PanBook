@@ -211,15 +211,15 @@ function _checkKey() {
 }
 
 function setV() {
-	vKey="`echo $1 |awk -F':' '{print $1}'`"
+	vKey="`echo "$1" |awk -F':' '{print $1}'`"
 	vKey=`_checkKey $vKey`
-	_V[$vKey]="`echo $1|awk -F':' '{print $2}'`"
+	_V[$vKey]="`echo "$1"|awk -F':' '{print $2}'`"
 }
 
 function setM() {
-	mKey="`echo $1 |awk -F':' '{print $1}'`"
+	mKey="`echo "$1" |awk -F':' '{print $1}'`"
 	mKey=`_checkKey $mKey`
-	_M[$mKey]="`echo $1|awk -F':' '{print $2}'`"
+	_M[$mKey]="`echo "$1"|awk -F':' '{print $2}'`"
 }
 
 # 只允许重置 ext- 开头的全局变量
@@ -245,13 +245,13 @@ function setP() {
 
 function getV() {
 	for k in ${!_V[@]};do
-		_G[v]="${_G[v]} -V `echo $k |sed 's/__.*//g'`:${_V[$k]}"
+		_G[v]="${_G[v]} -V `echo $k |sed 's/__.*//g'`:`echo ${_V[$k]} |sed 's/ /\\\ /g'`"
 	done
 }
 
 function getM() {
 	for k in ${!_M[@]};do
-		_G[m]="${_G[m]} -M `echo $k |sed 's/__.*//g'`:${_M[$k]}"
+		_G[m]="${_G[m]} -M `echo $k |sed 's/__.*//g'`:`echo ${_M[$k]} |sed 's/ /\\\ /g'`"
 	done
 }
 
@@ -299,7 +299,7 @@ function getPandocParam() {
 	getP
 	getF
 	heapSize
-	_G[pandoc-param]="${_G[heapsize]} ${_G[f0]} ${_G[crossref]} $crossrefYaml ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
+	_G[pandoc-param]="pandoc ${_G[heapsize]} ${_G[f0]} ${_G[crossref]} $crossrefYaml ${_G[citeproc]} ${_G[f]} ${_G[p]} ${_G[v]} ${_G[m]} ${_G[body]} -o ${_G[ofile]}.${_G[t]}"
 }
 
 function getXeLaTeXParam() {
