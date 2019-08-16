@@ -42,4 +42,7 @@ upload:
 online:
 	scp -P $(PORT) build/$(REPO)-book-*.pdf $(USER)@$(SERVER):$(DIR)
 	scp -P $(PORT) build/$(REPO).epub $(USER)@$(SERVER):$(DIR)
+
+aliyun:
+	cat Dockerfile |sed '/^FROM alpine/a\RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories' > Dockerfile.aliyun
 	
