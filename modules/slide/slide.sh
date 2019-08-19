@@ -6,6 +6,7 @@ function func_slide() {
 	initBody slide.md
 	initBib
 	initMakefile
+	initMetadataFile
 
 	unset _P[metadata-file]
 	getArrayVar _G style metropolis
