@@ -8,7 +8,6 @@ function func_slide() {
 	initMakefile
 	initMetadataFile
 
-	unset _P[metadata-file]
 	getArrayVar _G style metropolis
 	getArrayVar _V documentclass ctexbeamer
 	getArrayVar _V classoption "aspectratio=169"
