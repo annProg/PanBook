@@ -1,4 +1,4 @@
-% beamerthemeHeavenlyClouds.sty v1.0 2018/05/15
+% beamerthemeHeavenlyClouds.sty v1.1 2019/07/24
 % by LianTze Lim (liantze@gmail.com)
 \ProvidesPackage{beamerthemeHeavenlyClouds}
 
@@ -87,7 +87,30 @@
 
 \newlength{\clouds@frametitle@rawwidth}%
 \newlength{\clouds@frametitle@actualwidth}%
+\def\clouds@progressmarker{}
+\newcommand{\simpleprogressmarker}{%
+  \renewcommand{\clouds@progressmarker}{%
+  \clip (-1.25em,2em) rectangle (\paperwidth,0pt);
+  \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt);
+  }%
+}
+\newbox{\clouds@shenma}
+\savebox{\clouds@shenma}{%
+  \usebeamercolor[fg]{headline}%
+  \tikzset{pgfornamentstyle/.style={line width=0pt}}%
+  \pgfornamenthan[width=2.5em]{78}%
+}
+\newcommand{\shenmaprogressmarker}{%
+  \renewcommand{\clouds@progressmarker}{%
+  \clip (-1.3em,4em) rectangle (\paperwidth,0pt);
+  \node[anchor=south,inner sep=1pt] at (\clouds@progressinheadfoot,1.25em)
+  {\usebox{\clouds@shenma}};
+  }
+}%
+
+
 \AtBeginDocument{%
+  \shenmaprogressmarker
   \newbox{\clouds@title@deco}
   \savebox{\clouds@title@deco}{%
     \usebeamercolor{headline}%
@@ -125,14 +148,15 @@
     with { \node[transform shape]{\usebox{\clouds@smallhuiwen}}; }} ]
   \path [postaction={decorate}] (0,0) -- (\paperwidth,0);
   \draw[headline.fg!50,line width=0.6pt] (-1.25em,1.25em) -- (\paperwidth,1.25em);
-  \clip (-1.25em,2em) rectangle (\paperwidth,0pt);
-  \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt);
+  \clouds@progressmarker
+  % \fill[headline.fg] (\clouds@progressinheadfoot,1.25em) circle (2pt); %<-- TODO
   \end{tikzpicture}
   }
 }
 
 \AtBeginSection{\begin{frame}\sectionpage\end{frame}}
-%\renewcommand{\thesection}{\chinese{section}}
+\renewcommand{\thesection}{\chinese{section}}
+\newlength{\cloud@secname@height}
 \setbeamertemplate{section page}{
 \usebeamercolor{section title}\usebeamercolor{section name}
 \newbox{\clouds@section@circle@elem}
@@ -140,7 +164,6 @@
   \usebeamercolor{headline}%
   \pgfornamenthan[width=1.0471cm,color=headline.fg!80!black]{59}%
 }
-\newlength{\cloud@secname@height}
 \settototalheight{\cloud@secname@height}{\usebeamerfont{section name}节}
 \begin{tikzpicture}
   \begin{scope}[decoration={markings, mark=between positions 0 and 1 step 1.0471cm
