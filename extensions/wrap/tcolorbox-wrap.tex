@@ -75,3 +75,8 @@
   title={\helpTitleFa#1~~},  % Fixed title
   attach title, % Move the title into the box
 }
+
+\usepackage{changepage}
+\newenvironment{solu}[1]{2em}
+	{\begin{adjustwidth}{#1}{0.5em}}
+	{\end{adjustwidth}}

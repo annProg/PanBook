@@ -19,3 +19,8 @@
 \newenvironment{help}[1][\helpTitle]
 	{\vspace{0.3cm}\begin{bclogo}[logo=\bcnote, couleurBarre=helpBorder, noborder=true, couleur=colbackbclogo, arrondi=0.1]{~#1}}
 	{\end{bclogo}}
+
+\usepackage{changepage}
+\newenvironment{solu}[1][2em]
+	{\begin{adjustwidth}{#1}{0.5em}}
+	{\end{adjustwidth}}

@@ -2,7 +2,7 @@
 table_print = require('table_print')
 table.print = table_print.print_r
 --]]
-local wrapClass = {'info', 'tip', 'warn', 'alert', 'help', 'introduction', 'problemset'}
+local wrapClass = {'info', 'tip', 'warn', 'alert', 'help', 'introduction', 'problemset', 'solu'}
 
 function inTable(t, val)
 	for _, v in pairs(t) do
