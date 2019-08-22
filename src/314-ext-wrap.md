@@ -47,6 +47,10 @@ introduction（章节内容提要） 和 problemset（习题） 环境必须使�
 ::: {.problemset}
 - Problemset
 :::
+
+::: {.solu}
+解题环境，默认整体缩进 2em，可通过 caption 自定义缩进
+:::
 ```
 
 效果：
@@ -79,6 +83,10 @@ introduction（章节内容提要） 和 problemset（习题） 环境必须使�
 
 ::: {.problemset}
 - Problemset
+:::
+
+::: {.solu}
+解题环境，默认整体缩进 2em，可通过 caption 自定义缩进
 :::
 
 ::: {.info caption="更改 Wrap 风格"}
