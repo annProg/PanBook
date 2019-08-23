@@ -137,8 +137,8 @@ function userDefined() {
 		[ ! -f $CWD/build/${_P[template]} ] && _error "Template ${_P[template]} not found."
 	fi
 	
-	cp -rfu $SCRIPTDIR/${_G[fontdir]}/* ${_G[build]}/${_G[fontdir]} 2>/dev/null
-	cp -rfu $CWD/${_G[fontdir]}/* ${_G[build]}/${_G[fontdir]} 2>/dev/null
+	cp -rfu $SCRIPTDIR/${_G[fontdir]} ${_G[build]}/${_G[fontdir]} 2>/dev/null
+	cp -rfu $CWD/${_G[fontdir]}/* ${_G[build]}/${_G[fontdir]}/ 2>/dev/null
 
 	# 此时还未复制书籍源码，build目录中的 template或者font中包含的 .md 文件应该被删除
 	rm -f ${_G[build]}/*.md
