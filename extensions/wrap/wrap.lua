@@ -3,6 +3,11 @@ table_print = require('table_print')
 table.print = table_print.print_r
 --]]
 local wrapClass = {'info', 'tip', 'warn', 'alert', 'help', 'introduction', 'problemset', 'solu'}
+local solu = false
+
+function Meta(meta)
+	solu = meta['ext-wrap-solu']
+end
 
 function inTable(t, val)
 	for _, v in pairs(t) do
@@ -50,8 +55,20 @@ function Div(el)
 			option = ""
 		end
 
+		-- 隐藏solu
+		if el.attr.classes[1] == "solu" and not solu then
+			return pandoc.Div({})
+		end
 		-- 特殊符号转义
 		option = string.gsub(option, "_", "\\_{}")
 		return wrap(el, option)
 	end
 end
+
+-- Normally, pandoc will run the function in the built-in order Inlines ->
+-- Blocks -> Meta -> Pandoc. We instead want Meta -> Blocks. Thus, we must
+-- define our custom order:
+return {
+    {Meta = Meta},
+    {Div = Div},
+}

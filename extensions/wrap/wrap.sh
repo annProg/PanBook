@@ -46,6 +46,7 @@ function ext_wrap_help() {
 	echo -e "\t-G ext-wrap-introduction:<custom introduction>  use custom introduction"
 	echo -e "\t-G ext-wrap-problemset:<custom problemset>      use custom problemset"
 	echo -e "\t-G ext-wrap-noanswer:<true|false>               noanswer mode"
+	echo -e "\t-M ext-wrap-solu:<true|false>                   show solu environment"
 	echo -e "\t-V lang:<zh|en>                                 select language(default zh)"
 	exit 0
 }
