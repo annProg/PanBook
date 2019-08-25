@@ -150,7 +150,7 @@ function tikz(code, filetype, fname, cname, package)
 		f:write(package)
 	end
 
-	f:write("\\begin{document}\n")
+	f:write("\n\\begin{document}\n")
 	f:write(code)
 	f:write("\n\\end{document}\n")
 	f:close()

@@ -202,7 +202,7 @@ K:G
 
 see [@fig:tikz]
 
-```{#fig:tikz .plot:tikz caption="TIKZ"}
+```{#fig:tikz .plot:tikz caption="TIKZ" usepackage="\\usepackage{ctex}"}
 \begin{tikzpicture}
 	\draw (0,0)--(0,4);
 	\draw (0,0)--(4,0);

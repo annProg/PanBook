@@ -328,6 +328,28 @@ K:G
   g2gf g2Bd|g2f2 e2d2|c2ec B2dB|A2F2 G4:|
 ```
 
+### tikz
+
+示例如下，效果见 [@fig:plot_tikz]。如需引入自定义包，请使用 `usepackage` 属性。
+
+~~~markdown
+```{#fig:plot_tikz .plot:tikz caption="TIKZ 示例" usepackage="\\usepackage{ctex}"}
+\begin{tikzpicture}
+	\draw (0,0)--(0,4);
+	\draw (0,0)--(4,0);
+	\draw (4,0) arc[start angle=0,end angle=90,radius=4cm];
+\end{tikzpicture}
+```
+~~~
+
+```{#fig:plot_tikz .plot:tikz caption="TIKZ 示例"}
+\begin{tikzpicture}
+	\draw (0,0)--(0,4);
+	\draw (0,0)--(4,0);
+	\draw (4,0) arc[start angle=0,end angle=90,radius=4cm];
+\end{tikzpicture}
+```
+
 ### 子图
 代码如下，效果见 [@fig:plot_subfig]。
 
