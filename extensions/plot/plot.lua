@@ -5,6 +5,11 @@ table.print = table_print.print_r
 
 -- reference: https://github.com/pandoc/lua-filters/blob/master/diagram-generator/diagram-generator.lua
 
+local renderDir = "_plot_render"
+if not os.execute("[ -d " .. renderDir .. " ]") then
+	os.execute("mkdir " .. renderDir)
+end
+
 function inTable(t, val)
 	for _, v in pairs(t) do
 		if v == val then
@@ -136,6 +141,30 @@ function abcm2ps(code, filetype, fname, cname)
 	return success,img
 end
 
+function tikz(code, filetype, fname, cname, package)
+	local nfname = string.gsub(fname, '.' .. filetype, '')
+	local f = io.open(nfname .. ".tex", 'w')
+	f:write("\\documentclass{standalone}\n\\usepackage{tikz}\n")
+
+	if package then
+		f:write(package)
+	end
+
+	f:write("\\begin{document}\n")
+	f:write(code)
+	f:write("\n\\end{document}\n")
+	f:close()
+
+	print("renderDir: " .. renderDir)
+	local success,img = pandoc.pipe("xelatex", {'-output-directory', renderDir, nfname}, '')
+
+	if filetype ~= 'pdf' then
+		os.execute("pdftocairo -" .. filetype .. " " .. nfname .. ".pdf " .. nfname .. "." .. filetype)
+	end
+
+	return success,img
+end
+
 function gnuplot(code, filetype, fname, cname)
 	local ncode = string.gsub(code, '(set ter)', '#%1')
 	local ncode = string.gsub(ncode, '(se t)', "#%1")
@@ -162,6 +191,8 @@ end
 function enginePath(engine)
 	if engine == "abc" then
 		return "abcm2ps"
+	elseif engine == "tikz" then
+		return "xelatex"
 	else
 		return engine
 	end
@@ -180,13 +211,9 @@ local validEngines = {
 	a2s = a2s,
 	asy = asy,
 	abc = abcm2ps,
+	tikz = tikz,
 	gnuplot = gnuplot
 }
-
-local renderDir = "_plot_render"
-if not os.execute("[ -d " .. renderDir .. " ]") then
-	os.execute("mkdir " .. renderDir)
-end
 
 function renderImg(block)
 	if block.attr.classes[1] == nil then
@@ -218,7 +245,7 @@ function renderImg(block)
 	if file_exists(fname) then
 		print("Plot Cache Hit: " .. fname)
 	else
-		local success, img = pcall(validEngines[engine], block.text, filetype, fname, cname, block.attributes["additionalPackages"] or nil)
+		local success, img = pcall(validEngines[engine], block.text, filetype, fname, cname, block.attributes["usepackage"] or nil)
 
 		-- Was ok?
 		if not success or not file_exists(fname) then

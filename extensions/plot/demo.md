@@ -199,3 +199,13 @@ K:G
 |:g2gf gdBd|g2f2 e2d2|c2ec B2dB|c2A2 A2df|
   g2gf g2Bd|g2f2 e2d2|c2ec B2dB|A2F2 G4:|
 ```
+
+see [@fig:tikz]
+
+```{#fig:tikz .plot:tikz caption="TIKZ"}
+\begin{tikzpicture}
+	\draw (0,0)--(0,4);
+	\draw (0,0)--(4,0);
+	\draw (4,0) arc[start angle=0,end angle=90,radius=4cm];
+\end{tikzpicture}
+```
