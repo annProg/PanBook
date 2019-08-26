@@ -155,7 +155,6 @@ function tikz(code, filetype, fname, cname, package)
 	f:write("\n\\end{document}\n")
 	f:close()
 
-	print("renderDir: " .. renderDir)
 	local success,img = pandoc.pipe("xelatex", {'-output-directory', renderDir, nfname}, '')
 
 	if filetype ~= 'pdf' then
