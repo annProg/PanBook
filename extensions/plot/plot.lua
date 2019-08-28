@@ -19,16 +19,6 @@ function inTable(t, val)
 	return false
 end
 
-function nonBreakingSpace()
-	if inTable({'epub', 'epub2', 'epub3', 'html', 'html5'}, FORMAT) then
-		return pandoc.RawInline("html", "&nbsp;")
-	elseif inTable({'tex', 'latex', 'pdf', 'beamer'}, FORMAT) then
-		return pandoc.RawInline("tex", "~")
-	else
-		return pandoc.Str(" ")
-	end
-end
-
 function table.keys( t )
     local keys = {}
     for k, _ in pairs( t ) do
@@ -335,8 +325,9 @@ function Div(block)
 		for i,j in pairs(v) do
 			if j.t == "Image" then
 				table.insert(imgGroup.content, j)
-				table.insert(imgGroup.content, nonBreakingSpace())
-				table.insert(imgGroup.content, nonBreakingSpace())
+				-- 添加 nonbreaking space. 在latex中会被转换为 ~ 
+				table.insert(imgGroup.content, pandoc.Str("\u{A0}"))
+				table.insert(imgGroup.content, pandoc.Str("\u{A0}"))
 				table.insert(imgGroup.content, pandoc.SoftBreak())
 			else
 				table.insert(para, j)
