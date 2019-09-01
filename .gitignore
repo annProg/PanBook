@@ -9,3 +9,4 @@ build
 *.fls
 *.xdv
 *.dvi
+*.thm
