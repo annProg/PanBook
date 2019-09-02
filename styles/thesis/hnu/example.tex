@@ -3,19 +3,26 @@
 \usepackage{lipsum}
 \usepackage{hyperref}
 
-\title{论文题目}
-\etitle{Thesis Title}
-\subtitle{论文副标题}
-\esubtitle{Thesis Subtitle}
-\author{张\ 三}
-\xuehao{20190713021}
-\college{计算机学院}
-\supervisor{\LaTeX{}~~教授}
-\date{2019 年 7 月 12 日}
+\hnusetup{
+    ctitle={论文题目},
+    etitle={Thesis Title},
+    cauthor={张\ 三},
+    cnumber={20190713021},
+    cdepartment={计算机学院},
+    cclassname={人工智能1502},
+    csupervisor={XXX},
+    cheadmaster={XXX},
+    cdate={2019 年 6 月},
+    ckeywords={TeX, LaTeX, CJK, 模版, 论文, 怪学校},
+    ekeywords={TeX, LaTeX, CJK, template, thesis, weirdschool},
+}
+
+\input{style/cover.sty}
+\input{style/abstract.sty}
 
 \begin{document}
 \frontmatter
-\maketitle
+\makecover
 
 \begin{abstract}{c}{\LaTeX{}，排版，论文}
 \zhlipsum[1]

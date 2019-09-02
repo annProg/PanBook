@@ -1,0 +1,30 @@
+
+\newenvironment{abstract}[2]{
+    \def\invalue{#1}
+    \def\english{e}
+    \def\keyword{#2}
+    % 论文题目
+    \begin{center}
+        \heiti\xiaosan\ctitle \\
+        \vspace{1em}
+        \heiti\sanhao
+        \ifx\invalue\english
+            {Abstract} \\
+        \else
+            {摘~~~~~~要} \\
+            
+        \fi
+        \vspace{1em}
+    \end{center}
+    \songti\xiaosi
+}{
+    \vspace{1em}\\
+    \heiti\sihao
+    \ifx\invalue\english{}
+        Key Words:
+    \else
+        关键词：
+    \fi
+    \keyword
+    \cleardoublepage
+}
