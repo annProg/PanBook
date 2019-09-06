@@ -1,30 +1,33 @@
-
-\newenvironment{abstract}[2]{
+% abstract
+\newenvironment*{abstract}[2]{
+	%\parindent{2em}
     \def\invalue{#1}
     \def\english{e}
-    \def\keyword{#2}
+    \def\keywords{#2}
     % 论文题目
     \begin{center}
-        \heiti\xiaosan\ctitle \\
-        \vspace{1em}
-        \heiti\sanhao
         \ifx\invalue\english
-            {Abstract} \\
+        	{\Large \bfseries \@etitle} \\
+        	\vspace{1.5em}
+            {\LARGE \bfseries Abstract} \\
+			\addcontentsline{toc}{chapter}{Abstract}
         \else
-            {摘~~~~~~要} \\
-            
+		    {\Large \bfseries \@title} \\
+        	\vspace{1.5em}
+            {\LARGE \bfseries 摘~~~~要} \\
+			\addcontentsline{toc}{chapter}{摘要}
         \fi
-        \vspace{1em}
+        \vspace{0.5em}
     \end{center}
-    \songti\xiaosi
 }{
-    \vspace{1em}\\
-    \heiti\sihao
-    \ifx\invalue\english{}
-        Key Words:
-    \else
-        关键词：
-    \fi
-    \keyword
-    \cleardoublepage
+	\par
+	\vspace{1cm}
+	\noindent
+	\ifx\invalue\english
+		{\bfseries Key Words: }
+	\else
+		{\bfseries 关键词： }
+	\fi
+	\keywords
+	\cleardoublepage
 }
