@@ -21,10 +21,10 @@ if [ "${_P[template]}"x != "" ];then
 	getArrayVar _V logo "logo.png"
 	getArrayVar _V extrainfo "使用~PanBook~编译"
 	
-	FIXHYPERREF=${_G[build]}/fix-elegantpaper-hyperref.tex
+	FIXHYPERREF=${_G[build]}/fix-elegantbook-hyperref.tex
 	echo "\hypersetup{pageanchor=true}" > $FIXHYPERREF
 	_P[include-before-body__]=$FIXHYPERREF
-	FIX=${_G[build]}/fix-elegantpaper.tex
+	FIX=${_G[build]}/fix-elegantbook.tex
 	echo "\cover{${_V[cover]}}" > $FIX
 	echo "\logo{${_V[logo]}}" >> $FIX
 	echo "\extrainfo{${_V[extrainfo]}}" >> $FIX
