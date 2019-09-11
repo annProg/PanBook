@@ -5,7 +5,7 @@
 \RequirePackage{zhnumber}
 % \RequirePackage[draft]{graphicx}
 \RequirePackage{graphicx}
-\RequirePackage{subfigure}
+%\RequirePackage{subfigure}
 \AtEndOfClass{\RequirePackage{microtype}}
 \RequirePackage{latexsym, amsmath, amssymb, amsfonts, mathrsfs, amsthm}
 \RequirePackage{siunitx}
