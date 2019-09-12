@@ -93,6 +93,11 @@ _F=()
 declare -A _H
 _H=()
 
+# 引入函数和模块
+source $SCRIPTDIR/libs/core.sh
+source $SCRIPTDIR/libs/functions.sh
+loadModules
+
 if [ $# -ge 1 ];then
 	[ "$1"x == "--help"x -o "$1"x == "-h"x -o "$1"x == "help"x ] && printhelp
 	_G[function]=$1
@@ -101,10 +106,6 @@ else
 	printhelp
 fi
 
-# 引入函数和模块
-source $SCRIPTDIR/libs/core.sh
-source $SCRIPTDIR/libs/functions.sh
-loadModules
 loadExtensions
 
 for i in "$@"
