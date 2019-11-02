@@ -16,6 +16,9 @@
 然后下载 PanBook。打开终端（ msys2 ），假设工作目录为 /d/dev ，克隆代码并设置环境变量：
 
 ```bash
+# 首先安装 git，msys2 包管理工具为 pacman
+$ pacman -Ss git     # 查询软件包
+$ pacman -S git      # 安装软件包
 $ cd /d/dev
 $ git clone https://github.com/annProg/PanBook
 # 将 PanBook，TeXLive 及 Pandoc 加入环境变量

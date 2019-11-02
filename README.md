@@ -34,6 +34,9 @@
 然后下载本项目，打开`msys2`，假设工作目录为`/d/dev`
 
 ```
+# 首先安装 git，msys2 包管理工具为 pacman
+$ pacman -Ss git     # 查询软件包
+$ pacman -S git      # 安装软件包
 $ cd /d/dev
 $ git clone https://github.com/annProg/PanBook
 ```
