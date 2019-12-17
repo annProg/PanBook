@@ -158,7 +158,7 @@ $if(extrainfo)$
 $endif$
 
 $if(photo)$
-\photo[55pt][0pt]{$photo$} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
+\photo[$if(photoheight)$$photoheight$pt$else$55pt$endif$][$if(photoframe)$$photoframe$pt$else$1pt$endif$]{$photo$} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
 $endif$
 
 $if(quote)$

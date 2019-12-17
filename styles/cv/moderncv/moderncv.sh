@@ -27,7 +27,9 @@ note "This Template support the following variables, they can set via metadata o
 \tonlinecv             Your cv url
 \tshowdate             Show cv compile date (true|false)
 \tCJKmainfont          Change CJKmainfont. default SimSun
-\tCJKoptions           Change CJKoptions default (BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑)"
+\tCJKoptions           Change CJKoptions default (BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑)
+\tphotoheight          Change photo height. default 55
+\tphotoframe           Change thickness of the frame around the picture. default 1"
 }
 
 function func_cv_moderncv_list() {
