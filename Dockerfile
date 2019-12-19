@@ -6,9 +6,23 @@ RUN cd /tmp/ && curl -s -L https://github.com/lierdakil/pandoc-crossref/releases
 
 COPY tools/docker/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive-fonts.conf
 
-RUN [ ! -d /usr/share/fonts ] && mkdir /usr/share/fonts
-RUN curl -s -L https://github.com/adobe-fonts/source-han-serif/releases/download/1.001R/SourceHanSerif.ttc -o /usr/share/fonts/SourceHanSerif.ttc
-RUN curl -s -L https://github.com/adobe-fonts/source-han-sans/releases/download/2.001R/SourceHanSans.ttc -o /usr/share/fonts/SourceHanSans.ttc
+# fonts
+RUN mkdir -p /usr/share/fonts/source-han && mkdir -p /usr/share/fonts/source-sans-pro && mkdir -p /usr/share/fonts/source-serif-pro && mkdir -p /usr/share/fonts/source-code-pro
+RUN curl -s -L https://github.com/adobe-fonts/source-han-serif/releases/download/1.001R/SourceHanSerif.ttc -o /usr/share/fonts/source-han/SourceHanSerif.ttc
+RUN curl -s -L https://github.com/adobe-fonts/source-han-sans/releases/download/2.001R/SourceHanSans.ttc -o /usr/share/fonts/source-han/SourceHanSans.ttc
+RUN curl -s -L https://github.com/adobe-fonts/source-code-pro/releases/download/2.030R-ro%2F1.050R-it/source-code-pro-2.030R-ro-1.050R-it.zip -o /tmp/source-code-pro.zip && \
+	unzip /tmp/source-code-pro.zip -d /tmp && \
+	mv /tmp/source-code-pro-2.030R-ro-1.050R-it/OTF/* /usr/share/fonts/source-code-pro/ && \
+	rm -fr /tmp/*
+RUN curl -s -L https://github.com/adobe-fonts/source-serif-pro/releases/download/3.001R/source-serif-pro-3.001R.zip -o /tmp/source-serif-pro.zip && \
+	unzip /tmp/source-serif-pro.zip -d /tmp && \
+	mv /tmp/source-serif-pro-3.001R/OTF/* /usr/share/fonts/source-serif-pro && \
+	rm -fr /tmp/*
+RUN curl -s -L https://github.com/adobe-fonts/source-sans-pro/releases/download/3.006R/source-sans-pro-3.006R.zip -o /tmp/source-sans-pro.zip && \
+	unzip /tmp/source-sans-pro.zip -d /tmp && \
+	mv /tmp/source-sans-pro-3.006R/OTF/* /usr/share/fonts/source-sans-pro && \
+	rm -fr /tmp/*
+
 RUN fc-cache -sfv
 RUN apk add --no-cache make
 ENV PATH /PanBook:$PATH
