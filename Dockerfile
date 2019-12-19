@@ -49,7 +49,7 @@ RUN apk add --no-cache --virtual .build-deps \
 	apk del .build-deps
 # abcm2ps (poppler-utils 提供 pdftocairo)
 RUN apk add --no-cache poppler-utils
-RUN curl -s -L "https://sourceforge.net/projects/abcplus/files/abcm2ps/abcm2ps-8.14.5" -o /usr/bin/abcm2ps && chmod +x /usr/bin/abcm2ps
+RUN curl -s -L "https://sourceforge.net/projects/abcplus/files/abcm2ps/abcm2ps-8.14.6" -o /usr/bin/abcm2ps && chmod +x /usr/bin/abcm2ps
 
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata git
