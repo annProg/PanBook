@@ -1,9 +1,16 @@
 \documentclass[$for(classoption)$
   $classoption$$sep$,
 $endfor$]{ctexbook}
-\setmainfont{DejaVu Sans} 	% 設定英文字型
-\setromanfont{DejaVu Sans} 	% 字型
-\setmonofont{DejaVu Sans Mono}
+
+$if(mainfont)$
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+$endif$
 
 \usepackage{ifxetex,ifluatex}
 $if(CJKmainfont)$
