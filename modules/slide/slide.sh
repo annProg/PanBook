@@ -26,6 +26,9 @@ function func_slide() {
 		_P[standalone]=""
 	fi
 
+	# 默认模板给xeCJK加了个选项，导致不能编译，见 https://github.com/jgm/pandoc/pull/5855
+	[ "${_P[template]}"x == ""x ] && _P[template]="${_G[scriptdir]}/${_G[tpldir]}/latex/latex.tpl"
+
 	_P[to]=beamer
 	getPandocParam
 	eval ${_G[pandoc-param]}
