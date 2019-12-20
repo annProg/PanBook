@@ -45,6 +45,15 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\par}
+$endif$
+
 \begin{document}
 \pagenumbering{gobble} % suppress displaying page number
 
