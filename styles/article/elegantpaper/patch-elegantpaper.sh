@@ -48,3 +48,6 @@ EOF
 writeHeader $FIX
 
 # wrap 写入的header需要放到 $FIX 后面（修复amsmath and mathspec bug）
+
+# 默认模板给xeCJK加了个选项，导致不能编译，见 https://github.com/jgm/pandoc/pull/5855
+[ "${_P[template]}"x == ""x ] && _P[template]="${_G[scriptdir]}/${_G[tpldir]}/latex/latex.tpl"
