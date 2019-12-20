@@ -1,5 +1,5 @@
 % Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode=true$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
+\PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 $if(colorlinks)$
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
@@ -93,15 +93,14 @@ $else$
 $endif$
 $if(linestretch)$
 \usepackage{setspace}
-\setstretch{$linestretch$}
 $endif$
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
 $if(mathspec)$
   \ifxetex
     \usepackage{mathspec}
@@ -138,7 +137,7 @@ $endif$
 $endif$
 $if(CJKmainfont)$
   \ifxetex
-    \usepackage{xeCJK}
+    \usepackage[space]{xeCJK}
     \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
   \fi
 $endif$
@@ -206,6 +205,9 @@ $endif$
 $if(author-meta)$
   pdfauthor={$author-meta$},
 $endif$
+$if(lang)$
+  pdflang={$lang$},
+$endif$
 $if(subject)$
   pdfsubject={$subject$},
 $endif$
@@ -221,13 +223,17 @@ $if(colorlinks)$
 $else$
   hidelinks,
 $endif$
-}
+  pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 $if(verbatim-in-note)$
-\VerbatimFootnotes % allows verbatim text in footnotes
+\VerbatimFootnotes % allow verbatim text in footnotes
 $endif$
 $if(geometry)$
+$if(beamer)$
+\geometry{$for(geometry)$$geometry$$sep$,$endfor$}
+$else$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
 $endif$
 $if(beamer)$
 \newif\ifbibliography
@@ -253,13 +259,18 @@ $if(beamer)$
 \def\fnum@table{\tablename~\thetable}
 \makeatother
 $else$
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
 $endif$
 $endif$
 $if(graphics)$
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -268,6 +279,10 @@ $if(graphics)$
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 $endif$
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
@@ -288,9 +303,8 @@ $else$
 $endif$
 $if(beamer)$
 $else$
-$if(subparagraph)$
-$else$
-% Redefines (sub)paragraphs to behave more like sections
+$if(block-headings)$
+% Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
   \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
@@ -304,12 +318,6 @@ $endif$
 $if(pagestyle)$
 \pagestyle{$pagestyle$}
 $endif$
-
-% Set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
-
 $for(header-includes)$
 $header-includes$
 $endfor$
@@ -351,6 +359,14 @@ $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
 $endif$
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\par}
+$endif$
 
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
@@ -367,9 +383,7 @@ $else$
 $endif$
 \subtitle{$subtitle$}
 $endif$
-$if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
-$endif$
 \date{$date$}
 $if(beamer)$
 $if(institute)$
@@ -430,6 +444,9 @@ $if(lot)$
 $endif$
 $if(lof)$
 \listoffigures
+$endif$
+$if(linestretch)$
+\setstretch{$linestretch$}
 $endif$
 $if(has-frontmatter)$
 \mainmatter
