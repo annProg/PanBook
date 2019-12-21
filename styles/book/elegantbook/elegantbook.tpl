@@ -8,6 +8,16 @@ $endfor$]{elegantbook}
 
 \usepackage[yyyymmdd,hhmmss]{datetime}
 
+$if(mainfont)$
+  \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
+$endif$
+$if(sansfont)$
+  \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
+$endif$
+$if(monofont)$
+  \setmonofont[$for(monofontoptions)$$monofontoptions$$sep$,$endfor$]{$monofont$}
+$endif$
+
 \usepackage{ifxetex,ifluatex}
 $if(CJKmainfont)$
   \ifxetex
