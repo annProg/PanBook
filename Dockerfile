@@ -1,6 +1,9 @@
-FROM alpine:3.10
+FROM alpine:3.11
 
-RUN apk add --no-cache texlive-full curl bash
+# sourcecodepro 字体2.010版本有字符重叠问题，升级到2.030. ref: https://github.com/CTeX-org/forum/issues/73
+RUN apk add --no-cache texlive-full curl bash font-adobe-source-code-pro && \
+	rm -fr /usr/share/texmf-dist/fonts/type1/adobe/sourcecodepro/ && \
+	rm -fr /usr/share/texmf-dist/fonts/opentype/adobe/sourcecodepro
 COPY tools/docker/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive-fonts.conf
 
 # fonts
