@@ -7,15 +7,14 @@ workspace:
 
 steps:
 - name: build
-  image: banzaicloud/drone-kaniko
-  settings:
-    repo: ann17/panbook
-    auto_tag: true
-    cache: true
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
+  image: docker:18.09-git
+  volumes:
+  - name: docker_sock
+	path: /var/run/docker.sock
+  commands:
+  - export TAG=`git describe --tags --exact-match 2> /dev/null || echo "latest"`
+  - docker build -t ann17/panbook:$TAG .
+  - docker tag ann17/panbook:$TAG panbook:latest
 
 - name: doc-epub
   image: ann17/panbook:latest
@@ -159,3 +158,8 @@ steps:
     dest: 172.17.0.1::panbook
   depends_on:
   - demo-thesis
+
+volumes:
+- name: docker_sock
+  host:
+    path: /var/run/docker.sock  
