@@ -14,11 +14,11 @@ steps:
   commands:
   - export TAG=`git describe --tags --exact-match 2> /dev/null || echo "latest"`
   - docker build -t ann17/panbook:$TAG .
-  - docker tag ann17/panbook:$TAG panbook:latest
+  - docker tag ann17/panbook:$TAG ann17/panbook:latest
 
 - name: doc-epub
   image: ann17/panbook:latest
-  pull: always
+  pull: if-not-exists
   commands:
   - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make epub
@@ -27,7 +27,7 @@ steps:
 
 - name: doc-ctexbook
   image: ann17/panbook:latest
-  pull: always
+  pull: if-not-exists
   commands:
   - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make ctex
@@ -37,7 +37,7 @@ steps:
 
 - name: doc-ctexbook-6inch
   image: ann17/panbook:latest
-  pull: always
+  pull: if-not-exists
   commands:
   - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make ctex6in
@@ -47,7 +47,7 @@ steps:
 
 - name: doc-elegantbook
   image: ann17/panbook:latest
-  pull: always
+  pull: if-not-exists
   commands:
   - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make elegantbook
@@ -57,7 +57,7 @@ steps:
 
 - name: demo-article
   image: ann17/panbook:latest
-  pull: always
+  pull: if-not-exists
   commands:
   - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/article); then exit 78; fi
   - cd demo/article
@@ -68,7 +68,7 @@ steps:
   
 - name: demo-slide
   image: ann17/panbook:latest
-  pull: always
+  pull: if-not-exists
   commands:
   - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/beamer); then exit 78; fi
   - cd demo/beamer
@@ -78,7 +78,7 @@ steps:
 
 - name: demo-cv
   image: ann17/panbook:latest
-  pull: always
+  pull: if-not-exists
   commands:
   - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/cv); then exit 78; fi
   - cd demo/cv
@@ -89,7 +89,7 @@ steps:
 
 - name: demo-thesis
   image: ann17/panbook:latest
-  pull: always
+  pull: if-not-exists
   commands:
   - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/thesis); then exit 78; fi
   - cd demo/thesis
@@ -100,7 +100,7 @@ steps:
 
 - name: publish-epub
   image: annprog/rsync:latest
-  pull: always
+  pull: if-not-exists
   settings:
     src: build/*.epub
     dest: 172.17.0.1::panbook
@@ -109,7 +109,7 @@ steps:
 
 - name: publish-doc
   image: annprog/rsync:latest
-  pull: always
+  pull: if-not-exists
   settings:
     src: build/*.pdf
     dest: 172.17.0.1::panbook
@@ -120,7 +120,7 @@ steps:
 
 - name: publish-article
   image: annprog/rsync:latest
-  pull: always
+  pull: if-not-exists
   settings:
     src: demo/article/build/*.pdf
     dest: 172.17.0.1::panbook
@@ -129,7 +129,7 @@ steps:
 
 - name: publish-slide
   image: annprog/rsync:latest
-  pull: always
+  pull: if-not-exists
   settings:
     src: demo/beamer/build/*.pdf
     dest: 172.17.0.1::panbook
@@ -138,7 +138,7 @@ steps:
 
 - name: publish-cv
   image: annprog/rsync:latest
-  pull: always
+  pull: if-not-exists
   settings:
     src: demo/cv/build/*.pdf
     dest: 172.17.0.1::panbook
@@ -147,7 +147,7 @@ steps:
 
 - name: publish-thesis
   image: annprog/rsync:latest
-  pull: always
+  pull: if-not-exists
   settings:
     src: demo/thesis/build/*.pdf
     dest: 172.17.0.1::panbook
