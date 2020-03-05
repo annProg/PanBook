@@ -44,7 +44,6 @@ steps:
   - grep -iE "warning|at lines" build/*-ctexbook-mobile.log
   depends_on:
   - build
-  - doc-ctexbook
 
 - name: doc-elegantbook
   image: ann17/panbook:latest
@@ -55,7 +54,6 @@ steps:
   - grep -iE "warning|at lines" build/*-elegantbook-pc.log
   depends_on:
   - build
-  - doc-ctexbook-6inch
 
 - name: demo-article
   image: ann17/panbook:latest
@@ -77,7 +75,6 @@ steps:
   - make all-theme
   depends_on:
   - build
-  - demo-article
 
 - name: demo-cv
   image: ann17/panbook:latest
@@ -89,7 +86,6 @@ steps:
   - grep -iE "warning|at lines" build/*.log
   depends_on:
   - build
-  - demo-slide
 
 - name: demo-thesis
   image: ann17/panbook:latest
@@ -101,7 +97,6 @@ steps:
   - grep -iE "warning|at lines" build/*.log
   depends_on:
   - build
-  - demo-slide
 
 - name: publish-epub
   image: annprog/rsync:latest
