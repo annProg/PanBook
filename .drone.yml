@@ -6,7 +6,7 @@ workspace:
   path: PanBook
 
 steps:
-- name: docker-image
+- name: build
   image: banzaicloud/drone-kaniko
   settings:
     repo: ann17/panbook
