@@ -57,7 +57,7 @@ steps:
   image: ann17/panbook:latest
   pull: if-not-exists
   commands:
-  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/article); then exit 78; fi
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/article); then exit 0; fi
   - cd demo/article
   - DEBUG=-d make build
   - grep -iE "warning|at lines" build/*.log
@@ -68,7 +68,7 @@ steps:
   image: ann17/panbook:latest
   pull: if-not-exists
   commands:
-  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/beamer); then exit 78; fi
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/beamer); then exit 0; fi
   - cd demo/beamer
   - make all-theme
   depends_on:
@@ -78,7 +78,7 @@ steps:
   image: ann17/panbook:latest
   pull: if-not-exists
   commands:
-  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/cv); then exit 78; fi
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/cv); then exit 0; fi
   - cd demo/cv
   - make all
   - grep -iE "warning|at lines" build/*.log
@@ -89,7 +89,7 @@ steps:
   image: ann17/panbook:latest
   pull: if-not-exists
   commands:
-  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/thesis); then exit 78; fi
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/thesis); then exit 0; fi
   - cd demo/thesis
   - make all
   - grep -iE "warning|at lines" build/*.log
