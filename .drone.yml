@@ -13,9 +13,9 @@ steps:
     auto_tag: true
     cache: true
     username:
-	  from_secret: docker_username
+      from_secret: docker_username
     password:
-	  from_secret: docker_password
+      from_secret: docker_password
 
 - name: doc-epub
   image: ann17/panbook:latest
