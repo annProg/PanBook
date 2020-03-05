@@ -20,7 +20,6 @@ steps:
   image: ann17/panbook:latest
   pull: if-not-exists
   commands:
-  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make epub
   depends_on:
   - build
@@ -29,7 +28,6 @@ steps:
   image: ann17/panbook:latest
   pull: if-not-exists
   commands:
-  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make ctex
   - grep -iE "warning|at lines" build/*-ctexbook-pc.log
   depends_on:
@@ -39,21 +37,21 @@ steps:
   image: ann17/panbook:latest
   pull: if-not-exists
   commands:
-  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make ctex6in
   - grep -iE "warning|at lines" build/*-ctexbook-mobile.log
   depends_on:
   - build
+  - doc-ctexbook
 
 - name: doc-elegantbook
   image: ann17/panbook:latest
   pull: if-not-exists
   commands:
-  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make elegantbook
   - grep -iE "warning|at lines" build/*-elegantbook-pc.log
   depends_on:
   - build
+  - doc-ctexbook-6inch
 
 - name: demo-article
   image: ann17/panbook:latest
