@@ -10,7 +10,7 @@ steps:
   image: docker:18.09-git
   volumes:
   - name: docker_sock
-	path: /var/run/docker.sock
+    path: /var/run/docker.sock
   commands:
   - export TAG=`git describe --tags --exact-match 2> /dev/null || echo "latest"`
   - docker build -t ann17/panbook:$TAG .
