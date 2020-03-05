@@ -23,6 +23,7 @@ elegantbook:
 epub:
 	rm -f build/*.epub
 	panbook book --style=epub $(DEBUG) $(HIGHLIGHT)
+	ls -l build/
 	mv build/$(REPO)-*.epub build/$(REPO).epub
 	
 up: release upload
