@@ -6,37 +6,41 @@ workspace:
   path: PanBook
 
 steps:
-- name: build
-  image: docker:18.09-git
-  volumes:
-  - name: docker_sock
-    path: /var/run/docker.sock
-  commands:
-  - export TAG=`git describe --tags --exact-match 2> /dev/null || git rev-parse --short HEAD`
-  - docker build -t panbook:$TAG .
-  - docker tag panbook:$TAG panbook:latest
+- name: docker-image
+  image: banzaicloud/drone-kaniko
+  settings:
+    repo: ann17/panbook
+    auto_tag: true
+    cache: true
+    username:
+	  from_secret: docker_username
+    password:
+	  from_secret: docker_password
 
 - name: doc-epub
-  image: panbook:latest
-  pull: if-not-exists
+  image: ann17/panbook:latest
+  pull: always
   commands:
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make epub
   depends_on:
   - build
 
 - name: doc-ctexbook
-  image: panbook:latest
-  pull: if-not-exists
+  image: ann17/panbook:latest
+  pull: always
   commands:
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make ctex
   - grep -iE "warning|at lines" build/*-ctexbook-pc.log
   depends_on:
   - build
 
 - name: doc-ctexbook-6inch
-  image: panbook:latest
-  pull: if-not-exists
+  image: ann17/panbook:latest
+  pull: always
   commands:
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make ctex6in
   - grep -iE "warning|at lines" build/*-ctexbook-mobile.log
   depends_on:
@@ -44,9 +48,10 @@ steps:
   - doc-ctexbook
 
 - name: doc-elegantbook
-  image: panbook:latest
-  pull: if-not-exists
+  image: ann17/panbook:latest
+  pull: always
   commands:
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- src); then exit 78; fi
   - DEBUG="-d" make elegantbook
   - grep -iE "warning|at lines" build/*-elegantbook-pc.log
   depends_on:
@@ -54,9 +59,10 @@ steps:
   - doc-ctexbook-6inch
 
 - name: demo-article
-  image: panbook:latest
-  pull: if-not-exists
+  image: ann17/panbook:latest
+  pull: always
   commands:
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/article); then exit 78; fi
   - cd demo/article
   - DEBUG=-d make build
   - grep -iE "warning|at lines" build/*.log
@@ -64,9 +70,10 @@ steps:
   - build
   
 - name: demo-slide
-  image: panbook:latest
-  pull: if-not-exists
+  image: ann17/panbook:latest
+  pull: always
   commands:
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/beamer); then exit 78; fi
   - cd demo/beamer
   - make all-theme
   depends_on:
@@ -74,9 +81,10 @@ steps:
   - demo-article
 
 - name: demo-cv
-  image: panbook:latest
-  pull: if-not-exists
+  image: ann17/panbook:latest
+  pull: always
   commands:
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/cv); then exit 78; fi
   - cd demo/cv
   - make all
   - grep -iE "warning|at lines" build/*.log
@@ -85,9 +93,10 @@ steps:
   - demo-slide
 
 - name: demo-thesis
-  image: panbook:latest
-  pull: if-not-exists
+  image: ann17/panbook:latest
+  pull: always
   commands:
+  - if (git diff --exit-code $DRONE_COMMIT_BEFORE $DRONE_COMMIT_AFTER -- demo/thesis); then exit 78; fi
   - cd demo/thesis
   - make all
   - grep -iE "warning|at lines" build/*.log
@@ -97,7 +106,7 @@ steps:
 
 - name: publish-epub
   image: annprog/rsync:latest
-  pull: if-not-exists
+  pull: always
   settings:
     src: build/*.epub
     dest: 172.17.0.1::panbook
@@ -106,7 +115,7 @@ steps:
 
 - name: publish-doc
   image: annprog/rsync:latest
-  pull: if-not-exists
+  pull: always
   settings:
     src: build/*.pdf
     dest: 172.17.0.1::panbook
@@ -117,7 +126,7 @@ steps:
 
 - name: publish-article
   image: annprog/rsync:latest
-  pull: if-not-exists
+  pull: always
   settings:
     src: demo/article/build/*.pdf
     dest: 172.17.0.1::panbook
@@ -126,7 +135,7 @@ steps:
 
 - name: publish-slide
   image: annprog/rsync:latest
-  pull: if-not-exists
+  pull: always
   settings:
     src: demo/beamer/build/*.pdf
     dest: 172.17.0.1::panbook
@@ -135,7 +144,7 @@ steps:
 
 - name: publish-cv
   image: annprog/rsync:latest
-  pull: if-not-exists
+  pull: always
   settings:
     src: demo/cv/build/*.pdf
     dest: 172.17.0.1::panbook
@@ -144,14 +153,9 @@ steps:
 
 - name: publish-thesis
   image: annprog/rsync:latest
-  pull: if-not-exists
+  pull: always
   settings:
     src: demo/thesis/build/*.pdf
     dest: 172.17.0.1::panbook
   depends_on:
   - demo-thesis
-
-volumes:
-- name: docker_sock
-  host:
-    path: /var/run/docker.sock
