@@ -1,5 +1,8 @@
 # Drone ci plugin rsync
 
+## 权限设置
+`path` 需要正确设置权限， `chown` 为 `/etc/rsyncd.conf` 中指定的用户
+
 ## rsyncd 安全设置
 
 使用 `munge symlinks` 给 `symlinks` 加 `/rsyncd-munged/` 前缀，防止恶意 `symlinks` 链接系统文件
