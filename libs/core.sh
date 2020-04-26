@@ -197,7 +197,7 @@ function useCI() {
 	cidir=$SCRIPTDIR/tools/ci
 	case $ci in
 	drone) [ ! -f $CWD/.drone.yml ] && cat $cidir/.drone.yml|sed "s/__WORKSPACE__/${_G[ofile]}/g" |sed "s/__MODULE__/${_G[function]}/g" > $CWD/.drone.yml;;
-	*) note $ic;;
+	*) note $ci;;
 	esac
 }
 

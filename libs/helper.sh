@@ -307,7 +307,7 @@ function printhelp() {
 	echo -e "\t--src       change src directory name(default src)"
 	echo -e "\t--imgdir    change image directory name(default src/images)"
 	echo -e "\t--part      only compile specified markdown file"
-	echo -e "\t--ci        init with ci config(support: drone)"
+	echo -e "\t--ci=val    init with ci config(support: drone)"
 	echo -e "\t--memory    limit the maximum heap size(e.g. 1000m)"
 	echo -e "\t-V key:val  same with pandoc -V option"
 	echo -e "\t-M key:val  same with pandoc -M option"
