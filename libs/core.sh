@@ -193,7 +193,11 @@ function enableExt() {
 
 function useCI() {
 	ci=$1
-	_info "CI: $ci"
+	if [ "$ci"x == "--ci"x ];then
+		_error "ci can not be empty. Please use --ci={val}"
+	else
+		_info "CI: $ci"
+	fi
 	cidir=$SCRIPTDIR/tools/ci
 	case $ci in
 	drone) [ ! -f $CWD/.drone.yml ] && cat $cidir/.drone.yml|sed "s/__WORKSPACE__/${_G[ofile]}/g" |sed "s/__MODULE__/${_G[function]}/g" > $CWD/.drone.yml;;

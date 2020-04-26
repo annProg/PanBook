@@ -136,7 +136,7 @@ do
 	--part=*)
 		_G[part]=${key#*=}
 		shift;;
-	--ci=*)
+	--ci=*|--ci*)
 		_G[ci]=${key#*=}
 		useCI ${_G[ci]}
 		shift;;
