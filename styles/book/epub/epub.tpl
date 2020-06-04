@@ -20,7 +20,7 @@ $highlighting-css$
   </style>
 $endif$
 $for(css)$
-  <link rel="stylesheet" href="$css$" />
+  <link rel="stylesheet" type="text/css" href="$css$" />
 $endfor$
 $for(header-includes)$
   $header-includes$
@@ -56,6 +56,13 @@ $if(rights)$
 $endif$
 </section>
 $else$
+$if(coverpage)$
+<div id="cover-image">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="100%" viewBox="0 0 $cover-image-width$ $cover-image-height$" preserveAspectRatio="none">
+<image width="$cover-image-width$" height="$cover-image-height$" xlink:href="../media/$cover-image$" />
+</svg>
+</div>
+$else$
 $for(include-before)$
 $include-before$
 $endfor$
@@ -63,6 +70,7 @@ $body$
 $for(include-after)$
 $include-after$
 $endfor$
+$endif$
 $endif$
 </body>
 </html>
