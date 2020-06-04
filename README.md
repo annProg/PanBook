@@ -71,6 +71,7 @@ $ panbook -h
 
 - [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf)
 - [Go by example](https://github.com/pandoc-ebook/gobyexample-zh)
+- [程序员词典](https://github.com/annProg/programerDict)
 
 ## 免责声明
 
