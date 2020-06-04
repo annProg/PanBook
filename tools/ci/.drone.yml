@@ -7,7 +7,7 @@ workspace:
 
 steps:
 - name: build
-  image: panbook:latest
+  image: ann17/panbook:latest
   pull: if-not-exists
   commands:
   - panbook __MODULE__ -d
