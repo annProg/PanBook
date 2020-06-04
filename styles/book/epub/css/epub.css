@@ -11,6 +11,10 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, strong, b, u, i, pre, c
   margin: 5px;
 }
 
+dt {
+  font-weight: bold;
+}
+
 /* Table 显示边框 */
 table
 {
