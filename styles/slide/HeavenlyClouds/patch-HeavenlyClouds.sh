@@ -6,3 +6,5 @@ if [ "$os"x == "windows"x ];then
 else
 	(cat fix-heavenlyclouds.tex |sed 's/LiSu/FandolHei/g';echo) >> ${_G[header]}
 fi
+
+_G[ext-ipa]=false
