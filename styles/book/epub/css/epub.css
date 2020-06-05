@@ -13,6 +13,11 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, strong, b, u, i, pre, c
 
 dt {
   font-weight: bold;
+  padding-top: 10px;
+}
+
+dd {
+	padding-left: 10px;
 }
 
 /* Table 显示边框 */
