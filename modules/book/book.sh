@@ -33,6 +33,8 @@ function func_book() {
 	if [ ${_G[t]} == "tex" ];then
 		_P[include-before-body]=frontmatter.tex
 		_P[include-after-body]=backmatter.tex
+	else
+		_G[body]="${_G[frontmatter]} ${_G[body]} ${_G[backmatter]}"
 	fi
 
 	partCompile
