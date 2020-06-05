@@ -105,7 +105,7 @@ function initBib() {
 
 function initBody() {
 	cd ${_G[workdir]}
-	_G[body]=`find ./ -name "*.md" 2>/dev/null |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"`
+	_G[body]=`find ./ -name "*.md" 2>/dev/null |sort |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"`
 	# 兼容性处理
 	compatible
 	
