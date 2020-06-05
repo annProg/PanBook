@@ -2,6 +2,11 @@
   $classoption$$sep$,
 $endfor$]{ctexbook}
 
+$if(multitoc)$
+\usepackage[toc]{multitoc}
+\setlength{\columnsep}{50pt}
+$endif$
+
 $if(mainfont)$
   \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
 $endif$
@@ -128,6 +133,7 @@ $if(csl-refs)$
 $endif$
 
 \begin{document}
+
 \frontmatter
 
 %----------------------------------------------------------------------------------------
@@ -239,6 +245,10 @@ $if(lof)$
 $endif$
 
 
+$if(twocolumn)$
+\setlength{\columnsep}{20pt}
+\twocolumn
+$endif$
 
 \mainmatter
     % 在此命令之后的页码为阿拉伯数字

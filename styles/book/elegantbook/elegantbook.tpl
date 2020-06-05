@@ -1,4 +1,4 @@
-\documentclass[$for(classoption)$
+\documentclass[$if(multitoc)$twocol,$endif$$for(classoption)$
   $classoption$$sep$,
 $endfor$]{elegantbook}
 
@@ -123,6 +123,7 @@ $if(csl-refs)$
 $endif$
 
 \begin{document}
+
 \frontmatter
 
 \maketitle
@@ -174,6 +175,10 @@ $endif$
 
 \clearpage
 \thispagestyle{empty}
+
+$if(twocolumn)$
+\twocolumn
+$endif$
 
 \mainmatter
 \hypersetup{pageanchor=true}
