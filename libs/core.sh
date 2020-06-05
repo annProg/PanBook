@@ -105,7 +105,7 @@ function initBib() {
 
 function initBody() {
 	cd ${_G[workdir]}
-	_G[body]=`ls *.md 2>/dev/null |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"`
+	_G[body]=`find ./ -name "*.md" 2>/dev/null |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"`
 	# 兼容性处理
 	compatible
 	
@@ -150,6 +150,13 @@ function init()
 	userDefined
 	# 复制$SRC目录下资源文件到build目录
 	cp -rf ${_G[workdir]}/* ${_G[build]}
+	
+	# 保证子目录下章节换行
+	for item in `ls -F ${_G[workdir]} |grep '/$'`;do
+		# 保证换行
+		sed -i '1i\\' ${_G[build]}/${item}*.md 2>/dev/null
+	done
+	
 	cd ${_G[build]}
 
 	# 清空$HEADERS 以后都是追加
