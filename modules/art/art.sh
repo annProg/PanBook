@@ -3,7 +3,7 @@ regmod art
 _H[art]="make article"
 
 function func_art() {
-	initBody
+	initBody article.md
 	initBib
 	initMetadataFile
 	initMakefile

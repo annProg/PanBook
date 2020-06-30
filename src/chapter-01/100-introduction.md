@@ -38,10 +38,27 @@ export PATH=$PATH:/d/texlive/2018/bin/win32:/d/dev/PanBook:/c/Users/myname/AppDa
 |   |-- frontmatter.md      # 前言文件
 |   |-- backmatter.md       # 后记文件
 |   |-- 100-chapter1.md     # 正文，命名须保证能按正确章节顺序列出
-|   `-- 200-chapter2.md
+|   `-- 200-chapter2.md     # 正文也可以用子目录组织
 |-- styles                   # 自定义风格
 |-- templates                # 自定义模板 
 `-- build                    # 电子书构建目录
+```
+
+章节内容如果很多，也可以用目录来组织章节，见 [@lst:srcdir]。也需要能按顺序列出。举例来说，如果 chapter 或者 小节 数量超出 10，那么编号要从 01 开始，不能从 1 开始，否则 10 将错误的排在 1 后面。
+
+```{#lst:srcdir .bash caption="章节组织方式"}
+.
+|-- backmatter.md
+|-- bibliography.bib
+|-- chapter-01
+|   `-- 01-title.md
+|-- chapter-02
+|   `-- 01-title.md
+|-- chapter-03
+|   `-- 01-title.md
+|-- frontmatter.md
+|-- images
+`-- metadata.yaml
 ```
 
 ### 指定风格（style）

@@ -103,17 +103,22 @@ function initBib() {
 	fi	
 }
 
+function getBody() {
+	cd ${_G[workdir]}
+	find ./ -name "*.md" 2>/dev/null |sort |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"
+}
+
 function initBody() {
 	cd ${_G[workdir]}
-	_G[body]=`find ./ -name "*.md" 2>/dev/null |sort |grep -vE "${_G[frontmatter]}|${_G[backmatter]}"`
+	_G[body]=`getBody`
 	# 兼容性处理
 	compatible
 	
 	bodyfile=$1
 	[ "$bodyfile"x == ""x ] && bodyfile=${_G[defaultbody]}
 	if [ "${_G[body]}"x == ""x ];then
-		cp $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/$bodyfile ${_G[workdir]}
-		_G[body]=$bodyfile
+		cp -ru $SCRIPTDIR/${_G[moduledir]}/${_G[function]}/src/$bodyfile ${_G[workdir]}
+		_G[body]=`getBody`
 	fi
 }
 
