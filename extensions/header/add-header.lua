@@ -4,7 +4,7 @@ table.print = table_print.print_r
 --]]
 
 function get_header(build_id)
-	local headers,err = io.open('add-headers-' .. build_id .. '.tex', 'rb')
+	local headers,err = io.open('add-headers/' .. build_id .. '.tex', 'rb')
 	if err ~= nil then
 		print(err)
 		os.exit(1) 

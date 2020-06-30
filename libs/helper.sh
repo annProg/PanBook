@@ -142,6 +142,7 @@ function mkDir() {
 	_gitignore
 	_mkdir ${_G[workdir]}
 	_mkdir ${_G[build]}
+	_mkdir ${_G[build]}/add-headers
 	_mkdir ${_G[imgdir]}
 	_mkdir $CWD/${_G[extdir]}
 	_mkdir $CWD/${_G[moduledir]}

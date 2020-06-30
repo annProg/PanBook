@@ -71,7 +71,7 @@ _G=(
 	[highlight]=""                                                    # 高亮样式
 )
 _G[build_id]=`echo $RANDOM$RANDOM$RANDOM`                             # 表示编译ID
-_G[header]=$CWD/build/add-headers-${_G[build_id]}.tex                 # 默认header文件名 build_id支持并行编译
+_G[header]=$CWD/build/add-headers/${_G[build_id]}.tex                 # 默认header文件名 build_id支持并行编译
 
 _P=(
 	[toc]=""
