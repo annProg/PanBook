@@ -54,11 +54,6 @@ function compatible()
 
 	cd ${_G[build]}
 	
-	# gif转换为eps格式
-	cd ${_G[imgdirrelative]}
-	ls *.gif &>/dev/null && toeps gif
-	cd ${_G[build]}
-	
 	COMPATIBLE="compatible.conf"
 	PREFIX="PanBook-compatible-"
 	if [ -f $COMPATIBLE ];then
@@ -167,8 +162,12 @@ function init()
 	# 清空$HEADERS 以后都是追加
 	echo > ${_G[header]}
 	[ "${_G[trace]}"x == "true"x -o "${_G[debug]}"x == "true"x ] && _G[interaction]="-interaction=nonstopmode -halt-on-error"
-	cd ${_G[build]}
-	_G[ofile]=${_G[build]}/${_G[ofile]}-${_G[function]}-${_G[style]}	
+	_G[ofile]=${_G[build]}/${_G[ofile]}-${_G[function]}-${_G[style]}
+
+	# gif转换为eps格式
+	cd ${_G[imgdirrelative]}
+	ls *.gif &>/dev/null && toeps gif
+	cd ${_G[build]}	
 }
 
 # 执行extension函数，由extension自行判断在moudles中是否启用
