@@ -22,20 +22,14 @@ function saveimg()
 
 function toeps()
 {
-	cd ${_G[imgdir]}
-	for item in `ls *.$1`;do
+	for item in `ls *.$1 2>/dev/null`;do
 		new=`echo $item |sed -r "s/.$1$//g"`
 		${_G[convert]} $item $new.eps
 		mv $new-0.eps $new.eps 2>/dev/null
 		rm -f $new-*.eps
 	done
-	cd $CWD
-}
-
-# 转换为eps格式
-function eps()
-{
-	toeps gif
+	note "to Eps for $1 file:"
+	ls -l *.eps 2>/dev/null
 }
 
 function pdf2jpg()
@@ -59,6 +53,12 @@ function compatible()
 	fi
 
 	cd ${_G[build]}
+	
+	# gif转换为eps格式
+	cd ${_G[imgdirrelative]}
+	ls *.gif &>/dev/null && toeps gif
+	cd ${_G[build]}
+	
 	COMPATIBLE="compatible.conf"
 	PREFIX="PanBook-compatible-"
 	if [ -f $COMPATIBLE ];then

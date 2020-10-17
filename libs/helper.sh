@@ -291,7 +291,6 @@ function printhelp() {
 	declare -A _HF
 	_HF[help]="print help info"
 	_HF[saveimg]="save image url to local"
-	_HF[eps]="convert gif to eps"
 	_HF[clean]="clean build dir"
 	_HF[ext]="extensions help"
 	_HF[mod]="modules help"
@@ -306,7 +305,7 @@ function printhelp() {
 	echo -e "\t--style     change style(list styles: panbook <module> -l)"
 	echo -e "\t--crs       change pandoc-crossref settings(default crs/zh-CN.yaml)"
 	echo -e "\t--src       change src directory name(default src)"
-	echo -e "\t--imgdir    change image directory name(default src/images)"
+	echo -e "\t--imgdir    change image directory name(default images)"
 	echo -e "\t--part      only compile specified markdown file"
 	echo -e "\t--ci=val    init with ci config(support: drone)"
 	echo -e "\t--memory    limit the maximum heap size(e.g. 1000m)"
