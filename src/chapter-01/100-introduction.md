@@ -13,6 +13,8 @@
 - 安装 [Pandoc](https://pandoc.org/installing.html) 2.7.3 或以上版本
 - 下载 [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本安装到 path 目录下（建议和 Pandoc 放同一目录）
 
+另外，本项目需要使用 4.x 版本以上的 `bash`, OS X 用户可能需要升级 `bash` 版本，参见 [stackoverflow](https://stackoverflow.com/questions/6047648/associative-arrays-error-declare-a-invalid-option)
+
 然后下载 PanBook。打开终端（ msys2 ），假设工作目录为 /d/dev ，克隆代码并设置环境变量：
 
 ```bash

@@ -31,6 +31,8 @@
 - [Pandoc](https://pandoc.org/installing.html) 2.9 或以上版本
 - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，即`/c/Users/yourname/AppData/Local/Pandoc`）
 
+另外，本项目需要使用 4.x 版本以上的 `bash`, OS X 用户可能需要升级 `bash` 版本，参见 [stackoverflow](https://stackoverflow.com/questions/6047648/associative-arrays-error-declare-a-invalid-option)
+
 然后下载本项目，打开`msys2`，假设工作目录为`/d/dev`
 
 ```
