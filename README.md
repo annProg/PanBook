@@ -13,14 +13,14 @@
 | Book | Article | Thesis | Slide | CV |
 | --- | --- | --- | --- | --- |
 |[ElegantBook](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf) | [ctexart](https://panbook.annhe.net/pub/article-art-ctexart.pdf)| [Demo Thesis](https://panbook.annhe.net/pub/thesis-thesis-thesis.pdf) | [metropolis](https://panbook.annhe.net/pub/beamer-slide-metropolis.pdf) |[moderncv-classic](https://panbook.annhe.net/pub/cv-cv-moderncv-classic-blue.pdf)|
-|| [elegantnote](https://panbook.annhe.net/pub/article-art-elegantnote.pdf) | [湖南大学（WIP）](https://panbook.annhe.net/pub/thesis-thesis-hnuthesis.pdf) |[solarized](https://panbook.annhe.net/pub/beamer-slide-solarized.pdf)|[resume](https://panbook.annhe.net/pub/cv-cv-resume.pdf)|
-|[CTeXBook](https://panbook.annhe.net/pub/PanBook-book-ctexbook-pc.pdf) | [elegantpaper](https://panbook.annhe.net/pub/article-art-elegantpaper.pdf) | [清华大学（WIP）](https://panbook.annhe.net/pub/thesis-thesis-thuthesis.pdf) | [material](https://panbook.annhe.net/pub/beamer-slide-material.pdf)| [TMR](https://panbook.annhe.net/pub/cv-cv-tmr.pdf)|
-|[CTeXBook-mobile](https://panbook.annhe.net/pub/PanBook-book-ctexbook-mobile.pdf)| | [上海交通大学（WIP）](https://panbook.annhe.net/pub/thesis-thesis-sjtuthesis.pdf) | [Execushares](https://panbook.annhe.net/pub/beamer-slide-Execushares.pdf)|[moderncv-fancy](https://panbook.annhe.net/pub/cv-cv-moderncv-fancy-blue.pdf) |
-| [Epub](https://panbook.annhe.net/pub/PanBook.epub) | | [南京大学（WIP）](https://panbook.annhe.net/pub/thesis-thesis-njuthesis.pdf) | [classyslides](https://panbook.annhe.net/pub/beamer-slide-classyslides.pdf) | [moderncv-banking](https://panbook.annhe.net/pub/cv-cv-moderncv-banking-blue.pdf) |
-| | | [山东大学（WIP）](https://panbook.annhe.net/pub/thesis-thesis-sduthesis.pdf) | [elegance](https://panbook.annhe.net/pub/beamer-slide-elegance.pdf) | [moderncv-casual](https://panbook.annhe.net/pub/cv-cv-moderncv-casual-blue.pdf) |
-| | | [中国科学院大学（WIP）](https://panbook.annhe.net/pub/thesis-thesis-ucasthesis.pdf) | [Hest](https://panbook.annhe.net/pub/beamer-slide-Hest.pdf) | [moderncv-oldstyle](https://panbook.annhe.net/pub/cv-cv-moderncv-oldstyle-blue.pdf) |
-| | | [电子科技大学（WIP）](https://panbook.annhe.net/pub/thesis-thesis-uestcthesis.pdf) | [opensuse](https://panbook.annhe.net/pub/beamer-slide-opensuse.pdf) | |
-| | | [北京航空航天大学（WIP）](https://panbook.annhe.net/pub/thesis-thesis-buaathesis.pdf) | [Xiaoshan](https://panbook.annhe.net/pub/beamer-slide-Xiaoshan.pdf) | |
+|| [elegantnote](https://panbook.annhe.net/pub/article-art-elegantnote.pdf) | |[solarized](https://panbook.annhe.net/pub/beamer-slide-solarized.pdf)|[resume](https://panbook.annhe.net/pub/cv-cv-resume.pdf)|
+|[CTeXBook](https://panbook.annhe.net/pub/PanBook-book-ctexbook-pc.pdf) | [elegantpaper](https://panbook.annhe.net/pub/article-art-elegantpaper.pdf) | | [material](https://panbook.annhe.net/pub/beamer-slide-material.pdf)| [TMR](https://panbook.annhe.net/pub/cv-cv-tmr.pdf)|
+|[CTeXBook-mobile](https://panbook.annhe.net/pub/PanBook-book-ctexbook-mobile.pdf)| | | [Execushares](https://panbook.annhe.net/pub/beamer-slide-Execushares.pdf)|[moderncv-fancy](https://panbook.annhe.net/pub/cv-cv-moderncv-fancy-blue.pdf) |
+| [Epub](https://panbook.annhe.net/pub/PanBook.epub) | | | [classyslides](https://panbook.annhe.net/pub/beamer-slide-classyslides.pdf) | [moderncv-banking](https://panbook.annhe.net/pub/cv-cv-moderncv-banking-blue.pdf) |
+| | | | [elegance](https://panbook.annhe.net/pub/beamer-slide-elegance.pdf) | [moderncv-casual](https://panbook.annhe.net/pub/cv-cv-moderncv-casual-blue.pdf) |
+| | | | [Hest](https://panbook.annhe.net/pub/beamer-slide-Hest.pdf) | [moderncv-oldstyle](https://panbook.annhe.net/pub/cv-cv-moderncv-oldstyle-blue.pdf) |
+| | | | [opensuse](https://panbook.annhe.net/pub/beamer-slide-opensuse.pdf) | |
+| | | | [Xiaoshan](https://panbook.annhe.net/pub/beamer-slide-Xiaoshan.pdf) | |
 | | [more](https://github.com/annProg/PanBook/tree/master/demo/article)| [more](https://github.com/annProg/PanBook/tree/master/demo/thesis) |[more](https://github.com/annProg/PanBook/tree/master/demo/beamer) |[more](https://github.com/annProg/PanBook/tree/master/demo/cv) |
 
 ## 快速开始
@@ -74,6 +74,7 @@ $ panbook -h
 - [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf)
 - [Go by example](https://github.com/pandoc-ebook/gobyexample-zh)
 - [程序员词典](https://github.com/annProg/programerDict)
+- [iTop实施杂记](https://github.com/ops-itop/itop-book)
 
 ## 免责声明
 
