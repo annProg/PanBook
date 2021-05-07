@@ -28,7 +28,7 @@
 
 - [msys2](https://www.msys2.org/)（ Linux 及 OS X 请忽略此步骤）
 - [texlive](http://mirror.ctan.org/systems/texlive/Images/) 2018 或以上版本
-- [Pandoc](https://pandoc.org/installing.html) 2.9 或以上版本
+- [Pandoc](https://pandoc.org/installing.html) 2.13 或以上版本
 - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref/releases) 对应版本并安装到`path`目录下（建议和`Pandoc`放同一目录，即`/c/Users/yourname/AppData/Local/Pandoc`）
 
 另外，本项目需要使用 4.x 版本以上的 `bash`, OS X 用户可能需要升级 `bash` 版本，参见 [stackoverflow](https://stackoverflow.com/questions/6047648/associative-arrays-error-declare-a-invalid-option)
@@ -74,7 +74,7 @@ $ panbook -h
 - [PanBook 手册](https://panbook.annhe.net/pub/PanBook-book-elegantbook-pc.pdf)
 - [Go by example](https://github.com/pandoc-ebook/gobyexample-zh)
 - [程序员词典](https://github.com/annProg/programerDict)
-- [iTop实施杂记](https://github.com/ops-itop/itop-book)
+- [iTop 实施杂记](https://github.com/ops-itop/itop-book)
 
 ## 免责声明
 

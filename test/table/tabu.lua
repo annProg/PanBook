@@ -52,7 +52,7 @@ function tabu(tbl, longtable, caption)
 	tbltop = pandoc.RawBlock("latex", macro .. "{" .. xcolumn .. "}\n")
 	toprule = pandoc.RawBlock("latex", "\\toprule\n")
 
-	column = #tbl.headers
+	column = #tbl.aligns
 	row = #tbl.rows
 
 	local newtbl = {}
@@ -83,6 +83,7 @@ function tabu(tbl, longtable, caption)
 	end
 
 	if not nohead then
+		column = #tbl.headers
 		for k=1,column do
 			for i,val in pairs(tbl.headers[k]) do
 				table.insert(newtbl, val)
@@ -111,7 +112,7 @@ function tabu(tbl, longtable, caption)
 	table.insert(newtbl, tblbottom)
 
 	newtbl = pandoc.utils.blocks_to_inlines(newtbl, {})
-	
+
 	newtblBlock = pandoc.Para({})
 	newtblBlock.content = newtbl
 	return newtblBlock
@@ -140,15 +141,15 @@ function renderTabu(el)
 
 	if el.t == "Div" then
 		tbl = el.content[1]
-		caption = el.content[1].caption
-		longtable = checkLongtabu(caption)
 	elseif el.t == "Table" then
 		tbl = el
-		caption = tbl.caption
-		longtable = checkLongtabu(caption)
 	else
 	end
 
+	-- 转换为 SimpleTable see https://pandoc.org/lua-filters.html#pandoc.utils.to_simple_table
+	tbl = pandoc.utils.to_simple_table(tbl)
+	caption = tbl.caption
+	longtable = checkLongtabu(caption)
 	if longtable == 0 then
 		if #caption > 0 then
 			table.insert(wrapBlock.content, pandoc.RawBlock("latex", "\\begin{table}[h]\n\\begin{center}"))

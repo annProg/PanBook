@@ -62,7 +62,7 @@ _G=(
 	[p]=""
 	[f]=""
 	[crossref]="-F pandoc-crossref"
-	[citeproc]="-F pandoc-citeproc"
+	[citeproc]="--citeproc"
 	[pandoc-param]=""
 	[t]=tex
 	[interaction]="-interaction=batchmode"
