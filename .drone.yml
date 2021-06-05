@@ -31,7 +31,7 @@ steps:
   - DEBUG="-d" make ctex
   - grep -iE "warning|at lines" build/*-ctexbook-pc.log
   depends_on:
-  - build
+  - doc-epub
 
 - name: doc-ctexbook-6inch
   image: ann17/panbook:latest
@@ -61,7 +61,7 @@ steps:
   - DEBUG=-d make build
   - grep -iE "warning|at lines" build/*.log
   depends_on:
-  - build
+  - doc-ctexbook-6inch
   
 - name: demo-slide
   image: ann17/panbook:latest
