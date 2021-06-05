@@ -121,7 +121,7 @@ $endif$
 \newcommand*\weibosocialsymbol{{\small\faWeibo~}}
 \newcommand*\wechatsocialsymbol{{\small\faWeixin~}}
 \newcommand*\qqsocialsymbol{{\small\faQq~}}
-\newcommand*\skypesocialsymbol{{\small\faSkype~}}
+%\newcommand*\skypesocialsymbol{{\small\faSkype~}}  2021新版已经包含 skype
 
 % makes a http hyperlink
 % usage: \httplink[optional text]{link}
