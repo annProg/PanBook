@@ -123,8 +123,8 @@ $endif$
 \newcommand*\qqsocialsymbol{{\small\faQq~}}
 %\newcommand*\skypesocialsymbol{{\small\faSkype~}}  2021新版已经包含 skype
 \newcommand*\malesocialsymbol{{\small\faMars~}}
-\newcommand*\femalesocialsymbol{{\small\faMars~}}
-\newcommand*\birthmalesocialsymbol{{\small\faBirthdayCake~}}
+\newcommand*\femalesocialsymbol{{\small\faVenus~}}
+\newcommand*\birthsocialsymbol{{\small\faBirthdayCake~}}
 
 % makes a http hyperlink
 % usage: \httplink[optional text]{link}
@@ -137,6 +137,16 @@ $endif$
 		\ifthenelse{\equal{#2}{nolink}}
 		{#1}
 		{\href{http://#2}{#1}}
+	}
+}
+
+\renewcommand*{\httpslink}[2][]{
+	\ifthenelse{\equal{#1}{}}
+	{\href{https://#2}{#2}}
+	{
+		\ifthenelse{\equal{#2}{nolink}}
+		{#1}
+		{\href{https://#2}{#1}}
 	}
 }
 
@@ -157,15 +167,15 @@ $if(skype)$
 $endif$
 
 $if(male)$
-\social[male][]{$male$}
+\social[male][nolink]{$male$}
 $endif$
 
 $if(female)$
-\social[female][]{$female$}
+\social[female][nolink]{$female$}
 $endif$
 
 $if(birth)$
-\social[birth][]{$birth$}
+\social[birth][nolink]{$birth$}
 $endif$
 
 $if(address)$
