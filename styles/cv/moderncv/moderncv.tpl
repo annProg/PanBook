@@ -122,6 +122,9 @@ $endif$
 \newcommand*\wechatsocialsymbol{{\small\faWeixin~}}
 \newcommand*\qqsocialsymbol{{\small\faQq~}}
 %\newcommand*\skypesocialsymbol{{\small\faSkype~}}  2021新版已经包含 skype
+\newcommand*\malesocialsymbol{{\small\faMars~}}
+\newcommand*\femalesocialsymbol{{\small\faMars~}}
+\newcommand*\birthmalesocialsymbol{{\small\faBirthdayCake~}}
 
 % makes a http hyperlink
 % usage: \httplink[optional text]{link}
@@ -151,6 +154,18 @@ $endif$
 
 $if(skype)$
 \social[skype][nolink]{$skype$}
+$endif$
+
+$if(male)$
+\social[male][]{$male$}
+$endif$
+
+$if(female)$
+\social[female][]{$female$}
+$endif$
+
+$if(birth)$
+\social[birth][]{$birth$}
 $endif$
 
 $if(address)$
