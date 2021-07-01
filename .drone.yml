@@ -79,7 +79,6 @@ steps:
   commands:
   - cd demo/cv
   - make all
-  - grep -iE "warning|at lines" build/*.log
   depends_on:
   - build
   - demo-slide
