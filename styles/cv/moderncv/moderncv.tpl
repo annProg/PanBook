@@ -121,7 +121,7 @@ $endif$
 \newcommand*\weibosocialsymbol{{\small\faWeibo~}}
 \newcommand*\wechatsocialsymbol{{\small\faWeixin~}}
 \newcommand*\qqsocialsymbol{{\small\faQq~}}
-%\newcommand*\skypesocialsymbol{{\small\faSkype~}}  2021新版已经包含 skype
+\providecommand*\skypesocialsymbol{{\small\faSkype~}}  %2021新版已经包含 skype
 \newcommand*\malesocialsymbol{{\small\faMars~}}
 \newcommand*\femalesocialsymbol{{\small\faVenus~}}
 \newcommand*\birthsocialsymbol{{\small\faBirthdayCake~}}
