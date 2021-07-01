@@ -16,6 +16,9 @@ wechat: WeChat
 skype: Skype
 twitter: Twitter
 linkedin: LinkedIn
+male: 男
+female: 女
+birth: 2000
 onlinecv: http://github.com/annProg/PanBook/tree/master/demo/cv
 nocite: |
   @*
