@@ -140,6 +140,17 @@ $endif$
 	}
 }
 
+\ifthenelse{\isundefined{\httpslink}}{
+\newcommand*{\httpslink}[2][]{
+	\ifthenelse{\equal{#1}{}}
+	{\href{https://#2}{#2}}
+	{
+		\ifthenelse{\equal{#2}{nolink}}
+		{#1}
+		{\href{https://#2}{#1}}
+	}
+}
+}{
 \renewcommand*{\httpslink}[2][]{
 	\ifthenelse{\equal{#1}{}}
 	{\href{https://#2}{#2}}
@@ -149,6 +160,9 @@ $endif$
 		{\href{https://#2}{#1}}
 	}
 }
+}
+
+
 
 $if(weibo)$
 \social[weibo][weibo.com/$weibo$]{$weibo$}
