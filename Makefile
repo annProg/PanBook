@@ -9,17 +9,21 @@ OWNER ?= annProg
 REPO ?= PanBook
 TAG ?= $(shell git rev-parse --short HEAD)
 DIVISION = --top-level-division=chapter
-CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=Source\ Han\ Serif\ SC\ Heavy,ItalicFont=FandolKai,SmallCapsFont=思源黑体 -V mainfont:Source\ Serif\ Pro -V sansfont:Source\ Sans\ Pro -V monofont:Source\ Code\ Pro
+CJK ?= -V CJKmainfont:思源宋体 -V CJKoptions:BoldFont=Source\ Han\ Serif\ SC\ Heavy,ItalicFont=FandolKai,SmallCapsFont=思源黑体
+MAINFONT ?= -V mainfont:Source\ Serif\ Pro
+SANSFONT ?= -V sansfont:Source\ Sans\ Pro
+CODEFONT ?= -V monofont:Source\ Code\ Pro
+
 
 all: ctex ctex6in elegantbook epub online
 book: ctex ctex6in elegantbook
 
 ctex: 
-	panbook book -V cover:R $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT)
+	panbook book -V cover:R $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT) $(MAINFONT) $(SANSFONT) $(CODEFONT)
 ctex6in: 
-	panbook book -V cover:R -V device:mobile $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT)
+	panbook book -V cover:R -V device:mobile $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT) $(MAINFONT) $(SANSFONT) $(CODEFONT)
 elegantbook: 
-	panbook book --style=elegantbook $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT)
+	panbook book --style=elegantbook $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT) $(SANSFONT) $(CODEFONT)
 epub:
 	rm -f build/*.epub
 	panbook book --style=epub $(DEBUG) $(HIGHLIGHT)

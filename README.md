@@ -75,6 +75,7 @@ $ panbook -h
 - [Go by example](https://github.com/pandoc-ebook/gobyexample-zh)
 - [程序员词典](https://github.com/annProg/programerDict)
 - [iTop 实施杂记](https://github.com/ops-itop/itop-book)
+- [Linux Performance and Tuning Guidelines 中文翻译](https://github.com/annProg/redp4285-zh)
 
 ## 免责声明
 
