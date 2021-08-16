@@ -1,3 +1,12 @@
+% see https://github.com/annProg/PanBook/issues/38
+% and https://tex.stackexchange.com/questions/39415/unload-a-latex-package
+$if(newtxtext)$
+% use newtxtext
+$else$
+\makeatletter
+\@namedef{ver@newtxtext.sty}{9999/99/99}
+\makeatother
+$endif$
 \documentclass[$if(multitoc)$twocol,$endif$$for(classoption)$
   $classoption$$sep$,
 $endfor$]{elegantbook}

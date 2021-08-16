@@ -23,7 +23,7 @@ ctex:
 ctex6in: 
 	panbook book -V cover:R -V device:mobile $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT) $(MAINFONT) $(SANSFONT) $(CODEFONT)
 elegantbook: 
-	panbook book --style=elegantbook $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT) $(SANSFONT) $(CODEFONT)
+	panbook book --style=elegantbook $(DIVISION) $(CJK) $(DEBUG) $(HIGHLIGHT) $(MAINFONT) $(SANSFONT) $(CODEFONT)
 epub:
 	rm -f build/*.epub
 	panbook book --style=epub $(DEBUG) $(HIGHLIGHT)

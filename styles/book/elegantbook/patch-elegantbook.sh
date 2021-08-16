@@ -5,6 +5,7 @@
 note "use -V device:(pc|mobile|kindel) to produce different size of pdf"
 note "use -V cover:path to use custom cover image"
 note "use -V logo:path to use custom logo image"
+note "use -V newtxtext:true to enable newtxtext"
 
 # 启用扩展
 # introduction和problemset文档类中已有定义，取消writeHeader
