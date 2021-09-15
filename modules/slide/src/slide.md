@@ -1,10 +1,3 @@
----
-title: 幻灯片标题
-author:
-  - 作者
-date: \today
-...
-
 # This is a group
 
 ## This is 标题 1

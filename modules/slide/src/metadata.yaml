@@ -1,0 +1,12 @@
+---
+title: 基于 PanBook 的幻灯片方案
+subtitle: 用 Markdown 制作 Beamer 幻灯片
+author:          # 作者（数组）
+  - An He
+date: \today     # 日期
+authortitle: 软件工程师
+organization: PanBook
+institute:
+  - PanBook
+location: Beijing China
+...
