@@ -55,8 +55,8 @@ RUN apk add --no-cache poppler-utils
 RUN curl -s -L "https://sourceforge.net/projects/abcplus/files/abcm2ps/abcm2ps-8.14.11/download" -o /usr/bin/abcm2ps && chmod +x /usr/bin/abcm2ps
 
 # pandoc
-RUN cd /tmp/ && curl -s -L https://github.com/jgm/pandoc/releases/download/2.15/pandoc-2.15-linux-amd64.tar.gz -o pandoc.tar.gz && tar -zxvf pandoc.tar.gz  && mv pandoc-2.15/bin/* /usr/local/bin && rm -fr /tmp/*
-RUN cd /tmp/ && curl -s -L https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.12.0d/pandoc-crossref-Linux.tar.xz -o crossref.tar.xz && tar -Jxvf crossref.tar.xz && mv pandoc-crossref /usr/local/bin && rm -fr /tmp/*
+RUN cd /tmp/ && curl -s -L https://github.com/jgm/pandoc/releases/download/2.14.2/pandoc-2.14.2-linux-amd64.tar.gz -o pandoc.tar.gz && tar -zxvf pandoc.tar.gz  && mv pandoc-2.14.2/bin/* /usr/local/bin && rm -fr /tmp/*
+RUN cd /tmp/ && curl -s -L https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.12.0c/pandoc-crossref-Linux.tar.xz -o crossref.tar.xz && tar -Jxvf crossref.tar.xz && mv pandoc-crossref /usr/local/bin && rm -fr /tmp/*
 
 ENV TIMEZONE Asia/Shanghai
 RUN apk add --no-cache tzdata git
