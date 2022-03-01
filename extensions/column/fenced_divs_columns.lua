@@ -48,5 +48,5 @@ function Pandoc(doc)
 			table.insert(nblocks, el)
 		end
 	end
-	return pandoc.Doc(nblocks, doc.meta)
+	return pandoc.Pandoc(nblocks, doc.meta)
 end
