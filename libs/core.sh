@@ -329,12 +329,12 @@ function partCompile() {
 	getArrayVar _V CJKmainfont SimSun
 	getArrayVar _V CJKoptions "BoldFont=微软雅黑,ItalicFont=KaiTi,SmallCapsFont=微软雅黑"
 	_P[standalone]=""
-	unset _P[template]
+	_P[template]="${_G[scriptdir]}/${_G[tpldir]}/latex/latex.tpl"
 	unset _P[toc]
 	unset _P[bibliography]
 	_M[lot]=false
 	_M[lof]=false
 	_M[title]=false
-	_G[body]=${_G[part]}
+	_G[body]=".`echo ${_G[part]} |awk -F'\' '{$1="";print $0}' |sed 's| |/|g'`"
 	_G[ofile]=${_G[build]}/part
 }
